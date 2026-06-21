@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universitas Crypto - Upload Dokumen</title>
+
+<style>
+/* =========================
+   RESET & BASE TOKENS
+========================= */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary-dark: #051630;
+  --primary-green: #005640;
+  --bg-body: #f8fafc;
+  --bg-card: #ffffff;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --border-color: #e5e7eb;
+  --font-heading: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Work Sans", sans-serif;
+  
+  --wajib-bg: #dcfce7;
+  --wajib-text: #166534;
+  --opsional-bg: #f1f5f9;
+  --opsional-text: #475569;
+  --btn-upload: #7388A9; /* Warna tombol upload sesuai gambar */
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+.sidebar {
+  width: 260px;
+  background-color: var(--primary-dark);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 20px;
+  flex-shrink: 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  padding: 0 12px;
+}
+
+.brand-icon {
+  background: white;
+  border-radius: 4px;
+  padding: 6px;
+  display: flex;
+}
+
+.brand-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--primary-dark);
+}
+
+.brand-text h2 {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.brand-text span {
+  font-size: 10px;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.nav-section {
+  font-size: 10px;
+  font-weight: 700;
+  color: #9ca3af;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  padding: 0 12px;
+  text-transform: uppercase;
+}
+
+.nav-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #d1d5db;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
+.nav-item.active {
+  background-color: #1e3a8a;
+  color: white;
+}
+
+.nav-item svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.btn-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  background: transparent;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  margin-top: auto;
+}
+
+.btn-logout:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+/* =========================
+   MAIN CONTENT AREA
+========================= */
+.main-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* TOP HEADER */
+.top-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 16px 40px;
+  background: var(--bg-body);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header-icons {
+  display: flex;
+  gap: 16px;
+}
+
+.header-icons svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--text-muted);
+  stroke-width: 2;
+  fill: none;
+  cursor: pointer;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--primary-green);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.user-name {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.user-role {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* PAGE CONTENT */
+.page-content {
+  padding: 0 40px 40px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.page-header {
+  margin-bottom: 32px;
+}
+
+.page-header h1 {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.page-header p {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 700px;
+}
+
+/* LAYOUT: 2 KOLOM */
+.doc-container {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.doc-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.doc-guide-wrapper {
+  width: 320px;
+  flex-shrink: 0;
+}
+
+/* CARD UPLOAD (KIRI) */
+.upload-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.icon-box {
+  width: 56px;
+  height: 56px;
+  background: #f1f5f9;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon-box svg {
+  width: 24px;
+  height: 24px;
+  stroke: #64748b;
+  stroke-width: 2;
+  fill: none;
+}
+
+.icon-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.card-info {
+  flex: 1;
+}
+
+.card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.card-title-row h4 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-main);
+}
+
+.badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.badge-wajib {
+  background: var(--wajib-bg);
+  color: var(--wajib-text);
+}
+
+.badge-opsional {
+  background: var(--opsional-bg);
+  color: var(--opsional-text);
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.status-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-success {
+  color: #16a34a;
+}
+
+.status-success svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.status-error {
+  color: #ef4444;
+}
+
+.status-error svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.btn-upload {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background-color: var(--btn-upload);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  cursor: pointer;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-upload:hover {
+  opacity: 0.9;
+}
+
+.btn-upload svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+/* CARD PANDUAN (KANAN) */
+.guide-card {
+  background: #f9fafb;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.guide-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-main);
+  margin-bottom: 20px;
+}
+
+.guide-title svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--primary-green);
+  stroke-width: 2;
+  fill: none;
+}
+
+.guide-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.guide-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-main);
+}
+
+.guide-list li svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--primary-green);
+  stroke-width: 2;
+  fill: none;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* FOOTER */
+.dash-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 40px;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-body);
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: auto;
+}
+
+.footer-links {
+  display: flex;
+  gap: 16px;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .doc-container {
+    flex-direction: column;
+  }
+  .doc-guide-wrapper {
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .upload-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .btn-upload {
+    width: 100%;
+    justify-content: center;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2.81-1.53M12 5.27l7.5 4.09L12 13.45 4.5 9.36M17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73z"/></svg>
+    </div>
+    <div class="brand-text">
+      <h2>Universitas<br>Crypto</h2>
+      <span>Portal Mahasiswa</span>
+    </div>
+  </div>
+
+  <div class="nav-section">PMB (PENDAFTARAN)</div>
+  <ul class="nav-menu">
+    <li>
+      <a href="#" class="nav-item">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        Beranda
+      </a>
+    </li>
+    <li>
+      <a href="#" class="nav-item">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        Biodata
+      </a>
+    </li>
+    <li>
+      <a href="#" class="nav-item">
+        <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+        Formulir Pendaftaran
+      </a>
+    </li>
+    <li>
+      <a href="#" class="nav-item active">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        Dokumen
+      </a>
+    </li>
+    <li>
+      <a href="#" class="nav-item">
+        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        Status Pendaftaran
+      </a>
+    </li>
+  </ul>
+
+  <button class="btn-logout">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+    Keluar
+  </button>
+</aside>
+
+<div class="main-wrapper">
+  
+  <header class="top-header">
+    <div class="header-right">
+      <div class="header-icons">
+        <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+      </div>
+      <div class="user-profile">
+        <div class="user-info">
+          <div class="user-name">Muhammad Dhafin <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+          <div class="user-role">Calon Mahasiswa</div>
+        </div>
+        <div class="avatar">MD</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-content">
+    
+    <div class="page-header">
+      <h1>Upload Dokumen Persyaratan</h1>
+      <p>Lengkapi berkas pendaftaran Anda di bawah ini. Pastikan dokumen yang diunggah jelas, dapat terbaca, dan sesuai dengan format yang diminta (PDF, JPG, atau PNG maksimal 5MB).</p>
+    </div>
+
+    <div class="doc-container">
+      
+      <div class="doc-list">
+        
+        <div class="upload-card">
+          <div class="icon-box">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" ry="2"></rect><circle cx="9" cy="10" r="2"></circle><line x1="15" y1="10" x2="19" y2="10"></line><line x1="15" y1="14" x2="19" y2="14"></line><path d="M5 18v-1a3 3 0 0 1 3-3h2a3 3 0 0 1 3 3v1"></path></svg>
+          </div>
+          <div class="card-info">
+            <div class="card-title-row">
+              <h4>Kartu Tanda Penduduk (KTP)</h4>
+              <span class="badge badge-wajib">WAJIB</span>
+            </div>
+            <p class="card-desc">Scan atau foto KTP asli yang masih berlaku.</p>
+            <div class="status-line status-success">
+              <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              ktp_muhammad_dhafin.pdf (1.1 MB) diunggah
+            </div>
+          </div>
+          <button class="btn-upload">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            Upload File
+          </button>
+        </div>
+
+        <div class="upload-card">
+          <div class="icon-box">
+            <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+          </div>
+          <div class="card-info">
+            <div class="card-title-row">
+              <h4>Ijazah Terakhir / SKL</h4>
+              <span class="badge badge-wajib">WAJIB</span>
+            </div>
+            <p class="card-desc">Scan Ijazah Asli atau Surat Keterangan Lulus jika Ijazah belum terbit.</p>
+            <div class="status-line status-error">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              Belum diunggah
+            </div>
+          </div>
+          <button class="btn-upload">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            Upload File
+          </button>
+        </div>
+
+        <div class="upload-card">
+          <div class="icon-box">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-4h2v4a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V9z"></path></svg>
+          </div>
+          <div class="card-info">
+            <div class="card-title-row">
+              <h4>Kartu Keluarga (KK)</h4>
+              <span class="badge badge-opsional">OPSIONAL</span>
+            </div>
+            <p class="card-desc">Scan Kartu Keluarga terbaru.</p>
+            <div class="status-line status-error">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              Belum diunggah
+            </div>
+          </div>
+          <button class="btn-upload">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            Upload File
+          </button>
+        </div>
+
+        <div class="upload-card">
+          <div class="icon-box" style="padding: 0; overflow: hidden;">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Pas Foto">
+          </div>
+          <div class="card-info">
+            <div class="card-title-row">
+              <h4>Pas Foto 4x6</h4>
+              <span class="badge badge-wajib">WAJIB</span>
+            </div>
+            <p class="card-desc">Latar belakang merah atau biru. Pakaian rapi berkerah.</p>
+            <div class="status-line status-success">
+              <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              foto_formal.jpg (800 KB) diunggah
+            </div>
+          </div>
+          <button class="btn-upload">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            Upload File
+          </button>
+        </div>
+
+      </div>
+
+      <div class="doc-guide-wrapper">
+        <div class="guide-card">
+          <div class="guide-title">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            Panduan Upload
+          </div>
+          <ul class="guide-list">
+            <li>
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Pastikan file dalam format PDF, JPG, JPEG, atau PNG.
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Ukuran maksimal setiap file adalah 5 MB.
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Dokumen harus asli (bukan fotokopi) dan di-scan berwarna dengan jelas.
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Dokumen yang tidak terbaca dapat menyebabkan pendaftaran ditolak.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="dash-footer">
+    <div>© 2025 Universitas Crypto. Semua hak dilindungi.</div>
+    <div class="footer-links">
+      <a href="#">Bantuan</a>
+      <a href="#">Syarat & Ketentuan</a>
+      <a href="#">Kebijakan Privasi</a>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>

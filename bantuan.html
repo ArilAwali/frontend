@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pusat Bantuan PMB - Universitas Crypto</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #0a6b4f;
+            --dark-navy: #061936;
+            --light-bg: #f8f9fc;
+            --yellow-btn: #ffc107;
+            --text-dark: #333333;
+            --text-gray: #6b7280;
+            --border-color: #e5e7eb;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 5%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-weight: 500;
+            font-size: 14px;
+            padding-bottom: 6px;
+        }
+
+        nav a.active {
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--primary-green);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-green);
+            border: 1px solid var(--primary-green);
+        }
+
+        .btn-solid {
+            background-color: var(--primary-green);
+            color: #ffffff;
+            border: 1px solid var(--primary-green);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background-color: var(--dark-navy);
+            color: #ffffff;
+            padding: 60px 5% 140px 5%; /* Padding bawah lebih besar untuk overlapping card */
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 14px;
+            color: #cbd5e1;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Search Bar */
+        .search-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            padding: 6px;
+            max-width: 600px;
+        }
+
+        .search-icon {
+            color: var(--text-gray);
+            padding: 0 16px;
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            flex-grow: 1;
+            padding: 12px 0;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .search-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .btn-search {
+            background-color: var(--yellow-btn);
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* --- Main Content Layout --- */
+        .main-content {
+            max-width: 1200px;
+            margin: -90px auto 40px auto; /* Margin negatif untuk menarik konten ke atas area biru */
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: 1fr 350px; /* Kiri lebih lebar, kanan fixed 350px */
+            gap: 24px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            padding: 30px;
+        }
+
+        /* --- Kiri: Pertanyaan Populer --- */
+        .faq-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .faq-icon-bg {
+            background-color: #e8f3f0;
+            color: var(--primary-green);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .faq-title {
+            color: var(--primary-green);
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .faq-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .faq-item i {
+            color: var(--text-gray);
+        }
+
+        .view-all {
+            display: inline-block;
+            margin-top: 24px;
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .view-all i {
+            margin-left: 4px;
+        }
+
+        /* --- Kanan: Sidebar --- */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Kontak Kami */
+        .contact-title {
+            color: var(--primary-green);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-icon {
+            background-color: #e8f3f0;
+            color: var(--primary-green);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-info h4 {
+            font-size: 11px;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .contact-info p {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+
+        .contact-info .sub-text {
+            font-size: 12px;
+            color: var(--text-gray);
+            font-weight: 400;
+        }
+
+        .contact-info .action-text {
+            color: var(--primary-green);
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* Live Status Card */
+        .status-card {
+            background-color: var(--dark-navy);
+            color: #ffffff;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .status-badge {
+            background-color: rgba(255,255,255,0.1);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .online-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #10b981; /* Green dot */
+            border-radius: 50%;
+        }
+
+        .status-card p {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #cbd5e1;
+            margin-bottom: 20px;
+        }
+
+        .highlight-yellow {
+            color: var(--yellow-btn);
+            font-weight: 600;
+        }
+
+        .progress-bar-bg {
+            height: 4px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            width: 100%;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background-color: var(--yellow-btn);
+            border-radius: 2px;
+            width: 75%; /* Representasi loading bar */
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 24px 5%;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        footer p {
+            font-size: 12px;
+            color: var(--text-gray);
+        }
+
+        /* --- Responsiveness --- */
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            nav {
+                display: none; /* Menyembunyikan nav di mobile untuk simplicity */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Universitas Crypto</div>
+        <nav>
+            <a href="#">Beranda</a>
+            <a href="#">Informasi</a>
+            <a href="#" class="active">Bantuan</a>
+        </nav>
+        <div class="auth-buttons">
+            <a href="#" class="btn btn-outline">Masuk</a>
+            <a href="#" class="btn btn-solid">Daftar</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Pusat Bantuan PMB</h1>
+            <p>Temukan jawaban atas pertanyaan Anda mengenai proses seleksi masuk, administrasi, dan teknis pendaftaran di Universitas Perjuangan.</p>
+            
+            <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" class="search-input" placeholder="Cari pertanyaan, misal: 'Cara upload dokumen'...">
+                <button class="btn-search">Cari</button>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-content">
+        
+        <div class="card faq-section">
+            <div class="faq-header">
+                <div class="faq-icon-bg">
+                    <i class="fa-solid fa-book"></i>
+                </div>
+                <h2 class="faq-title">Pertanyaan Populer</h2>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <span>Bagaimana cara mendaftar?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-item">
+                    <span>Dokumen apa saja yang diperlukan?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-item">
+                    <span>Bagaimana jika lupa password?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-item">
+                    <span>Berapa biaya pendaftaran?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </div>
+
+            <a href="#" class="view-all">Lihat Semua FAQ <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <aside class="sidebar">
+            
+            <div class="card">
+                <h2 class="contact-title">Kontak Kami</h2>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <div class="contact-info">
+                        <h4>WHATSAPP ADMIN</h4>
+                        <p>+62 812-3456-7890</p>
+                        <a href="#" class="action-text">Chat Sekarang</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fa-regular fa-envelope"></i>
+                    </div>
+                    <div class="contact-info">
+                        <h4>EMAIL SUPPORT</h4>
+                        <p>pmb.crypto@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fa-regular fa-clock"></i>
+                    </div>
+                    <div class="contact-info">
+                        <h4>JAM OPERASIONAL</h4>
+                        <p>Senin - Jumat</p>
+                        <span class="sub-text">08.00 - 16.00 WIB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="status-card">
+                <div class="status-header">
+                    <span class="status-badge">LIVE STATUS</span>
+                    <div class="online-indicator">
+                        <div class="dot"></div> Online
+                    </div>
+                </div>
+                <p>Waktu tunggu respon rata-rata saat ini adalah <span class="highlight-yellow">5 menit.</span></p>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill"></div>
+                </div>
+            </div>
+
+        </aside>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Universitas Perjuangan. Hak Cipta Dilindungi.</p>
+    </footer>
+
+</body>
+</html>
