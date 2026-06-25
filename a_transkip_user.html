@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -91,7 +92,8 @@
 
         .menu-item.active {
             color: #FFFFFF;
-            background-color: #0A369D; /* Blue active state */
+            background-color: #0A369D;
+            /* Blue active state */
             border-left: 4px solid #3B82F6;
             padding-left: 20px;
         }
@@ -115,7 +117,7 @@
 
         .logout-btn:hover {
             color: #fff;
-            background-color: rgba(255,255,255,0.05);
+            background-color: rgba(255, 255, 255, 0.05);
         }
 
         /* --- MAIN CONTENT --- */
@@ -235,7 +237,7 @@
             flex: 1;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
         }
 
         .card-title {
@@ -287,7 +289,8 @@
             height: 100%;
             background-color: #34D399;
             border-radius: 4px;
-            width: 86%; /* roughly 124/144 */
+            width: 86%;
+            /* roughly 124/144 */
         }
 
         .card-icon {
@@ -398,53 +401,10 @@
         }
     </style>
 </head>
+
 <body>
 
     <aside class="sidebar">
-        <div class="brand">
-            <i class="fas fa-university"></i>
-            <div class="brand-text">
-                <h2>Universitas Crypto</h2>
-                <p>Portal Mahasiswa</p>
-            </div>
-        </div>
-
-        <a href="#" class="menu-item">
-            <i class="fas fa-home"></i> Beranda
-        </a>
-
-        <div class="menu-section" style="margin-top: 10px;">
-            <div class="menu-title">PMB (PENDAFTARAN)</div>
-            <a href="#" class="menu-item"><i class="far fa-user"></i> Biodata</a>
-            <a href="#" class="menu-item"><i class="far fa-file-alt"></i> Formulir Pendaftaran</a>
-            <a href="#" class="menu-item"><i class="far fa-file"></i> Dokumen</a>
-            <a href="#" class="menu-item"><i class="far fa-times-circle"></i> Status Pendaftaran</a>
-        </div>
-
-        <div class="menu-section">
-            <div class="menu-title">AKADEMIK</div>
-            <a href="#" class="menu-item"><i class="fas fa-chart-bar"></i> Dashboard Akademik</a>
-            <a href="#" class="menu-item"><i class="fas fa-book"></i> KRS</a>
-            <a href="#" class="menu-item"><i class="fas fa-star"></i> KHS (Nilai)</a>
-            <a href="#" class="menu-item active"><i class="fas fa-file-invoice"></i> Transkrip</a>
-            <a href="#" class="menu-item"><i class="far fa-calendar-alt"></i> Jadwal Kuliah</a>
-        </div>
-
-        <div class="menu-section">
-            <div class="menu-title">KOMUNIKASI</div>
-            <a href="#" class="menu-item"><i class="far fa-envelope"></i> Pesan</a>
-            <a href="#" class="menu-item"><i class="fas fa-bullhorn"></i> Pengumuman</a>
-            <a href="#" class="menu-item"><i class="far fa-comments"></i> Diskusi / Forum</a>
-        </div>
-
-        <div class="menu-section">
-            <div class="menu-title">ADMINISTRASI</div>
-            <a href="#" class="menu-item"><i class="fas fa-wallet"></i> Keuangan</a>
-        </div>
-
-        <a href="#" class="logout-btn">
-            <i class="fas fa-sign-out-alt"></i> Keluar
-        </a>
     </aside>
 
     <main class="main-content">
@@ -561,7 +521,8 @@
                 </tbody>
             </table>
             <div class="table-footer">
-                <a href="#">Tampilkan Semua Mata Kuliah <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i></a>
+                <a href="#">Tampilkan Semua Mata Kuliah <i class="fas fa-chevron-down"
+                        style="font-size: 10px; margin-left: 4px;"></i></a>
             </div>
         </div>
 
@@ -570,6 +531,8 @@
         </footer>
     </main>
 
-<script src="js/api.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/sidebar.js"></script>
 </body>
+
 </html>
