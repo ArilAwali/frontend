@@ -755,23 +755,23 @@ textarea.input-control {
           <div class="grades-grid">
             <div class="form-group">
               <label style="text-align: center;">Semester 1</label>
-              <input type="text" class="input-control grade-input" placeholder="0.00">
+              <input type="text" id="sem_1" class="input-control grade-input" placeholder="0.00">
             </div>
             <div class="form-group">
               <label style="text-align: center;">Semester 2</label>
-              <input type="text" class="input-control grade-input" placeholder="0.00">
+              <input type="text" id="sem_2" class="input-control grade-input" placeholder="0.00">
             </div>
             <div class="form-group">
               <label style="text-align: center;">Semester 3</label>
-              <input type="text" class="input-control grade-input" placeholder="0.00">
+              <input type="text" id="sem_3" class="input-control grade-input" placeholder="0.00">
             </div>
             <div class="form-group">
               <label style="text-align: center;">Semester 4</label>
-              <input type="text" class="input-control grade-input" placeholder="0.00">
+              <input type="text" id="sem_4" class="input-control grade-input" placeholder="0.00">
             </div>
             <div class="form-group">
               <label style="text-align: center;">Semester 5</label>
-              <input type="text" class="input-control grade-input" placeholder="0.00">
+              <input type="text" id="sem_5" class="input-control grade-input" placeholder="0.00">
             </div>
           </div>
         </div>
@@ -800,5 +800,130 @@ textarea.input-control {
 </div>
 
 <script src="js/api.js"></script>
+<script>
+  checkSession();
+
+  // Membaca prodi dan rapor jika sudah ada
+  async function loadData() {
+    try {
+      // Load nama user di header
+      const statusRes = await apiFetch('/portal/status');
+      if (statusRes.success && statusRes.data) {
+        document.querySelector('.user-name').childNodes[0].textContent = statusRes.data.nama_lengkap + ' ';
+        const initials = statusRes.data.nama_lengkap.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+        document.querySelector('.avatar').textContent = initials;
+      }
+
+      // Load prodi
+      const bioRes = await apiFetch('/biodata/biodata');
+      if (bioRes.success && bioRes.data) {
+        const data = bioRes.data;
+        if (data.pilihan_prodi_1) {
+          document.getElementById('prodi_1').value = data.pilihan_prodi_1;
+          // Set fakultas dropdown based on prodi
+          if (data.pilihan_prodi_1.includes('Informatika') || data.pilihan_prodi_1.includes('Sistem Informasi')) {
+            document.getElementById('fakultas_1').value = 'Fakultas Ilmu Komputer';
+          } else {
+            document.getElementById('fakultas_1').value = 'Fakultas Ekonomi & Bisnis';
+          }
+        }
+        if (data.pilihan_prodi_2) {
+          document.getElementById('prodi_2').value = data.pilihan_prodi_2;
+          if (data.pilihan_prodi_2.includes('Informatika') || data.pilihan_prodi_2.includes('Sistem Informasi')) {
+            document.getElementById('fakultas_2').value = 'Fakultas Ilmu Komputer';
+          } else {
+            document.getElementById('fakultas_2').value = 'Fakultas Ekonomi & Bisnis';
+          }
+        }
+      }
+
+      // Load nilai rapor
+      const raporRes = await apiFetch('/biodata/rapor');
+      if (raporRes.success && raporRes.data && raporRes.data.length > 0) {
+        raporRes.data.forEach(item => {
+          const semId = 'sem_' + item.semester;
+          const input = document.getElementById(semId);
+          if (input) {
+            // Karena matematika, ipa, dll nilainya disamakan rata-rata saat input
+            input.value = item.matematika || '0.00';
+          }
+        });
+      }
+    } catch (err) {
+      console.error('Gagal memuat data:', err);
+    }
+  }
+
+  // Interaksi dinamis Fakultas - Prodi dropdown
+  const prodisComputer = ['S1 Teknik Informatika', 'S1 Sistem Informasi'];
+  const prodisBusiness = ['S1 Manajemen', 'S1 Akuntansi'];
+
+  function setupFakultasListener(fakultasId, prodiId) {
+    document.getElementById(fakultasId).addEventListener('change', (e) => {
+      const prodiSelect = document.getElementById(prodiId);
+      prodiSelect.innerHTML = '<option value="" disabled selected>Pilih Program Studi</option>';
+      const items = e.target.value === 'Fakultas Ilmu Komputer' ? prodisComputer : prodisBusiness;
+      items.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p;
+        opt.textContent = p;
+        prodiSelect.appendChild(opt);
+      });
+    });
+  }
+
+  setupFakultasListener('fakultas_1', 'prodi_1');
+  setupFakultasListener('fakultas_2', 'prodi_2');
+
+  document.getElementById('btn-submit-rapor').addEventListener('click', async (e) => {
+    e.preventDefault();
+    
+    const prodi_1 = document.getElementById('prodi_1').value;
+    const prodi_2 = document.getElementById('prodi_2').value;
+
+    if (!prodi_1 || !prodi_2) {
+      alert('Silakan pilih Program Studi Pilihan 1 & Pilihan 2!');
+      return;
+    }
+
+    try {
+      // 1. Simpan Program Studi
+      await apiFetch('/biodata/biodata', {
+        method: 'PUT',
+        body: JSON.stringify({
+          pilihan_prodi_1: prodi_1,
+          pilihan_prodi_2: prodi_2
+        })
+      });
+
+      // 2. Simpan Nilai Rapor (Semester 1 s.d. 5)
+      const semesters = [1, 2, 3, 4, 5];
+      const promises = semesters.map(sem => {
+        const inputId = 'sem_' + sem;
+        const val = parseFloat(document.getElementById(inputId).value) || 0;
+        
+        return apiFetch('/biodata/rapor', {
+          method: 'POST',
+          body: JSON.stringify({
+            semester: sem,
+            matematika: val,
+            bahasa_indonesia: val,
+            bahasa_inggris: val,
+            ipa: val,
+            ips: val
+          })
+        });
+      });
+
+      await Promise.all(promises);
+      alert('Pilihan Program Studi & Nilai Rapor berhasil disimpan!');
+      window.location.href = 'dokumen step 1.html';
+    } catch (err) {
+      alert('Gagal menyimpan formulir: ' + (err.message || err));
+    }
+  });
+
+  loadData();
+</script>
 </body>
 </html>

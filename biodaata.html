@@ -485,7 +485,15 @@
         grid-column: span 1;
       }
     }
-  </style>
+  /* Style khusus untuk input yang di-disabled agar terlihat jelas tidak bisa diubah */
+input:disabled, select:disabled, textarea:disabled {
+  background-color: #e2e8f0 !important;
+  color: #64748b !important;
+  cursor: not-allowed !important;
+  border-color: #cbd5e1 !important;
+  opacity: 0.85;
+}
+</style>
 </head>
 
 <body>
@@ -616,17 +624,17 @@
         <div class="form-grid">
           <div class="form-group">
             <label>Nama Lengkap</label>
-            <input type="text" class="input-control" placeholder="Masukkan Nama Sesuai Ijazah">
+            <input type="text" id="nama_lengkap" class="input-control" placeholder="Masukkan Nama Sesuai Ijazah" disabled>
           </div>
 
           <div class="form-group">
             <label>Tanggal Lahir</label>
-            <input type="text" class="input-control" placeholder="mm / dd / yyyy">
+            <input type="date" id="tanggal_lahir" class="input-control">
           </div>
 
           <div class="form-group">
             <label>Tempat Lahir</label>
-            <input type="text" class="input-control" placeholder="Kota/Kabupaten">
+            <input type="text" id="tempat_lahir" class="input-control" placeholder="Kota/Kabupaten">
           </div>
 
           <div class="form-group">
@@ -639,13 +647,13 @@
                 <line x1="14" y1="13" x2="19" y2="13"></line>
                 <line x1="5" y1="17" x2="19" y2="17"></line>
               </svg>
-              <input type="text" class="input-control" placeholder="16 digit NIK" disabled>
+              <input type="text" id="nik" class="input-control" placeholder="16 digit NIK" disabled>
             </div>
           </div>
 
           <div class="form-group">
             <label>Agama</label>
-            <select class="input-control">
+            <select id="agama" class="input-control">
               <option value="" disabled selected>Pilih Agama</option>
               <option value="islam">Islam</option>
               <option value="kristen">Kristen Protestan</option>
@@ -690,7 +698,7 @@
                   d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
                 </path>
               </svg>
-              <input type="text" class="input-control" placeholder="08xxxxxxxx">
+              <input type="text" id="nomor_wa" class="input-control" placeholder="08xxxxxxxx" disabled>
             </div>
           </div>
 
@@ -701,18 +709,18 @@
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                 <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
-              <input type="email" class="input-control" placeholder="contoh@email.com">
+              <input type="email" id="email" class="input-control" placeholder="contoh@email.com" disabled>
             </div>
           </div>
 
           <div class="form-group full-width">
             <label>Alamat Lengkap</label>
-            <textarea class="input-control" placeholder="Masukkan alamat lengkap sesuai KTP"></textarea>
+            <textarea id="alamat_lengkap" class="input-control" placeholder="Masukkan alamat lengkap sesuai KTP"></textarea>
           </div>
 
           <div class="form-group">
             <label>Provinsi</label>
-            <select class="input-control">
+            <select id="provinsi" class="input-control">
               <option value="" disabled selected>Pilih Provinsi</option>
               <option>Jawa Barat</option>
               <option>DKI Jakarta</option>
@@ -722,7 +730,7 @@
 
           <div class="form-group">
             <label>Kota/Kabupaten</label>
-            <select class="input-control">
+            <select id="kota_kabupaten" class="input-control">
               <option value="" disabled selected>Pilih Kota/Kabupaten</option>
               <option>Kota Bandung</option>
               <option>Kab. Tasikmalaya</option>
@@ -731,7 +739,7 @@
 
           <div class="form-group">
             <label>Kecamatan</label>
-            <select class="input-control">
+            <select id="kecamatan" class="input-control">
               <option value="" disabled selected>Pilih Kecamatan</option>
               <option>Cibeureum</option>
               <option>Tawang</option>
@@ -740,13 +748,13 @@
 
           <div class="form-group">
             <label>Kode Pos</label>
-            <input type="text" class="input-control" placeholder="5 Digit Kode Pos">
+            <input type="text" id="kode_pos" class="input-control" placeholder="5 Digit Kode Pos">
           </div>
         </div>
 
         <div class="form-actions">
-          <button type="button" class="btn btn-outline">Simpan Draf</button>
-          <button type="button" class="btn btn-primary">Simpan & Lanjutkan</button>
+          <button type="button" id="btn-draft-biodata" class="btn btn-outline">Simpan Draf</button>
+          <button type="button" id="btn-submit-biodata" class="btn btn-primary">Simpan & Lanjutkan</button>
         </div>
 
       </form>
@@ -765,6 +773,192 @@
   </div>
 
   <script src="js/api.js"></script>
+<script>
+  checkSession();
+
+  let isUpdate = false;
+  const DRAFT_KEY = 'pmb_biodata_draft';
+
+  async function loadBiodata() {
+    // 1. Muat data pendaftaran (nama, NIK, wa, email) dari status seleksi API
+    try {
+      const statusRes = await apiFetch('/portal/status');
+      if (statusRes.success && statusRes.data) {
+        const user = statusRes.data;
+        const fields = ['nama_lengkap', 'nik', 'nomor_wa', 'email'];
+        fields.forEach(f => {
+          const el = document.getElementById(f);
+          if (el) el.value = user[f] || '';
+        });
+        
+        // Render nama & initials di sidebar/header
+        if (document.querySelector('.user-name') && user.nama_lengkap) {
+          if (document.querySelector('.user-name').childNodes[0]) {
+            document.querySelector('.user-name').childNodes[0].textContent = user.nama_lengkap + ' ';
+          }
+          const initials = user.nama_lengkap.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+          const avatar = document.querySelector('.avatar');
+          if (avatar) avatar.textContent = initials;
+        }
+      }
+    } catch (err) {
+      console.error('Gagal mengambil status pendaftaran:', err);
+    }
+
+    // 2. Muat data biodata detail jika sudah pernah diisi di database
+    try {
+      const bioRes = await apiFetch('/biodata/biodata');
+      if (bioRes.success && bioRes.data) {
+        isUpdate = true;
+        const data = bioRes.data;
+        
+        const fields = ['tempat_lahir', 'agama', 'alamat_lengkap', 'provinsi', 'kota_kabupaten', 'kecamatan', 'kode_pos'];
+        fields.forEach(f => {
+          const el = document.getElementById(f);
+          if (el) el.value = data[f] || '';
+        });
+        
+        const dateEl = document.getElementById('tanggal_lahir');
+        if (dateEl && data.tanggal_lahir) {
+          dateEl.value = data.tanggal_lahir.substring(0, 10);
+        }
+        
+        if (data.jenis_kelamin) {
+          const genderVal = data.jenis_kelamin === 'L' ? 'Laki-laki' : 'Perempuan';
+          const radio = document.querySelector(`input[name="gender"][value="${genderVal}"]`);
+          if (radio) radio.checked = true;
+        }
+      }
+    } catch (err) {
+      // Kita abaikan error 404 (atau data belum diisi) dan log error lainnya
+      console.log('Biodata di database belum diisi atau tidak ditemukan (wajar untuk pendaftaran baru):', err);
+    }
+
+    // 3. Muat data draf lokal jika ada (menimpa/mengisi form jika belum disubmit ke DB atau untuk melanjutkan draf)
+    const draftStr = localStorage.getItem(DRAFT_KEY);
+    if (draftStr) {
+      try {
+        const draft = JSON.parse(draftStr);
+        if (draft.tempat_lahir) document.getElementById('tempat_lahir').value = draft.tempat_lahir;
+        if (draft.tanggal_lahir) document.getElementById('tanggal_lahir').value = draft.tanggal_lahir;
+        if (draft.agama) document.getElementById('agama').value = draft.agama;
+        if (draft.alamat_lengkap) document.getElementById('alamat_lengkap').value = draft.alamat_lengkap;
+        if (draft.provinsi) document.getElementById('provinsi').value = draft.provinsi;
+        if (draft.kota_kabupaten) document.getElementById('kota_kabupaten').value = draft.kota_kabupaten;
+        if (draft.kecamatan) document.getElementById('kecamatan').value = draft.kecamatan;
+        if (draft.kode_pos) document.getElementById('kode_pos').value = draft.kode_pos;
+        
+        if (draft.jenis_kelamin) {
+          const genderVal = draft.jenis_kelamin === 'L' ? 'Laki-laki' : 'Perempuan';
+          const radio = document.querySelector(`input[name="gender"][value="${genderVal}"]`);
+          if (radio) radio.checked = true;
+        }
+      } catch (e) {
+        console.error('Gagal memuat draf dari localStorage:', e);
+      }
+    }
+  }
+
+  function saveDraftLocal() {
+    const getValue = (id) => {
+      const el = document.getElementById(id);
+      return el ? el.value : '';
+    };
+
+    const genderRadio = document.querySelector('input[name="gender"]:checked');
+    const jenis_kelamin = genderRadio ? (genderRadio.value === 'Laki-laki' ? 'L' : 'P') : null;
+
+    const draftData = {
+      tempat_lahir: getValue('tempat_lahir').trim(),
+      tanggal_lahir: getValue('tanggal_lahir'),
+      agama: getValue('agama'),
+      alamat_lengkap: getValue('alamat_lengkap').trim(),
+      provinsi: getValue('provinsi'),
+      kota_kabupaten: getValue('kota_kabupaten'),
+      kecamatan: getValue('kecamatan'),
+      kode_pos: getValue('kode_pos').trim(),
+      jenis_kelamin: jenis_kelamin
+    };
+
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(draftData));
+    return true;
+  }
+
+  async function saveBiodata() {
+    const getValue = (id) => {
+      const el = document.getElementById(id);
+      return el ? el.value : '';
+    };
+
+    const tempat_lahir = getValue('tempat_lahir').trim();
+    const tanggal_lahir = getValue('tanggal_lahir');
+    const agama = getValue('agama');
+    const alamat_lengkap = getValue('alamat_lengkap').trim();
+    const provinsi = getValue('provinsi');
+    const kota_kabupaten = getValue('kota_kabupaten');
+    const kecamatan = getValue('kecamatan');
+    const kode_pos = getValue('kode_pos').trim();
+    
+    const genderRadio = document.querySelector('input[name="gender"]:checked');
+    const jenis_kelamin = genderRadio ? (genderRadio.value === 'Laki-laki' ? 'L' : 'P') : null;
+
+    if (!tempat_lahir || !tanggal_lahir || !jenis_kelamin || !agama || !alamat_lengkap || !provinsi || !kota_kabupaten || !kecamatan || !kode_pos) {
+      alert('Semua kolom data pribadi, kontak dan alamat wajib diisi!');
+      return false;
+    }
+
+    const payload = {
+      tempat_lahir,
+      tanggal_lahir,
+      jenis_kelamin,
+      agama,
+      alamat_lengkap,
+      provinsi,
+      kota_kabupaten,
+      kecamatan,
+      kode_pos
+    };
+
+    try {
+      const endpoint = '/biodata/biodata';
+      const method = isUpdate ? 'PUT' : 'POST';
+
+      await apiFetch(endpoint, {
+        method,
+        body: JSON.stringify(payload)
+      });
+
+      isUpdate = true;
+      return true;
+    } catch (err) {
+      alert(err.message || 'Gagal menyimpan biodata.');
+      return false;
+    }
+  }
+
+  // Event handler untuk tombol Simpan & Lanjutkan
+  document.getElementById('btn-submit-biodata').addEventListener('click', async (e) => {
+    e.preventDefault();
+    const success = await saveBiodata();
+    if (success) {
+      localStorage.removeItem(DRAFT_KEY); // Hapus draf lokal setelah berhasil disubmit ke database
+      alert('Biodata berhasil disimpan!');
+      window.location.href = 'formulir pendaftaran.html';
+    }
+  });
+
+  // Event handler untuk tombol Simpan Draf
+  document.getElementById('btn-draft-biodata').addEventListener('click', async (e) => {
+    e.preventDefault();
+    const success = saveDraftLocal();
+    if (success) {
+      alert('Draf biodata berhasil disimpan secara lokal di browser Anda!');
+    }
+  });
+
+  // Load awal
+  loadBiodata();
+</script>
 </body>
 
 </html>
