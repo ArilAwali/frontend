@@ -608,7 +608,7 @@ textarea.input-control {
               <h4>Pilihan 1</h4>
               <div class="form-group" style="margin-bottom: 16px;">
                 <label>Fakultas</label>
-                <select class="input-control">
+                <select id="fakultas_1" class="input-control">
                   <option value="" disabled selected>Pilih Fakultas</option>
                   <option>Fakultas Ilmu Komputer</option>
                   <option>Fakultas Ekonomi & Bisnis</option>
@@ -616,7 +616,7 @@ textarea.input-control {
               </div>
               <div class="form-group">
                 <label>Program Studi</label>
-                <select class="input-control">
+                <select id="prodi_1" class="input-control">
                   <option value="" disabled selected>Pilih Program Studi</option>
                   <option>S1 Teknik Informatika</option>
                   <option>S1 Sistem Informasi</option>
@@ -628,7 +628,7 @@ textarea.input-control {
               <h4>Pilihan 2</h4>
               <div class="form-group" style="margin-bottom: 16px;">
                 <label>Fakultas</label>
-                <select class="input-control">
+                <select id="fakultas_2" class="input-control">
                   <option value="" disabled selected>Pilih Fakultas</option>
                   <option>Fakultas Ilmu Komputer</option>
                   <option>Fakultas Ekonomi & Bisnis</option>
@@ -636,7 +636,7 @@ textarea.input-control {
               </div>
               <div class="form-group">
                 <label>Program Studi</label>
-                <select class="input-control">
+                <select id="prodi_2" class="input-control">
                   <option value="" disabled selected>Pilih Program Studi</option>
                   <option>S1 Teknik Informatika</option>
                   <option>S1 Sistem Informasi</option>
@@ -673,27 +673,27 @@ textarea.input-control {
           <div class="form-grid">
             <div class="form-group">
               <label>Nama Sekolah / Institusi</label>
-              <input type="text" class="input-control" placeholder="Masukkan nama sekolah asal">
+              <input type="text" id="nama_sekolah" class="input-control" placeholder="Masukkan nama sekolah asal">
             </div>
             
             <div class="form-group">
               <label>Jurusan</label>
-              <input type="text" class="input-control" placeholder="Contoh: IPA / IPS / Teknik Komputer Jaringan">
+              <input type="text" id="jurusan_sekolah" class="input-control" placeholder="Contoh: IPA / IPS / Teknik Komputer Jaringan">
             </div>
 
             <div class="form-group">
               <label>Tahun Lulus</label>
-              <input type="text" class="input-control" placeholder="YYYY">
+              <input type="text" id="tahun_lulus" class="input-control" placeholder="YYYY">
             </div>
 
             <div class="form-group">
               <label>NISN (Nomor Induk Siswa Nasional)</label>
-              <input type="text" class="input-control" placeholder="Masukkan 10 digit NISN">
+              <input type="text" id="nisn" class="input-control" placeholder="Masukkan 10 digit NISN">
             </div>
 
             <div class="form-group full-width">
               <label>Alamat Sekolah</label>
-              <textarea class="input-control" placeholder="Masukkan alamat lengkap sekolah"></textarea>
+              <textarea id="alamat_sekolah" class="input-control" placeholder="Masukkan alamat lengkap sekolah"></textarea>
             </div>
           </div>
         </div>
@@ -729,8 +729,8 @@ textarea.input-control {
         </div>
 
         <div class="form-actions">
-          <button type="button" class="btn btn-outline">Kembali ke Biodata</button>
-          <button type="button" class="btn btn-primary">
+          <button type="button" id="btn-back-biodata" class="btn btn-outline">Kembali ke Biodata</button>
+          <button type="button" id="btn-submit-rapor" class="btn btn-primary">
             Simpan & Lanjutkan
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </button>
@@ -754,6 +754,7 @@ textarea.input-control {
 <script src="js/api.js"></script>
 <script>
   checkSession();
+  let isUpdate = false;
 
   // Membaca prodi dan rapor jika sudah ada
   async function loadData() {
@@ -766,40 +767,53 @@ textarea.input-control {
         document.querySelector('.avatar').textContent = initials;
       }
 
-      // Load prodi
+      // Load prodi & riwayat pendidikan
       const bioRes = await apiFetch('/biodata/biodata');
       if (bioRes.success && bioRes.data) {
         const data = bioRes.data;
         if (data.pilihan_prodi_1) {
-          document.getElementById('prodi_1').value = data.pilihan_prodi_1;
-          // Set fakultas dropdown based on prodi
+          isUpdate = true;
           if (data.pilihan_prodi_1.includes('Informatika') || data.pilihan_prodi_1.includes('Sistem Informasi')) {
             document.getElementById('fakultas_1').value = 'Fakultas Ilmu Komputer';
           } else {
             document.getElementById('fakultas_1').value = 'Fakultas Ekonomi & Bisnis';
           }
+          // Dispatch change to populate prodi options
+          document.getElementById('fakultas_1').dispatchEvent(new Event('change'));
+          document.getElementById('prodi_1').value = data.pilihan_prodi_1;
         }
         if (data.pilihan_prodi_2) {
-          document.getElementById('prodi_2').value = data.pilihan_prodi_2;
           if (data.pilihan_prodi_2.includes('Informatika') || data.pilihan_prodi_2.includes('Sistem Informasi')) {
             document.getElementById('fakultas_2').value = 'Fakultas Ilmu Komputer';
           } else {
             document.getElementById('fakultas_2').value = 'Fakultas Ekonomi & Bisnis';
           }
+          // Dispatch change to populate prodi options
+          document.getElementById('fakultas_2').dispatchEvent(new Event('change'));
+          document.getElementById('prodi_2').value = data.pilihan_prodi_2;
         }
+        // Populate pendidikan fields
+        if (data.pendidikan_terakhir) {
+          const radio = document.querySelector(`input[name="pendidikan"][value="${data.pendidikan_terakhir}"]`);
+          if (radio) radio.checked = true;
+        }
+        if (data.nama_sekolah) document.getElementById('nama_sekolah').value = data.nama_sekolah;
+        if (data.jurusan_sekolah) document.getElementById('jurusan_sekolah').value = data.jurusan_sekolah;
+        if (data.tahun_lulus) document.getElementById('tahun_lulus').value = data.tahun_lulus;
+        if (data.nisn) document.getElementById('nisn').value = data.nisn;
+        if (data.alamat_sekolah) document.getElementById('alamat_sekolah').value = data.alamat_sekolah;
       }
 
       // Load nilai rapor
       const raporRes = await apiFetch('/biodata/rapor');
-      if (raporRes.success && raporRes.data && raporRes.data.length > 0) {
-        raporRes.data.forEach(item => {
-          const semId = 'sem_' + item.semester;
-          const input = document.getElementById(semId);
+      if (raporRes.success && raporRes.data) {
+        const data = raporRes.data;
+        for (let i = 1; i <= 5; i++) {
+          const input = document.getElementById('sem_' + i);
           if (input) {
-            // Karena matematika, ipa, dll nilainya disamakan rata-rata saat input
-            input.value = item.matematika || '0.00';
+            input.value = data['semester_' + i] !== undefined && data['semester_' + i] !== null ? data['semester_' + i] : '0.00';
           }
-        });
+        }
       }
     } catch (err) {
       console.error('Gagal memuat data:', err);
@@ -827,48 +841,76 @@ textarea.input-control {
   setupFakultasListener('fakultas_1', 'prodi_1');
   setupFakultasListener('fakultas_2', 'prodi_2');
 
+  // Event handler untuk tombol Kembali ke Biodata
+  document.getElementById('btn-back-biodata').addEventListener('click', () => {
+    window.location.href = 'biodaata.html';
+  });
+
   document.getElementById('btn-submit-rapor').addEventListener('click', async (e) => {
     e.preventDefault();
     
+    if (isUpdate) {
+      alert('Anda sudah pernah mengirim formulir pendaftaran');
+      window.location.href = 'dokumen step 1.html';
+      return;
+    }
+
     const prodi_1 = document.getElementById('prodi_1').value;
     const prodi_2 = document.getElementById('prodi_2').value;
+
+    // Extract pendidikan fields
+    const pendidikan_terakhir = document.querySelector('input[name="pendidikan"]:checked')?.value;
+    const nama_sekolah = document.getElementById('nama_sekolah').value.trim();
+    const jurusan_sekolah = document.getElementById('jurusan_sekolah').value.trim();
+    const tahun_lulus = document.getElementById('tahun_lulus').value.trim();
+    const nisn = document.getElementById('nisn').value.trim();
+    const alamat_sekolah = document.getElementById('alamat_sekolah').value.trim();
 
     if (!prodi_1 || !prodi_2) {
       alert('Silakan pilih Program Studi Pilihan 1 & Pilihan 2!');
       return;
     }
 
+    if (!nama_sekolah || !jurusan_sekolah || !tahun_lulus || !nisn || !alamat_sekolah) {
+      alert('Silakan lengkapi semua kolom Riwayat Pendidikan Terakhir!');
+      return;
+    }
+
     try {
-      // 1. Simpan Program Studi
+      // 1. Simpan Program Studi & Riwayat Pendidikan
       await apiFetch('/biodata/biodata', {
         method: 'PUT',
         body: JSON.stringify({
           pilihan_prodi_1: prodi_1,
-          pilihan_prodi_2: prodi_2
+          pilihan_prodi_2: prodi_2,
+          pendidikan_terakhir,
+          nama_sekolah,
+          jurusan_sekolah,
+          tahun_lulus,
+          nisn,
+          alamat_sekolah
         })
       });
 
       // 2. Simpan Nilai Rapor (Semester 1 s.d. 5)
-      const semesters = [1, 2, 3, 4, 5];
-      const promises = semesters.map(sem => {
-        const inputId = 'sem_' + sem;
-        const val = parseFloat(document.getElementById(inputId).value) || 0;
-        
-        return apiFetch('/biodata/rapor', {
-          method: 'POST',
-          body: JSON.stringify({
-            semester: sem,
-            matematika: val,
-            bahasa_indonesia: val,
-            bahasa_inggris: val,
-            ipa: val,
-            ips: val
-          })
-        });
-      });
+      const semester_1 = parseFloat(document.getElementById('sem_1').value) || 0;
+      const semester_2 = parseFloat(document.getElementById('sem_2').value) || 0;
+      const semester_3 = parseFloat(document.getElementById('sem_3').value) || 0;
+      const semester_4 = parseFloat(document.getElementById('sem_4').value) || 0;
+      const semester_5 = parseFloat(document.getElementById('sem_5').value) || 0;
 
-      await Promise.all(promises);
-      alert('Pilihan Program Studi & Nilai Rapor berhasil disimpan!');
+      await apiFetch('/biodata/rapor', {
+        method: 'POST',
+        body: JSON.stringify({
+          semester_1,
+          semester_2,
+          semester_3,
+          semester_4,
+          semester_5
+        })
+      });
+      isUpdate = true;
+      alert('Formulir Pendaftaran berhasil terkirim');
       window.location.href = 'dokumen step 1.html';
     } catch (err) {
       alert('Gagal menyimpan formulir: ' + (err.message || err));
