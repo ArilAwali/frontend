@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forum</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --sidebar-bg: #07193a;
+            --sidebar-hover: rgba(255, 255, 255, 0.05);
+            --sidebar-active: #0d3a75;
+            --bg-color: #f7f9fc;
+            --text-dark: #2c3e50;
+            --text-gray: #7a8c9e;
+            --text-light-gray: #a0aec0;
+            --border-color: #e2e8f0;
+            --green-badge-bg: #e6f4ea;
+            --green-badge-text: #1e8e3e;
+            --font-family: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background-color: var(--sidebar-bg);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            overflow-y: auto;
+        }
+
+        /* Hide scrollbar for sidebar */
+        .sidebar::-webkit-scrollbar { display: none; }
+        .sidebar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .logo-container {
+            padding: 25px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon i {
+            font-size: 24px;
+        }
+
+        .logo-text h2 {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .logo-text p {
+            font-size: 10px;
+            color: #a0aec0;
+            margin-top: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            padding: 0 15px 20px 15px;
+            flex-grow: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 15px;
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 8px;
+            margin-bottom: 2px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item i {
+            width: 16px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .nav-item:hover {
+            background-color: var(--sidebar-hover);
+        }
+
+        .nav-item.active {
+            background-color: var(--sidebar-active);
+            color: white;
+            font-weight: 600;
+        }
+
+        .nav-section {
+            font-size: 10px;
+            color: #718096;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin: 20px 0 8px 15px;
+        }
+
+        .logout-container {
+            padding: 15px;
+            margin-top: auto;
+        }
+
+        .btn-logout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 10px;
+            background-color: transparent;
+            color: white;
+            border: 1px solid #2d3748;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-family: inherit;
+            transition: background 0.2s;
+        }
+
+        .btn-logout:hover {
+            background-color: var(--sidebar-hover);
+        }
+
+        /* Main Content Styles */
+        .main-wrapper {
+            margin-left: 250px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Top Header */
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .top-header h1 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #07193a;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-actions i {
+            font-size: 18px;
+            color: var(--text-gray);
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        /* Content Area */
+        .content-area {
+            padding: 30px;
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+            flex-grow: 1;
+        }
+
+        /* Left Column: Post Card */
+        .post-column {
+            flex: 2;
+        }
+
+        .post-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .post-author-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge {
+            background-color: var(--green-badge-bg);
+            color: var(--green-badge-text);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .post-time {
+            font-size: 12px;
+            color: var(--text-light-gray);
+        }
+
+        .post-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .post-body {
+            font-size: 13px;
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 20px;
+            font-size: 12px;
+            color: var(--text-light-gray);
+            font-weight: 500;
+        }
+
+        .post-stats span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .participant-avatars {
+            display: flex;
+            align-items: center;
+        }
+
+        .participant-avatars img {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid white;
+            margin-left: -8px;
+            object-fit: cover;
+        }
+        
+        .participant-avatars img:first-child {
+            margin-left: 0;
+        }
+
+        .avatar-count {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background-color: #edf2f7;
+            color: var(--text-gray);
+            font-size: 10px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+            margin-left: -8px;
+            z-index: 10;
+        }
+
+        /* Right Column: Hot Topics */
+        .sidebar-widgets {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .widget-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .widget-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .widget-header i {
+            color: var(--green-badge-text);
+            font-size: 16px;
+        }
+
+        .widget-header h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a202c;
+        }
+
+        .hot-topic-item {
+            margin-bottom: 20px;
+        }
+
+        .hot-topic-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .hot-topic-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 6px;
+            line-height: 1.4;
+            cursor: pointer;
+        }
+
+        .hot-topic-title:hover {
+            color: var(--sidebar-active);
+        }
+
+        .hot-topic-meta {
+            font-size: 11px;
+            color: var(--text-light-gray);
+        }
+
+        /* Footer */
+        .main-footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 11px;
+            color: var(--text-light-gray);
+            border-top: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+        }
+
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo-container">
+            <div class="logo-icon">
+                <i class="fa-solid fa-building-columns"></i>
+            </div>
+            <div class="logo-text">
+                <h2>Universitas<br>Crypto</h2>
+                <p>Portal Mahasiswa</p>
+            </div>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-house"></i> Beranda
+            </a>
+
+            <div class="nav-section">PMB (PENDAFTARAN)</div>
+            <a href="#" class="nav-item">
+                <i class="fa-regular fa-user"></i> Biodata
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-bars-staggered"></i> Formulir Pendaftaran
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-regular fa-file-lines"></i> Dokumen
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-regular fa-circle-check"></i> Status Pendaftaran
+            </a>
+
+            <div class="nav-section">AKADEMIK</div>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-qrcode"></i> Dashboard Akademik
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-book"></i> KRS
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-regular fa-star"></i> KHS (Nilai)
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-file-invoice"></i> Transkrip
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-regular fa-calendar"></i> Jadwal Kuliah
+            </a>
+
+            <div class="nav-section">KOMUNIKASI</div>
+            <a href="#" class="nav-item">
+                <i class="fa-regular fa-envelope"></i> Pesan
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-bullhorn"></i> Pengumuman
+            </a>
+            <a href="#" class="nav-item active">
+                <i class="fa-regular fa-comments"></i> Diskusi / Forum
+            </a>
+
+            <div class="nav-section">ADMINISTRASI</div>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-money-bills"></i> Keuangan
+            </a>
+        </nav>
+
+        <div class="logout-container">
+            <button class="btn-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar
+            </button>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        
+        <header class="top-header">
+            <h1>Diskusi / Forum</h1>
+            <div class="header-actions">
+                <i class="fa-regular fa-bell"></i>
+                <i class="fa-regular fa-envelope"></i>
+                <img src="https://i.pravatar.cc/150?img=11" alt="User Avatar" class="user-avatar">
+            </div>
+        </header>
+
+        <main class="content-area">
+            
+            <div class="post-column">
+                <div class="post-card">
+                    <div class="post-header">
+                        <img src="https://i.pravatar.cc/150?img=5" alt="Author" class="post-author-img">
+                        <div class="post-meta">
+                            <span class="badge">DISKUSI MATA KULIAH</span>
+                            <span class="post-time">• 2 jam yang lalu</span>
+                        </div>
+                    </div>
+                    
+                    <h2 class="post-title">Tips dan Trik Lulus Mata Kuliah Kriptografi Lanjut?</h2>
+                    
+                    <p class="post-body">
+                        Halo semuanya, saya agak kesulitan mengikuti materi minggu ketiga tentang Elliptic Curve Cryptography. Apakah ada rekomendasi buku atau...
+                    </p>
+                    
+                    <div class="post-footer">
+                        <div class="post-stats">
+                            <span><i class="fa-regular fa-comment"></i> 24 Balasan</span>
+                            <span><i class="fa-regular fa-eye"></i> 156 Dilihat</span>
+                        </div>
+                        <div class="participant-avatars">
+                            <img src="https://i.pravatar.cc/150?img=12" alt="Participant 1">
+                            <img src="https://i.pravatar.cc/150?img=33" alt="Participant 2">
+                            <div class="avatar-count">+5</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-widgets">
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                        <h3>Topik Hangat</h3>
+                    </div>
+                    
+                    <div class="hot-topic-item">
+                        <div class="hot-topic-title">Panduan Pengisian KRS Semester Ganjil 2025</div>
+                        <div class="hot-topic-meta">150 balasan • Aktif 10 menit lalu</div>
+                    </div>
+                    
+                    <div class="hot-topic-item">
+                        <div class="hot-topic-title">Review Dosen Pembimbing Skripsi Fakultas Ilmu Komputer</div>
+                        <div class="hot-topic-meta">89 balasan • Aktif 1 jam lalu</div>
+                    </div>
+                    
+                    <div class="hot-topic-item">
+                        <div class="hot-topic-title">Bahas Soal Ujian Tengah Semester Aljabar Linear</div>
+                        <div class="hot-topic-meta">45 balasan • Aktif 3 jam lalu</div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="main-footer">
+            © 2025 Universitas Crypto. Semua hak dilindungi.
+        </footer>
+
+    </div>
+
+</body>
+</html>

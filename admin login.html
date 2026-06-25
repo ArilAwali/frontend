@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Staff - Universitas Crypto Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #065f46; /* Hijau tua */
+            --bg-body: #f5f8fb; /* Biru sangat muda / abu-abu terang */
+            --bg-white: #ffffff;
+            --text-dark: #1f2937;
+            --text-gray: #6b7280;
+            --border-color: #e5e7eb;
+            --alert-bg: #eef2ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--bg-white);
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h2 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 0.3px;
+        }
+
+        /* --- MAIN CONTENT --- */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .login-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .login-subtitle {
+            font-size: 13px;
+            color: var(--text-gray);
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        /* --- FORM --- */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .label-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .form-group label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #4b5563;
+        }
+
+        .forgot-password {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .input-wrapper {
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-white);
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 0 14px;
+            transition: all 0.2s ease;
+        }
+
+        .input-wrapper:focus-within {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(6, 95, 70, 0.1);
+        }
+
+        .input-wrapper i.icon-left {
+            color: #9ca3af;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        .input-wrapper input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 12px 0;
+            font-size: 13px;
+            color: var(--text-dark);
+            background: transparent;
+        }
+
+        .input-wrapper input::placeholder {
+            color: #9ca3af;
+        }
+
+        .input-wrapper i.icon-right {
+            color: #9ca3af;
+            font-size: 14px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        /* --- BUTTONS & LINKS --- */
+        .btn-submit {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background-color: #044e3a;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            font-size: 12px;
+            color: #4b5563;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 16px;
+        }
+
+        .back-link:hover {
+            color: var(--text-dark);
+        }
+
+        /* --- DIVIDER & ALERT --- */
+        .divider {
+            border-top: 1px solid var(--border-color);
+            margin: 24px 0;
+        }
+
+        .alert-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background-color: var(--alert-bg);
+            padding: 14px 16px;
+            border-radius: 6px;
+        }
+
+        .alert-box i {
+            color: #4c8273; /* Warna icon di box biru */
+            font-size: 16px;
+            margin-top: 2px;
+        }
+
+        .alert-box p {
+            font-size: 11px;
+            color: #4b5563;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--bg-white);
+            text-align: center;
+            padding: 20px;
+            font-size: 11px;
+            color: #9ca3af;
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h2>Universitas Crypto Admin</h2>
+    </header>
+
+    <main>
+        <div class="login-wrapper">
+            <h1 class="login-title">Login Staff</h1>
+            <p class="login-subtitle">Silakan masukkan kredensial admin Anda untuk melanjutkan.</p>
+
+            <form action="#" method="POST">
+                
+                <div class="form-group">
+                    <div class="label-row">
+                        <label>ID Staff / Username</label>
+                    </div>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-user icon-left"></i>
+                        <input type="text" placeholder="Masukkan ID Staff" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="label-row">
+                        <label>Kata Sandi</label>
+                        <a href="#" class="forgot-password">Lupa Kata Sandi ?</a>
+                    </div>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock icon-left"></i>
+                        <input type="password" placeholder="••••••••" required>
+                        <i class="fa-regular fa-eye icon-right" title="Tampilkan sandi"></i>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    Masuk ke Portal Admin <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <a href="#" class="back-link">&lt; Kembali ke Beranda</a>
+
+            </form>
+
+            <div class="divider"></div>
+
+            <div class="alert-box">
+                <i class="fa-solid fa-shield-halved"></i>
+                <p>Pastikan Anda berada di domain resmi admin.crypto.ac.id sebelum memasukkan kredensial login Anda.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        © 2025 Universitas Crypto. Seluruh Hak Cipta Dilindungi.
+    </footer>
+
+</body>
+</html>

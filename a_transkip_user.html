@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transkrip Akademik</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            display: flex;
+            background-color: #FAFAFA;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 260px;
+            background-color: #0B1727;
+            color: #8A99AF;
+            display: flex;
+            flex-direction: column;
+            padding: 24px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .brand {
+            padding: 0 24px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #FFFFFF;
+        }
+
+        .brand i {
+            font-size: 24px;
+        }
+
+        .brand-text h2 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .brand-text p {
+            font-size: 11px;
+            color: #8A99AF;
+            margin-top: 2px;
+        }
+
+        .menu-section {
+            margin-bottom: 20px;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0 24px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #5C6B82;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 24px;
+            color: #8A99AF;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            gap: 12px;
+            transition: all 0.2s;
+        }
+
+        .menu-item:hover {
+            color: #FFFFFF;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .menu-item.active {
+            color: #FFFFFF;
+            background-color: #0A369D; /* Blue active state */
+            border-left: 4px solid #3B82F6;
+            padding-left: 20px;
+        }
+
+        .logout-btn {
+            margin-top: auto;
+            margin-left: 24px;
+            margin-right: 24px;
+            padding: 12px;
+            border: 1px solid #2A3B54;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #8A99AF;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .logout-btn:hover {
+            color: #fff;
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            padding: 0 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Topbar */
+        .topbar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 20px 0;
+            gap: 20px;
+            border-bottom: 1px solid #EAEAEA;
+            margin-bottom: 30px;
+        }
+
+        .topbar-icons {
+            display: flex;
+            gap: 20px;
+            color: #666;
+            font-size: 18px;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .profile-avatar {
+            width: 36px;
+            height: 36px;
+            background-color: #1E3A8A;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-info .name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111;
+        }
+
+        .profile-info .role {
+            font-size: 12px;
+            color: #777;
+        }
+
+        .profile i.fa-chevron-down {
+            font-size: 12px;
+            color: #777;
+            margin-left: 8px;
+        }
+
+        /* Page Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .page-title h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 6px;
+        }
+
+        .page-title p {
+            font-size: 14px;
+            color: #6B7280;
+        }
+
+        .btn-download {
+            background-color: #6B82A4;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        /* Summary Cards */
+        .summary-cards {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 20px;
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .card-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #6B7280;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .card-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+
+        .card-value span {
+            font-size: 16px;
+            color: #6B7280;
+            font-weight: 500;
+        }
+
+        .card-status {
+            font-size: 13px;
+            color: #059669;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+
+        .card-status.neutral {
+            color: #4B5563;
+        }
+
+        .progress-bar-container {
+            height: 6px;
+            background-color: #E5E7EB;
+            border-radius: 4px;
+            margin-top: 12px;
+            width: 100%;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background-color: #34D399;
+            border-radius: 4px;
+            width: 86%; /* roughly 124/144 */
+        }
+
+        .card-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: #F3F4F6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6B7280;
+            opacity: 0.8;
+        }
+
+        .card-icon.green-icon {
+            background-color: #D1FAE5;
+            color: #10B981;
+        }
+
+        /* Table Area */
+        .table-section {
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            border: 1px solid #E5E7EB;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .table-header {
+            padding: 20px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .table-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background-color: #F9FAFB;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #6B7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 16px 20px;
+            font-size: 13px;
+            color: #111827;
+            font-weight: 500;
+            border-bottom: 1px solid #F3F4F6;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .badge-a {
+            background-color: #D1FAE5;
+            color: #059669;
+        }
+
+        .badge-b {
+            background-color: #E5E7EB;
+            color: #4B5563;
+        }
+
+        .table-footer {
+            padding: 16px;
+            text-align: center;
+            background-color: #F9FAFB;
+        }
+
+        .table-footer a {
+            color: #4B5563;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .site-footer {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 12px;
+            color: #9CA3AF;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="brand">
+            <i class="fas fa-university"></i>
+            <div class="brand-text">
+                <h2>Universitas Crypto</h2>
+                <p>Portal Mahasiswa</p>
+            </div>
+        </div>
+
+        <a href="#" class="menu-item">
+            <i class="fas fa-home"></i> Beranda
+        </a>
+
+        <div class="menu-section" style="margin-top: 10px;">
+            <div class="menu-title">PMB (PENDAFTARAN)</div>
+            <a href="#" class="menu-item"><i class="far fa-user"></i> Biodata</a>
+            <a href="#" class="menu-item"><i class="far fa-file-alt"></i> Formulir Pendaftaran</a>
+            <a href="#" class="menu-item"><i class="far fa-file"></i> Dokumen</a>
+            <a href="#" class="menu-item"><i class="far fa-times-circle"></i> Status Pendaftaran</a>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-title">AKADEMIK</div>
+            <a href="#" class="menu-item"><i class="fas fa-chart-bar"></i> Dashboard Akademik</a>
+            <a href="#" class="menu-item"><i class="fas fa-book"></i> KRS</a>
+            <a href="#" class="menu-item"><i class="fas fa-star"></i> KHS (Nilai)</a>
+            <a href="#" class="menu-item active"><i class="fas fa-file-invoice"></i> Transkrip</a>
+            <a href="#" class="menu-item"><i class="far fa-calendar-alt"></i> Jadwal Kuliah</a>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-title">KOMUNIKASI</div>
+            <a href="#" class="menu-item"><i class="far fa-envelope"></i> Pesan</a>
+            <a href="#" class="menu-item"><i class="fas fa-bullhorn"></i> Pengumuman</a>
+            <a href="#" class="menu-item"><i class="far fa-comments"></i> Diskusi / Forum</a>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-title">ADMINISTRASI</div>
+            <a href="#" class="menu-item"><i class="fas fa-wallet"></i> Keuangan</a>
+        </div>
+
+        <a href="#" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Keluar
+        </a>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div class="topbar-icons">
+                <i class="far fa-bell"></i>
+                <i class="far fa-envelope"></i>
+            </div>
+            <div class="profile">
+                <div class="profile-avatar">MD</div>
+                <div class="profile-info">
+                    <span class="name">Muhammad Dhafin</span>
+                    <span class="role">Mahasiswa</span>
+                </div>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </header>
+
+        <div class="page-header">
+            <div class="page-title">
+                <h1>Transkrip Akademik</h1>
+                <p>Riwayat lengkap nilai dan pencapaian akademik Anda.</p>
+            </div>
+            <button class="btn-download">
+                <i class="fas fa-file-download"></i> Unduh PDF
+            </button>
+        </div>
+
+        <div class="summary-cards">
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-award"></i></div>
+                <div class="card-title">INDEKS PRESTASI KUMULATIF</div>
+                <div class="card-value">3.85</div>
+                <div class="card-status">
+                    <i class="fas fa-check"></i> Sangat Memuaskan
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-layer-group"></i></div>
+                <div class="card-title">TOTAL SKS DIPEROLEH</div>
+                <div class="card-value">124<span>/144</span></div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon green-icon"><i class="fas fa-check"></i></div>
+                <div class="card-title">STATUS AKADEMIK</div>
+                <div class="card-value" style="font-size: 20px;">Aktif</div>
+                <div class="card-status neutral" style="margin-top: 10px;">
+                    Semester: Ganjil 2025/2026
+                </div>
+            </div>
+        </div>
+
+        <div class="table-section">
+            <div class="table-header">
+                <h3>Daftar Mata Kuliah</h3>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>KODE</th>
+                        <th>MATA KULIAH</th>
+                        <th>SKS</th>
+                        <th>NILAI HURUF</th>
+                        <th>NILAI ANGKA</th>
+                        <th>SEMESTER</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color: #6B7280;">CRY101</td>
+                        <td>Pengantar Kriptografi</td>
+                        <td>3</td>
+                        <td><span class="badge badge-a">A</span></td>
+                        <td>4.00</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #6B7280;">MAT101</td>
+                        <td>Kalkulus Dasar</td>
+                        <td>4</td>
+                        <td><span class="badge badge-a">A</span></td>
+                        <td>4.00</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #6B7280;">CRY201</td>
+                        <td>Struktur Data Blockchain</td>
+                        <td>3</td>
+                        <td><span class="badge badge-b">B+</span></td>
+                        <td>3.75</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #6B7280;">EKO201</td>
+                        <td>Ekonomi Digital</td>
+                        <td>2</td>
+                        <td><span class="badge badge-a">A</span></td>
+                        <td>4.00</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #6B7280;">CRY202</td>
+                        <td>Smart Contracts Dasar</td>
+                        <td>4</td>
+                        <td><span class="badge badge-b">B+</span></td>
+                        <td>3.50</td>
+                        <td>2</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-footer">
+                <a href="#">Tampilkan Semua Mata Kuliah <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i></a>
+            </div>
+        </div>
+
+        <footer class="site-footer">
+            &copy; 2024 Universitas Crypto. Semua hak dilindungi.
+        </footer>
+    </main>
+
+</body>
+</html>
