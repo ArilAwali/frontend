@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Dokumen - Universitas Crypto</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/dokumen.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="top-header">
+        <div class="logo-area">
+            <h1>Universitas Crypto</h1>
+        </div>
+        <div class="user-area">
+            <img src="https://ui-avatars.com/api/?name=Admin&background=1a2530&color=fff" alt="User Avatar" class="avatar">
+        </div>
+    </header>
+
+    <div class="layout-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">UP</span>
+                    <span class="brand-subtitle">Portal PMB</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <i class="fa-solid fa-border-all"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="dokumen.html" class="nav-item active">
+                    <i class="fa-regular fa-file-lines"></i>
+                    <span>Dokumen</span>
+                </a>
+                <a href="prodi.html" class="nav-item">
+                    <i class="fa-solid fa-users-gear"></i>
+                    <span>Manajemen Prodi</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>Pendaftaran</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Laporan</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span>Pengumuman</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Ajuan Mata Kuliah</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-regular fa-envelope"></i>
+                    <span>Pesan</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Keluar</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h2>Manajemen Dokumen</h2>
+                <p>Kelola, verifikasi, dan pantau semua dokumen yang diunggah oleh pendaftar.</p>
+            </div>
+
+            <div class="stats-grid-5">
+                <div class="stat-card row-card">
+                    <div class="stat-icon-wrapper bg-light-green text-green">
+                        <i class="fa-solid fa-file-arrow-up"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-title">Upload Hari Ini</div>
+                        <div class="stat-value-sm">128 <span class="stat-trend positive"><i class="fa-solid fa-arrow-trend-up"></i> +10% dari kemarin</span></div>
+                    </div>
+                </div>
+                <div class="stat-card row-card">
+                    <div class="stat-icon-wrapper bg-light-blue text-blue">
+                        <i class="fa-regular fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-title">Menunggu Verifikasi</div>
+                        <div class="stat-value-sm">312 <span class="stat-trend positive"><i class="fa-solid fa-arrow-trend-up"></i> +2% dari kemarin</span></div>
+                    </div>
+                </div>
+                <div class="stat-card row-card">
+                    <div class="stat-icon-wrapper bg-light-yellow text-yellow">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-title">Perlu Revisi</div>
+                        <div class="stat-value-sm">45 <span class="stat-trend negative"><i class="fa-solid fa-arrow-trend-down"></i> +5% dari kemarin</span></div>
+                    </div>
+                </div>
+                <div class="stat-card row-card">
+                    <div class="stat-icon-wrapper bg-light-green text-green">
+                        <i class="fa-regular fa-circle-check"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-title">Terverifikasi Hari Ini</div>
+                        <div class="stat-value-sm">96 <span class="stat-trend positive"><i class="fa-solid fa-arrow-trend-up"></i> +22% dari kemarin</span></div>
+                    </div>
+                </div>
+                <div class="stat-card row-card">
+                    <div class="stat-icon-wrapper bg-light-red text-red">
+                        <i class="fa-regular fa-circle-xmark"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-title">Ditolak Hari Ini</div>
+                        <div class="stat-value-sm">12 <span class="stat-trend negative"><i class="fa-solid fa-arrow-trend-down"></i> +3% dari kemarin</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="document-layout">
+                <div class="card document-list">
+                    <div class="filter-bar">
+                        <div class="search-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" placeholder="Cari nama pendaftar atau NIM...">
+                        </div>
+                        <div class="filter-dropdowns">
+                            <select><option>Semua Jenis Dokumen</option></select>
+                            <select><option>Semua Status</option></select>
+                            <div class="date-picker">
+                                Tanggal Upload <i class="fa-regular fa-calendar"></i>
+                            </div>
+                            <button class="btn-filter"><i class="fa-solid fa-filter"></i> Filter</button>
+                        </div>
+                    </div>
+
+                    <div class="tabs">
+                        <div class="tab active">Semua Dokumen</div>
+                        <div class="tab">Menunggu</div>
+                        <div class="tab">Perlu Revisi</div>
+                        <div class="tab">Terverifikasi</div>
+                        <div class="tab">Ditolak</div>
+                    </div>
+
+                    <div class="table-actions-bar">
+                        <div class="selection-actions">
+                            <input type="checkbox" class="cb-main"> <span class="selected-count">0 dipilih</span>
+                            <select class="action-select"><option>Pilih Aksi</option></select>
+                            <button class="btn-apply">Terapkan</button>
+                        </div>
+                        <button class="btn-export"><i class="fa-solid fa-download"></i> Export Data</button>
+                    </div>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>PENDAFTAR</th>
+                                <th>JENIS DOKUMEN</th>
+                                <th>NAMA FILE</th>
+                                <th>TANGGAL UPLOAD</th>
+                                <th>STATUS</th>
+                                <th>AKSI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="active-row">
+                                <td><input type="checkbox" checked></td>
+                                <td>
+                                    <div class="student-info">
+                                        <div class="avatar-initial bg-light-green">BP</div>
+                                        <div>
+                                            <div class="student-name">Bagus Permadi</div>
+                                            <div class="student-id">24091001</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>KTP</td>
+                                <td>
+                                    <div class="file-name">KTP_BagusPermadi.jpg</div>
+                                    <div class="file-size">1.2 MB</div>
+                                </td>
+                                <td>
+                                    <div class="date-text">20 Mei 2025</div>
+                                    <div class="time-text">10:30 WIB</div>
+                                </td>
+                                <td><span class="badge badge-green">Terverifikasi</span></td>
+                                <td>
+                                    <div class="action-icons">
+                                        <i class="fa-regular fa-eye text-primary-green"></i>
+                                        <i class="fa-solid fa-download"></i>
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>
+                                    <div class="student-info">
+                                        <div class="avatar-initial bg-light-yellow">SN</div>
+                                        <div>
+                                            <div class="student-name">Siti Nurhaliza</div>
+                                            <div class="student-id">24091002</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Kartu Keluarga</td>
+                                <td>
+                                    <div class="file-name">KK_SitiNurhaliza.pdf</div>
+                                    <div class="file-size">1.8 MB</div>
+                                </td>
+                                <td>
+                                    <div class="date-text">20 Mei 2025</div>
+                                    <div class="time-text">09:15 WIB</div>
+                                </td>
+                                <td><span class="badge badge-yellow">Perlu Revisi</span></td>
+                                <td>
+                                    <div class="action-icons">
+                                        <i class="fa-regular fa-eye"></i>
+                                        <i class="fa-solid fa-download"></i>
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>
+                                    <div class="student-info">
+                                        <div class="avatar-initial bg-light-blue">RK</div>
+                                        <div>
+                                            <div class="student-name">Rahmat Kurnia</div>
+                                            <div class="student-id">24091003</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Ijazah</td>
+                                <td>
+                                    <div class="file-name">Ijazah_RahmatKurnia.pdf</div>
+                                    <div class="file-size">2.1 MB</div>
+                                </td>
+                                <td>
+                                    <div class="date-text">19 Mei 2025</div>
+                                    <div class="time-text">14:20 WIB</div>
+                                </td>
+                                <td><span class="badge badge-blue">Menunggu</span></td>
+                                <td>
+                                    <div class="action-icons">
+                                        <i class="fa-regular fa-eye"></i>
+                                        <i class="fa-solid fa-download"></i>
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>
+                                    <div class="student-info">
+                                        <div class="avatar-initial bg-light-red">AW</div>
+                                        <div>
+                                            <div class="student-name">Adi Wijaya</div>
+                                            <div class="student-id">24091004</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>SKL</td>
+                                <td>
+                                    <div class="file-name">SKL_AdiWijaya.pdf</div>
+                                    <div class="file-size">1.5 MB</div>
+                                </td>
+                                <td>
+                                    <div class="date-text">19 Mei 2025</div>
+                                    <div class="time-text">10:10 WIB</div>
+                                </td>
+                                <td><span class="badge badge-red">Ditolak</span></td>
+                                <td>
+                                    <div class="action-icons">
+                                        <i class="fa-regular fa-eye"></i>
+                                        <i class="fa-solid fa-download"></i>
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>
+                                    <div class="student-info">
+                                        <div class="avatar-initial bg-light-purple">MA</div>
+                                        <div>
+                                            <div class="student-name">Maya Amalia</div>
+                                            <div class="student-id">24091005</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Pas Foto</td>
+                                <td>
+                                    <div class="file-name">Foto_MayaAmalia.jpg</div>
+                                    <div class="file-size">542 KB</div>
+                                </td>
+                                <td>
+                                    <div class="date-text">19 Mei 2025</div>
+                                    <div class="time-text">11:05 WIB</div>
+                                </td>
+                                <td><span class="badge badge-green">Terverifikasi</span></td>
+                                <td>
+                                    <div class="action-icons">
+                                        <i class="fa-regular fa-eye"></i>
+                                        <i class="fa-solid fa-download"></i>
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="pagination">
+                        <div class="page-info">Menampilkan 1 - 5 dari 312 data</div>
+                        <div class="page-controls">
+                            <button><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="active">1</button>
+                            <button>2</button>
+                            <button>3</button>
+                            <button>4</button>
+                            <span class="dots">...</span>
+                            <button>39</button>
+                            <button><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card document-detail">
+                    <div class="detail-header">
+                        <h3>Detail Dokumen</h3>
+                        <button class="btn-close"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+
+                    <div class="doc-file-card">
+                        <div class="doc-file-icon bg-light-green text-green">
+                            <i class="fa-regular fa-id-card"></i>
+                        </div>
+                        <div class="doc-file-info">
+                            <div class="doc-file-title">KTP</div>
+                            <div class="doc-file-desc">Bagus Permadi (ID 1001)</div>
+                            <div class="doc-file-meta">KTP_BagusPermadi.jpg • 1.2 MB<br>Diunggah: 20 Mei 2025, 10:30 WIB</div>
+                        </div>
+                        <span class="badge badge-green status-badge">TERVERIFIKASI</span>
+                    </div>
+
+                    <div class="doc-preview">
+                        <img src="assets/images/doc_preview.png" alt="Document Preview">
+                        <div class="preview-actions">
+                            <button><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                            <button><i class="fa-solid fa-expand"></i></button>
+                            <button class="btn-dl"><i class="fa-solid fa-download"></i> Download</button>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>INFORMASI VERIFIKASI</h4>
+                        <div class="info-row">
+                            <span class="info-label">Verifikator</span>
+                            <span class="info-value">: Admin PMB</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Tanggal Verifikasi</span>
+                            <span class="info-value">: 20 Mei 2025, 11:30 WIB</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Catatan</span>
+                            <span class="info-value">: Dokumen sesuai dan jelas</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>RIWAYAT DOKUMEN</h4>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-dot bg-success-green"></div>
+                                <div class="timeline-content">
+                                    <div class="timeline-title">20 Mei 2025, 11:30 WIB</div>
+                                    <div class="timeline-desc">Dokumen diverifikasi oleh Admin PMB</div>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot bg-border"></div>
+                                <div class="timeline-content">
+                                    <div class="timeline-title">20 Mei 2025, 10:30 WIB</div>
+                                    <div class="timeline-desc">Dokumen diunggah oleh pendaftar</div>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot bg-yellow"></div>
+                                <div class="timeline-content">
+                                    <div class="timeline-title">20 Mei 2025, 10:15 WIB</div>
+                                    <div class="timeline-desc">Dokumen minta direvisi oleh Admin PMB</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn-action bg-green text-white"><i class="fa-solid fa-check"></i> Terverifikasi</button>
+                        <button class="btn-action btn-outline-yellow"><i class="fa-solid fa-rotate-left"></i> Minta Revisi</button>
+                        <button class="btn-action btn-outline-red"><i class="fa-solid fa-xmark"></i> Tolak</button>
+                    </div>
+                    <button class="btn-full btn-outline-gray"><i class="fa-regular fa-comment"></i> Beri Catatan</button>
+
+                    <div class="info-box bg-light-blue text-blue">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <div class="info-box-text">
+                            <strong>Catatan</strong>
+                            <p>Pastikan semua detail dokumen terlihat jelas. Jika gambar buram, gunakan fitur "Minta Revisi". Jika dokumen palsu/tidak valid, klik "Tolak".</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="doc-types-section">
+                <h3>Jenis Dokumen yang Dikelola</h3>
+                <div class="stats-grid-5">
+                    <div class="doc-type-card">
+                        <div class="doc-type-icon text-green bg-light-green"><i class="fa-regular fa-id-card"></i></div>
+                        <div class="doc-type-info">
+                            <div class="doc-type-title">KTP</div>
+                            <div class="doc-type-count">512 dokumen</div>
+                        </div>
+                    </div>
+                    <div class="doc-type-card">
+                        <div class="doc-type-icon text-blue bg-light-blue"><i class="fa-solid fa-people-roof"></i></div>
+                        <div class="doc-type-info">
+                            <div class="doc-type-title">Kartu Keluarga</div>
+                            <div class="doc-type-count">255 dokumen</div>
+                        </div>
+                    </div>
+                    <div class="doc-type-card">
+                        <div class="doc-type-icon text-dark-green bg-light-green"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <div class="doc-type-info">
+                            <div class="doc-type-title">Ijazah</div>
+                            <div class="doc-type-count">3 dokumen</div>
+                        </div>
+                    </div>
+                    <div class="doc-type-card">
+                        <div class="doc-type-icon text-purple bg-light-purple"><i class="fa-regular fa-file-pdf"></i></div>
+                        <div class="doc-type-info">
+                            <div class="doc-type-title">SKL</div>
+                            <div class="doc-type-count">342 dokumen</div>
+                        </div>
+                    </div>
+                    <div class="doc-type-card">
+                        <div class="doc-type-icon text-gray bg-light-gray" style="background: #f1f5f9; color: #64748b;"><i class="fa-regular fa-image"></i></div>
+                        <div class="doc-type-info">
+                            <div class="doc-type-title">Pas Foto</div>
+                            <div class="doc-type-count">296 dokumen</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</body>
+</html>

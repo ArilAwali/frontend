@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Program Studi - Universitas Crypto</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/prodi.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="top-header">
+        <div class="logo-area">
+            <h1>Universitas Crypto</h1>
+        </div>
+        <div class="user-area">
+            <img src="https://ui-avatars.com/api/?name=Admin&background=1a2530&color=fff" alt="User Avatar" class="avatar">
+        </div>
+    </header>
+
+    <div class="layout-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">UP</span>
+                    <span class="brand-subtitle">Portal PMB</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <i class="fa-solid fa-border-all"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="dokumen.html" class="nav-item">
+                    <i class="fa-regular fa-file-lines"></i>
+                    <span>Dokumen</span>
+                </a>
+                <a href="prodi.html" class="nav-item active">
+                    <i class="fa-solid fa-users-gear"></i>
+                    <span>Manajemen Prodi</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>Pendaftaran</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Laporan</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span>Pengumuman</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Ajuan Mata Kuliah</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-regular fa-envelope"></i>
+                    <span>Pesan</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Keluar</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header page-header-flex">
+                <div>
+                    <h2>Manajemen Program Studi</h2>
+                    <p>Kelola daftar dan detail program studi yang tersedia untuk pendaftaran mahasiswa baru.</p>
+                </div>
+                <button class="btn-primary"><i class="fa-solid fa-plus"></i> Tambah Prodi</button>
+            </div>
+
+            <div class="stats-grid-3">
+                <div class="stat-card horizontal-stat">
+                    <div class="stat-info">
+                        <div class="stat-title">Total Prodi</div>
+                        <div class="stat-value">4</div>
+                    </div>
+                    <div class="stat-icon bg-light-gray text-secondary">
+                        <i class="fa-solid fa-table-list"></i>
+                    </div>
+                </div>
+                <div class="stat-card horizontal-stat">
+                    <div class="stat-info">
+                        <div class="stat-title">Prodi Aktif</div>
+                        <div class="stat-value">4</div>
+                    </div>
+                    <div class="stat-icon bg-light-green text-green">
+                        <i class="fa-regular fa-circle-check"></i>
+                    </div>
+                </div>
+                <div class="stat-card horizontal-stat">
+                    <div class="stat-info">
+                        <div class="stat-title">Prodi Terfavorit</div>
+                        <div class="stat-value-text">Teknik Informatika</div>
+                    </div>
+                    <div class="stat-icon bg-light-green text-green">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card table-card">
+                <div class="card-header-flex">
+                    <h3>Daftar Program Studi</h3>
+                    <div class="search-box-sm">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Cari prodi...">
+                    </div>
+                </div>
+                
+                <table class="data-table prodi-table">
+                    <thead>
+                        <tr>
+                            <th>Kode</th>
+                            <th>Nama</th>
+                            <th>Fakultas</th>
+                            <th>Kuota</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>TI-01</strong></td>
+                            <td>Teknik Informatika</td>
+                            <td>FTI</td>
+                            <td>150</td>
+                            <td><span class="badge badge-green">Aktif</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>SI-02</strong></td>
+                            <td>Sistem Informasi</td>
+                            <td>FTI</td>
+                            <td>120</td>
+                            <td><span class="badge badge-green">Aktif</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>AK-03</strong></td>
+                            <td>Akuntansi</td>
+                            <td>FEB</td>
+                            <td>200</td>
+                            <td><span class="badge badge-green">Aktif</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>MN-04</strong></td>
+                            <td>Manajemen</td>
+                            <td>FEB</td>
+                            <td>250</td>
+                            <td><span class="badge badge-green">Aktif</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,562 @@
+/* dokumen.css - Styles specifically for the document management page */
+
+/* Utility colors */
+.text-green { color: var(--primary-green); }
+.text-blue { color: var(--blue); }
+.text-yellow { color: var(--yellow); }
+.text-red { color: var(--red); }
+.text-white { color: #fff; }
+.text-primary-green { color: var(--primary-green); }
+.bg-border { background-color: var(--border-color); }
+.bg-success-green { background-color: var(--success-green); }
+
+.badge-blue {
+    background-color: var(--light-blue);
+    color: var(--blue);
+}
+
+/* 5 Columns Grid */
+.stats-grid-5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+}
+
+.row-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 16px;
+    gap: 16px;
+}
+
+.stat-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-value-sm {
+    font-size: 1.4rem;
+    font-weight: 700;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.stat-value-sm .stat-trend {
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.stat-trend.negative {
+    color: var(--red);
+}
+
+/* Document Layout Grid */
+.document-layout {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 20px;
+}
+
+/* Document List Area */
+.document-list {
+    padding: 0; /* Removing padding so borders go full width */
+}
+
+.filter-bar {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-color);
+    padding: 10px 16px;
+    border-radius: 8px;
+    width: 300px;
+    border: 1px solid var(--border-color);
+}
+
+.search-box i {
+    color: var(--text-secondary);
+    margin-right: 10px;
+}
+
+.search-box input {
+    border: none;
+    background: none;
+    outline: none;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+.filter-dropdowns {
+    display: flex;
+    gap: 12px;
+}
+
+.filter-dropdowns select, .date-picker, .btn-filter {
+    padding: 10px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: white;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+.btn-filter {
+    background-color: var(--bg-color);
+}
+
+.tabs {
+    display: flex;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tab {
+    padding: 16px 24px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.tab.active {
+    color: var(--primary-green);
+    border-bottom: 2px solid var(--primary-green);
+}
+
+.table-actions-bar {
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fafbfc;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.selection-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.selected-count {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.action-select {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+
+.btn-apply {
+    padding: 8px 16px;
+    background-color: var(--primary-green);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.btn-export {
+    padding: 8px 16px;
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.active-row {
+    background-color: var(--light-green);
+    border-left: 3px solid var(--primary-green);
+}
+
+.file-name {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.file-size {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+.date-text {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.time-text {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+.action-icons {
+    display: flex;
+    gap: 12px;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.action-icons i:hover {
+    color: var(--primary-green);
+}
+
+/* Pagination */
+.pagination {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+}
+
+.page-info {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.page-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.page-controls button {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+}
+
+.page-controls button.active {
+    background-color: var(--primary-green);
+    color: white;
+    border-color: var(--primary-green);
+}
+
+.dots {
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+}
+
+/* Document Detail Sidebar */
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.doc-file-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.doc-file-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.doc-file-title {
+    font-weight: 600;
+}
+
+.doc-file-desc {
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+.doc-file-meta {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 6px;
+    line-height: 1.4;
+}
+
+.status-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+}
+
+.doc-preview {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    position: relative;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 180px;
+}
+
+.doc-preview img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.preview-actions {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    gap: 8px;
+}
+
+.preview-actions button {
+    background-color: white;
+    border: 1px solid var(--border-color);
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.btn-dl {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.detail-section {
+    margin-bottom: 24px;
+}
+
+.detail-section h4 {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+.info-row {
+    display: flex;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+}
+
+.info-label {
+    width: 120px;
+    color: var(--text-secondary);
+}
+
+.info-value {
+    flex: 1;
+    font-weight: 500;
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+    padding-left: 20px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--border-color);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -20px;
+    top: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px var(--border-color);
+}
+
+.timeline-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.timeline-desc {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.btn-action, .btn-full {
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-outline-yellow {
+    background-color: white;
+    border-color: var(--yellow);
+    color: var(--yellow);
+}
+
+.btn-outline-red {
+    background-color: white;
+    border-color: var(--red);
+    color: var(--red);
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.btn-outline-gray {
+    background-color: white;
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.info-box {
+    margin-top: 20px;
+    padding: 16px;
+    border-radius: 8px;
+    display: flex;
+    gap: 12px;
+}
+
+.info-box i {
+    font-size: 1.2rem;
+    margin-top: 2px;
+}
+
+.info-box-text strong {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+}
+
+.info-box-text p {
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+/* Bottom Document Types Section */
+.doc-types-section {
+    margin-top: 8px;
+}
+
+.doc-types-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.doc-type-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.doc-type-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.doc-type-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.doc-type-count {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}

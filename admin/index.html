@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Statistik - Universitas Crypto</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="top-header">
+        <div class="logo-area">
+            <h1>Universitas Crypto</h1>
+        </div>
+        <div class="user-area">
+            <img src="https://ui-avatars.com/api/?name=Admin&background=1a2530&color=fff" alt="User Avatar" class="avatar">
+        </div>
+    </header>
+
+    <div class="layout-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">UP</span>
+                    <span class="brand-subtitle">Portal PMB</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item active">
+                    <i class="fa-solid fa-border-all"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="dokumen.html" class="nav-item">
+                    <i class="fa-regular fa-file-lines"></i>
+                    <span>Dokumen</span>
+                </a>
+                <a href="prodi.html" class="nav-item">
+                    <i class="fa-solid fa-users-gear"></i>
+                    <span>Manajemen Prodi</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>Pendaftaran</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Laporan</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span>Pengumuman</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Ajuan Mata Kuliah</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-regular fa-envelope"></i>
+                    <span>Pesan</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Keluar</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h2>Dashboard Statistik</h2>
+                <p>Selamat datang kembali, Admin. Berikut adalah ringkasan pendaftaran mahasiswa baru hari ini.</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-title">Total Pendaftar</div>
+                    <div class="stat-value text-dark">2,458</div>
+                    <div class="stat-trend positive">
+                        <i class="fa-solid fa-arrow-trend-up"></i> 12% dari minggu lalu
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Fakultas Teknik</div>
+                    <div class="stat-value">1,240</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar bg-green" style="width: 70%"></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Fakultas Ekonomi</div>
+                    <div class="stat-value">1,218</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar bg-yellow" style="width: 65%"></div>
+                    </div>
+                </div>
+                <div class="stat-card dark-green-card">
+                    <div class="stat-title">Target Pendaftaran</div>
+                    <div class="stat-value">3,000</div>
+                    <div class="stat-trend">82% Tercapai</div>
+                </div>
+            </div>
+
+            <div class="middle-grid">
+                <div class="card status-card">
+                    <h3>Status Verifikasi</h3>
+                    <div class="status-list">
+                        <div class="status-item">
+                            <span class="dot dot-green"></span> Diterima
+                            <span class="status-count">1,150</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="dot dot-yellow"></span> Menunggu
+                            <span class="status-count">890</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="dot dot-red"></span> Ditolak
+                            <span class="status-count">418</span>
+                        </div>
+                    </div>
+                    <div class="donut-chart-container">
+                        <!-- Pure CSS Donut Chart representation -->
+                        <div class="donut-chart">
+                            <div class="donut-hole">
+                                <span class="donut-value">2.4k</span>
+                                <span class="donut-label">Total</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card table-card">
+                    <div class="card-header">
+                        <h3>Pendaftar Terbaru</h3>
+                        <a href="#" class="link-more">Lihat Semua <i class="fa-solid fa-plus"></i></a>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Mahasiswa</th>
+                                <th>Prodi</th>
+                                <th>Tanggal</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="student-info">
+                                        <div class="avatar-initial bg-light-green">BP</div>
+                                        <div>
+                                            <div class="student-name">Bagus Permadi</div>
+                                            <div class="student-id">ID: 24091001</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Teknik Informatika</td>
+                                <td>12 Okt 2024</td>
+                                <td><span class="badge badge-green">Tersertifikasi</span></td>
+                                <td><button class="action-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="student-info">
+                                        <div class="avatar-initial bg-light-yellow">SN</div>
+                                        <div>
+                                            <div class="student-name">Siti Nurhaliza</div>
+                                            <div class="student-id">ID: 24091002</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Manajemen</td>
+                                <td>12 Okt 2024</td>
+                                <td><span class="badge badge-yellow">Menunggu</span></td>
+                                <td><button class="action-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="student-info">
+                                        <div class="avatar-initial bg-light-blue">RN</div>
+                                        <div>
+                                            <div class="student-name">Rahmat Nurdin</div>
+                                            <div class="student-id">ID: 24091003</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Teknik Sipil</td>
+                                <td>11 Okt 2024</td>
+                                <td><span class="badge badge-green">Tersertifikasi</span></td>
+                                <td><button class="action-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="student-info">
+                                        <div class="avatar-initial bg-light-red">AW</div>
+                                        <div>
+                                            <div class="student-name">Adi Wijaya</div>
+                                            <div class="student-id">ID: 24091004</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Akuntansi</td>
+                                <td>11 Okt 2024</td>
+                                <td><span class="badge badge-red">Ditolak</span></td>
+                                <td><button class="action-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="student-info">
+                                        <div class="avatar-initial bg-light-purple">MA</div>
+                                        <div>
+                                            <div class="student-name">Maya Amalia</div>
+                                            <div class="student-id">ID: 24091005</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Teknik Informatika</td>
+                                <td>11 Okt 2024</td>
+                                <td><span class="badge badge-yellow">Menunggu</span></td>
+                                <td><button class="action-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="bottom-grid">
+                <div class="card fav-prodi-card">
+                    <h3>Program Studi Terfavorit</h3>
+                    
+                    <div class="prodi-item">
+                        <div class="prodi-header">
+                            <span class="prodi-name">Teknik Informatika</span>
+                            <span class="prodi-count">842</span>
+                        </div>
+                        <div class="prodi-bar-bg">
+                            <div class="prodi-bar bg-dark-green" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="prodi-item">
+                        <div class="prodi-header">
+                            <span class="prodi-name">Manajemen</span>
+                            <span class="prodi-count">580</span>
+                        </div>
+                        <div class="prodi-bar-bg">
+                            <div class="prodi-bar bg-green" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="prodi-item">
+                        <div class="prodi-header">
+                            <span class="prodi-name">Akuntansi</span>
+                            <span class="prodi-count">422</span>
+                        </div>
+                        <div class="prodi-bar-bg">
+                            <div class="prodi-bar bg-yellow" style="width: 45%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="prodi-item">
+                        <div class="prodi-header">
+                            <span class="prodi-name">Teknik Sipil</span>
+                            <span class="prodi-count">314</span>
+                        </div>
+                        <div class="prodi-bar-bg">
+                            <div class="prodi-bar bg-gray" style="width: 35%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="image-cards">
+                    <div class="image-card" id="card-teknik">
+                        <div class="image-card-overlay">
+                            <h4>Fakultas Teknik</h4>
+                            <p>1,240 MAHASISWA TERDAFTAR</p>
+                        </div>
+                    </div>
+                    <div class="image-card" id="card-ekonomi">
+                        <div class="image-card-overlay">
+                            <h4>Fakultas Ekonomi</h4>
+                            <p>1,218 MAHASISWA TERDAFTAR</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer">
+                &copy; 2024 Universitas Perjuangan. Sistem Penerimaan Mahasiswa Baru.
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

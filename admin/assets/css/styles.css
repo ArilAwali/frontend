@@ -1,0 +1,565 @@
+:root {
+    --bg-color: #f3f6f9;
+    --sidebar-bg: #ffffff;
+    --topbar-bg: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    
+    --primary-green: #117b53;
+    --dark-green: #0d4a36;
+    --light-green: #e6f4ed;
+    --success-green: #22c55e;
+    
+    --yellow: #f59e0b;
+    --light-yellow: #fef3c7;
+    
+    --red: #ef4444;
+    --light-red: #fee2e2;
+
+    --blue: #3b82f6;
+    --light-blue: #dbeafe;
+    
+    --purple: #8b5cf6;
+    --light-purple: #ede9fe;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Top Header */
+.top-header {
+    height: 64px;
+    background-color: var(--topbar-bg);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.logo-area h1 {
+    font-size: 1.1rem;
+    color: var(--dark-green);
+    font-weight: 700;
+}
+
+.user-area .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Layout Wrapper */
+.layout-wrapper {
+    display: flex;
+    margin-top: 64px;
+    min-height: calc(100vh - 64px);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 64px;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+}
+
+.sidebar-brand {
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-green);
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.brand-subtitle {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.sidebar-nav {
+    flex: 1;
+    padding: 0 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.nav-item:hover {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+}
+
+.nav-item.active {
+    background-color: var(--light-green);
+    color: var(--primary-green);
+    border-left: 4px solid var(--primary-green);
+}
+
+.nav-item i {
+    width: 20px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.sidebar-footer {
+    padding: 16px 12px;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 250px;
+    flex: 1;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.page-header h2 {
+    font-size: 1.5rem;
+    color: var(--dark-green);
+    margin-bottom: 8px;
+}
+
+.page-header p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.stat-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.stat-card.dark-green-card {
+    background-color: var(--primary-green);
+    color: white;
+}
+
+.stat-title {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.dark-green-card .stat-title {
+    color: rgba(255,255,255,0.8);
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.text-dark {
+    color: var(--dark-green);
+}
+
+.stat-trend {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.stat-trend.positive {
+    color: var(--primary-green);
+}
+
+.dark-green-card .stat-trend {
+    color: rgba(255,255,255,0.9);
+}
+
+.progress-bar-container {
+    height: 6px;
+    background-color: var(--bg-color);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: auto;
+}
+
+.progress-bar {
+    height: 100%;
+    border-radius: 3px;
+}
+
+.bg-green { background-color: var(--success-green); }
+.bg-yellow { background-color: var(--yellow); }
+
+/* Middle Grid */
+.middle-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+/* Status List & Chart */
+.status-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.status-item .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.dot-green { background-color: var(--success-green); }
+.dot-yellow { background-color: var(--yellow); }
+.dot-red { background-color: var(--red); }
+
+.status-count {
+    margin-left: auto;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.donut-chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 160px;
+}
+
+/* Pure CSS Donut Chart (approximating visual with conic-gradient) */
+.donut-chart {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: conic-gradient(
+        var(--success-green) 0% 50%,
+        var(--yellow) 50% 80%,
+        var(--red) 80% 100%
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.donut-hole {
+    width: 110px;
+    height: 110px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.donut-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.donut-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Table Card */
+.table-card {
+    overflow: hidden;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-header h3 {
+    margin-bottom: 0;
+}
+
+.link-more {
+    font-size: 0.85rem;
+    color: var(--primary-green);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th {
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.data-table td {
+    padding: 16px;
+    vertical-align: middle;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--bg-color);
+}
+
+.student-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar-initial {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.bg-light-green { background-color: var(--light-green); color: var(--primary-green); }
+.bg-light-yellow { background-color: var(--light-yellow); color: var(--yellow); }
+.bg-light-blue { background-color: var(--light-blue); color: var(--blue); }
+.bg-light-red { background-color: var(--light-red); color: var(--red); }
+.bg-light-purple { background-color: var(--light-purple); color: var(--purple); }
+
+.student-name {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.student-id {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+.badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.badge-green {
+    background-color: var(--light-green);
+    color: var(--primary-green);
+}
+
+.badge-yellow {
+    background-color: var(--light-yellow);
+    color: var(--yellow);
+}
+
+.badge-red {
+    background-color: var(--light-red);
+    color: var(--red);
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+/* Bottom Grid */
+.bottom-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+}
+
+.prodi-item {
+    margin-bottom: 20px;
+}
+
+.prodi-item:last-child {
+    margin-bottom: 0;
+}
+
+.prodi-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.prodi-name {
+    color: var(--text-primary);
+}
+
+.prodi-count {
+    color: var(--primary-green);
+    font-weight: 600;
+}
+
+.prodi-bar-bg {
+    height: 8px;
+    background-color: var(--bg-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.prodi-bar {
+    height: 100%;
+    border-radius: 4px;
+}
+
+.bg-dark-green { background-color: var(--dark-green); }
+.bg-gray { background-color: var(--border-color); }
+
+.image-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.image-card {
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--dark-green); /* Fallback */
+    background-size: cover;
+    background-position: center;
+    min-height: 200px;
+}
+
+#card-teknik {
+    background-image: url('../images/fakultas_teknik.png');
+}
+
+#card-ekonomi {
+    background-image: url('../images/fakultas_ekonomi.png');
+}
+
+.image-card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+}
+
+.image-card-overlay h4 {
+    color: white;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+}
+
+.image-card-overlay p {
+    font-size: 0.75rem;
+    opacity: 0.9;
+    letter-spacing: 0.5px;
+}
+
+/* Footer */
+.footer {
+    text-align: left;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    padding-top: 20px;
+}
