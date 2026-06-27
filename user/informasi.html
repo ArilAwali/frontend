@@ -1,286 +1,339 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<title>Informasi Lengkap PMB - Universitas Crypto</title>
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background:#eef0f3; color:#1a1a1a; }
+  <meta charset="UTF-8">
+  <title>Informasi Lengkap PMB - Universitas Crypto</title>
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/footer.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  .navbar {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:#fff;
-    padding:16px 60px;
-    box-shadow:0 1px 4px rgba(0,0,0,0.05);
-  }
-  .navbar .brand { font-weight:800; color:#0a1a3c; font-size:16px; }
-  .nav-links { display:flex; align-items:center; gap:28px; font-size:14px; color:#333; }
-  .nav-links a { text-decoration:none; color:#333; }
-  .nav-links a.active { color:#0a8a52; font-weight:600; border-bottom:2px solid #0a8a52; padding-bottom:18px; }
-  .nav-buttons { display:flex; gap:10px; }
-  .btn-outline {
-    border:1px solid #0a1a3c; color:#0a1a3c; background:#fff;
-    padding:8px 18px; border-radius:6px; font-size:13px; cursor:pointer;
-  }
-  .btn-dark {
-    background:#0a1a3c; color:#fff; border:none;
-    padding:8px 18px; border-radius:6px; font-size:13px; cursor:pointer;
-  }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #eef0f3;
+      color: #1a1a1a;
+    }
 
-  .container { max-width:1100px; margin:0 auto; padding:40px 20px 60px; }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
 
-  .badge {
-    display:inline-block;
-    background:#dbeefc;
-    color:#1262a8;
-    font-size:12px;
-    font-weight:600;
-    padding:5px 12px;
-    border-radius:20px;
-    margin-bottom:16px;
-  }
+    .badge {
+      display: inline-block;
+      background: #dbeefc;
+      color: #1262a8;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
 
-  h1 {
-    color:#0a1a3c;
-    font-size:30px;
-    font-weight:800;
-    margin-bottom:10px;
-  }
-  .subtitle {
-    color:#5b6472;
-    font-size:14.5px;
-    margin-bottom:32px;
-  }
+    h1 {
+      color: #0a1a3c;
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
 
-  .section-title {
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-size:17px;
-    font-weight:700;
-    color:#0a1a3c;
-    margin-bottom:18px;
-  }
+    .subtitle {
+      color: #5b6472;
+      font-size: 14.5px;
+      margin-bottom: 32px;
+    }
 
-  .main-grid {
-    display:grid;
-    grid-template-columns:2.2fr 1fr;
-    gap:24px;
-  }
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 17px;
+      font-weight: 700;
+      color: #0a1a3c;
+      margin-bottom: 18px;
+    }
 
-  .schedule-grid {
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:16px;
-    margin-bottom:36px;
-  }
+    .main-grid {
+      display: grid;
+      grid-template-columns: 2.2fr 1fr;
+      gap: 24px;
+    }
 
-  .schedule-card {
-    background:#fff;
-    border-radius:10px;
-    padding:18px;
-    border-top:4px solid #1fa97e;
-  }
-  .schedule-card.reguler { border-top-color:#e2a223; }
-  .schedule-card.terakhir { border-top-color:#d24545; }
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
 
-  .schedule-tag {
-    font-size:11px;
-    font-weight:700;
-    padding:3px 10px;
-    border-radius:20px;
-    display:inline-block;
-    margin-bottom:10px;
-  }
-  .schedule-card .schedule-tag { background:#e3f8ee; color:#1fa97e; }
-  .schedule-card.reguler .schedule-tag { background:#fbeed4; color:#b9790a; }
-  .schedule-card.terakhir .schedule-tag { background:#fbe1e1; color:#c23a3a; }
+    .schedule-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 18px;
+      border-top: 4px solid #1fa97e;
+    }
 
-  .schedule-card h3 {
-    font-size:16px;
-    font-weight:700;
-    color:#0a1a3c;
-    margin-bottom:4px;
-  }
-  .schedule-card .date {
-    font-size:12.5px;
-    color:#8b919c;
-    margin-bottom:12px;
-  }
-  .schedule-card ul {
-    list-style:none;
-    font-size:12.5px;
-    color:#4a4f57;
-  }
-  .schedule-card ul li {
-    margin-bottom:6px;
-    display:flex;
-    align-items:center;
-    gap:6px;
-  }
-  .schedule-card ul li::before {
-    content:"✓";
-    color:#1fa97e;
-    font-size:11px;
-  }
-  .schedule-card.reguler ul li::before { color:#b9790a; }
-  .schedule-card.terakhir ul li::before { color:#c23a3a; }
+    .schedule-card.reguler {
+      border-top-color: #e2a223;
+    }
 
-  .alur-card {
-    background:#fff;
-    border-radius:10px;
-    padding:26px;
-  }
+    .schedule-card.terakhir {
+      border-top-color: #d24545;
+    }
 
-  .alur-steps {
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr 1fr;
-    gap:16px;
-  }
-  .alur-step {
-    text-align:left;
-  }
-  .alur-step .num {
-    width:32px; height:32px;
-    border-radius:50%;
-    background:#0a1a3c;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:13px;
-    font-weight:700;
-    margin-bottom:10px;
-  }
-  .alur-step h4 {
-    font-size:13.5px;
-    color:#0a1a3c;
-    margin-bottom:4px;
-  }
-  .alur-step p {
-    font-size:11.5px;
-    color:#8b919c;
-    line-height:1.4;
-  }
+    .schedule-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
 
-  .sidebar { display:flex; flex-direction:column; gap:18px; }
+    .schedule-card .schedule-tag {
+      background: #e3f8ee;
+      color: #1fa97e;
+    }
 
-  .persyaratan-card {
-    background:#0a1a3c;
-    color:#fff;
-    border-radius:10px;
-    padding:22px;
-  }
-  .persyaratan-card .section-title { color:#fff; }
-  .persyaratan-card ul { list-style:none; font-size:13px; }
-  .persyaratan-card ul li {
-    margin-bottom:14px;
-    display:flex;
-    gap:8px;
-    align-items:flex-start;
-    color:#d6dae3;
-  }
-  .persyaratan-card ul li::before {
-    content:"✓";
-    color:#2ecf8e;
-    flex-shrink:0;
-  }
+    .schedule-card.reguler .schedule-tag {
+      background: #fbeed4;
+      color: #b9790a;
+    }
 
-  .biaya-card {
-    background:#fff;
-    border-radius:10px;
-    padding:22px;
-  }
-  .biaya-amount {
-    font-size:26px;
-    font-weight:800;
-    color:#b9790a;
-    margin-bottom:4px;
-  }
-  .biaya-amount span {
-    font-size:12px;
-    font-weight:400;
-    color:#8b919c;
-  }
-  .biaya-note { font-size:11.5px; color:#8b919c; margin-bottom:16px; }
-  .biaya-row {
-    display:flex;
-    justify-content:space-between;
-    font-size:13px;
-    margin-bottom:10px;
-    color:#333;
-  }
-  .biaya-row strong { color:#0a1a3c; }
+    .schedule-card.terakhir .schedule-tag {
+      background: #fbe1e1;
+      color: #c23a3a;
+    }
 
-  .btn-yellow-full {
-    width:100%;
-    background:#f2b705;
-    color:#0a1a3c;
-    border:none;
-    padding:13px;
-    border-radius:8px;
-    font-weight:700;
-    font-size:14px;
-    margin-top:6px;
-    cursor:pointer;
-  }
+    .schedule-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0a1a3c;
+      margin-bottom: 4px;
+    }
 
-  .bantuan-card {
-    background:#0a1a3c;
-    border-radius:10px;
-    padding:20px;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    position:relative;
-    overflow:hidden;
-    min-height:90px;
-  }
-  .bantuan-card .icon-circle {
-    width:38px; height:38px;
-    background:#1c3a6b;
-    border-radius:8px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-shrink:0;
-    font-size:18px;
-  }
-  .bantuan-card strong { display:block; font-size:13px; }
-  .bantuan-card span { font-size:11px; color:#a8b0c2; }
+    .schedule-card .date {
+      font-size: 12.5px;
+      color: #8b919c;
+      margin-bottom: 12px;
+    }
 
-  footer {
-    text-align:center;
-    padding:24px;
-    font-size:12px;
-    color:#9aa0ab;
-    background:#fff;
-    border-top:1px solid #eee;
-  }
-</style>
+    .schedule-card ul {
+      list-style: none;
+      font-size: 12.5px;
+      color: #4a4f57;
+    }
+
+    .schedule-card ul li {
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .schedule-card ul li::before {
+      content: "✓";
+      color: #1fa97e;
+      font-size: 11px;
+    }
+
+    .schedule-card.reguler ul li::before {
+      color: #b9790a;
+    }
+
+    .schedule-card.terakhir ul li::before {
+      color: #c23a3a;
+    }
+
+    .alur-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 26px;
+    }
+
+    .alur-steps {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .alur-step {
+      text-align: left;
+    }
+
+    .alur-step .num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #0a1a3c;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .alur-step h4 {
+      font-size: 13.5px;
+      color: #0a1a3c;
+      margin-bottom: 4px;
+    }
+
+    .alur-step p {
+      font-size: 11.5px;
+      color: #8b919c;
+      line-height: 1.4;
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .persyaratan-card {
+      background: #0a1a3c;
+      color: #fff;
+      border-radius: 10px;
+      padding: 22px;
+    }
+
+    .persyaratan-card .section-title {
+      color: #fff;
+    }
+
+    .persyaratan-card ul {
+      list-style: none;
+      font-size: 13px;
+    }
+
+    .persyaratan-card ul li {
+      margin-bottom: 14px;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      color: #d6dae3;
+    }
+
+    .persyaratan-card ul li::before {
+      content: "✓";
+      color: #2ecf8e;
+      flex-shrink: 0;
+    }
+
+    .biaya-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 22px;
+    }
+
+    .biaya-amount {
+      font-size: 26px;
+      font-weight: 800;
+      color: #b9790a;
+      margin-bottom: 4px;
+    }
+
+    .biaya-amount span {
+      font-size: 12px;
+      font-weight: 400;
+      color: #8b919c;
+    }
+
+    .biaya-note {
+      font-size: 11.5px;
+      color: #8b919c;
+      margin-bottom: 16px;
+    }
+
+    .biaya-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .biaya-row strong {
+      color: #0a1a3c;
+    }
+
+    .btn-yellow-full {
+      width: 100%;
+      background: #f2b705;
+      color: #0a1a3c;
+      border: none;
+      padding: 13px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      margin-top: 6px;
+      cursor: pointer;
+    }
+
+    .bantuan-card {
+      background: #0a1a3c;
+      border-radius: 10px;
+      padding: 20px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+      min-height: 90px;
+    }
+
+    .bantuan-card .icon-circle {
+      width: 38px;
+      height: 38px;
+      background: #1c3a6b;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 18px;
+    }
+
+    .bantuan-card strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .bantuan-card span {
+      font-size: 11px;
+      color: #a8b0c2;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+      color: #9aa0ab;
+      background: #fff;
+      border-top: 1px solid #eee;
+    }
+  </style>
 </head>
+
 <body>
 
-  <div class="navbar">
-    <div class="brand">Universitas Crypto</div>
-    <div class="nav-links">
-      <a href="branda pmb.html">Beranda</a>
-      <a href="#" class="active">Informasi</a>
-      <a href="#">Bantuan</a>
-    </div>
-    <div class="nav-buttons">
-      <button class="btn-outline">Masuk</button>
-      <button class="btn-dark">Daftar</button>
-    </div>
-  </div>
+  <header class="crypto-navbar"></header>
 
   <div class="container">
     <span class="badge">📢 Penerimaan Mahasiswa Baru 2024/2025</span>
     <h1>Informasi Lengkap PMB Universitas Crypto</h1>
-    <p class="subtitle">Bergabunglah dengan institusi pendidikan masa depan yang mengedepankan inovasi teknologi dan integritas akademik.</p>
+    <p class="subtitle">Bergabunglah dengan institusi pendidikan masa depan yang mengedepankan inovasi teknologi dan
+      integritas akademik.</p>
 
     <div class="section-title">🗓️ Jadwal Pendaftaran</div>
 
@@ -357,7 +410,8 @@
         <div class="biaya-card">
           <div class="section-title">💳 Biaya</div>
           <div class="biaya-amount">Rp 350.000 <span>/ Pendaftar</span></div>
-          <div class="biaya-note">Biaya pendaftaran berlaku untuk seluruh jalur seleksi dan tidak dapat dikembalikan.</div>
+          <div class="biaya-note">Biaya pendaftaran berlaku untuk seluruh jalur seleksi dan tidak dapat dikembalikan.
+          </div>
           <div class="biaya-row"><span>Metode Pembayaran</span><strong>Semua Bank</strong></div>
           <div class="biaya-row"><span>Biaya Admin</span><strong>Gratis</strong></div>
           <button class="btn-yellow-full">Daftar Sekarang</button>
@@ -374,7 +428,10 @@
     </div>
   </div>
 
-  <footer>Universitas Crypto &copy; 2026 Universitas Crypto - Panitia PMB</footer>
+  <footer id="footer"></footer>
 
+  <script src="assets/js/navbar.js"></script>
+  <script src="assets/js/footer.js"></script>
 </body>
+
 </html>

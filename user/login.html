@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/footer.css">
   <style>
     /* =========================
    RESET + BASE
@@ -27,48 +28,6 @@
       background-color: #f8faff;
       display: flex;
       flex-direction: column;
-    }
-
-    /* =========================
-   HEADER / NAVBAR
-========================= */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 40px;
-      background-color: #ffffff;
-      border-bottom: 1px solid #eaeaea;
-    }
-
-    .brand {
-      font-family: "Plus Jakarta Sans", sans-serif;
-      font-weight: 800;
-      font-size: 20px;
-      color: #005640;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: #4a5568;
-      font-weight: 500;
-      font-size: 14px;
-    }
-
-    .btn-daftar-nav {
-      background-color: #005640;
-      color: white;
-      border: none;
-      padding: 10px 24px;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: "Plus Jakarta Sans", sans-serif;
     }
 
     /* =========================
@@ -342,25 +301,13 @@
         width: 100%;
         padding: 40px 20px;
       }
-
-      .navbar {
-        padding: 16px 20px;
-      }
     }
   </style>
 </head>
 
 <body>
 
-  <header class="navbar">
-    <div class="brand">Universitas Crypto</div>
-    <nav class="nav-links">
-      <a href="branda pmb.html">Beranda</a>
-      <a href="#">Informasi</a>
-      <a href="#">Bantuan</a>
-    </nav>
-    <a href="daftar.html"><button class="btn-daftar-nav">Daftar</button></a>
-  </header>
+  <header class="crypto-navbar"></header>
 
   <div class="main">
     <section class="section-visual">
@@ -450,10 +397,10 @@
     </section>
   </div>
 
-  <footer>
-    <span>Universitas Crypto</span> © 2026. Sistem Penerimaan Mahasiswa Baru.
-  </footer>
+  <footer id="footer"></footer>
 
+  <script src="assets/js/navbar.js"></script>
+  <script src="assets/js/footer.js"></script>
 </body>
 
 </html>

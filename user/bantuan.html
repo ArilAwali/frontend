@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pusat Bantuan PMB</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/navbar.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
     <style>
         :root {
             --primary-green: #0a6b4f;
@@ -30,75 +33,12 @@
             color: var(--text-dark);
         }
 
-        /* --- Header --- */
-        header {
-            background-color: #ffffff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 5%;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            position: relative;
-            z-index: 10;
-        }
-
-        .logo {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--primary-green);
-        }
-
-        nav {
-            display: flex;
-            gap: 32px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-gray);
-            font-weight: 500;
-            font-size: 14px;
-            padding-bottom: 6px;
-        }
-
-        nav a.active {
-            color: var(--primary-green);
-            border-bottom: 2px solid var(--primary-green);
-        }
-
-        .auth-buttons {
-            display: flex;
-            gap: 12px;
-        }
-
-        .btn {
-            padding: 8px 20px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.2s;
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            color: var(--primary-green);
-            border: 1px solid var(--primary-green);
-        }
-
-        .btn-solid {
-            background-color: var(--primary-green);
-            color: #ffffff;
-            border: 1px solid var(--primary-green);
-        }
-
         /* --- Hero Section --- */
         .hero {
             background-color: var(--dark-navy);
             color: #ffffff;
-            padding: 60px 5% 140px 5%; /* Padding bawah lebih besar untuk overlapping card */
+            padding: 60px 5% 140px 5%;
+            /* Padding bawah lebih besar untuk overlapping card */
         }
 
         .hero-content {
@@ -162,10 +102,12 @@
         /* --- Main Content Layout --- */
         .main-content {
             max-width: 1200px;
-            margin: -90px auto 40px auto; /* Margin negatif untuk menarik konten ke atas area biru */
+            margin: -90px auto 40px auto;
+            /* Margin negatif untuk menarik konten ke atas area biru */
             padding: 0 5%;
             display: grid;
-            grid-template-columns: 1fr 350px; /* Kiri lebih lebar, kanan fixed 350px */
+            grid-template-columns: 1fr 350px;
+            /* Kiri lebih lebar, kanan fixed 350px */
             gap: 24px;
             position: relative;
             z-index: 5;
@@ -321,7 +263,7 @@
         }
 
         .status-badge {
-            background-color: rgba(255,255,255,0.1);
+            background-color: rgba(255, 255, 255, 0.1);
             padding: 4px 10px;
             border-radius: 4px;
             font-size: 11px;
@@ -340,7 +282,8 @@
         .dot {
             width: 8px;
             height: 8px;
-            background-color: #10b981; /* Green dot */
+            background-color: #10b981;
+            /* Green dot */
             border-radius: 50%;
         }
 
@@ -358,7 +301,7 @@
 
         .progress-bar-bg {
             height: 4px;
-            background-color: rgba(255,255,255,0.1);
+            background-color: rgba(255, 255, 255, 0.1);
             border-radius: 2px;
             width: 100%;
         }
@@ -367,7 +310,8 @@
             height: 100%;
             background-color: var(--yellow-btn);
             border-radius: 2px;
-            width: 75%; /* Representasi loading bar */
+            width: 75%;
+            /* Representasi loading bar */
         }
 
         /* --- Footer --- */
@@ -387,32 +331,20 @@
             .main-content {
                 grid-template-columns: 1fr;
             }
-            nav {
-                display: none; /* Menyembunyikan nav di mobile untuk simplicity */
-            }
         }
     </style>
 </head>
+
 <body>
 
-    <header>
-        <div class="logo">Universitas Crypto</div>
-        <nav>
-            <a href="branda pmb.html">Beranda</a>
-            <a href="#">Informasi</a>
-            <a href="#" class="active">Bantuan</a>
-        </nav>
-        <div class="auth-buttons">
-            <a href="#" class="btn btn-outline">Masuk</a>
-            <a href="#" class="btn btn-solid">Daftar</a>
-        </div>
-    </header>
+    <header class="crypto-navbar"></header>
 
     <section class="hero">
         <div class="hero-content">
             <h1>Pusat Bantuan PMB</h1>
-            <p>Temukan jawaban atas pertanyaan Anda mengenai proses seleksi masuk, administrasi, dan teknis pendaftaran di Universitas Perjuangan.</p>
-            
+            <p>Temukan jawaban atas pertanyaan Anda mengenai proses seleksi masuk, administrasi, dan teknis pendaftaran
+                di Universitas Perjuangan.</p>
+
             <div class="search-container">
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
                 <input type="text" class="search-input" placeholder="Cari pertanyaan, misal: 'Cara upload dokumen'...">
@@ -422,7 +354,7 @@
     </section>
 
     <main class="main-content">
-        
+
         <div class="card faq-section">
             <div class="faq-header">
                 <div class="faq-icon-bg">
@@ -454,10 +386,10 @@
         </div>
 
         <aside class="sidebar">
-            
+
             <div class="card">
                 <h2 class="contact-title">Kontak Kami</h2>
-                
+
                 <div class="contact-item">
                     <div class="contact-icon">
                         <i class="fa-brands fa-whatsapp"></i>
@@ -508,9 +440,10 @@
 
     </main>
 
-    <footer>
-        <p>© 2026 Universitas Perjuangan. Hak Cipta Dilindungi.</p>
-    </footer>
+    <footer id="footer"></footer>
 
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/js/footer.js"></script>
 </body>
+
 </html>

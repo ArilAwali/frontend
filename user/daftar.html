@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pendaftaran Akun</title>
-
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/footer.css">
   <style>
     /* =========================
    RESET + BASE
@@ -27,49 +28,6 @@
       background-color: #f8faff;
       display: flex;
       flex-direction: column;
-    }
-
-    /* =========================
-   HEADER / NAVBAR
-========================= */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 40px;
-      background-color: #ffffff;
-      border-bottom: 1px solid #eaeaea;
-    }
-
-    .brand {
-      font-family: "Plus Jakarta Sans", sans-serif;
-      font-weight: 800;
-      font-size: 20px;
-      color: #005640;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: #4a5568;
-      font-weight: 500;
-      font-size: 14px;
-    }
-
-    .btn-masuk-nav {
-      background-color: transparent;
-      color: #005640;
-      border: 1px solid #005640;
-      padding: 8px 24px;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: "Plus Jakarta Sans", sans-serif;
-      font-size: 14px;
     }
 
     /* =========================
@@ -465,15 +423,7 @@
 
 <body>
 
-  <header class="navbar">
-    <div class="brand">Universitas Crypto</div>
-    <nav class="nav-links">
-      <a href="branda pmb.html">Beranda</a>
-      <a href="#">Informasi</a>
-      <a href="#">Bantuan</a>
-    </nav>
-    <a href="login.html"><button class="btn-masuk-nav">Masuk</button></a>
-  </header>
+  <header class="crypto-navbar"></header>
 
   <div class="main">
     <section class="section-visual">
@@ -650,38 +600,10 @@
     </section>
   </div>
 
-  <footer>
-    <div class="footer-brand">Universitas Crypto</div>
-    <p class="footer-tagline">Mencetak Generasi Unggul dan Berintegritas untuk Kemajuan Bangsa.</p>
+  <footer id="footer"></footer>
 
-    <div class="footer-social">
-      <a href="#" class="social-icon">
-        <svg viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="2" y1="12" x2="22" y2="12"></line>
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-        </svg>
-      </a>
-      <a href="#" class="social-icon">
-        <svg viewBox="0 0 24 24">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-          <polyline points="22,6 12,13 2,6"></polyline>
-        </svg>
-      </a>
-      <a href="#" class="social-icon">
-        <svg viewBox="0 0 24 24">
-          <circle cx="18" cy="5" r="3"></circle>
-          <circle cx="6" cy="12" r="3"></circle>
-          <circle cx="18" cy="19" r="3"></circle>
-          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-        </svg>
-      </a>
-    </div>
-
-    <p class="footer-copyright">© 2024 Universitas Crypto. Sistem Penerimaan Mahasiswa Baru Terintegrasi.</p>
-  </footer>
-
+  <script src="assets/js/navbar.js"></script>
+  <script src="assets/js/footer.js"></script>
 </body>
 
 </html>

@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/navbar.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
 
     <style>
         /* --- CSS Variables --- */
@@ -81,48 +83,6 @@
         .btn-dark {
             background-color: var(--primary-blue);
             color: var(--bg-white);
-        }
-
-        /* --- Header / Navbar --- */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            background-color: var(--bg-white);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: #1A8961;
-            /* Warna hijau sesuai gambar */
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            font-size: 0.9rem;
-            color: var(--text-gray);
-            font-weight: 500;
-        }
-
-        .nav-links a.active {
-            color: #1A8961;
-            border-bottom: 2px solid #1A8961;
-            padding-bottom: 5px;
-        }
-
-        .auth-buttons {
-            display: flex;
-            gap: 15px;
         }
 
         /* --- Hero Section --- */
@@ -421,59 +381,7 @@
             color: #9ca3af;
         }
 
-        /* --- Footer --- */
-        footer {
-            background-color: var(--bg-light);
-            padding: 50px 5% 20px;
-        }
 
-        .footer-content {
-            max-width: 400px;
-            margin-bottom: 40px;
-        }
-
-        .footer-logo {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--primary-blue);
-            margin-bottom: 15px;
-        }
-
-        .footer-content p {
-            font-size: 0.85rem;
-            color: var(--text-gray);
-            margin-bottom: 20px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-icon {
-            width: 35px;
-            height: 35px;
-            background-color: #E2E8F0;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--text-dark);
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-
-        .social-icon:hover {
-            background-color: var(--primary-blue);
-            color: var(--bg-white);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid #e2e8f0;
-            padding-top: 20px;
-            font-size: 0.75rem;
-            color: var(--text-gray);
-        }
 
 
         /* --- RESPONSIVE DESIGN (Mobile & Tablet) --- */
@@ -497,26 +405,10 @@
             .alur-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
-            .nav-links {
-                display: none;
-                /* Sembunyikan menu di tablet/mobile untuk kesederhanaan */
-            }
         }
 
         /* Mobile */
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 15px;
-                padding: 15px 5%;
-            }
-
-            .auth-buttons {
-                width: 100%;
-                justify-content: center;
-            }
-
             .hero-content h1 {
                 font-size: 1.8rem;
             }
@@ -542,18 +434,7 @@
 
 <body>
 
-    <header>
-        <div class="logo">Universitas Crypto</div>
-        <nav class="nav-links">
-            <a href="branda pmb.html" class="active">Beranda</a>
-            <a href="#">Informasi</a>
-            <a href="#">Bantuan</a>
-        </nav>
-        <div class="auth-buttons">
-            <a href="login.html" class="btn btn-outline">Masuk</a>
-            <a href="daftar.html" class="btn btn-dark">Daftar</a>
-        </div>
-    </header>
+    <header class="crypto-navbar"></header>
 
     <section class="hero">
         <div class="hero-content">
@@ -658,24 +539,10 @@
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">Universitas Crypto</div>
-                <p>Mencetak generasi unggul yang berjiwa pejuang, profesional, dan berintegritas tinggi untuk Indonesia
-                    maju.</p>
-                <div class="social-links">
-                    <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
-                    <a href="#" class="social-icon"><i class="fa-solid fa-share-nodes"></i></a>
-                    <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                &copy; 2026 Universitas Crypto. Sistem Penerimaan Mahasiswa Baru.
-            </div>
-        </div>
-    </footer>
+    <footer id="footer"></footer>
 
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/js/footer.js"></script>
 </body>
 
 </html>

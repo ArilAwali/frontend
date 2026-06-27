@@ -1,4 +1,4 @@
-(function() {
+(function () {
     function initSidebar() {
         const sidebarContainer = document.querySelector('.sidebar') || document.querySelector('nav.sidebar') || document.querySelector('#sidebar-container');
         if (!sidebarContainer) return;
