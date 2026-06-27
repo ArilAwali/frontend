@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <script src="../config/admin-guard.js"></script>
     <script src="../config/api.js"></script>
@@ -11,13 +12,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
     <header class="top-header">
         <div class="logo-area">
             <h1>Universitas Crypto</h1>
         </div>
         <div class="user-area">
-            <img src="https://ui-avatars.com/api/?name=Admin&background=1a2530&color=fff" alt="User Avatar" class="avatar">
+            <img src="https://ui-avatars.com/api/?name=Admin&background=1a2530&color=fff" alt="User Avatar"
+                class="avatar">
         </div>
     </header>
 
@@ -82,14 +85,14 @@
                 <p>Kelola, verifikasi, dan pantau semua dokumen yang diunggah oleh pendaftar.</p>
             </div>
 
-            <div class="stats-grid-5">
+            <div class="stats-grid-4-doc">
                 <div class="stat-card row-card">
                     <div class="stat-icon-wrapper bg-light-green text-green">
                         <i class="fa-solid fa-file-arrow-up"></i>
                     </div>
                     <div class="stat-info">
-                        <div class="stat-title">Upload Hari Ini</div>
-                        <div class="stat-value-sm">128 <span class="stat-trend positive"><i class="fa-solid fa-arrow-trend-up"></i> +10% dari kemarin</span></div>
+                        <div class="stat-title">Total Berkas</div>
+                        <div class="stat-value-sm" id="stat_total_count">0</div>
                     </div>
                 </div>
                 <div class="stat-card row-card">
@@ -98,25 +101,25 @@
                     </div>
                     <div class="stat-info">
                         <div class="stat-title">Menunggu Verifikasi</div>
-                        <div class="stat-value-sm">312 <span class="stat-trend positive"><i class="fa-solid fa-arrow-trend-up"></i> +2% dari kemarin</span></div>
+                        <div class="stat-value-sm" id="stat_pending_count">0</div>
                     </div>
                 </div>
-                <div class="stat-card row-card">
+                <!-- <div class="stat-card row-card">
                     <div class="stat-icon-wrapper bg-light-yellow text-yellow">
                         <i class="fa-regular fa-pen-to-square"></i>
                     </div>
                     <div class="stat-info">
                         <div class="stat-title">Perlu Revisi</div>
-                        <div class="stat-value-sm">45 <span class="stat-trend negative"><i class="fa-solid fa-arrow-trend-down"></i> +5% dari kemarin</span></div>
+                        <div class="stat-value-sm" id="stat_revisi_count">0</div>
                     </div>
-                </div>
+                </div> -->
                 <div class="stat-card row-card">
                     <div class="stat-icon-wrapper bg-light-green text-green">
                         <i class="fa-regular fa-circle-check"></i>
                     </div>
                     <div class="stat-info">
-                        <div class="stat-title">Terverifikasi Hari Ini</div>
-                        <div class="stat-value-sm">96 <span class="stat-trend positive"><i class="fa-solid fa-arrow-trend-up"></i> +22% dari kemarin</span></div>
+                        <div class="stat-title">Terverifikasi</div>
+                        <div class="stat-value-sm" id="stat_verified_count">0</div>
                     </div>
                 </div>
                 <div class="stat-card row-card">
@@ -124,345 +127,128 @@
                         <i class="fa-regular fa-circle-xmark"></i>
                     </div>
                     <div class="stat-info">
-                        <div class="stat-title">Ditolak Hari Ini</div>
-                        <div class="stat-value-sm">12 <span class="stat-trend negative"><i class="fa-solid fa-arrow-trend-down"></i> +3% dari kemarin</span></div>
+                        <div class="stat-title">Ditolak</div>
+                        <div class="stat-value-sm" id="stat_rejected_count">0</div>
                     </div>
                 </div>
             </div>
 
-            <div class="document-layout">
-                <div class="card document-list">
-                    <div class="filter-bar">
-                        <div class="search-box">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" placeholder="Cari nama pendaftar atau NIM...">
-                        </div>
-                        <div class="filter-dropdowns">
-                            <select><option>Semua Jenis Dokumen</option></select>
-                            <select><option>Semua Status</option></select>
-                            <div class="date-picker">
-                                Tanggal Upload <i class="fa-regular fa-calendar"></i>
-                            </div>
-                            <button class="btn-filter"><i class="fa-solid fa-filter"></i> Filter</button>
-                        </div>
+            <div class="card document-list">
+                <div class="filter-bar">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="search_input" placeholder="Cari nama pendaftar atau email...">
                     </div>
-
-                    <div class="tabs">
-                        <div class="tab active">Semua Dokumen</div>
-                        <div class="tab">Menunggu</div>
-                        <div class="tab">Perlu Revisi</div>
-                        <div class="tab">Terverifikasi</div>
-                        <div class="tab">Ditolak</div>
-                    </div>
-
-                    <div class="table-actions-bar">
-                        <div class="selection-actions">
-                            <input type="checkbox" class="cb-main"> <span class="selected-count">0 dipilih</span>
-                            <select class="action-select"><option>Pilih Aksi</option></select>
-                            <button class="btn-apply">Terapkan</button>
-                        </div>
-                        <button class="btn-export"><i class="fa-solid fa-download"></i> Export Data</button>
-                    </div>
-
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>PENDAFTAR</th>
-                                <th>JENIS DOKUMEN</th>
-                                <th>NAMA FILE</th>
-                                <th>TANGGAL UPLOAD</th>
-                                <th>STATUS</th>
-                                <th>AKSI</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="active-row">
-                                <td><input type="checkbox" checked></td>
-                                <td>
-                                    <div class="student-info">
-                                        <div class="avatar-initial bg-light-green">BP</div>
-                                        <div>
-                                            <div class="student-name">Bagus Permadi</div>
-                                            <div class="student-id">24091001</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>KTP</td>
-                                <td>
-                                    <div class="file-name">KTP_BagusPermadi.jpg</div>
-                                    <div class="file-size">1.2 MB</div>
-                                </td>
-                                <td>
-                                    <div class="date-text">20 Mei 2025</div>
-                                    <div class="time-text">10:30 WIB</div>
-                                </td>
-                                <td><span class="badge badge-green">Terverifikasi</span></td>
-                                <td>
-                                    <div class="action-icons">
-                                        <i class="fa-regular fa-eye text-primary-green"></i>
-                                        <i class="fa-solid fa-download"></i>
-                                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>
-                                    <div class="student-info">
-                                        <div class="avatar-initial bg-light-yellow">SN</div>
-                                        <div>
-                                            <div class="student-name">Siti Nurhaliza</div>
-                                            <div class="student-id">24091002</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Kartu Keluarga</td>
-                                <td>
-                                    <div class="file-name">KK_SitiNurhaliza.pdf</div>
-                                    <div class="file-size">1.8 MB</div>
-                                </td>
-                                <td>
-                                    <div class="date-text">20 Mei 2025</div>
-                                    <div class="time-text">09:15 WIB</div>
-                                </td>
-                                <td><span class="badge badge-yellow">Perlu Revisi</span></td>
-                                <td>
-                                    <div class="action-icons">
-                                        <i class="fa-regular fa-eye"></i>
-                                        <i class="fa-solid fa-download"></i>
-                                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>
-                                    <div class="student-info">
-                                        <div class="avatar-initial bg-light-blue">RK</div>
-                                        <div>
-                                            <div class="student-name">Rahmat Kurnia</div>
-                                            <div class="student-id">24091003</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Ijazah</td>
-                                <td>
-                                    <div class="file-name">Ijazah_RahmatKurnia.pdf</div>
-                                    <div class="file-size">2.1 MB</div>
-                                </td>
-                                <td>
-                                    <div class="date-text">19 Mei 2025</div>
-                                    <div class="time-text">14:20 WIB</div>
-                                </td>
-                                <td><span class="badge badge-blue">Menunggu</span></td>
-                                <td>
-                                    <div class="action-icons">
-                                        <i class="fa-regular fa-eye"></i>
-                                        <i class="fa-solid fa-download"></i>
-                                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>
-                                    <div class="student-info">
-                                        <div class="avatar-initial bg-light-red">AW</div>
-                                        <div>
-                                            <div class="student-name">Adi Wijaya</div>
-                                            <div class="student-id">24091004</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>SKL</td>
-                                <td>
-                                    <div class="file-name">SKL_AdiWijaya.pdf</div>
-                                    <div class="file-size">1.5 MB</div>
-                                </td>
-                                <td>
-                                    <div class="date-text">19 Mei 2025</div>
-                                    <div class="time-text">10:10 WIB</div>
-                                </td>
-                                <td><span class="badge badge-red">Ditolak</span></td>
-                                <td>
-                                    <div class="action-icons">
-                                        <i class="fa-regular fa-eye"></i>
-                                        <i class="fa-solid fa-download"></i>
-                                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>
-                                    <div class="student-info">
-                                        <div class="avatar-initial bg-light-purple">MA</div>
-                                        <div>
-                                            <div class="student-name">Maya Amalia</div>
-                                            <div class="student-id">24091005</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Pas Foto</td>
-                                <td>
-                                    <div class="file-name">Foto_MayaAmalia.jpg</div>
-                                    <div class="file-size">542 KB</div>
-                                </td>
-                                <td>
-                                    <div class="date-text">19 Mei 2025</div>
-                                    <div class="time-text">11:05 WIB</div>
-                                </td>
-                                <td><span class="badge badge-green">Terverifikasi</span></td>
-                                <td>
-                                    <div class="action-icons">
-                                        <i class="fa-regular fa-eye"></i>
-                                        <i class="fa-solid fa-download"></i>
-                                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div class="pagination">
-                        <div class="page-info">Menampilkan 1 - 5 dari 312 data</div>
-                        <div class="page-controls">
-                            <button><i class="fa-solid fa-chevron-left"></i></button>
-                            <button class="active">1</button>
-                            <button>2</button>
-                            <button>3</button>
-                            <button>4</button>
-                            <span class="dots">...</span>
-                            <button>39</button>
-                            <button><i class="fa-solid fa-chevron-right"></i></button>
-                        </div>
+                    <div class="filter-dropdowns">
+                        <select id="filter_jenis" class="filter-select">
+                            <option value="">Semua Jenis Dokumen</option>
+                            <option value="ktp">KTP</option>
+                            <option value="kartu_keluarga">Kartu Keluarga</option>
+                            <option value="ijazah_skl">Ijazah / SKL</option>
+                            <option value="pas_foto">Pas Foto</option>
+                        </select>
+                        <select id="filter_status" class="filter-select">
+                            <option value="">Semua Status</option>
+                            <option value="belum_diverifikasi">Menunggu Seleksi</option>
+                            <option value="disetujui">Terverifikasi</option>
+                            <option value="ditolak">Ditolak</option>
+                        </select>
+                        <button class="btn-filter" id="btn_filter"
+                            style="padding: 10px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: white; font-weight: 500; cursor: pointer;">
+                            <i class="fa-solid fa-filter"></i> Filter
+                        </button>
                     </div>
                 </div>
 
-                <div class="card document-detail">
-                    <div class="detail-header">
-                        <h3>Detail Dokumen</h3>
-                        <button class="btn-close"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
+                <div class="tabs">
+                    <div class="tab active" onclick="switchFilterTab('all', this)">Semua Dokumen</div>
+                    <div class="tab" onclick="switchFilterTab('belum_diverifikasi', this)">Menunggu</div>
+                    <div class="tab" onclick="switchFilterTab('disetujui', this)">Terverifikasi</div>
+                    <div class="tab" onclick="switchFilterTab('ditolak', this)">Ditolak</div>
+                </div>
 
-                    <div class="doc-file-card">
-                        <div class="doc-file-icon bg-light-green text-green">
-                            <i class="fa-regular fa-id-card"></i>
-                        </div>
-                        <div class="doc-file-info">
-                            <div class="doc-file-title">KTP</div>
-                            <div class="doc-file-desc">Bagus Permadi (ID 1001)</div>
-                            <div class="doc-file-meta">KTP_BagusPermadi.jpg • 1.2 MB<br>Diunggah: 20 Mei 2025, 10:30 WIB</div>
-                        </div>
-                        <span class="badge badge-green status-badge">TERVERIFIKASI</span>
-                    </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>PENDAFTAR</th>
+                            <th>JENIS DOKUMEN</th>
+                            <th>NAMA FILE</th>
+                            <th>STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dokumen_table_body">
+                        <!-- Dynamically populated -->
+                    </tbody>
+                </table>
 
-                    <div class="doc-preview">
-                        <img src="assets/images/doc_preview.png" alt="Document Preview">
-                        <div class="preview-actions">
-                            <button><i class="fa-solid fa-magnifying-glass-plus"></i></button>
-                            <button><i class="fa-solid fa-expand"></i></button>
-                            <button class="btn-dl"><i class="fa-solid fa-download"></i> Download</button>
-                        </div>
-                    </div>
-
-                    <div class="detail-section">
-                        <h4>INFORMASI VERIFIKASI</h4>
-                        <div class="info-row">
-                            <span class="info-label">Verifikator</span>
-                            <span class="info-value">: Admin PMB</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">Tanggal Verifikasi</span>
-                            <span class="info-value">: 20 Mei 2025, 11:30 WIB</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">Catatan</span>
-                            <span class="info-value">: Dokumen sesuai dan jelas</span>
-                        </div>
-                    </div>
-
-                    <div class="detail-section">
-                        <h4>RIWAYAT DOKUMEN</h4>
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <div class="timeline-dot bg-success-green"></div>
-                                <div class="timeline-content">
-                                    <div class="timeline-title">20 Mei 2025, 11:30 WIB</div>
-                                    <div class="timeline-desc">Dokumen diverifikasi oleh Admin PMB</div>
-                                </div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-dot bg-border"></div>
-                                <div class="timeline-content">
-                                    <div class="timeline-title">20 Mei 2025, 10:30 WIB</div>
-                                    <div class="timeline-desc">Dokumen diunggah oleh pendaftar</div>
-                                </div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-dot bg-yellow"></div>
-                                <div class="timeline-content">
-                                    <div class="timeline-title">20 Mei 2025, 10:15 WIB</div>
-                                    <div class="timeline-desc">Dokumen minta direvisi oleh Admin PMB</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="action-buttons">
-                        <button class="btn-action bg-green text-white"><i class="fa-solid fa-check"></i> Terverifikasi</button>
-                        <button class="btn-action btn-outline-yellow"><i class="fa-solid fa-rotate-left"></i> Minta Revisi</button>
-                        <button class="btn-action btn-outline-red"><i class="fa-solid fa-xmark"></i> Tolak</button>
-                    </div>
-                    <button class="btn-full btn-outline-gray"><i class="fa-regular fa-comment"></i> Beri Catatan</button>
-
-                    <div class="info-box bg-light-blue text-blue">
-                        <i class="fa-solid fa-circle-info"></i>
-                        <div class="info-box-text">
-                            <strong>Catatan</strong>
-                            <p>Pastikan semua detail dokumen terlihat jelas. Jika gambar buram, gunakan fitur "Minta Revisi". Jika dokumen palsu/tidak valid, klik "Tolak".</p>
-                        </div>
+                <div class="pagination"
+                    style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+                    <div class="page-info" id="pagination_info">Menampilkan 0 - 0 dari 0 data</div>
+                    <div class="page-controls" id="pagination_container">
+                        <!-- Dynamically populated -->
                     </div>
                 </div>
             </div>
 
             <div class="doc-types-section">
                 <h3>Jenis Dokumen yang Dikelola</h3>
-                <div class="stats-grid-5">
-                    <div class="doc-type-card">
-                        <div class="doc-type-icon text-green bg-light-green"><i class="fa-regular fa-id-card"></i></div>
+                <div class="stats-grid-4" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+                    <div class="doc-type-card"
+                        style="background: white; border: 1px solid var(--border-color); padding: 16px; border-radius: 12px; display: flex; align-items: center; gap: 16px;">
+                        <div class="doc-type-icon text-green bg-light-green"
+                            style="width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;">
+                            <i class="fa-regular fa-id-card"></i>
+                        </div>
                         <div class="doc-type-info">
-                            <div class="doc-type-title">KTP</div>
-                            <div class="doc-type-count">512 dokumen</div>
+                            <div class="doc-type-title"
+                                style="font-size: 12px; color: var(--text-secondary); font-weight: 500;">KTP</div>
+                            <div class="doc-type-count" id="type_ktp_count"
+                                style="font-size: 14px; font-weight: 700; color: var(--text-primary); margin-top: 2px;">
+                                0 dokumen</div>
                         </div>
                     </div>
-                    <div class="doc-type-card">
-                        <div class="doc-type-icon text-blue bg-light-blue"><i class="fa-solid fa-people-roof"></i></div>
+                    <div class="doc-type-card"
+                        style="background: white; border: 1px solid var(--border-color); padding: 16px; border-radius: 12px; display: flex; align-items: center; gap: 16px;">
+                        <div class="doc-type-icon text-blue bg-light-blue"
+                            style="width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;">
+                            <i class="fa-solid fa-people-roof"></i>
+                        </div>
                         <div class="doc-type-info">
-                            <div class="doc-type-title">Kartu Keluarga</div>
-                            <div class="doc-type-count">255 dokumen</div>
+                            <div class="doc-type-title"
+                                style="font-size: 12px; color: var(--text-secondary); font-weight: 500;">Kartu Keluarga
+                            </div>
+                            <div class="doc-type-count" id="type_kk_count"
+                                style="font-size: 14px; font-weight: 700; color: var(--text-primary); margin-top: 2px;">
+                                0 dokumen</div>
                         </div>
                     </div>
-                    <div class="doc-type-card">
-                        <div class="doc-type-icon text-dark-green bg-light-green"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <div class="doc-type-card"
+                        style="background: white; border: 1px solid var(--border-color); padding: 16px; border-radius: 12px; display: flex; align-items: center; gap: 16px;">
+                        <div class="doc-type-icon text-dark-green bg-light-green"
+                            style="width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
                         <div class="doc-type-info">
-                            <div class="doc-type-title">Ijazah</div>
-                            <div class="doc-type-count">3 dokumen</div>
+                            <div class="doc-type-title"
+                                style="font-size: 12px; color: var(--text-secondary); font-weight: 500;">Ijazah / SKL
+                            </div>
+                            <div class="doc-type-count" id="type_ijazah_count"
+                                style="font-size: 14px; font-weight: 700; color: var(--text-primary); margin-top: 2px;">
+                                0 dokumen</div>
                         </div>
                     </div>
-                    <div class="doc-type-card">
-                        <div class="doc-type-icon text-purple bg-light-purple"><i class="fa-regular fa-file-pdf"></i></div>
-                        <div class="doc-type-info">
-                            <div class="doc-type-title">SKL</div>
-                            <div class="doc-type-count">342 dokumen</div>
+                    <div class="doc-type-card"
+                        style="background: white; border: 1px solid var(--border-color); padding: 16px; border-radius: 12px; display: flex; align-items: center; gap: 16px;">
+                        <div class="doc-type-icon text-purple bg-light-purple"
+                            style="width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;">
+                            <i class="fa-regular fa-image"></i>
                         </div>
-                    </div>
-                    <div class="doc-type-card">
-                        <div class="doc-type-icon text-gray bg-light-gray" style="background: #f1f5f9; color: #64748b;"><i class="fa-regular fa-image"></i></div>
                         <div class="doc-type-info">
-                            <div class="doc-type-title">Pas Foto</div>
-                            <div class="doc-type-count">296 dokumen</div>
+                            <div class="doc-type-title"
+                                style="font-size: 12px; color: var(--text-secondary); font-weight: 500;">Pas Foto</div>
+                            <div class="doc-type-count" id="type_foto_count"
+                                style="font-size: 14px; font-weight: 700; color: var(--text-primary); margin-top: 2px;">
+                                0 dokumen</div>
                         </div>
                     </div>
                 </div>
@@ -470,5 +256,290 @@
 
         </main>
     </div>
+
+    <script>
+        const SERVER_UPLOADS_URL = 'http://localhost:5000/uploads/';
+        let rawDocumentList = [];
+        let flattenedDocs = [];
+        let filteredDocs = [];
+
+        let currentPage = 1;
+        const itemsPerPage = 8;
+        let currentTabStatus = 'all';
+
+        function getInitials(name) {
+            if (!name) return 'UN';
+            const parts = name.trim().split(/\s+/);
+            if (parts.length >= 2) {
+                return (parts[0][0] + parts[1][0]).toUpperCase();
+            }
+            return parts[0].substring(0, 2).toUpperCase();
+        }
+
+        function formatTanggal(isoString) {
+            if (!isoString) return '-';
+            const dateObj = new Date(isoString);
+            return dateObj.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) + ' ' +
+                dateObj.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + ' WIB';
+        }
+
+        async function loadDocuments() {
+            try {
+                const res = await fetchAPI('/admin/dokumen');
+                if (res.success && res.data) {
+                    rawDocumentList = res.data;
+                    flattenData();
+                    calculateStats();
+                    applyFilters();
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Gagal mengambil daftar dokumen.');
+            }
+        }
+
+        function flattenData() {
+            flattenedDocs = [];
+            rawDocumentList.forEach(item => {
+                // KTP
+                if (item.ktp) {
+                    flattenedDocs.push({
+                        userId: item.user_id,
+                        nama_lengkap: item.nama_lengkap,
+                        email: item.email,
+                        jenis: 'KTP',
+                        fileField: 'ktp',
+                        fileName: item.ktp,
+                        status: item.ktp_status || 'belum_diverifikasi',
+                        catatan: item.ktp_catatan || '',
+                        updated_at: item.updated_at || item.created_at
+                    });
+                }
+                // Kartu Keluarga
+                if (item.kartu_keluarga) {
+                    flattenedDocs.push({
+                        userId: item.user_id,
+                        nama_lengkap: item.nama_lengkap,
+                        email: item.email,
+                        jenis: 'Kartu Keluarga',
+                        fileField: 'kartu_keluarga',
+                        fileName: item.kartu_keluarga,
+                        status: item.kartu_keluarga_status || 'belum_diverifikasi',
+                        catatan: item.kartu_keluarga_catatan || '',
+                        updated_at: item.updated_at || item.created_at
+                    });
+                }
+                // Ijazah / SKL
+                if (item.ijazah_skl) {
+                    flattenedDocs.push({
+                        userId: item.user_id,
+                        nama_lengkap: item.nama_lengkap,
+                        email: item.email,
+                        jenis: 'Ijazah / SKL',
+                        fileField: 'ijazah_skl',
+                        fileName: item.ijazah_skl,
+                        status: item.ijazah_skl_status || 'belum_diverifikasi',
+                        catatan: item.ijazah_skl_catatan || '',
+                        updated_at: item.updated_at || item.created_at
+                    });
+                }
+                // Pas Foto
+                if (item.pas_foto) {
+                    flattenedDocs.push({
+                        userId: item.user_id,
+                        nama_lengkap: item.nama_lengkap,
+                        email: item.email,
+                        jenis: 'Pas Foto',
+                        fileField: 'pas_foto',
+                        fileName: item.pas_foto,
+                        status: item.pas_foto_status || 'belum_diverifikasi',
+                        catatan: item.pas_foto_catatan || '',
+                        updated_at: item.updated_at || item.created_at
+                    });
+                }
+            });
+        }
+
+        function calculateStats() {
+            const total = flattenedDocs.length;
+            const pending = flattenedDocs.filter(d => d.status === 'belum_diverifikasi').length;
+            const verified = flattenedDocs.filter(d => d.status === 'disetujui').length;
+            const rejected = flattenedDocs.filter(d => d.status === 'ditolak').length;
+
+            document.getElementById('stat_total_count').textContent = total;
+            document.getElementById('stat_pending_count').textContent = pending;
+            document.getElementById('stat_verified_count').textContent = verified;
+            document.getElementById('stat_rejected_count').textContent = rejected;
+
+            // Counts of each type
+            document.getElementById('type_ktp_count').textContent = flattenedDocs.filter(d => d.fileField === 'ktp').length + ' dokumen';
+            document.getElementById('type_kk_count').textContent = flattenedDocs.filter(d => d.fileField === 'kartu_keluarga').length + ' dokumen';
+            document.getElementById('type_ijazah_count').textContent = flattenedDocs.filter(d => d.fileField === 'ijazah_skl').length + ' dokumen';
+            document.getElementById('type_foto_count').textContent = flattenedDocs.filter(d => d.fileField === 'pas_foto').length + ' dokumen';
+        }
+
+        function switchFilterTab(status, element) {
+            currentTabStatus = status;
+
+            // Tab active styling
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(t => t.classList.remove('active'));
+            element.classList.add('active');
+
+            currentPage = 1;
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const searchVal = document.getElementById('search_input').value.toLowerCase().trim();
+            const jenisVal = document.getElementById('filter_jenis').value;
+            const statusVal = document.getElementById('filter_status').value;
+
+            filteredDocs = flattenedDocs.filter(doc => {
+                // Search by name/email
+                const matchSearch = !searchVal ||
+                    doc.nama_lengkap.toLowerCase().includes(searchVal) ||
+                    doc.email.toLowerCase().includes(searchVal);
+
+                // Filter by doc type
+                const matchJenis = !jenisVal || doc.fileField === jenisVal;
+
+                // Filter by status (tab or dropdown selection)
+                let matchStatus = true;
+                if (currentTabStatus !== 'all') {
+                    matchStatus = doc.status === currentTabStatus;
+                } else if (statusVal) {
+                    matchStatus = doc.status === statusVal;
+                }
+
+                return matchSearch && matchJenis && matchStatus;
+            });
+
+            currentPage = 1;
+            renderTable();
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('dokumen_table_body');
+            tbody.innerHTML = '';
+
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, filteredDocs.length);
+            const pageData = filteredDocs.slice(startIndex, endIndex);
+
+            if (pageData.length > 0) {
+                pageData.forEach((doc, idx) => {
+                    const tr = document.createElement('tr');
+                    tr.style.cursor = 'pointer';
+                    tr.addEventListener('click', () => {
+                        window.location.href = `detail_dokumen.html?id=${doc.userId}&type=${doc.fileField}`;
+                    });
+
+                    // Status Badge style
+                    let badgeClass = 'badge-yellow';
+                    let statusLabel = 'Menunggu';
+                    if (doc.status === 'disetujui') {
+                        badgeClass = 'badge-green';
+                        statusLabel = 'Terverifikasi';
+                    } else if (doc.status === 'ditolak') {
+                        badgeClass = 'badge-red';
+                        statusLabel = 'Ditolak';
+                    }
+
+                    // Avatar color
+                    const colors = ['bg-light-green', 'bg-light-yellow', 'bg-light-blue', 'bg-light-red', 'bg-light-purple'];
+                    const colorClass = colors[idx % colors.length];
+
+                    tr.innerHTML = `
+                        <td>
+                            <div class="student-info">
+                                <div class="avatar-initial ${colorClass}">${getInitials(doc.nama_lengkap)}</div>
+                                <div>
+                                    <div class="student-name" style="font-weight: 600;">${doc.nama_lengkap}</div>
+                                    <div class="student-id" style="font-size: 11px; color: var(--text-gray);">${doc.email}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="font-weight: 600; font-size: 13px;">${doc.jenis}</td>
+                        <td>
+                            <div class="file-name" style="word-break: break-all;">${doc.fileName}</div>
+                        </td>
+                        <td><span class="badge ${badgeClass}">${statusLabel}</span></td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } else {
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-gray); padding: 36px;">Tidak ada dokumen ditemukan.</td></tr>`;
+            }
+
+            // Update pagination
+            const total = filteredDocs.length;
+            const from = total > 0 ? startIndex + 1 : 0;
+            document.getElementById('pagination_info').textContent = `Menampilkan ${from} - ${endIndex} dari ${total} data`;
+            renderPaginationControls();
+        }
+
+        function renderPaginationControls() {
+            const container = document.getElementById('pagination_container');
+            container.innerHTML = '';
+
+            const totalPages = Math.ceil(filteredDocs.length / itemsPerPage);
+            if (totalPages <= 1) return;
+
+            // Prev button
+            const prev = document.createElement('button');
+            prev.className = `page-btn ${currentPage === 1 ? 'disabled' : ''}`;
+            prev.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
+            prev.disabled = currentPage === 1;
+            prev.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderTable();
+                }
+            });
+            container.appendChild(prev);
+
+            // Numbers
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                    const btn = document.createElement('button');
+                    btn.className = `page-btn ${currentPage === i ? 'active' : ''}`;
+                    btn.textContent = i;
+                    btn.addEventListener('click', () => {
+                        currentPage = i;
+                        renderTable();
+                    });
+                    container.appendChild(btn);
+                } else if (i === currentPage - 2 || i === currentPage + 2) {
+                    const dots = document.createElement('span');
+                    dots.textContent = '...';
+                    container.appendChild(dots);
+                }
+            }
+
+            // Next button
+            const next = document.createElement('button');
+            next.className = `page-btn ${currentPage === totalPages ? 'disabled' : ''}`;
+            next.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
+            next.disabled = currentPage === totalPages;
+            next.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderTable();
+                }
+            });
+            container.appendChild(next);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadDocuments();
+
+            document.getElementById('btn_filter').addEventListener('click', applyFilters);
+            document.getElementById('search_input').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') applyFilters();
+            });
+        });
+    </script>
 </body>
+
 </html>

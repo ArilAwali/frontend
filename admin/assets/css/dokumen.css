@@ -1,14 +1,37 @@
 /* dokumen.css - Styles specifically for the document management page */
 
 /* Utility colors */
-.text-green { color: var(--primary-green); }
-.text-blue { color: var(--blue); }
-.text-yellow { color: var(--yellow); }
-.text-red { color: var(--red); }
-.text-white { color: #fff; }
-.text-primary-green { color: var(--primary-green); }
-.bg-border { background-color: var(--border-color); }
-.bg-success-green { background-color: var(--success-green); }
+.text-green {
+    color: var(--primary-green);
+}
+
+.text-blue {
+    color: var(--blue);
+}
+
+.text-yellow {
+    color: var(--yellow);
+}
+
+.text-red {
+    color: var(--red);
+}
+
+.text-white {
+    color: #fff;
+}
+
+.text-primary-green {
+    color: var(--primary-green);
+}
+
+.bg-border {
+    background-color: var(--border-color);
+}
+
+.bg-success-green {
+    background-color: var(--success-green);
+}
 
 .badge-blue {
     background-color: var(--light-blue);
@@ -16,9 +39,9 @@
 }
 
 /* 5 Columns Grid */
-.stats-grid-5 {
+.stats-grid-4-doc {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 16px;
 }
 
@@ -72,7 +95,8 @@
 
 /* Document List Area */
 .document-list {
-    padding: 0; /* Removing padding so borders go full width */
+    padding: 0;
+    /* Removing padding so borders go full width */
 }
 
 .filter-bar {
@@ -111,7 +135,9 @@
     gap: 12px;
 }
 
-.filter-dropdowns select, .date-picker, .btn-filter {
+.filter-dropdowns select,
+.date-picker,
+.btn-filter {
     padding: 10px 16px;
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -368,7 +394,7 @@
     padding: 6px 10px;
     border-radius: 6px;
     cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .btn-dl {
@@ -461,7 +487,8 @@
     margin-bottom: 12px;
 }
 
-.btn-action, .btn-full {
+.btn-action,
+.btn-full {
     padding: 10px;
     border-radius: 6px;
     font-size: 0.85rem;
@@ -537,7 +564,7 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .doc-type-icon {

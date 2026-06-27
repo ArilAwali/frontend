@@ -25,4 +25,26 @@
             window.location.href = 'admin/admin-login.html';
         }
     }
+
+    // Attach global logout handler once the DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+        const logoutBtn = document.querySelector('.sidebar-footer a');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (confirm('Apakah Anda yakin ingin keluar dari Portal Admin?')) {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                    localStorage.removeItem('isRegistered');
+                    
+                    const pathname = window.location.pathname;
+                    if (pathname.includes('/admin/')) {
+                        window.location.href = 'admin-login.html';
+                    } else {
+                        window.location.href = 'admin/admin-login.html';
+                    }
+                }
+            });
+        }
+    });
 })();
