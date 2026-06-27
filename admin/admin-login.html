@@ -235,7 +235,7 @@
             <h1 class="login-title">Login Staff</h1>
             <p class="login-subtitle">Silakan masukkan kredensial admin Anda untuk melanjutkan.</p>
 
-            <form action="#" method="POST">
+            <form id="adminLoginForm">
 
                 <div class="form-group">
                     <div class="label-row">
@@ -243,7 +243,7 @@
                     </div>
                     <div class="input-wrapper">
                         <i class="fa-regular fa-user icon-left"></i>
-                        <input type="text" placeholder="Masukkan ID Staff" required>
+                        <input type="text" id="username" placeholder="Masukkan ID Staff" required>
                     </div>
                 </div>
 
@@ -254,16 +254,16 @@
                     </div>
                     <div class="input-wrapper">
                         <i class="fa-solid fa-lock icon-left"></i>
-                        <input type="password" placeholder="••••••••" required>
-                        <i class="fa-regular fa-eye icon-right" title="Tampilkan sandi"></i>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                        <i class="fa-regular fa-eye icon-right" id="togglePassword" title="Tampilkan sandi" style="cursor: pointer;"></i>
                     </div>
                 </div>
 
-                <button type="submit" class="btn-submit">
+                <button type="submit" class="btn-submit" id="btn-login">
                     Masuk ke Portal Admin <i class="fa-solid fa-arrow-right"></i>
                 </button>
 
-                <a href="portal/beranda.html" class="back-link">&lt; Kembali ke Beranda</a>
+                <a href="../portal/beranda.html" class="back-link">&lt; Kembali ke Beranda</a>
 
             </form>
 
@@ -280,6 +280,56 @@
         © 2025 Universitas Crypto. Seluruh Hak Cipta Dilindungi.
     </footer>
 
+    <script src="../config/api.js"></script>
+    <script>
+        // Toggle password visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        if (togglePassword && passwordInput) {
+            togglePassword.addEventListener('click', () => {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                togglePassword.classList.toggle('fa-eye');
+                togglePassword.classList.toggle('fa-eye-slash');
+            });
+        }
+
+        // Login Handler
+        document.getElementById('adminLoginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const usernameVal = document.getElementById('username').value;
+            const passwordVal = document.getElementById('password').value;
+
+            try {
+                const res = await fetchAPI('/auth/login', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        email: usernameVal,
+                        password: passwordVal
+                    })
+                });
+
+                if (res.success && res.data) {
+                    const user = res.data.user;
+                    if (user.role !== 'staf administration') {
+                        alert('Akses Ditolak: Akun Anda tidak memiliki hak akses Staf Administrasi.');
+                        return;
+                    }
+
+                    // Simpan token dan data user ke localStorage
+                    localStorage.setItem('token', res.data.token);
+                    localStorage.setItem('user', JSON.stringify(user));
+                    localStorage.setItem('isRegistered', 'true'); // bypass untuk dashboard admin
+
+                    alert('Login berhasil! Selamat datang Admin.');
+                    window.location.href = 'index.html';
+                }
+            } catch (error) {
+                alert('Login Gagal: ' + error.message);
+            }
+        });
+    </script>
 </body>
 
 </html>
