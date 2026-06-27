@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <script src="../config/admin-guard.js"></script>
+    <script src="../config/api.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Pendaftar - Bagus Permadi</title>
@@ -357,15 +359,15 @@
             <!-- Profile Top Card -->
             <div class="profile-card">
                 <div class="profile-top-row">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&auto=format&fit=crop&q=80" alt="Foto Bagus Permadi" class="profile-photo">
+                    <img src="https://ui-avatars.com/api/?name=Pendaftar&background=1a2530&color=fff" alt="Foto Pendaftar" class="profile-photo" id="profile_photo">
                     <div class="profile-main-info">
-                        <h2>Bagus Permadi</h2>
-                        <div class="id-pendaftar">ID Pendaftar : 24091001</div>
+                        <h2 id="profile_name">-</h2>
+                        <div class="id-pendaftar" id="profile_id">ID Pendaftar : -</div>
                     </div>
                     <div class="profile-badges">
                         <div class="badge-box">
-                            <span class="badge-box-label">STATUS PENDAFTARAN</span>
-                            <span class="badge-pill-green">Verifikasi Dokumen</span>
+                            <span class="badge-box-label">STATUS KELULUSAN</span>
+                            <span class="badge-pill-green" id="profile_status_badge">-</span>
                         </div>
                         <div class="badge-box">
                             <span class="badge-box-label">GELOMBANG</span>
@@ -379,14 +381,14 @@
                         <div class="meta-icon"><i class="fa-regular fa-calendar-check"></i></div>
                         <div>
                             <div class="meta-text-label">TANGGAL DAFTAR</div>
-                            <div class="meta-text-val">12 Oktober 2024</div>
+                            <div class="meta-text-val" id="profile_created_at">-</div>
                         </div>
                     </div>
                     <div class="meta-item">
                         <div class="meta-icon"><i class="fa-regular fa-clock"></i></div>
                         <div>
                             <div class="meta-text-label">TERAKHIR DIPERBARUI</div>
-                            <div class="meta-text-val">19 Mei 2025, 14:25 WIB</div>
+                            <div class="meta-text-val" id="profile_updated_at">-</div>
                         </div>
                     </div>
                     <div class="meta-item">
@@ -401,119 +403,414 @@
 
             <!-- Tabs Nav -->
             <div class="tabs-nav">
-                <span class="tab-link active">Biodata Lengkap</span>
-                <span class="tab-link">Data Akademik</span>
-                <span class="tab-link">Pilihan Program Studi</span>
-                <span class="tab-link">Riwayat Pendaftaran</span>
+                <span class="tab-link active" onclick="switchTab('biodata')">Biodata Lengkap</span>
+                <span class="tab-link" onclick="switchTab('akademik')">Data Akademik & Rapor</span>
+                <span class="tab-link" onclick="switchTab('prodi')">Pilihan Program Studi</span>
+                <span class="tab-link" onclick="switchTab('status')">Status Kelulusan</span>
             </div>
 
-            <!-- Section: Data Pribadi -->
-            <div class="section-card">
-                <h3>Data Pribadi</h3>
+            <!-- Tab: Biodata Lengkap -->
+            <div id="tab_biodata">
+                <!-- Section: Data Pribadi -->
+                <div class="section-card">
+                    <h3>Data Pribadi</h3>
+                    <div class="data-grid">
+                        <!-- Left Col -->
+                        <div class="data-row">
+                            <div class="data-label-group"><i class="fa-regular fa-user"></i> Nama Lengkap</div>
+                            <div class="data-val" id="val_nama_lengkap">-</div>
+                        </div>
+                        <!-- Right Col -->
+                        <div class="data-row">
+                            <div class="data-label-group"><i class="fa-regular fa-flag"></i> Kewarganegaraan</div>
+                            <div class="data-val" id="val_kewarganegaraan">-</div>
+                        </div>
+
+                        <!-- Left Col -->
+                        <div class="data-row">
+                            <div class="data-label-group"><i class="fa-regular fa-id-card"></i> NIK</div>
+                            <div class="data-val" id="val_nik">-</div>
+                        </div>
+                        <!-- Right Col -->
+                        <div class="data-row">
+                            <div class="data-label-group"><i class="fa-regular fa-heart"></i> Status Pernikahan</div>
+                            <div class="data-val" id="val_status_pernikahan">-</div>
+                        </div>
+
+                        <!-- Left Col -->
+                        <div class="data-row">
+                            <div class="data-label-group"><i class="fa-solid fa-location-dot"></i> Tempat Lahir</div>
+                            <div class="data-val" id="val_tempat_lahir">-</div>
+                        </div>
+                        <!-- Right Col -->
+                        <div class="data-row">
+                            <div class="data-label-group"><i class="fa-solid fa-phone"></i> No. WhatsApp</div>
+                            <div class="data-val" id="val_nomor_wa">-</div>
+                        </div>
+
+                        <!-- Left Col -->
+                        <div class="data-row">
+                            <div class="data-label-group"><i class="fa-regular fa-calendar"></i> Tanggal Lahir</div>
+                            <div class="data-val" id="val_tanggal_lahir">-</div>
+                        </div>
+                        <!-- Right Col -->
+                        <div class="data-row">
+                            <div class="data-label-group"><i class="fa-regular fa-envelope"></i> Email</div>
+                            <div class="data-val" id="val_email">-</div>
+                        </div>
+
+                        <!-- Left Col -->
+                        <div class="data-row">
+                            <div class="data-label-group"><i class="fa-solid fa-venus-mars"></i> Jenis Kelamin</div>
+                            <div class="data-val" id="val_jenis_kelamin">-</div>
+                        </div>
+                        <!-- Right Col -->
+                        <div class="data-row">
+                            <div class="data-label-group"><i class="fa-solid fa-droplet"></i> Golongan Darah</div>
+                            <div class="data-val" id="val_golongan_darah">-</div>
+                        </div>
+
+                        <!-- Left Col -->
+                        <div class="data-row">
+                            <div class="data-label-group"><i class="fa-solid fa-kaaba"></i> Agama</div>
+                            <div class="data-val" id="val_agama">-</div>
+                        </div>
+                        <!-- Right Col -->
+                        <div class="data-row">
+                            <div class="data-label-group"><i class="fa-solid fa-users"></i> Anak Ke</div>
+                            <div class="data-val" id="val_anak_ke">-</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section: Alamat -->
+                <div class="section-card">
+                    <h3>Alamat</h3>
+                    <div class="alamat-block">
+                        <div class="alamat-icon"><i class="fa-solid fa-house"></i></div>
+                        <div class="alamat-content">
+                            <span class="alamat-label">Alamat Lengkap</span>
+                            <span class="alamat-val" id="val_alamat_lengkap">-</span>
+                        </div>
+                    </div>
+
+                    <div class="alamat-details-grid">
+                        <div class="sub-meta">
+                            <span class="sub-meta-label">RT / RW</span>
+                            <span class="sub-meta-val" id="val_rt_rw">-</span>
+                        </div>
+                        <div class="sub-meta">
+                            <span class="sub-meta-label">KELURAHAN / DESA</span>
+                            <span class="sub-meta-val" id="val_kelurahan">-</span>
+                        </div>
+                        <div class="sub-meta">
+                            <span class="sub-meta-label">KECAMATAN</span>
+                            <span class="sub-meta-val" id="val_kecamatan">-</span>
+                        </div>
+                        <div class="sub-meta">
+                            <span class="sub-meta-label">KOTA / KABUPATEN</span>
+                            <span class="sub-meta-val" id="val_kota">-</span>
+                        </div>
+                        <div class="sub-meta">
+                            <span class="sub-meta-label">PROVINSI</span>
+                            <span class="sub-meta-val" id="val_provinsi">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Data Akademik -->
+            <div class="section-card" id="tab_akademik" style="display: none;">
+                <h3>Data Akademik</h3>
                 <div class="data-grid">
-                    <!-- Left Col -->
                     <div class="data-row">
-                        <div class="data-label-group"><i class="fa-regular fa-user"></i> Nama Lengkap</div>
-                        <div class="data-val">Bagus Permadi</div>
+                        <div class="data-label-group"><i class="fa-solid fa-school"></i> Asal Sekolah</div>
+                        <div class="data-val" id="val_sekolah_asal">-</div>
                     </div>
-                    <!-- Right Col -->
                     <div class="data-row">
-                        <div class="data-label-group"><i class="fa-regular fa-flag"></i> Kewarganegaraan</div>
-                        <div class="data-val">Warga Negara Indonesia</div>
+                        <div class="data-label-group"><i class="fa-solid fa-graduation-cap"></i> Jurusan</div>
+                        <div class="data-val" id="val_jurusan">-</div>
                     </div>
+                    <div class="data-row">
+                        <div class="data-label-group"><i class="fa-regular fa-calendar-days"></i> Tahun Lulus</div>
+                        <div class="data-val" id="val_tahun_lulus">-</div>
+                    </div>
+                    <div class="data-row">
+                        <div class="data-label-group"><i class="fa-regular fa-address-card"></i> NISN</div>
+                        <div class="data-val" id="val_nisn">-</div>
+                    </div>
+                </div>
 
-                    <!-- Left Col -->
-                    <div class="data-row">
-                        <div class="data-label-group"><i class="fa-regular fa-id-card"></i> NIK</div>
-                        <div class="data-val">3275101209010001</div>
-                    </div>
-                    <!-- Right Col -->
-                    <div class="data-row">
-                        <div class="data-label-group"><i class="fa-regular fa-heart"></i> Status Pernikahan</div>
-                        <div class="data-val">Belum Menikah</div>
-                    </div>
+                <h3 style="margin-top: 32px; margin-bottom: 16px;">Nilai Rapor (Nilai Rata-rata per Semester)</h3>
+                <table class="data-table" style="width: 100%; border-collapse: collapse; margin-top: 12px;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: left; padding: 12px; border-bottom: 2px solid var(--border-color);">Semester</th>
+                            <th style="text-align: right; padding: 12px; border-bottom: 2px solid var(--border-color);">Nilai Rata-rata</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--bg-color);">Semester 1</td>
+                            <td style="text-align: right; padding: 12px; border-bottom: 1px solid var(--bg-color); font-weight: 700;" id="val_sem1">0.00</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--bg-color);">Semester 2</td>
+                            <td style="text-align: right; padding: 12px; border-bottom: 1px solid var(--bg-color); font-weight: 700;" id="val_sem2">0.00</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--bg-color);">Semester 3</td>
+                            <td style="text-align: right; padding: 12px; border-bottom: 1px solid var(--bg-color); font-weight: 700;" id="val_sem3">0.00</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--bg-color);">Semester 4</td>
+                            <td style="text-align: right; padding: 12px; border-bottom: 1px solid var(--bg-color); font-weight: 700;" id="val_sem4">0.00</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--bg-color);">Semester 5</td>
+                            <td style="text-align: right; padding: 12px; border-bottom: 1px solid var(--bg-color); font-weight: 700;" id="val_sem5">0.00</td>
+                        </tr>
+                        <tr style="background-color: var(--bg-color);">
+                            <td style="padding: 12px; font-weight: 700;">Rata-rata Keseluruhan</td>
+                            <td style="text-align: right; padding: 12px; font-weight: 800; color: #117b53;" id="val_sem_avg">0.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-                    <!-- Left Col -->
+            <!-- Tab: Pilihan Program Studi -->
+            <div class="section-card" id="tab_prodi" style="display: none;">
+                <h3>Pilihan Program Studi</h3>
+                <div class="data-grid">
                     <div class="data-row">
-                        <div class="data-label-group"><i class="fa-solid fa-location-dot"></i> Tempat Lahir</div>
-                        <div class="data-val">Yogyakarta</div>
+                        <div class="data-label-group"><i class="fa-solid fa-1"></i> Program Studi Pilihan 1</div>
+                        <div class="data-val" id="val_prodi1">-</div>
                     </div>
-                    <!-- Right Col -->
                     <div class="data-row">
-                        <div class="data-label-group"><i class="fa-solid fa-phone"></i> No. WhatsApp</div>
-                        <div class="data-val">0812-3456-7890</div>
-                    </div>
-
-                    <!-- Left Col -->
-                    <div class="data-row">
-                        <div class="data-label-group"><i class="fa-regular fa-calendar"></i> Tanggal Lahir</div>
-                        <div class="data-val">12 September 2001</div>
-                    </div>
-                    <!-- Right Col -->
-                    <div class="data-row">
-                        <div class="data-label-group"><i class="fa-regular fa-envelope"></i> Email</div>
-                        <div class="data-val">baguspermadi@email.com</div>
-                    </div>
-
-                    <!-- Left Col -->
-                    <div class="data-row">
-                        <div class="data-label-group"><i class="fa-solid fa-venus-mars"></i> Jenis Kelamin</div>
-                        <div class="data-val">Laki-laki</div>
-                    </div>
-                    <!-- Right Col -->
-                    <div class="data-row">
-                        <div class="data-label-group"><i class="fa-solid fa-droplet"></i> Golongan Darah</div>
-                        <div class="data-val">O</div>
-                    </div>
-
-                    <!-- Left Col -->
-                    <div class="data-row">
-                        <div class="data-label-group"><i class="fa-solid fa-kaaba"></i> Agama</div>
-                        <div class="data-val">Islam</div>
-                    </div>
-                    <!-- Right Col -->
-                    <div class="data-row">
-                        <div class="data-label-group"><i class="fa-solid fa-users"></i> Anak Ke</div>
-                        <div class="data-val">2 dari 3 bersaudara</div>
+                        <div class="data-label-group"><i class="fa-solid fa-2"></i> Program Studi Pilihan 2</div>
+                        <div class="data-val" id="val_prodi2">-</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Section: Alamat -->
-            <div class="section-card">
-                <h3>Alamat</h3>
-                <div class="alamat-block">
-                    <div class="alamat-icon"><i class="fa-solid fa-house"></i></div>
-                    <div class="alamat-content">
-                        <span class="alamat-label">Alamat Lengkap</span>
-                        <span class="alamat-val">Jl. Kaliurang No. 123, Sleman, Yogyakarta</span>
+            <!-- Tab: Status Kelulusan -->
+            <div class="section-card" id="tab_status" style="display: none;">
+                <h3>Kelola Kelulusan Mahasiswa</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 13px;">Tentukan apakah calon mahasiswa ini memenuhi kriteria kelulusan akademik Universitas Crypto.</p>
+                
+                <div style="max-width: 480px; display: flex; flex-direction: column; gap: 16px;">
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <label for="select_status_kelulusan" style="font-size: 12px; font-weight: 700; color: var(--text-secondary);">STATUS KELULUSAN</label>
+                        <select id="select_status_kelulusan" class="filter-select" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: white; font-weight: 600;">
+                            <option value="proses">Menunggu Seleksi</option>
+                            <option value="lulus">Lulus / Diterima</option>
+                            <option value="tidak_lulus">Tidak Lulus / Ditolak</option>
+                        </select>
                     </div>
-                </div>
-
-                <div class="alamat-details-grid">
-                    <div class="sub-meta">
-                        <span class="sub-meta-label">RT / RW</span>
-                        <span class="sub-meta-val">03 / 12</span>
-                    </div>
-                    <div class="sub-meta">
-                        <span class="sub-meta-label">KELURAHAN / DESA</span>
-                        <span class="sub-meta-val">Caturtunggal</span>
-                    </div>
-                    <div class="sub-meta">
-                        <span class="sub-meta-label">KECAMATAN</span>
-                        <span class="sub-meta-val">Depok</span>
-                    </div>
-                    <div class="sub-meta">
-                        <span class="sub-meta-label">KOTA / KABUPATEN</span>
-                        <span class="sub-meta-val">Sleman</span>
-                    </div>
-                    <div class="sub-meta">
-                        <span class="sub-meta-label">PROVINSI</span>
-                        <span class="sub-meta-val">DI Yogyakarta</span>
-                    </div>
+                    
+                    <button id="btn_save_status" class="btn-edit-data" style="width: fit-content; padding: 12px 24px; margin-top: 8px;">
+                        <i class="fa-regular fa-floppy-disk"></i> Simpan Status Kelulusan
+                    </button>
                 </div>
             </div>
         </main>
     </div>
+
+    <script>
+        const SERVER_UPLOADS_URL = 'http://localhost:5000/uploads/';
+        let currentUserId = null;
+
+        function switchTab(tabId) {
+            // Hide all tabs
+            document.getElementById('tab_biodata').style.display = 'none';
+            document.getElementById('tab_akademik').style.display = 'none';
+            document.getElementById('tab_prodi').style.display = 'none';
+            document.getElementById('tab_status').style.display = 'none';
+
+            // Show active tab
+            document.getElementById('tab_' + tabId).style.display = 'block';
+
+            // Update active link class
+            const tabLinks = document.querySelectorAll('.tab-link');
+            tabLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Find which link was clicked
+            if (tabId === 'biodata') tabLinks[0].classList.add('active');
+            else if (tabId === 'akademik') tabLinks[1].classList.add('active');
+            else if (tabId === 'prodi') tabLinks[2].classList.add('active');
+            else if (tabId === 'status') tabLinks[3].classList.add('active');
+        }
+
+        function formatTanggal(isoString) {
+            if (!isoString) return '-';
+            const dateObj = new Date(isoString);
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            return dateObj.toLocaleDateString('id-ID', options);
+        }
+
+        function getStatusLabel(status) {
+            if (status === 'lulus') return 'Lulus / Diterima';
+            if (status === 'tidak_lulus') return 'Tidak Lulus / Ditolak';
+            return 'Menunggu Seleksi';
+        }
+
+        function updateStatusBadgeStyle(status) {
+            const badge = document.getElementById('profile_status_badge');
+            if (!badge) return;
+            badge.textContent = getStatusLabel(status);
+            
+            // Remove any existing badge class and apply based on status
+            badge.className = '';
+            if (status === 'lulus') {
+                badge.className = 'badge-pill-green';
+                badge.style.background = '#e6f4ed';
+                badge.style.color = '#117b53';
+            } else if (status === 'tidak_lulus') {
+                badge.className = 'badge-pill-blue';
+                badge.style.background = '#fee2e2';
+                badge.style.color = '#ef4444';
+            } else {
+                badge.className = 'badge-pill-blue';
+                badge.style.background = '#f1f5f9';
+                badge.style.color = '#475569';
+            }
+        }
+
+        async function fetchDetailPendaftar() {
+            const urlParams = new URLSearchParams(window.location.search);
+            currentUserId = urlParams.get('id');
+
+            if (!currentUserId) {
+                alert('ID Pendaftar tidak ditemukan.');
+                window.location.href = 'pendaftaran.html';
+                return;
+            }
+
+            try {
+                const res = await fetchAPI(`/admin/pendaftar/${currentUserId}`);
+                if (res.success && res.data) {
+                    const data = res.data;
+                    const user = data.user || {};
+                    const biodata = data.biodata || {};
+                    const rapor = data.rapor || [];
+                    const dokumen = data.dokumen || {};
+
+                    // 1. Profile Top Card
+                    document.getElementById('profile_name').textContent = user.nama_lengkap || '-';
+                    document.getElementById('profile_id').textContent = `ID Pendaftar : ${user.id}`;
+                    document.title = `Detail Pendaftar - ${user.nama_lengkap || 'Calon Mahasiswa'}`;
+                    
+                    updateStatusBadgeStyle(user.status_kelulusan);
+
+                    if (dokumen.pas_foto) {
+                        document.getElementById('profile_photo').src = `${SERVER_UPLOADS_URL}${dokumen.pas_foto}`;
+                    } else {
+                        document.getElementById('profile_photo').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.nama_lengkap || 'Pendaftar')}&background=0d4a36&color=fff`;
+                    }
+
+                    document.getElementById('profile_created_at').textContent = formatTanggal(user.created_at);
+                    document.getElementById('profile_updated_at').textContent = formatTanggal(biodata.updated_at || user.created_at);
+
+                    // 2. Tab Biodata Lengkap (Data Pribadi)
+                    document.getElementById('val_nama_lengkap').textContent = user.nama_lengkap || '-';
+                    document.getElementById('val_kewarganegaraan').textContent = biodata.kewarganegaraan === 'wni' ? 'Warga Negara Indonesia (WNI)' : (biodata.kewarganegaraan === 'wna' ? 'Warga Negara Asing (WNA)' : '-');
+                    document.getElementById('val_nik').textContent = user.nik || '-';
+                    document.getElementById('val_status_pernikahan').textContent = biodata.status_pernikahan === 'belum_menikah' ? 'Belum Menikah' : (biodata.status_pernikahan === 'menikah' ? 'Menikah' : '-');
+                    document.getElementById('val_tempat_lahir').textContent = biodata.tempat_lahir || '-';
+                    document.getElementById('val_nomor_wa').textContent = user.nomor_wa || '-';
+                    document.getElementById('val_tanggal_lahir').textContent = formatTanggal(biodata.tanggal_lahir);
+                    document.getElementById('val_email').textContent = user.email || '-';
+                    document.getElementById('val_jenis_kelamin').textContent = biodata.jenis_kelamin === 'L' ? 'Laki-laki' : (biodata.jenis_kelamin === 'P' ? 'Perempuan' : '-');
+                    document.getElementById('val_golongan_darah').textContent = biodata.golongan_darah || '-';
+                    document.getElementById('val_agama').textContent = biodata.agama || '-';
+                    document.getElementById('val_anak_ke').textContent = biodata.anak_ke && biodata.jumlah_bersaudara ? `${biodata.anak_ke} dari ${biodata.jumlah_bersaudara} bersaudara` : '-';
+
+                    // Alamat
+                    const alamatLengkap = [
+                        biodata.alamat,
+                        biodata.dusun ? `Dusun ${biodata.dusun}` : '',
+                        biodata.rt ? `RT ${biodata.rt}` : '',
+                        biodata.rw ? `RW ${biodata.rw}` : ''
+                    ].filter(Boolean).join(', ');
+                    document.getElementById('val_alamat_lengkap').textContent = alamatLengkap || '-';
+                    document.getElementById('val_rt_rw').textContent = `${biodata.rt || '-'} / ${biodata.rw || '-'}`;
+                    document.getElementById('val_kelurahan').textContent = biodata.kelurahan || '-';
+                    document.getElementById('val_kecamatan').textContent = biodata.kecamatan || '-';
+                    document.getElementById('val_kota').textContent = biodata.kota_kabupaten || '-';
+                    document.getElementById('val_provinsi').textContent = biodata.provinsi || '-';
+
+                    // 3. Tab Data Akademik
+                    document.getElementById('val_sekolah_asal').textContent = biodata.sekolah_asal || '-';
+                    document.getElementById('val_jurusan').textContent = biodata.jurusan || '-';
+                    document.getElementById('val_tahun_lulus').textContent = biodata.tahun_lulus || '-';
+                    document.getElementById('val_nisn').textContent = biodata.nisn || '-';
+
+                    // Rapor
+                    let sem1Val = 0, sem2Val = 0, sem3Val = 0, sem4Val = 0, sem5Val = 0;
+                    if (rapor && rapor.length > 0) {
+                        rapor.forEach(r => {
+                            if (r.semester === 1) sem1Val = parseFloat(r.matematika) || 0;
+                            else if (r.semester === 2) sem2Val = parseFloat(r.matematika) || 0;
+                            else if (r.semester === 3) sem3Val = parseFloat(r.matematika) || 0;
+                            else if (r.semester === 4) sem4Val = parseFloat(r.matematika) || 0;
+                            else if (r.semester === 5) sem5Val = parseFloat(r.matematika) || 0;
+                        });
+                    }
+                    
+                    document.getElementById('val_sem1').textContent = sem1Val.toFixed(2);
+                    document.getElementById('val_sem2').textContent = sem2Val.toFixed(2);
+                    document.getElementById('val_sem3').textContent = sem3Val.toFixed(2);
+                    document.getElementById('val_sem4').textContent = sem4Val.toFixed(2);
+                    document.getElementById('val_sem5').textContent = sem5Val.toFixed(2);
+
+                    const sum = sem1Val + sem2Val + sem3Val + sem4Val + sem5Val;
+                    const avg = sum > 0 ? (sum / 5) : 0;
+                    document.getElementById('val_sem_avg').textContent = avg.toFixed(2);
+
+                    // 4. Tab Program Studi
+                    document.getElementById('val_prodi1').textContent = biodata.pilihan_prodi_1_nama || '-';
+                    document.getElementById('val_prodi2').textContent = biodata.pilihan_prodi_2_nama || '-';
+
+                    // 5. Select kelulusan
+                    document.getElementById('select_status_kelulusan').value = user.status_kelulusan || 'proses';
+                } else {
+                    alert('Gagal memuat detail pendaftar.');
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Terjadi kesalahan saat memuat data.');
+            }
+        }
+
+        // Save status kelulusan
+        document.getElementById('btn_save_status').addEventListener('click', async () => {
+            const statusVal = document.getElementById('select_status_kelulusan').value;
+            if (!currentUserId) return;
+
+            try {
+                const res = await fetchAPI(`/admin/pendaftar/${currentUserId}/status`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ status_kelulusan: statusVal })
+                });
+
+                if (res.success) {
+                    alert('Status kelulusan berhasil diperbarui!');
+                    updateStatusBadgeStyle(statusVal);
+                } else {
+                    alert('Gagal menyimpan status kelulusan: ' + (res.message || 'Terjadi kesalahan'));
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Gagal menyimpan status kelulusan.');
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchDetailPendaftar();
+        });
+    </script>
 </body>
 </html>

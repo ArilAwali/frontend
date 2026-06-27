@@ -428,7 +428,7 @@
         alert(response.message || 'Login berhasil!');
         
         // Pengalihan berdasarkan role pengguna
-        if (response.data.user.role === 'admin') {
+        if (response.data.user.role === 'staf administration') {
             window.location.href = '../admin/index.html';
         } else {
             window.location.href = 'portal/beranda.html';

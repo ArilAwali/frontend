@@ -647,16 +647,16 @@
               </div>
 
               <!-- Step 5: Verifikasi -->
-              <div class="step-item pending" id="step_verifikasi">
+              <!-- <div class="step-item pending" id="step_verifikasi">
                 <div class="step-circle"><svg viewBox="0 0 24 24">
                     <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
                     <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
                   </svg></div>
                 <div class="step-text">
-                  <h5>Verifikasi</h5>
+                  <h5>Verifikasi Dokumen</h5>
                   <p id="sub_verifikasi">Menunggu</p>
                 </div>
-              </div>
+              </div> -->
 
               <!-- Step 6: Pengumuman -->
               <div class="step-item pending" id="step_pengumuman">
@@ -843,10 +843,10 @@
 
         if (statusRes.success) {
           const user = statusRes.data;
-          
+
           // 1. Tampilkan nama user secara dinamis
           document.getElementById('user_greeting').textContent = `Halo, ${user.nama_lengkap} 👋`;
-          
+
           // 2. Render status kelengkapan data
           const isBiodataFilled = !!biodataRes.data;
           const isFormulirFilled = !!raporRes.data;
@@ -858,7 +858,7 @@
 
           // 3. Update Stepper Status secara dinamis
           let completedSteps = 1; // Akun selalu selesai
-          
+
           if (isBiodataFilled) {
             setStepStatus('step_biodata', 'completed', 'Selesai');
             completedSteps = 2;
@@ -917,14 +917,14 @@
           // Atur width dari stepper-line-active
           const lineActive = document.getElementById('stepper_line_active');
           if (lineActive) {
-            const widthPercentage = ((completedSteps - 1) / 5) * 100;
+            const widthPercentage = ((completedSteps - 1) / 6) * 100;
             lineActive.style.width = `${widthPercentage}%`;
           }
 
           // 4. Update Card Status Saat Ini
           const mainStatusTitle = document.getElementById('main_status_title');
           const mainStatusDesc = document.getElementById('main_status_desc');
-          
+
           if (user.status_kelulusan === 'lulus') {
             mainStatusTitle.textContent = 'Dinyatakan Lulus!';
             mainStatusDesc.textContent = 'Selamat! Anda dinyatakan lulus seleksi. Harap segera lakukan registrasi ulang dan pembayaran UKT.';
@@ -997,7 +997,7 @@
     function setStepStatus(stepId, status, label) {
       const step = document.getElementById(stepId);
       if (!step) return;
-      
+
       step.className = `step-item ${status}`; // completed, current, pending
       const subText = step.querySelector('.step-text p');
       if (subText) subText.textContent = label;
