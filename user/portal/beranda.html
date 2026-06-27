@@ -11,7 +11,6 @@
 ========================= */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap');
-
 :root {
   --primary-dark: #051630;
   --primary-green: #005640;
@@ -27,13 +26,11 @@
   --font-heading: "Plus Jakarta Sans", sans-serif;
   --font-body: "Work Sans", sans-serif;
 }
-
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
 }
-
 body {
   margin: 0;
   font-family: var(--font-body);
@@ -43,54 +40,25 @@ body {
   height: 100vh;
   overflow: hidden;
 }
-
 /* =========================
    SIDEBAR
 ========================= */
-.sidebar {
-  width: 260px;
-  background-color: var(--primary-dark);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  padding: 24px 20px;
-  flex-shrink: 0;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 40px;
-  padding: 0 12px;
-}
-
 .brand-icon {
   background: white;
   border-radius: 4px;
   padding: 6px;
   display: flex;
 }
-
 .brand-icon svg {
   width: 20px;
   height: 20px;
   fill: var(--primary-dark);
 }
-
-.brand-text h2 {
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 18px;
-  line-height: 1.2;
-}
-
 .brand-text span {
   font-size: 10px;
   color: #9ca3af;
   font-weight: 500;
 }
-
 .nav-section {
   font-size: 10px;
   font-weight: 700;
@@ -100,7 +68,6 @@ body {
   padding: 0 12px;
   text-transform: uppercase;
 }
-
 .nav-menu {
   list-style: none;
   padding: 0;
@@ -110,7 +77,6 @@ body {
   gap: 8px;
   flex: 1;
 }
-
 .nav-item {
   display: flex;
   align-items: center;
@@ -124,17 +90,14 @@ body {
   font-size: 14px;
   transition: all 0.2s;
 }
-
 .nav-item:hover {
   background-color: rgba(255, 255, 255, 0.05);
   color: white;
 }
-
 .nav-item.active {
   background-color: #1e3a8a; /* active blue */
   color: white;
 }
-
 .nav-item svg {
   width: 20px;
   height: 20px;
@@ -142,28 +105,6 @@ body {
   stroke-width: 2;
   fill: none;
 }
-
-.btn-logout {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px;
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 8px;
-  background: transparent;
-  color: white;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  font-family: var(--font-body);
-  margin-top: auto;
-}
-
-.btn-logout:hover {
-  background: rgba(255,255,255,0.05);
-}
-
 /* =========================
    MAIN CONTENT AREA
 ========================= */
@@ -173,7 +114,6 @@ body {
   flex-direction: column;
   overflow-y: auto;
 }
-
 /* TOP HEADER */
 .top-header {
   display: flex;
@@ -183,12 +123,10 @@ body {
   gap: 24px;
   background: transparent;
 }
-
 .header-icons {
   display: flex;
   gap: 16px;
 }
-
 .header-icons svg {
   width: 24px;
   height: 24px;
@@ -197,14 +135,12 @@ body {
   fill: none;
   cursor: pointer;
 }
-
 .user-profile {
   display: flex;
   align-items: center;
   gap: 12px;
   cursor: pointer;
 }
-
 .avatar {
   width: 40px;
   height: 40px;
@@ -217,12 +153,10 @@ body {
   font-weight: 700;
   font-size: 14px;
 }
-
 .user-info {
   display: flex;
   flex-direction: column;
 }
-
 .user-name {
   font-weight: 700;
   font-size: 14px;
@@ -231,12 +165,10 @@ body {
   align-items: center;
   gap: 4px;
 }
-
 .user-role {
   font-size: 12px;
   color: var(--text-muted);
 }
-
 /* DASHBOARD CONTENT */
 .dashboard-content {
   padding: 0 40px 40px 40px;
@@ -244,42 +176,35 @@ body {
   margin: 0 auto;
   width: 100%;
 }
-
 .greeting {
   margin-bottom: 32px;
 }
-
 .greeting h1 {
   font-family: var(--font-heading);
   font-size: 32px;
   font-weight: 800;
   margin-bottom: 8px;
 }
-
 .greeting p {
   color: var(--text-muted);
   font-size: 15px;
 }
-
 /* GRID LAYOUT */
 .grid-container {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 24px;
 }
-
 .col-left {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
-
 .col-right {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
-
 /* CARDS */
 .card {
   background: var(--bg-card);
@@ -288,7 +213,6 @@ body {
   padding: 24px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.02);
 }
-
 .card-title {
   font-family: var(--font-heading);
   font-weight: 700;
@@ -296,11 +220,9 @@ body {
   color: var(--primary-green);
   margin-bottom: 24px;
 }
-
 .card-title-dark {
   color: var(--text-main);
 }
-
 /* STEPPER (Status Pendaftaran) */
 .stepper-container {
   position: relative;
@@ -310,7 +232,6 @@ body {
   margin-bottom: 10px;
   padding: 0 20px;
 }
-
 .stepper-line {
   position: absolute;
   top: 20px;
@@ -320,7 +241,6 @@ body {
   background: var(--border-color);
   z-index: 1;
 }
-
 .stepper-line-active {
   position: absolute;
   top: 20px;
@@ -330,7 +250,6 @@ body {
   background: #22c55e;
   z-index: 2;
 }
-
 .step-item {
   position: relative;
   z-index: 3;
@@ -341,7 +260,6 @@ body {
   width: 80px;
   text-align: center;
 }
-
 .step-circle {
   width: 40px;
   height: 40px;
@@ -352,25 +270,21 @@ body {
   align-items: center;
   justify-content: center;
 }
-
 .step-item.completed .step-circle {
   background: #e6f4ea;
   border-color: #22c55e;
   color: #22c55e;
 }
-
 .step-item.current .step-circle {
   background: white;
   border-color: var(--text-main);
   color: var(--text-main);
 }
-
 .step-item.pending .step-circle {
   background: #f3f4f6;
   border-color: var(--border-color);
   color: #9ca3af;
 }
-
 .step-circle svg {
   width: 20px;
   height: 20px;
@@ -378,25 +292,21 @@ body {
   stroke-width: 2;
   fill: none;
 }
-
 .step-text h5 {
   font-weight: 700;
   font-size: 13px;
   margin-bottom: 4px;
 }
-
 .step-text p {
   font-size: 11px;
   color: var(--text-muted);
 }
-
 /* LENGKAPI DATA CARDS */
 .data-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
-
 .data-card {
   border: 1px solid var(--border-color);
   border-radius: 12px;
@@ -404,7 +314,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-
 .data-icon {
   width: 40px;
   height: 40px;
@@ -416,7 +325,6 @@ body {
   margin-bottom: 16px;
   color: #22c55e;
 }
-
 .data-icon svg {
   width: 20px;
   height: 20px;
@@ -424,13 +332,11 @@ body {
   stroke-width: 2;
   fill: none;
 }
-
 .data-card h4 {
   font-weight: 700;
   font-size: 15px;
   margin-bottom: 6px;
 }
-
 .data-card p {
   font-size: 12px;
   color: var(--text-muted);
@@ -438,7 +344,6 @@ body {
   margin-bottom: 16px;
   flex: 1;
 }
-
 .badge {
   display: inline-block;
   padding: 4px 8px;
@@ -448,12 +353,10 @@ body {
   margin-bottom: 16px;
   width: fit-content;
 }
-
 .badge-success {
   background: var(--success-bg);
   color: var(--success-text);
 }
-
 .btn-outline {
   width: 100%;
   padding: 10px;
@@ -465,18 +368,15 @@ body {
   cursor: pointer;
   color: var(--text-main);
 }
-
 .btn-outline:hover {
   background: #f9fafb;
 }
-
 /* AKSES MODUL */
 .modul-card {
   display: flex;
   gap: 24px;
   align-items: center;
 }
-
 .modul-icon {
   width: 80px;
   height: 80px;
@@ -487,7 +387,6 @@ body {
   justify-content: center;
   flex-shrink: 0;
 }
-
 .modul-icon svg {
   width: 40px;
   height: 40px;
@@ -495,21 +394,18 @@ body {
   stroke-width: 2;
   fill: none;
 }
-
 .modul-info h4 {
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 16px;
   margin-bottom: 8px;
 }
-
 .modul-info p {
   font-size: 13px;
   color: var(--text-muted);
   line-height: 1.5;
   margin-bottom: 16px;
 }
-
 .btn-locked {
   display: inline-flex;
   align-items: center;
@@ -523,12 +419,10 @@ body {
   color: #9ca3af;
   cursor: not-allowed;
 }
-
 .btn-locked svg {
   width: 16px;
   height: 16px;
 }
-
 /* RIGHT COLUMN WIDGETS */
 /* Status Saat Ini */
 .status-box {
@@ -540,7 +434,6 @@ body {
   gap: 16px;
   margin-bottom: 16px;
 }
-
 .status-icon {
   width: 32px;
   height: 32px;
@@ -552,20 +445,17 @@ body {
   color: #ea580c;
   flex-shrink: 0;
 }
-
 .status-info h5 {
   font-weight: 700;
   font-size: 14px;
   color: #ea580c;
   margin-bottom: 4px;
 }
-
 .status-info p {
   font-size: 12px;
   color: var(--text-muted);
   line-height: 1.4;
 }
-
 /* Pengumuman */
 .header-with-link {
   display: flex;
@@ -573,20 +463,17 @@ body {
   align-items: center;
   margin-bottom: 20px;
 }
-
 .header-with-link a {
   font-size: 12px;
   font-weight: 600;
   color: var(--primary-green);
   text-decoration: none;
 }
-
 .list-pengumuman {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
-
 .pengumuman-item {
   display: flex;
   gap: 16px;
@@ -595,7 +482,6 @@ body {
   border-radius: 12px;
   align-items: center;
 }
-
 .p-icon {
   width: 32px;
   height: 32px;
@@ -606,19 +492,16 @@ body {
   justify-content: center;
   color: var(--text-muted);
 }
-
 .p-info h5 {
   font-weight: 600;
   font-size: 13px;
   margin-bottom: 4px;
   color: var(--text-main);
 }
-
 .p-info span {
   font-size: 11px;
   color: var(--text-muted);
 }
-
 /* Bantuan */
 .bantuan-text {
   font-size: 13px;
@@ -626,7 +509,6 @@ body {
   line-height: 1.5;
   margin-bottom: 16px;
 }
-
 /* FOOTER */
 .dash-footer {
   display: flex;
@@ -638,18 +520,15 @@ body {
   color: var(--text-muted);
   margin-top: auto;
 }
-
 .footer-links {
   display: flex;
   gap: 16px;
 }
-
 .footer-links a {
   color: var(--text-muted);
   text-decoration: none;
   font-weight: 500;
 }
-
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   .grid-container {
@@ -660,6 +539,7 @@ body {
   }
 }
 </style>
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
 </head>
 
 <body>

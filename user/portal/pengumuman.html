@@ -18,37 +18,19 @@
             --light-green: #e6f4ed;
             --accent-blue: #0f4c81;
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', sans-serif;
         }
-
         body {
             background-color: var(--main-bg);
             color: var(--text-dark);
             display: flex;
             min-height: 100vh;
         }
-
-        /* Sidebar Styling matches portal standard */
-        .sidebar {
-            width: 260px;
-            background-color: var(--sidebar-bg);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            padding: 24px 20px;
-            flex-shrink: 0;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            z-index: 100;
-        }
         .sidebar::-webkit-scrollbar { display: none; }
-
         .sidebar a {
             color: #94a3b8;
             text-decoration: none;
@@ -71,7 +53,6 @@
             color: white;
             font-weight: 600;
         }
-
         /* Main Content Layout */
         .main-wrapper {
             flex: 1;
@@ -80,7 +61,6 @@
             flex-direction: column;
             min-height: 100vh;
         }
-
         /* Topbar Header */
         .topbar {
             height: 64px;
@@ -155,7 +135,6 @@
             font-size: 11px;
             color: var(--text-muted);
         }
-
         /* Content Body */
         .content-body {
             padding: 32px 40px;
@@ -172,7 +151,6 @@
             font-size: 14px;
             margin-bottom: 28px;
         }
-
         /* Search & Filter Bar */
         .filter-row {
             display: flex;
@@ -204,7 +182,6 @@
             outline: none;
         }
         .search-box input::placeholder { color: #94a3b8; }
-
         .filter-tabs {
             display: flex;
             gap: 8px;
@@ -225,20 +202,17 @@
             color: white;
             border-color: #0d4a36;
         }
-
         /* Grid Layout */
         .announcement-grid {
             display: grid;
             grid-template-columns: 1fr 320px;
             gap: 24px;
         }
-
         .left-column {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
-
         /* Featured Card */
         .card-featured {
             background: linear-gradient(135deg, #0f2b5c 0%, #1e3a8a 100%);
@@ -299,7 +273,6 @@
             text-decoration: none;
         }
         .btn-read-more:hover { text-decoration: underline; }
-
         /* Standard Cards */
         .card-standard {
             background: white;
@@ -369,7 +342,6 @@
             color: var(--text-dark);
             text-decoration: none;
         }
-
         /* Right Column Widgets */
         .right-column {
             display: flex;
@@ -397,7 +369,6 @@
             text-decoration: none;
             font-weight: 600;
         }
-
         .cat-list {
             display: flex;
             flex-direction: column;
@@ -428,7 +399,6 @@
             border-radius: 12px;
             font-weight: 600;
         }
-
         .agenda-list {
             display: flex;
             flex-direction: column;
@@ -453,7 +423,6 @@
         .date-box.gray { background: var(--main-bg); color: var(--text-dark); border: 1px solid var(--border-color); }
         .date-month { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
         .date-day { font-size: 16px; font-weight: 800; line-height: 1; margin-top: 2px;}
-
         .agenda-info h4 {
             font-size: 13px;
             font-weight: 700;
@@ -464,7 +433,6 @@
             font-size: 11px;
             color: var(--text-muted);
         }
-
         /* Footer */
         .footer {
             text-align: center;
@@ -476,6 +444,7 @@
             background: white;
         }
     </style>
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
 </head>
 <body>
 

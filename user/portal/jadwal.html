@@ -10,21 +10,7 @@
         /* Shared Styles */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { display: flex; background-color: #FAFAFA; color: #333; min-height: 100vh; }
-        
-        /* Sidebar */
-        .sidebar { width: 260px; background-color: #0B1727; color: #8A99AF; display: flex; flex-direction: column; padding: 24px 0; position: fixed; height: 100vh; overflow-y: auto; }
-        .brand { padding: 0 24px; margin-bottom: 30px; display: flex; align-items: center; gap: 12px; color: #FFFFFF; }
-        .brand i { font-size: 24px; }
-        .brand-text h2 { font-size: 18px; font-weight: 600; }
-        .brand-text p { font-size: 11px; color: #8A99AF; margin-top: 2px; }
-        .menu-section { margin-bottom: 20px; }
-        .menu-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; padding: 0 24px; margin-bottom: 10px; font-weight: 600; color: #5C6B82; }
-        .menu-item { display: flex; align-items: center; padding: 12px 24px; color: #8A99AF; text-decoration: none; font-size: 14px; font-weight: 500; gap: 12px; transition: all 0.2s; }
-        .menu-item:hover { color: #FFFFFF; background-color: rgba(255, 255, 255, 0.05); }
-        .menu-item.active { color: #FFFFFF; background-color: #0A369D; border-left: 4px solid #3B82F6; padding-left: 20px; }
-        .logout-btn { margin-top: auto; margin-left: 24px; margin-right: 24px; padding: 12px; border: 1px solid #2A3B54; border-radius: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; color: #8A99AF; text-decoration: none; font-size: 14px; transition: 0.2s; }
         .logout-btn:hover { color: #fff; background-color: rgba(255,255,255,0.05); }
-
         /* Main Content */
         .main-content { margin-left: 260px; flex: 1; padding: 0 40px 40px 40px; display: flex; flex-direction: column; }
         .topbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #EAEAEA; margin-bottom: 30px; }
@@ -36,39 +22,34 @@
         .profile-info { display: flex; flex-direction: column; }
         .profile-info .name { font-size: 14px; font-weight: 600; color: #111; }
         .profile-info .role { font-size: 12px; color: #777; }
-        
         /* Page Header */
         .page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
         .page-title h1 { font-size: 24px; font-weight: 700; color: #111827; margin-bottom: 6px; }
         .page-title p { font-size: 14px; color: #6B7280; }
         .btn-download { background-color: #6B82A4; color: white; border: none; padding: 10px 16px; border-radius: 6px; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 8px; cursor: pointer; }
-
         /* Schedule Calendar Area */
         .schedule-wrapper { background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 12px; overflow: hidden; }
         .schedule-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
         .schedule-table th { background: #FFFFFF; padding: 16px; font-size: 13px; font-weight: 600; color: #111827; border-bottom: 1px solid #E5E7EB; border-right: 1px solid #E5E7EB; text-align: center; }
         .schedule-table th:first-child { width: 80px; color: #6B7280; font-size: 11px; text-transform: uppercase; }
         .schedule-table th:last-child { border-right: none; }
-        
         .schedule-table td { height: 80px; /* 1 Jam = 80px */ border-bottom: 1px solid #E5E7EB; border-right: 1px dashed #E5E7EB; position: relative; padding: 0; }
         .schedule-table td:first-child { border-right: 1px solid #E5E7EB; text-align: center; font-size: 13px; font-weight: 500; color: #6B7280; position: relative; z-index: 10; background: #fff; }
         .schedule-table td:last-child { border-right: none; }
-
         /* Course Cards (Absolute Pos) */
         .course-card { position: absolute; left: 8px; right: 8px; border-radius: 8px; padding: 12px; z-index: 5; display: flex; flex-direction: column; gap: 6px; border: 1px solid rgba(0,0,0,0.05); }
         .cc-title { font-size: 12px; font-weight: 600; color: #111827; line-height: 1.3; }
         .cc-detail { font-size: 11px; color: #4B5563; display: flex; align-items: center; gap: 4px; }
-        
         /* Specific Card Colors */
         .bg-green { background-color: #DCFCE7; }
         .bg-blue { background-color: #E0F2FE; }
         .bg-gray { background-color: #F3F4F6; }
-
         /* Footer */
         .site-footer { display: flex; justify-content: space-between; padding-top: 30px; font-size: 12px; color: #9CA3AF; margin-top: auto; }
         .footer-links { display: flex; gap: 16px; }
         .footer-links a { color: #6B7280; text-decoration: none; }
     </style>
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
 </head>
 <body>
 
