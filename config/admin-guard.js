@@ -1,4 +1,10 @@
 (function() {
+    // Redirect if accessing /admin without trailing slash to ensure correct relative path resolving
+    if (window.location.pathname.endsWith('/admin')) {
+        window.location.pathname = window.location.pathname + '/';
+        return;
+    }
+
     const token = localStorage.getItem('token');
     const userStr = localStorage.getItem('user');
     let isAdmin = false;

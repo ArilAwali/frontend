@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <script src="../config/admin-guard.js"></script>
     <script src="../config/api.js"></script>
@@ -10,13 +11,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
     <header class="top-header">
         <div class="logo-area">
             <h1>Universitas Crypto</h1>
         </div>
         <div class="user-area">
-            <img src="https://ui-avatars.com/api/?name=Admin&background=1a2530&color=fff" alt="User Avatar" class="avatar">
+            <img src="https://ui-avatars.com/api/?name=Admin&background=1a2530&color=fff" alt="User Avatar"
+                class="avatar">
         </div>
     </header>
 
@@ -40,6 +43,10 @@
                 <a href="dokumen.html" class="nav-item">
                     <i class="fa-regular fa-file-lines"></i>
                     <span>Dokumen</span>
+                </a>
+                <a href="registrasi_ulang.html" class="nav-item">
+                    <i class="fa-solid fa-address-card"></i>
+                    <span>Registrasi Ulang</span>
                 </a>
                 <a href="prodi.html" class="nav-item">
                     <i class="fa-solid fa-users-gear"></i>
@@ -129,7 +136,8 @@
                     </div>
                     <div class="donut-chart-container">
                         <!-- Pure CSS Donut Chart representation -->
-                        <div class="donut-chart" id="donut_chart_bg" style="background: conic-gradient(var(--primary-color) 0%, #e2e8f0 0%);">
+                        <div class="donut-chart" id="donut_chart_bg"
+                            style="background: conic-gradient(var(--primary-color) 0%, #e2e8f0 0%);">
                             <div class="donut-hole">
                                 <span class="donut-value" id="donut_total">0</span>
                                 <span class="donut-label">Total</span>
@@ -161,7 +169,7 @@
             <div class="bottom-grid">
                 <div class="card fav-prodi-card">
                     <h3>Program Studi Terfavorit</h3>
-                    
+
                     <div id="fav_prodi_list">
                         <!-- Dynamically populated -->
                     </div>
@@ -313,4 +321,5 @@
         window.addEventListener('DOMContentLoaded', loadDashboardStats);
     </script>
 </body>
+
 </html>

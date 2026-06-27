@@ -14,27 +14,45 @@
         let portalPrefix = isPortal ? '' : 'portal/';
         let rootPrefix = isPortal ? '../' : '';
 
-        // 3. Ambil status registrasi ulang dari localStorage
+        // 3. Ambil status registrasi ulang dan keuangan dari localStorage
         let isRegistered = localStorage.getItem('isRegistered') === 'true';
+        let isUktLunas = localStorage.getItem('isUktLunas') === 'true';
 
-        // 4. Sinkronisasi status kelulusan secara asinkron dari API
+        // 4. Sinkronisasi status kelulusan dan UKT secara asinkron dari API
         if (typeof fetchAPI === 'function') {
             const token = localStorage.getItem('token');
             if (token) {
-                fetchAPI('/portal/status')
-                    .then(response => {
-                        if (response.success) {
-                            const isLulus = response.data.status_kelulusan === 'lulus';
-                            if (isRegistered !== isLulus) {
-                                localStorage.setItem('isRegistered', isLulus ? 'true' : 'false');
-                                // Re-render sidebar jika status berubah
-                                initSidebar();
+                Promise.all([
+                    fetchAPI('/portal/status'),
+                    fetchAPI('/akademik/keuangan').catch(err => {
+                        console.warn('Gagal mengambil keuangan untuk sidebar:', err);
+                        return { success: false, data: [] };
+                    })
+                ]).then(([statusResponse, keuanganResponse]) => {
+                    if (statusResponse.success) {
+                        const isLulus = statusResponse.data.status_kelulusan === 'lulus' || statusResponse.data.status_kelulusan === 'aktif';
+                        
+                        let isLunas = false;
+                        if (keuanganResponse.success && Array.isArray(keuanganResponse.data)) {
+                            const uktSmt1 = keuanganResponse.data.find(k => k.semester === 1);
+                            if (uktSmt1 && uktSmt1.status === 'lunas') {
+                                isLunas = true;
                             }
                         }
-                    })
-                    .catch(err => {
-                        console.warn('Gagal memverifikasi status kelulusan untuk sidebar:', err);
-                    });
+
+                        const oldRegistered = localStorage.getItem('isRegistered') === 'true';
+                        const oldUktLunas = localStorage.getItem('isUktLunas') === 'true';
+
+                        if (oldRegistered !== isLulus || oldUktLunas !== isLunas) {
+                            localStorage.setItem('isRegistered', isLulus ? 'true' : 'false');
+                            localStorage.setItem('isUktLunas', isLunas ? 'true' : 'false');
+                            // Re-render sidebar jika status berubah
+                            initSidebar();
+                        }
+                    }
+                }).catch(err => {
+                    console.warn('Gagal memverifikasi status kelulusan/keuangan untuk sidebar:', err);
+                });
             }
         }
 
@@ -52,9 +70,9 @@
             `;
         }
 
-        // 6. Bangun menu tambahan jika mahasiswa sudah dinyatakan LULUS
+        // 6. Bangun menu tambahan jika mahasiswa sudah dinyatakan LULUS dan UKT Lunas
         let extendedMenuHtml = '';
-        if (isRegistered) {
+        if (isRegistered && isUktLunas) {
             extendedMenuHtml = `
             <div class="nav-section menu-section">
                 <div class="menu-title">AKADEMIK</div>

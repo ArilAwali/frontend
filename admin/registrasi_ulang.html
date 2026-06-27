@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <script src="../config/admin-guard.js"></script>
     <script src="../config/api.js"></script>
@@ -11,27 +12,105 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        .badge-status { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; display: inline-block; }
-        .badge-pending { background-color: #FEF3C7; color: #D97706; }
-        .badge-verified { background-color: #DCFCE7; color: #16A34A; }
-        .badge-rejected { background-color: #FEE2E2; color: #DC2626; }
-        .btn-sm-action { padding: 6px 12px; border-radius: 6px; border: none; font-size: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: 0.2s; text-decoration: none; }
-        .btn-verify { background-color: #10B981; color: white; }
-        .btn-verify:hover { background-color: #059669; }
-        .btn-detail { background-color: #2563EB; color: white; }
-        .btn-detail:hover { background-color: #1D4ED8; }
-        .table-custom { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        .table-custom th { text-align: left; padding: 12px 16px; background: #F8FAFC; font-size: 12px; color: #64748B; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid #E2E8F0; }
-        .table-custom td { padding: 14px 16px; border-bottom: 1px solid #E2E8F0; font-size: 13px; color: #334155; vertical-align: middle; }
+        .badge-status {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .badge-pending {
+            background-color: #FEF3C7;
+            color: #D97706;
+        }
+
+        .badge-verified {
+            background-color: #DCFCE7;
+            color: #16A34A;
+        }
+
+        .badge-rejected {
+            background-color: #FEE2E2;
+            color: #DC2626;
+        }
+
+        .btn-sm-action {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: none;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-verify {
+            background-color: #10B981;
+            color: white;
+        }
+
+        .btn-verify:hover {
+            background-color: #059669;
+        }
+
+        .btn-reject {
+            background-color: #EF4444;
+            color: white;
+        }
+
+        .btn-reject:hover {
+            background-color: #DC2626;
+        }
+
+        .btn-detail {
+            background-color: #2563EB;
+            color: white;
+        }
+
+        .btn-detail:hover {
+            background-color: #1D4ED8;
+        }
+
+        .table-custom {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .table-custom th {
+            text-align: left;
+            padding: 12px 16px;
+            background: #F8FAFC;
+            font-size: 12px;
+            color: #64748B;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .table-custom td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #E2E8F0;
+            font-size: 13px;
+            color: #334155;
+            vertical-align: middle;
+        }
     </style>
 </head>
+
 <body>
     <header class="top-header">
         <div class="logo-area">
             <h1>Universitas Crypto</h1>
         </div>
         <div class="user-area">
-            <img src="https://ui-avatars.com/api/?name=Admin&background=1a2530&color=fff" alt="User Avatar" class="avatar">
+            <img src="https://ui-avatars.com/api/?name=Admin&background=1a2530&color=fff" alt="User Avatar"
+                class="avatar">
         </div>
     </header>
 
@@ -103,7 +182,7 @@
                     </div>
                     <div class="stat-info">
                         <div class="stat-title">Total Ajuan</div>
-                        <div class="stat-value-sm">1,240</div>
+                        <div class="stat-value-sm" id="totalAjuan">0</div>
                     </div>
                 </div>
                 <div class="stat-card row-card">
@@ -112,7 +191,7 @@
                     </div>
                     <div class="stat-info">
                         <div class="stat-title">Menunggu Verifikasi</div>
-                        <div class="stat-value-sm">85</div>
+                        <div class="stat-value-sm" id="menungguVerifikasi">0</div>
                     </div>
                 </div>
                 <div class="stat-card row-card">
@@ -121,7 +200,7 @@
                     </div>
                     <div class="stat-info">
                         <div class="stat-title">Terverifikasi (Lunas)</div>
-                        <div class="stat-value-sm">1,120</div>
+                        <div class="stat-value-sm" id="terverifikasiLunas">0</div>
                     </div>
                 </div>
             </div>
@@ -129,7 +208,8 @@
             <div class="card" style="background: white; padding: 24px; border-radius: 12px; margin-top: 24px;">
                 <div class="filter-bar" style="display: flex; gap: 16px; margin-bottom: 20px;">
                     <div class="search-box" style="flex: 1; position: relative;">
-                        <input type="text" placeholder="Cari nama mahasiswa, no pendaftaran..." style="width: 100%; padding: 10px 14px; border: 1px solid #E2E8F0; border-radius: 8px;">
+                        <input type="text" id="searchInput" placeholder="Cari nama mahasiswa, no pendaftaran..."
+                            style="width: 100%; padding: 10px 14px; border: 1px solid #E2E8F0; border-radius: 8px;">
                     </div>
                 </div>
 
@@ -145,44 +225,161 @@
                             <th>Aksi</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td><b>UC202600123</b></td>
-                            <td>Muhammad Dhafin</td>
-                            <td>Teknik Informatika</td>
-                            <td><span class="badge-status badge-pending">Sedang Diproses</span></td>
-                            <td><a href="../user/pembayaran_ukt.html" target="_blank" style="color: #2563EB; font-weight: 600;"><i class="fa-solid fa-paperclip"></i> Bukti_UKT.jpg</a></td>
-                            <td>19 Juli 2026</td>
-                            <td>
-                                <button class="btn-sm-action btn-verify" onclick="alert('Registrasi Ulang Muhammad Dhafin Berhasil Diverifikasi!')"><i class="fa-solid fa-check"></i> Verifikasi</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>UC202600124</b></td>
-                            <td>Siti Aminah</td>
-                            <td>Sistem Informasi</td>
-                            <td><span class="badge-status badge-verified">Lunas</span></td>
-                            <td><a href="#" style="color: #2563EB; font-weight: 600;"><i class="fa-solid fa-paperclip"></i> Bukti_SA.pdf</a></td>
-                            <td>18 Juli 2026</td>
-                            <td>
-                                <button class="btn-sm-action btn-detail" onclick="alert('Membuka detail pendaftar...')"><i class="fa-regular fa-eye"></i> Detail</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>UC202600125</b></td>
-                            <td>Budi Santoso</td>
-                            <td>Teknik Elektro</td>
-                            <td><span class="badge-status badge-verified">Lunas</span></td>
-                            <td><a href="#" style="color: #2563EB; font-weight: 600;"><i class="fa-solid fa-paperclip"></i> Transfer_Budi.png</a></td>
-                            <td>18 Juli 2026</td>
-                            <td>
-                                <button class="btn-sm-action btn-detail" onclick="alert('Membuka detail pendaftar...')"><i class="fa-regular fa-eye"></i> Detail</button>
-                            </td>
-                        </tr>
+                    <tbody id="keuanganTableBody">
+                        <!-- Konten dinamis akan dimuat oleh JS -->
                     </tbody>
                 </table>
             </div>
         </main>
     </div>
+
+    <!-- Preview Modal -->
+    <div id="previewModal" class="modal-overlay"
+        style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
+        <div
+            style="background-color: #fefefe; padding: 20px; border: 1px solid #888; width: 80%; max-width: 500px; border-radius: 12px; position: relative; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #E2E8F0; padding-bottom: 10px;">
+                <h3 style="margin: 0; color: #1E293B; font-size: 16px;">Preview Bukti Pembayaran</h3>
+                <span onclick="closePreviewModal()"
+                    style="color: #aaa; font-size: 24px; font-weight: bold; cursor: pointer; line-height: 1;">&times;</span>
+            </div>
+            <div style="text-align: center;">
+                <img id="previewImg" src="assets/images/receipt_sample.png" alt="Bukti Pembayaran"
+                    style="max-width: 100%; max-height: 450px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            </div>
+            <div style="margin-top: 15px; text-align: right;">
+                <button onclick="closePreviewModal()"
+                    style="padding: 8px 16px; background: #64748B; color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allAjuan = [];
+
+        async function loadAjuanKeuangan() {
+            try {
+                const response = await fetchAPI('/admin/keuangan');
+                if (response.success) {
+                    allAjuan = response.data;
+                    renderTable();
+                    updateStats();
+                } else {
+                    alert('Gagal memuat ajuan keuangan: ' + response.message);
+                }
+            } catch (error) {
+                console.error('Error load ajuan:', error);
+            }
+        }
+
+        function renderTable(filterText = '') {
+            const tbody = document.getElementById('keuanganTableBody');
+            tbody.innerHTML = '';
+
+            const filtered = allAjuan.filter(a => {
+                const nama = a.nama_lengkap.toLowerCase();
+                const nik = a.nik ? a.nik.toLowerCase() : '';
+                const query = filterText.toLowerCase();
+                return nama.includes(query) || nik.includes(query);
+            });
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #64748B;">Tidak ada ajuan registrasi ulang.</td></tr>`;
+                return;
+            }
+
+            filtered.forEach(a => {
+                let statusBadge = '';
+                let actionBtn = '';
+
+                if (a.status_keuangan === 'lunas') {
+                    statusBadge = '<span class="badge-status badge-verified">Lunas</span>';
+                    actionBtn = '<span style="color: #10B981; font-weight: 600;"><i class="fa-solid fa-circle-check"></i> Terverifikasi</span>';
+                } else {
+                    statusBadge = '<span class="badge-status badge-pending">Menunggu Verifikasi</span>';
+                    actionBtn = `
+                        <button class="btn-sm-action btn-verify" onclick="verifikasiUkt('${a.keuangan_id}', 'lunas', '${a.nama_lengkap}')" style="margin-right: 8px;">
+                            <i class="fa-solid fa-check"></i> Verifikasi
+                        </button>
+                        <button class="btn-sm-action btn-reject" onclick="verifikasiUkt('${a.keuangan_id}', 'belum_bayar', '${a.nama_lengkap}')">
+                            <i class="fa-solid fa-xmark"></i> Tolak
+                        </button>
+                    `;
+                }
+
+                const dateStr = a.tanggal_bayar ? new Date(a.tanggal_bayar).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : '-';
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><b>UC${a.nik.substring(0, 8)}</b></td>
+                    <td>${a.nama_lengkap}</td>
+                    <td>${a.prodi_nama || '-'}</td>
+                    <td>${statusBadge}</td>
+                    <td><a href="#" onclick="openPreviewModal()" style="color: #2563EB; font-weight: 600;"><i class="fa-solid fa-paperclip"></i> Bukti_Bayar.jpg</a></td>
+                    <td>${dateStr}</td>
+                    <td>${actionBtn}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function updateStats() {
+            const total = allAjuan.length;
+            const pending = allAjuan.filter(a => a.status_keuangan === 'menunggu_verifikasi').length;
+            const lunas = allAjuan.filter(a => a.status_keuangan === 'lunas').length;
+
+            document.getElementById('totalAjuan').textContent = total;
+            document.getElementById('menungguVerifikasi').textContent = pending;
+            document.getElementById('terverifikasiLunas').textContent = lunas;
+        }
+
+        async function verifikasiUkt(keuanganId, status, nama) {
+            const confirmMsg = status === 'lunas'
+                ? `Apakah Anda yakin ingin memverifikasi pembayaran UKT mahasiswa '${nama}'? NIM resmi mahasiswa akan digenerate otomatis.`
+                : `Apakah Anda yakin ingin menolak pembayaran mahasiswa '${nama}'?`;
+
+            if (!confirm(confirmMsg)) return;
+
+            try {
+                const response = await fetchAPI(`/admin/keuangan/${keuanganId}/verifikasi`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ status })
+                });
+                if (response.success) {
+                    if (status === 'lunas') {
+                        alert(`Pembayaran UKT '${nama}' berhasil diverifikasi! Mahasiswa sekarang sudah aktif.`);
+                    } else {
+                        alert(`Pembayaran UKT '${nama}' berhasil ditolak.`);
+                    }
+                    loadAjuanKeuangan();
+                } else {
+                    alert('Gagal memproses verifikasi: ' + response.message);
+                }
+            } catch (error) {
+                alert('Gagal memproses verifikasi ajuan keuangan: ' + error.message);
+            }
+        }
+
+        function openPreviewModal() {
+            document.getElementById('previewModal').style.display = 'flex';
+        }
+
+        function closePreviewModal() {
+            document.getElementById('previewModal').style.display = 'none';
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadAjuanKeuangan();
+
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    renderTable(e.target.value);
+                });
+            }
+        });
+    </script>
 </body>
+
 </html>
