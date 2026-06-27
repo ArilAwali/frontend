@@ -6,7 +6,7 @@
         // Determine current page filename
         let path = window.location.pathname;
         let page = path.split('/').pop();
-        if (!page || page === '') page = 'home desktop.html';
+        if (!page || page === '') page = 'home-desktop.html';
         page = decodeURIComponent(page);
 
         footerContainer.innerHTML = `

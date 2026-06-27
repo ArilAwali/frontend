@@ -6,22 +6,23 @@
         // Determine current page filename
         let path = window.location.pathname;
         let page = path.split('/').pop();
-        if (!page || page === '') page = 'home desktop.html';
+        if (!page || page === '') page = 'home-desktop.html';
         page = decodeURIComponent(page);
 
-        // Inject Styles
-
+        // Detect if page is inside the portal folder
+        let isPortal = path.includes('/portal/');
+        let rootPrefix = isPortal ? '../' : '';
 
         // Generate Buttons based on page
         let authButtonsHtml = '';
         if (page === 'login.html') {
-            authButtonsHtml = '<a href="daftar.html" class="navbar-btn btn-filled" id="btn-register">Daftar</a>';
+            authButtonsHtml = `<a href="${rootPrefix}daftar.html" class="navbar-btn btn-filled" id="btn-register">Daftar</a>`;
         } else if (page === 'daftar.html') {
-            authButtonsHtml = '<a href="login.html" class="navbar-btn btn-outline" id="btn-login">Masuk</a>';
+            authButtonsHtml = `<a href="${rootPrefix}login.html" class="navbar-btn btn-outline" id="btn-login">Masuk</a>`;
         } else {
             authButtonsHtml = `
-                <a href="login.html" class="navbar-btn btn-outline" id="btn-login">Masuk</a>
-                <a href="daftar.html" class="navbar-btn btn-filled" id="btn-register">Daftar</a>
+                <a href="${rootPrefix}login.html" class="navbar-btn btn-outline" id="btn-login">Masuk</a>
+                <a href="${rootPrefix}daftar.html" class="navbar-btn btn-filled" id="btn-register">Daftar</a>
             `;
         }
 
@@ -29,15 +30,15 @@
         navbarContainer.className = 'crypto-navbar';
         navbarContainer.innerHTML = `
             <div class="navbar-container">
-                <a href="home desktop.html" class="navbar-logo">
+                <a href="${rootPrefix}home-desktop.html" class="navbar-logo">
                     <span class="logo-text">Universitas Crypto</span>
                 </a>
                 
                 <div class="navbar-menu-wrapper" id="navbarMenu">
                     <nav class="navbar-links">
-                        <a href="home desktop.html" class="nav-item-link \${page === 'home desktop.html' ? 'active' : ''}" id="nav-home">Beranda</a>
-                        <a href="informasi.html" class="nav-item-link \${page === 'informasi.html' ? 'active' : ''}" id="nav-informasi">Informasi</a>
-                        <a href="bantuan.html" class="nav-item-link \${page === 'bantuan.html' ? 'active' : ''}" id="nav-bantuan">Bantuan</a>
+                        <a href="${rootPrefix}home-desktop.html" class="nav-item-link ${page === 'home-desktop.html' ? 'active' : ''}" id="nav-home">Beranda</a>
+                        <a href="${rootPrefix}informasi.html" class="nav-item-link ${page === 'informasi.html' ? 'active' : ''}" id="nav-informasi">Informasi</a>
+                        <a href="${rootPrefix}bantuan.html" class="nav-item-link ${page === 'bantuan.html' ? 'active' : ''}" id="nav-bantuan">Bantuan</a>
                     </nav>
                     
                     <div class="navbar-auth">

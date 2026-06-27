@@ -6,8 +6,13 @@
         // Determine current page filename
         let path = window.location.pathname;
         let page = path.split('/').pop();
-        if (!page || page === '') page = 'branda pmb.html';
+        if (!page || page === '') page = 'beranda.html';
         page = decodeURIComponent(page);
+
+        // Detect if page is inside the portal folder
+        let isPortal = path.includes('/portal/');
+        let portalPrefix = isPortal ? '' : 'portal/';
+        let rootPrefix = isPortal ? '../' : '';
 
         // Standardized Sidebar Content
         const html = `
@@ -21,42 +26,42 @@
             <div class="subtitle" style="font-size: 11px; opacity: 0.8; margin-top: 4px;">Portal Mahasiswa</div>
         </div>
 
-        <a href="branda pmb.html" class="nav-link nav-item menu-item ${page === 'branda pmb.html' ? 'active' : ''}">
+        <a href="${portalPrefix}beranda.html" class="nav-link nav-item menu-item ${page === 'beranda.html' ? 'active' : ''}">
             <i class="fas fa-home fa-solid fa-house"></i> <span>Beranda</span>
         </a>
 
         <div class="nav-section menu-section" style="margin-top: 15px;">
             <div class="menu-title" style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; margin-bottom: 8px;">PMB (PENDAFTARAN)</div>
-            <a href="biodaata.html" class="nav-link nav-item menu-item ${page === 'biodaata.html' ? 'active' : ''}"><i class="fas fa-user fa-regular fa-user"></i> <span>Biodata</span></a>
-            <a href="formulir pendaftaran.html" class="nav-link nav-item menu-item ${page === 'formulir pendaftaran.html' ? 'active' : ''}"><i class="fas fa-file-alt fa-solid fa-bars-staggered"></i> <span>Formulir Pendaftaran</span></a>
-            <a href="dokumen step 1.html" class="nav-link nav-item menu-item ${page === 'dokumen step 1.html' ? 'active' : ''}"><i class="fas fa-folder fa-regular fa-file-lines"></i> <span>Dokumen</span></a>
-            <a href="a_status.html" class="nav-link nav-item menu-item ${page === 'a_status.html' ? 'active' : ''}"><i class="fas fa-check-circle fa-regular fa-circle-check"></i> <span>Status Pendaftaran</span></a>
-            <a href="registrasi_ulang.html" class="nav-link nav-item menu-item ${(page === 'registrasi_ulang.html' || page === 'pembayaran_ukt.html') ? 'active' : ''}"><i class="fas fa-id-card fa-regular fa-id-card"></i> <span>Registrasi Ulang</span></a>
+            <a href="${portalPrefix}biodata.html" class="nav-link nav-item menu-item ${page === 'biodata.html' ? 'active' : ''}"><i class="fas fa-user fa-regular fa-user"></i> <span>Biodata</span></a>
+            <a href="${portalPrefix}formulir.html" class="nav-link nav-item menu-item ${page === 'formulir.html' ? 'active' : ''}"><i class="fas fa-file-alt fa-solid fa-bars-staggered"></i> <span>Formulir Pendaftaran</span></a>
+            <a href="${portalPrefix}dokumen.html" class="nav-link nav-item menu-item ${page === 'dokumen.html' ? 'active' : ''}"><i class="fas fa-folder fa-regular fa-file-lines"></i> <span>Dokumen</span></a>
+            <a href="${portalPrefix}status-pendaftaran.html" class="nav-link nav-item menu-item ${page === 'status-pendaftaran.html' ? 'active' : ''}"><i class="fas fa-check-circle fa-regular fa-circle-check"></i> <span>Status Pendaftaran</span></a>
+            <a href="${portalPrefix}registrasi-ulang.html" class="nav-link nav-item menu-item ${(page === 'registrasi-ulang.html' || page === 'pembayaran-ukt.html') ? 'active' : ''}"><i class="fas fa-id-card fa-regular fa-id-card"></i> <span>Registrasi Ulang</span></a>
         </div>
 
         <div class="nav-section menu-section" style="margin-top: 15px;">
             <div class="menu-title" style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; margin-bottom: 8px;">AKADEMIK</div>
-            <a href="dashboard akademik user.html" class="nav-link nav-item menu-item ${page === 'dashboard akademik user.html' ? 'active' : ''}"><i class="fas fa-columns fa-solid fa-border-all"></i> <span>Dashboard Akademik</span></a>
-            <a href="krs.html" class="nav-link nav-item menu-item ${page === 'krs.html' ? 'active' : ''}"><i class="fas fa-book-open fa-solid fa-book"></i> <span>KRS</span></a>
-            <a href="khs user.html" class="nav-link nav-item menu-item ${page === 'khs user.html' ? 'active' : ''}"><i class="fas fa-star fa-regular fa-star"></i> <span>KHS (Nilai)</span></a>
-            <a href="a_transkip_user.html" class="nav-link nav-item menu-item ${page === 'a_transkip_user.html' ? 'active' : ''}"><i class="fas fa-file-invoice fa-solid fa-graduation-cap"></i> <span>Transkrip</span></a>
-            <a href="jadwal.html" class="nav-link nav-item menu-item ${page === 'jadwal.html' ? 'active' : ''}"><i class="far fa-calendar-alt fa-regular fa-calendar-days"></i> <span>Jadwal Kuliah</span></a>
+            <a href="${portalPrefix}dashboard-akademik.html" class="nav-link nav-item menu-item ${page === 'dashboard-akademik.html' ? 'active' : ''}"><i class="fas fa-columns fa-solid fa-border-all"></i> <span>Dashboard Akademik</span></a>
+            <a href="${portalPrefix}krs.html" class="nav-link nav-item menu-item ${page === 'krs.html' ? 'active' : ''}"><i class="fas fa-book-open fa-solid fa-book"></i> <span>KRS</span></a>
+            <a href="${portalPrefix}khs.html" class="nav-link nav-item menu-item ${page === 'khs.html' ? 'active' : ''}"><i class="fas fa-star fa-regular fa-star"></i> <span>KHS (Nilai)</span></a>
+            <a href="${portalPrefix}transkrip.html" class="nav-link nav-item menu-item ${page === 'transkrip.html' ? 'active' : ''}"><i class="fas fa-file-invoice fa-solid fa-graduation-cap"></i> <span>Transkrip</span></a>
+            <a href="${portalPrefix}jadwal.html" class="nav-link nav-item menu-item ${page === 'jadwal.html' ? 'active' : ''}"><i class="far fa-calendar-alt fa-regular fa-calendar-days"></i> <span>Jadwal Kuliah</span></a>
         </div>
 
         <div class="nav-section menu-section" style="margin-top: 15px;">
             <div class="menu-title" style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; margin-bottom: 8px;">KOMUNIKASI</div>
             <a href="#" class="nav-link nav-item menu-item"><i class="far fa-envelope fa-regular fa-envelope"></i> <span>Pesan</span></a>
-            <a href="pengumuman.html" class="nav-link nav-item menu-item ${(page === 'pengumuman.html' || page === 'informasi.html') ? 'active' : ''}"><i class="fas fa-bullhorn fa-solid fa-bullhorn"></i> <span>Pengumuman</span></a>
-            <a href="forum.html" class="nav-link nav-item menu-item ${page === 'forum.html' ? 'active' : ''}"><i class="far fa-comments fa-regular fa-comments"></i> <span>Diskusi / Forum</span></a>
+            <a href="${portalPrefix}pengumuman.html" class="nav-link nav-item menu-item ${(page === 'pengumuman.html' || page === 'informasi.html') ? 'active' : ''}"><i class="fas fa-bullhorn fa-solid fa-bullhorn"></i> <span>Pengumuman</span></a>
+            <a href="${portalPrefix}forum.html" class="nav-link nav-item menu-item ${page === 'forum.html' ? 'active' : ''}"><i class="far fa-comments fa-regular fa-comments"></i> <span>Diskusi / Forum</span></a>
         </div>
 
         <div class="nav-section menu-section" style="margin-top: 15px;">
             <div class="menu-title" style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; margin-bottom: 8px;">ADMINISTRASI</div>
-            <a href="keuangan.html" class="nav-link nav-item menu-item ${(page === 'keuangan.html' || page === 'keungan2.html') ? 'active' : ''}"><i class="fas fa-wallet fa-solid fa-money-bill-wave"></i> <span>Keuangan</span></a>
+            <a href="${portalPrefix}keuangan.html" class="nav-link nav-item menu-item ${(page === 'keuangan.html' || page === 'keuangan-detail.html') ? 'active' : ''}"><i class="fas fa-wallet fa-solid fa-money-bill-wave"></i> <span>Keuangan</span></a>
         </div>
 
         <div class="logout-btn" style="margin-top: auto; padding-top: 20px;">
-            <a href="login.html" class="btn-logout nav-link nav-item menu-item" style="display:flex; align-items:center; gap:8px;"><i class="fas fa-sign-out-alt fa-solid fa-arrow-right-from-bracket"></i> <span>Keluar</span></a>
+            <a href="${rootPrefix}login.html" class="btn-logout nav-link nav-item menu-item" style="display:flex; align-items:center; gap:8px;"><i class="fas fa-sign-out-alt fa-solid fa-arrow-right-from-bracket"></i> <span>Keluar</span></a>
         </div>
         `;
 
