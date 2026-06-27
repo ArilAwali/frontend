@@ -21,13 +21,11 @@
             --green-badge-text: #1e8e3e;
             --font-family: 'Inter', sans-serif;
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: var(--font-family);
             background-color: var(--bg-color);
@@ -35,128 +33,13 @@
             display: flex;
             min-height: 100vh;
         }
-
-        /* Sidebar Styles */
-        .sidebar {
-            width: 250px;
-            background-color: var(--sidebar-bg);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            overflow-y: auto;
-        }
-
-        /* Hide scrollbar for sidebar */
-        .sidebar::-webkit-scrollbar { display: none; }
-        .sidebar { -ms-overflow-style: none; scrollbar-width: none; }
-
-        .logo-container {
-            padding: 25px 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon i {
-            font-size: 24px;
-        }
-
-        .logo-text h2 {
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        .logo-text p {
-            font-size: 10px;
-            color: #a0aec0;
-            margin-top: 2px;
-        }
-
-        .nav-menu {
-            display: flex;
-            flex-direction: column;
-            padding: 0 15px 20px 15px;
-            flex-grow: 1;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 15px;
-            color: #e2e8f0;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-            border-radius: 8px;
-            margin-bottom: 2px;
-            transition: all 0.2s ease;
-        }
-
-        .nav-item i {
-            width: 16px;
-            text-align: center;
-            font-size: 14px;
-        }
-
-        .nav-item:hover {
-            background-color: var(--sidebar-hover);
-        }
-
-        .nav-item.active {
-            background-color: var(--sidebar-active);
-            color: white;
-            font-weight: 600;
-        }
-
-        .nav-section {
-            font-size: 10px;
-            color: #718096;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            margin: 20px 0 8px 15px;
-        }
-
-        .logout-container {
-            padding: 15px;
-            margin-top: auto;
-        }
-
-        .btn-logout {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            padding: 10px;
-            background-color: transparent;
-            color: white;
-            border: 1px solid #2d3748;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 13px;
-            font-family: inherit;
-            transition: background 0.2s;
-        }
-
-        .btn-logout:hover {
-            background-color: var(--sidebar-hover);
-        }
-
         /* Main Content Styles */
         .main-wrapper {
-            margin-left: 250px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
-
         /* Top Header */
         .top-header {
             display: flex;
@@ -166,25 +49,21 @@
             background-color: var(--bg-color);
             border-bottom: 1px solid var(--border-color);
         }
-
         .top-header h1 {
             font-size: 18px;
             font-weight: 700;
             color: #07193a;
         }
-
         .header-actions {
             display: flex;
             align-items: center;
             gap: 20px;
         }
-
         .header-actions i {
             font-size: 18px;
             color: var(--text-gray);
             cursor: pointer;
         }
-
         .user-avatar {
             width: 32px;
             height: 32px;
@@ -192,7 +71,6 @@
             object-fit: cover;
             cursor: pointer;
         }
-
         /* Content Area */
         .content-area {
             padding: 30px;
@@ -201,12 +79,10 @@
             align-items: flex-start;
             flex-grow: 1;
         }
-
         /* Left Column: Post Card */
         .post-column {
             flex: 2;
         }
-
         .post-card {
             background-color: white;
             border-radius: 12px;
@@ -214,27 +90,23 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             border: 1px solid var(--border-color);
         }
-
         .post-header {
             display: flex;
             align-items: center;
             gap: 15px;
             margin-bottom: 15px;
         }
-
         .post-author-img {
             width: 45px;
             height: 45px;
             border-radius: 50%;
             object-fit: cover;
         }
-
         .post-meta {
             display: flex;
             align-items: center;
             gap: 10px;
         }
-
         .badge {
             background-color: var(--green-badge-bg);
             color: var(--green-badge-text);
@@ -244,12 +116,10 @@
             font-weight: 700;
             letter-spacing: 0.5px;
         }
-
         .post-time {
             font-size: 12px;
             color: var(--text-light-gray);
         }
-
         .post-title {
             font-size: 18px;
             font-weight: 700;
@@ -257,20 +127,17 @@
             margin-bottom: 10px;
             line-height: 1.4;
         }
-
         .post-body {
             font-size: 13px;
             color: var(--text-gray);
             line-height: 1.6;
             margin-bottom: 25px;
         }
-
         .post-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
         .post-stats {
             display: flex;
             gap: 20px;
@@ -278,18 +145,15 @@
             color: var(--text-light-gray);
             font-weight: 500;
         }
-
         .post-stats span {
             display: flex;
             align-items: center;
             gap: 6px;
         }
-
         .participant-avatars {
             display: flex;
             align-items: center;
         }
-
         .participant-avatars img {
             width: 28px;
             height: 28px;
@@ -298,11 +162,9 @@
             margin-left: -8px;
             object-fit: cover;
         }
-        
         .participant-avatars img:first-child {
             margin-left: 0;
         }
-
         .avatar-count {
             width: 28px;
             height: 28px;
@@ -318,13 +180,11 @@
             margin-left: -8px;
             z-index: 10;
         }
-
         /* Right Column: Hot Topics */
         .sidebar-widgets {
             flex: 1;
             min-width: 300px;
         }
-
         .widget-card {
             background-color: white;
             border-radius: 12px;
@@ -332,33 +192,27 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             border: 1px solid var(--border-color);
         }
-
         .widget-header {
             display: flex;
             align-items: center;
             gap: 8px;
             margin-bottom: 20px;
         }
-
         .widget-header i {
             color: var(--green-badge-text);
             font-size: 16px;
         }
-
         .widget-header h3 {
             font-size: 15px;
             font-weight: 700;
             color: #1a202c;
         }
-
         .hot-topic-item {
             margin-bottom: 20px;
         }
-
         .hot-topic-item:last-child {
             margin-bottom: 0;
         }
-
         .hot-topic-title {
             font-size: 13px;
             font-weight: 600;
@@ -367,16 +221,13 @@
             line-height: 1.4;
             cursor: pointer;
         }
-
         .hot-topic-title:hover {
             color: var(--sidebar-active);
         }
-
         .hot-topic-meta {
             font-size: 11px;
             color: var(--text-light-gray);
         }
-
         /* Footer */
         .main-footer {
             text-align: center;
@@ -386,8 +237,8 @@
             border-top: 1px solid var(--border-color);
             background-color: var(--bg-color);
         }
-
     </style>
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
 </head>
 <body>
 
@@ -468,6 +319,6 @@
 
     </div>
 
-    <script src="sidebar.js"></script>
+    <script src="../assets/js/sidebar.js"></script>
 </body>
 </html>

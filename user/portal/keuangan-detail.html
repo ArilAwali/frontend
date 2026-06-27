@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Mahasiswa - Universitas Crypto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --sidebar-bg: #091a38;
+            --main-bg: #f5f6f8;
+            --text-dark: #2d3748;
+            --text-muted: #718096;
+            --border-color: #edf2f7;
+            --primary-blue: #8eb4f9;
+            --active-green: #bbf7d0;
+            --text-active-green: #14532d;
+            --danger-red: #e53e3e;
+            --danger-bg: #fed7d7;
+            --success-green: #38a169;
+            --success-bg: #c6f6d5;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background-color: var(--main-bg);
+            color: var(--text-dark);
+            display: flex;
+            min-height: 100vh;
+        }
+        /* --- MAIN CONTENT WRAPPER --- */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: var(--main-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .page-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #091a38;
+        }
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: var(--text-muted);
+        }
+        .topbar-actions i { font-size: 18px; cursor: pointer; transition: 0.2s; }
+        .topbar-actions i:hover { color: var(--primary-blue); }
+        .user-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; cursor: pointer; border: 2px solid transparent; transition: 0.2s;}
+        .user-avatar:hover { border-color: var(--primary-blue); }
+        /* --- VIEWS --- */
+        .view-section { display: none; padding: 40px; max-width: 1200px; }
+        .view-section.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* --- STYLES: FORUM --- */
+        .forum-container { display: flex; gap: 24px; align-items: flex-start; }
+        .post-column { flex: 2; }
+        .sidebar-widgets { flex: 1; min-width: 300px; }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            border: 1px solid var(--border-color);
+        }
+        .post-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .post-author-img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; cursor: pointer;}
+        .post-meta { display: flex; align-items: center; gap: 10px; }
+        .badge-forum { background-color: #e6f4ea; color: #1e8e3e; padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; }
+        .post-time { font-size: 12px; color: #a0aec0; }
+        .post-title { font-size: 18px; font-weight: 700; color: #1a202c; margin-bottom: 10px; line-height: 1.4; cursor: pointer; transition: 0.2s;}
+        .post-title:hover { color: var(--primary-blue); }
+        .post-body { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 25px; }
+        .post-footer { display: flex; justify-content: space-between; align-items: center; }
+        .post-stats { display: flex; gap: 20px; font-size: 12px; color: #a0aec0; font-weight: 500; cursor: pointer;}
+        .post-stats span:hover { color: var(--primary-blue); }
+        .participant-avatars { display: flex; align-items: center; cursor: pointer;}
+        .participant-avatars img { width: 28px; height: 28px; border-radius: 50%; border: 2px solid white; margin-left: -8px; }
+        .participant-avatars img:first-child { margin-left: 0; }
+        .avatar-count { width: 28px; height: 28px; border-radius: 50%; background-color: #edf2f7; color: var(--text-muted); font-size: 10px; font-weight: 600; display: flex; align-items: center; justify-content: center; border: 2px solid white; margin-left: -8px; }
+        .widget-header { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+        .widget-header i { color: #1e8e3e; font-size: 16px; }
+        .widget-header h3 { font-size: 15px; font-weight: 700; color: #1a202c; }
+        .hot-topic-item { margin-bottom: 20px; padding: 10px; border-radius: 8px; transition: 0.2s; cursor: pointer;}
+        .hot-topic-item:hover { background-color: var(--main-bg); }
+        .hot-topic-item:last-child { margin-bottom: 0; }
+        .hot-topic-title { font-size: 13px; font-weight: 600; color: #2d3748; margin-bottom: 6px; }
+        .hot-topic-item:hover .hot-topic-title { color: var(--success-green); }
+        .hot-topic-meta { font-size: 11px; color: #a0aec0; }
+        /* --- STYLES: KEUANGAN --- */
+        .keuangan-container { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+        .current-bill-card {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 24px;
+            background: linear-gradient(to right bottom, #ffffff 50%, #f0fdf4 100%);
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .bill-header { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; font-weight: 500; }
+        .no-bill-text { font-size: 28px; font-weight: 700; color: #1a202c;}
+        .table-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .card-title { font-size: 16px; font-weight: 700; color: #1a202c; display: flex; align-items: center; gap: 8px; }
+        .download-all { font-size: 12px; color: #2b6cb0; text-decoration: none; display: flex; align-items: center; gap: 6px; font-weight: 600; cursor: pointer; padding: 8px 12px; border-radius: 6px; transition: 0.2s;}
+        .download-all:hover { background-color: #ebf8ff; }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; font-size: 11px; color: var(--text-muted); padding-bottom: 12px; border-bottom: 1px solid var(--border-color); font-weight: 600; }
+        td { padding: 16px 0; font-size: 13px; border-bottom: 1px solid var(--border-color); color: #4a5568; }
+        tr:last-child td { border-bottom: none; padding-bottom: 0; }
+        .badge { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+        .badge.paid { background-color: var(--success-bg); color: var(--success-green); }
+        .action-icon { color: #38a169; cursor: pointer; font-size: 16px; transition: 0.2s; padding: 5px;}
+        .action-icon:hover { opacity: 0.7; transform: scale(1.1); }
+        .payment-methods-card .card-title i { color: #38a169; }
+        .va-box { border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; margin-bottom: 16px; background-color: #fafbfc; transition: 0.2s;}
+        .va-box:hover { border-color: #cbd5e0; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
+        .va-header { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #2d3748; }
+        .va-header i { color: var(--text-muted); }
+        .va-number { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+        .copy-link { font-size: 12px; color: #38a169; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; cursor: pointer; padding: 4px 8px; border-radius: 4px; margin-left: -8px; transition: 0.2s;}
+        .copy-link:hover { background-color: #f0fdf4; }
+        .guide-link { font-size: 12px; color: #4a5568; text-decoration: none; display: inline-flex; align-items: center; margin-top: 10px; font-weight: 500; cursor: pointer; padding: 5px 0;}
+        .guide-link:hover { color: #2b6cb0; }
+        .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--text-muted); margin-top: auto; }
+    </style>
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+</head>
+<body>
+
+    <nav class="sidebar"></nav>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div id="page-title" class="page-title"></div>
+            <div class="topbar-actions">
+                <i class="fa-regular fa-bell" title="Notifikasi" onclick="interactiveAlert('Anda memiliki 3 notifikasi baru.')"></i>
+                <i class="fa-regular fa-envelope" title="Pesan" onclick="interactiveAlert('Membuka kotak pesan...')"></i>
+                <img src="https://i.pravatar.cc/150?img=11" alt="User Avatar" class="user-avatar" title="Profil Pengguna" onclick="interactiveAlert('Membuka pengaturan profil pengguna.')">
+            </div>
+        </header>
+
+        <div id="view-forum" class="view-section">
+            <div class="forum-container">
+                <div class="post-column">
+                    <div class="card">
+                        <div class="post-header">
+                            <img src="https://i.pravatar.cc/150?img=5" alt="Author" class="post-author-img" onclick="interactiveAlert('Melihat profil pembuat postingan')">
+                            <div class="post-meta">
+                                <span class="badge-forum">DISKUSI MATA KULIAH</span>
+                                <span class="post-time">• 2 jam yang lalu</span>
+                            </div>
+                        </div>
+                        <h2 class="post-title" onclick="interactiveAlert('Membuka detail utas diskusi ini...')">Tips dan Trik Lulus Mata Kuliah Kriptografi Lanjut?</h2>
+                        <p class="post-body">
+                            Halo semuanya, saya agak kesulitan mengikuti materi minggu ketiga tentang Elliptic Curve Cryptography. Apakah ada rekomendasi buku atau referensi yang mudah dipahami?
+                        </p>
+                        <div class="post-footer">
+                            <div class="post-stats" onclick="interactiveAlert('Membuka kolom balasan komentar...')">
+                                <span><i class="fa-regular fa-comment"></i> 24 Balasan</span>
+                                <span><i class="fa-regular fa-eye"></i> 156 Dilihat</span>
+                            </div>
+                            <div class="participant-avatars" onclick="interactiveAlert('Melihat daftar partisipan diskusi')">
+                                <img src="https://i.pravatar.cc/150?img=12" alt="P1">
+                                <img src="https://i.pravatar.cc/150?img=33" alt="P2">
+                                <div class="avatar-count">+5</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-widgets">
+                    <div class="card">
+                        <div class="widget-header">
+                            <i class="fa-solid fa-arrow-trend-up"></i>
+                            <h3>Topik Hangat</h3>
+                        </div>
+                        <div class="hot-topic-item" onclick="interactiveAlert('Membuka topik: Panduan Pengisian KRS')">
+                            <div class="hot-topic-title">Panduan Pengisian KRS Semester Ganjil 2025</div>
+                            <div class="hot-topic-meta">150 balasan • Aktif 10 menit lalu</div>
+                        </div>
+                        <div class="hot-topic-item" onclick="interactiveAlert('Membuka topik: Review Dosen Pembimbing')">
+                            <div class="hot-topic-title">Review Dosen Pembimbing Skripsi Fakultas Ilmu Komputer</div>
+                            <div class="hot-topic-meta">89 balasan • Aktif 1 jam lalu</div>
+                        </div>
+                        <div class="hot-topic-item" onclick="interactiveAlert('Membuka topik: Bahas Soal Ujian')">
+                            <div class="hot-topic-title">Bahas Soal Ujian Tengah Semester Aljabar Linear</div>
+                            <div class="hot-topic-meta">45 balasan • Aktif 3 jam lalu</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-keuangan" class="view-section active">
+            <div class="keuangan-container">
+                <div class="main-column">
+                    
+                    <div class="card current-bill-card">
+                        <div class="bill-header">Tagihan Semester Saat Ini (Ganjil 2024/2025)</div>
+                        <div class="no-bill-text">Tidak Ada Tagihan</div>
+                    </div>
+
+                    <div class="card">
+                        <div class="table-header-row">
+                            <div class="card-title">Riwayat Pembayaran</div>
+                            <a class="download-all" onclick="interactiveAlert('Memproses pengunduhan seluruh riwayat rekap tagihan (PDF)...')">
+                                <i class="fa-solid fa-download"></i> Unduh Semua Rekap
+                            </a>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Semester</th>
+                                    <th>Jenis Tagihan</th>
+                                    <th>Nominal</th>
+                                    <th>Tanggal Bayar</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ganjil<br>2024/2025</td>
+                                    <td>Uang Kuliah<br>Tunggal (UKT)</td>
+                                    <td>Rp<br>5.500.000</td>
+                                    <td>15 Agu<br>2025</td>
+                                    <td><span class="badge paid">Lunas</span></td>
+                                    <td><i class="fa-solid fa-download action-icon" title="Unduh Kuitansi" onclick="interactiveAlert('Mengunduh kuitansi Semester Ganjil 2024/2025')"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Genap<br>2023/2024</td>
+                                    <td>Uang Kuliah<br>Tunggal (UKT)</td>
+                                    <td>Rp<br>5.500.000</td>
+                                    <td>10 Feb<br>2024</td>
+                                    <td><span class="badge paid">Lunas</span></td>
+                                    <td><i class="fa-solid fa-download action-icon" title="Unduh Kuitansi" onclick="interactiveAlert('Mengunduh kuitansi Semester Genap 2023/2024')"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Ganjil<br>2023/2024</td>
+                                    <td>Uang Kuliah<br>Tunggal (UKT)</td>
+                                    <td>Rp<br>5.500.000</td>
+                                    <td>12 Agu<br>2023</td>
+                                    <td><span class="badge paid">Lunas</span></td>
+                                    <td><i class="fa-solid fa-download action-icon" title="Unduh Kuitansi" onclick="interactiveAlert('Mengunduh kuitansi Semester Ganjil 2023/2024')"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Genap<br>2022/2023</td>
+                                    <td>Uang Kuliah<br>Tunggal (UKT)</td>
+                                    <td>Rp<br>5.500.000</td>
+                                    <td>08 Feb<br>2023</td>
+                                    <td><span class="badge paid">Lunas</span></td>
+                                    <td><i class="fa-solid fa-download action-icon" title="Unduh Kuitansi" onclick="interactiveAlert('Mengunduh kuitansi Semester Genap 2022/2023')"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="right-column">
+                    <div class="card payment-methods-card">
+                        <div class="card-title">
+                            <i class="fa-regular fa-circle-question"></i> Cara Pembayaran
+                        </div>
+                        
+                        <div class="va-box">
+                            <div class="va-header">
+                                <span>Virtual Account Bank<br>Mandiri</span>
+                                <i class="fa-solid fa-building-columns"></i>
+                            </div>
+                            <div class="va-number" id="va-mandiri">8901234567890</div>
+                            <a class="copy-link" onclick="copyVA('va-mandiri')">
+                                <i class="fa-regular fa-copy"></i> Salin Nomor
+                            </a>
+                        </div>
+                        
+                        <div class="va-box">
+                            <div class="va-header">
+                                <span>Virtual Account BNI</span>
+                                <i class="fa-solid fa-building-columns"></i>
+                            </div>
+                            <div class="va-number" id="va-bni">9876543210987</div>
+                            <a class="copy-link" onclick="copyVA('va-bni')">
+                                <i class="fa-regular fa-copy"></i> Salin Nomor
+                            </a>
+                        </div>
+                        
+                        <a class="guide-link" onclick="interactiveAlert('Membuka PDF Panduan Lengkap Pembayaran UKT...')">
+                            Lihat panduan lengkap <i class="fa-solid fa-arrow-right" style="margin-left: 5px; font-size: 10px;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            © 2025 Universitas Crypto. Semua hak dilindungi.
+        </footer>
+    </main>
+
+    <script>
+        // DOM Elements
+        const navForum = document.getElementById('nav-forum');
+        const navKeuangan = document.getElementById('nav-keuangan');
+        const viewForum = document.getElementById('view-forum');
+        const viewKeuangan = document.getElementById('view-keuangan');
+        const pageTitle = document.getElementById('page-title');
+        
+        // Pilih semua menu agar highlight (.active) bisa dihapus saat perpindahan tab
+        const allNavItems = document.querySelectorAll('.sidebar .menu-item');
+
+        // Fungsi Helper untuk membuang class 'active' dari sidebar & views
+        function clearActiveStates() {
+            allNavItems.forEach(item => item.classList.remove('active'));
+            viewForum.classList.remove('active');
+            viewKeuangan.classList.remove('active');
+        }
+
+        // EVENT LISTENER: Tab Forum
+        navForum.addEventListener('click', (e) => {
+            e.preventDefault();
+            clearActiveStates();
+            navForum.classList.add('active');
+            viewForum.classList.add('active');
+            pageTitle.innerText = "Diskusi / Forum"; 
+        });
+
+        // EVENT LISTENER: Tab Keuangan
+        navKeuangan.addEventListener('click', (e) => {
+            e.preventDefault();
+            clearActiveStates();
+            navKeuangan.classList.add('active'); 
+            viewKeuangan.classList.add('active'); 
+            pageTitle.innerText = ""; // Dikosongkan sesuai dengan gambar UI
+        });
+
+        // Set Default State onload
+        pageTitle.innerText = ""; 
+
+        // Fungsi Global: Menyalin teks Virtual Account
+        function copyVA(elementId) {
+            const vaNumber = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(vaNumber).then(() => {
+                alert(`Tersalin ke papan klip: ${vaNumber}`);
+            }).catch(err => {
+                alert('Browser Anda tidak mendukung fitur salin otomatis.');
+            });
+        }
+
+        // Fungsi Global: Interaksi tombol dummy (Notifikasi, Download, dll)
+        function interactiveAlert(message) {
+            alert(message);
+        }
+    </script>
+
+    <script src="../assets/js/sidebar.js"></script>
+</body>
+</html>

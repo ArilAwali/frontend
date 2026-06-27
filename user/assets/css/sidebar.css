@@ -1,0 +1,156 @@
+/* ==========================================================================
+   SIDEBAR COMPONENT STYLES (Mockup Match)
+   ========================================================================== */
+
+.sidebar {
+    width: 260px;
+    background-color: #001633; /* Dark navy blue from image */
+    color: #cbd5e0;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 16px; /* Floating look for items */
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.sidebar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Sidebar Brand Header */
+.brand {
+    padding: 0 12px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: #FFFFFF;
+}
+
+.brand i {
+    font-size: 32px; /* Bigger logo icon */
+    color: #FFFFFF;
+}
+
+.brand-text h2 {
+    font-size: 24px; /* Matches the bold heading in image */
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+}
+
+.brand-text p {
+    font-size: 13px;
+    color: #a0aec0;
+    margin-top: 4px;
+    margin-bottom: 0;
+    opacity: 0.8;
+}
+
+/* Sidebar Sections */
+.menu-section {
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.menu-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding-left: 12px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    color: #4A5D78; /* Muted blue-gray title */
+}
+
+/* Navigation Links */
+.menu-item, 
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    color: #cbd5e0 !important;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600; /* Semi-bold text */
+    gap: 14px;
+    border-radius: 8px; /* Rounded corners from image */
+    transition: all 0.2s ease;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin-bottom: 6px;
+}
+
+.menu-item i, 
+.nav-link i {
+    font-size: 18px;
+    width: 24px;
+    text-align: center;
+}
+
+/* Hover State (Inactive items) */
+.menu-item:hover, 
+.nav-link:hover {
+    color: #FFFFFF !important;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Active State (Mockup Match - Floating blue block) */
+.menu-item.active, 
+.nav-link.active {
+    color: #FFFFFF !important;
+    background-color: #0A3580 !important; /* Rich blue background from mockup */
+    font-weight: 700;
+}
+
+/* Logout Button */
+.logout-btn {
+    margin-top: auto;
+    padding-top: 20px;
+}
+
+.btn-logout {
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Rounded outline button at bottom */
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; /* Gap between icon and text */
+    padding: 12px;
+    color: #FFFFFF !important;
+    background-color: transparent;
+    transition: all 0.2s ease;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.btn-logout:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Layout Spacing to prevent content from being hidden under the fixed sidebar */
+.main-wrapper,
+.main-content {
+    margin-left: 260px !important;
+}
+
+/* Brand title-wrapper */
+.brand .title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+}

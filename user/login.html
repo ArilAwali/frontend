@@ -1,445 +1,406 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login</title>
 
-<style>
-/* =========================
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/footer.css">
+  <style>
+    /* =========================
    RESET + BASE
 ========================= */
-@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap');
+    @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap');
 
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  box-sizing: border-box;
-}
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      box-sizing: border-box;
+    }
 
-html, body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: "Work Sans", sans-serif;
-  background-color: #f8faff;
-  display: flex;
-  flex-direction: column;
-}
+    html,
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Work Sans", sans-serif;
+      background-color: #f8faff;
+      display: flex;
+      flex-direction: column;
+    }
 
-/* =========================
-   HEADER / NAVBAR
-========================= */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 40px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #eaeaea;
-}
-
-.brand {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-weight: 800;
-  font-size: 20px;
-  color: #005640;
-}
-
-.nav-links {
-  display: flex;
-  gap: 32px;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: #4a5568;
-  font-weight: 500;
-  font-size: 14px;
-}
-
-.btn-daftar-nav {
-  background-color: #005640;
-  color: white;
-  border: none;
-  padding: 10px 24px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: "Plus Jakarta Sans", sans-serif;
-}
-
-/* =========================
+    /* =========================
    LAYOUT UTAMA
 ========================= */
-.main {
-  display: flex;
-  flex: 1;
-  width: 100%;
-}
+    .main {
+      display: flex;
+      flex: 1;
+      width: 100%;
+    }
 
-/* =========================
+    /* =========================
    LEFT SECTION
 ========================= */
-.section-visual {
-  flex: 1;
-  background: #061938;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 60px;
-  position: relative;
-  color: white;
-}
+    .section-visual {
+      flex: 1;
+      background: #061938;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 60px;
+      position: relative;
+      color: white;
+    }
 
-.left-content {
-  max-width: 520px;
-  z-index: 2;
-  font-family: "Plus Jakarta Sans", sans-serif;
-}
+    .left-content {
+      max-width: 520px;
+      z-index: 2;
+      font-family: "Plus Jakarta Sans", sans-serif;
+    }
 
-.badge {
-  display: inline-block;
-  padding: 6px 16px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 24px;
-  color: #d1d5db;
-}
+    .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: #d1d5db;
+    }
 
-.left-content h1 {
-  font-size: 42px;
-  font-weight: 800;
-  margin-bottom: 16px;
-  line-height: 1.2;
-}
+    .left-content h1 {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
 
-.left-content p {
-  color: #9ca3af;
-  line-height: 1.6;
-  font-family: "Work Sans", sans-serif;
-  margin-bottom: 40px;
-}
+    .left-content p {
+      color: #9ca3af;
+      line-height: 1.6;
+      font-family: "Work Sans", sans-serif;
+      margin-bottom: 40px;
+    }
 
-.stats-container {
-  display: flex;
-  gap: 20px;
-}
+    .stats-container {
+      display: flex;
+      gap: 20px;
+    }
 
-.stat-box {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 16px 24px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex: 1;
-}
+    .stat-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+    }
 
-.stat-box svg {
-  width: 24px;
-  height: 24px;
-  fill: #f59e0b;
-}
+    .stat-box svg {
+      width: 24px;
+      height: 24px;
+      fill: #f59e0b;
+    }
 
-.stat-text h4 {
-  font-weight: 700;
-  font-size: 18px;
-  margin-bottom: 4px;
-}
+    .stat-text h4 {
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
 
-.stat-text span {
-  font-size: 12px;
-  color: #9ca3af;
-  font-family: "Work Sans", sans-serif;
-}
+    .stat-text span {
+      font-size: 12px;
+      color: #9ca3af;
+      font-family: "Work Sans", sans-serif;
+    }
 
-/* =========================
+    /* =========================
    RIGHT SECTION (LOGIN)
 ========================= */
-.section-form-side {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
-}
+    .section-form-side {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
 
-.form-wrapper {
-  width: 100%;
-  max-width: 440px;
-  text-align: center;
-}
+    .form-wrapper {
+      width: 100%;
+      max-width: 440px;
+      text-align: center;
+    }
 
-.form-wrapper > h2 {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 32px;
-  font-weight: 800;
-  color: #005640;
-  margin-bottom: 8px;
-}
+    .form-wrapper>h2 {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: #005640;
+      margin-bottom: 8px;
+    }
 
-.form-wrapper > p {
-  color: #6b7280;
-  font-size: 14px;
-  margin-bottom: 32px;
-}
+    .form-wrapper>p {
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
 
-/* FORM CARD */
-.form-card {
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-  overflow: hidden;
-  text-align: left;
-}
+    /* FORM CARD */
+    .form-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      overflow: hidden;
+      text-align: left;
+    }
 
-.form-tab {
-  display: flex;
-  justify-content: center;
-  border-bottom: 1px solid #eaeaea;
-  padding-top: 20px;
-}
+    .form-tab {
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid #eaeaea;
+      padding-top: 20px;
+    }
 
-.form-tab span {
-  color: #005640;
-  font-weight: 700;
-  font-size: 14px;
-  padding-bottom: 16px;
-  border-bottom: 2px solid #005640;
-  width: 80%;
-  text-align: center;
-}
+    .form-tab span {
+      color: #005640;
+      font-weight: 700;
+      font-size: 14px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #005640;
+      width: 80%;
+      text-align: center;
+    }
 
-.form-body {
-  padding: 24px 32px 32px 32px;
-}
+    .form-body {
+      padding: 24px 32px 32px 32px;
+    }
 
-.input-group {
-  margin-bottom: 20px;
-  position: relative;
-}
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
 
-.input-group label {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  font-weight: 600;
-  color: #374151;
-  margin-bottom: 8px;
-}
+    .input-group label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 8px;
+    }
 
-.input-group label a {
-  color: #005640;
-  text-decoration: none;
-  font-weight: 700;
-}
+    .input-group label a {
+      color: #005640;
+      text-decoration: none;
+      font-weight: 700;
+    }
 
-.input-control {
-  width: 100%;
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  outline: none;
-  font-size: 14px;
-  font-family: "Work Sans", sans-serif;
-  color: #1f2937;
-}
+    .input-control {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      outline: none;
+      font-size: 14px;
+      font-family: "Work Sans", sans-serif;
+      color: #1f2937;
+    }
 
-.input-control::placeholder {
-  color: #9ca3af;
-}
+    .input-control::placeholder {
+      color: #9ca3af;
+    }
 
-.input-icon {
-  position: absolute;
-  right: 16px;
-  top: 36px;
-  cursor: pointer;
-}
+    .input-icon {
+      position: absolute;
+      right: 16px;
+      top: 36px;
+      cursor: pointer;
+    }
 
-.checkbox-group {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 24px;
-}
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
 
-.checkbox-group input {
-  width: 16px;
-  height: 16px;
-  accent-color: #005640;
-}
+    .checkbox-group input {
+      width: 16px;
+      height: 16px;
+      accent-color: #005640;
+    }
 
-.checkbox-group label {
-  font-size: 12px;
-  color: #4b5563;
-  font-weight: 500;
-}
+    .checkbox-group label {
+      font-size: 12px;
+      color: #4b5563;
+      font-weight: 500;
+    }
 
-.btn-submit {
-  width: 100%;
-  padding: 14px;
-  background: #061938;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 14px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  font-family: "Plus Jakarta Sans", sans-serif;
-}
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: #061938;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      font-family: "Plus Jakarta Sans", sans-serif;
+    }
 
-.register-link {
-  text-align: center;
-  margin-top: 24px;
-  font-size: 13px;
-  color: #6b7280;
-}
+    .register-link {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 13px;
+      color: #6b7280;
+    }
 
-.register-link a {
-  color: #005640;
-  font-weight: 700;
-  text-decoration: none;
-}
+    .register-link a {
+      color: #005640;
+      font-weight: 700;
+      text-decoration: none;
+    }
 
-/* =========================
+    /* =========================
    FOOTER
 ========================= */
-footer {
-  text-align: right;
-  padding: 16px 40px;
-  font-size: 11px;
-  color: #9ca3af;
-  background-color: #f8faff;
-}
+    footer {
+      text-align: right;
+      padding: 16px 40px;
+      font-size: 11px;
+      color: #9ca3af;
+      background-color: #f8faff;
+    }
 
-footer span {
-  color: #005640;
-  font-weight: 600;
-}
+    footer span {
+      color: #005640;
+      font-weight: 600;
+    }
 
-/* =========================
+    /* =========================
    RESPONSIVE
 ========================= */
-@media (max-width: 1024px) {
-  .main {
-    flex-direction: column;
-  }
-  .section-visual,
-  .section-form-side {
-    width: 100%;
-    padding: 40px 20px;
-  }
-  .navbar {
-    padding: 16px 20px;
-  }
-}
-</style>
+    @media (max-width: 1024px) {
+      .main {
+        flex-direction: column;
+      }
+
+      .section-visual,
+      .section-form-side {
+        width: 100%;
+        padding: 40px 20px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header class="navbar">
-  <div class="brand">Universitas Crypto</div>
-  <nav class="nav-links">
-    <a href="branda pmb.html">Beranda</a>
-    <a href="#">Informasi</a>
-    <a href="#">Bantuan</a>
-  </nav>
-  <button class="btn-daftar-nav">Daftar</button>
-</header>
+  <header class="crypto-navbar"></header>
 
-<div class="main">
-  <section class="section-visual">
-    <div class="left-content">
-      <div class="badge">Portal Penerimaan Mahasiswa Baru</div>
-      <h1>Wujudkan Masa Depan Gemilang Bersama Kami</h1>
-      <p>
-        Bergabunglah dengan komunitas akademik yang progresif dan bangun karakter perjuangan untuk menghadapi tantangan global masa depan.
-      </p>
+  <div class="main">
+    <section class="section-visual">
+      <div class="left-content">
+        <div class="badge">Portal Penerimaan Mahasiswa Baru</div>
+        <h1>Wujudkan Masa Depan Gemilang Bersama Kami</h1>
+        <p>
+          Bergabunglah dengan komunitas akademik yang progresif dan bangun karakter perjuangan untuk menghadapi
+          tantangan global masa depan.
+        </p>
 
-      <div class="stats-container">
-        <div class="stat-box">
-          <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2.81-1.53M12 5.27l7.5 4.09L12 13.45 4.5 9.36M17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73z"/></svg>
-          <div class="stat-text">
-            <h4>50+</h4>
-            <span>Program Studi</span>
+        <div class="stats-container">
+          <div class="stat-box">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2.81-1.53M12 5.27l7.5 4.09L12 13.45 4.5 9.36M17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73z" />
+            </svg>
+            <div class="stat-text">
+              <h4>50+</h4>
+              <span>Program Studi</span>
+            </div>
           </div>
-        </div>
-        <div class="stat-box">
-          <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-          <div class="stat-text">
-            <h4>15rb+</h4>
-            <span>Mahasiswa Aktif</span>
+          <div class="stat-box">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+            </svg>
+            <div class="stat-text">
+              <h4>15rb+</h4>
+              <span>Mahasiswa Aktif</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section-form-side">
-    <div class="form-wrapper">
-      <h2>Selamat Datang</h2>
-      <p>Silakan masuk ke akun Portal PMB Anda</p>
+    <section class="section-form-side">
+      <div class="form-wrapper">
+        <h2>Selamat Datang</h2>
+        <p>Silakan masuk ke akun Portal PMB Anda</p>
 
-      <div class="form-card">
-        <div class="form-tab">
-          <span>Masuk</span>
+        <div class="form-card">
+          <div class="form-tab">
+            <span>Masuk</span>
+          </div>
+
+          <div class="form-body">
+            <form>
+              <div class="input-group">
+                <label>Email</label>
+                <input type="email" class="input-control" placeholder="Masukkan email anda">
+              </div>
+
+              <div class="input-group">
+                <label>
+                  Password
+                  <a href="#">Lupa Password?</a>
+                </label>
+                <input type="password" class="input-control" placeholder="Masukkan password">
+                <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#005640"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </div>
+
+              <div class="checkbox-group">
+                <input type="checkbox" id="remember">
+                <label for="remember">Ingat saya di perangkat ini</label>
+              </div>
+
+              <button type="button" class="btn-submit">
+                Masuk Ke Portal
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                  <polyline points="10 17 15 12 10 7"></polyline>
+                  <line x1="15" y1="12" x2="3" y2="12"></line>
+                </svg>
+              </button>
+            </form>
+          </div>
         </div>
-        
-        <div class="form-body">
-          <form>
-            <div class="input-group">
-              <label>Email</label>
-              <input type="email" class="input-control" placeholder="Masukkan email anda">
-            </div>
 
-            <div class="input-group">
-              <label>
-                Password
-                <a href="#">Lupa Password?</a>
-              </label>
-              <input type="password" class="input-control" placeholder="Masukkan password">
-              <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#005640" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-            </div>
-
-            <div class="checkbox-group">
-              <input type="checkbox" id="remember">
-              <label for="remember">Ingat saya di perangkat ini</label>
-            </div>
-
-            <button type="button" class="btn-submit">
-              Masuk Ke Portal
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-                <polyline points="10 17 15 12 10 7"></polyline>
-                <line x1="15" y1="12" x2="3" y2="12"></line>
-              </svg>
-            </button>
-          </form>
-        </div>
+        <p class="register-link">Belum punya akun PMB? <a href="daftar.html">Daftar Sekarang</a></p>
       </div>
+    </section>
+  </div>
 
-      <p class="register-link">Belum punya akun PMB? <a href="#">Daftar Sekarang</a></p>
-    </div>
-  </section>
-</div>
+  <footer id="footer"></footer>
 
-<footer>
-  <span>Universitas Crypto</span> © 2026. Sistem Penerimaan Mahasiswa Baru.
-</footer>
-
+  <script src="assets/js/navbar.js"></script>
+  <script src="assets/js/footer.js"></script>
 </body>
+
 </html>
