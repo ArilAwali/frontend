@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universitas Crypto</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         /* --- CSS Variables --- */
         :root {
@@ -91,13 +93,14 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
         .logo {
             font-weight: 700;
             font-size: 1.2rem;
-            color: #1A8961; /* Warna hijau sesuai gambar */
+            color: #1A8961;
+            /* Warna hijau sesuai gambar */
         }
 
         .nav-links {
@@ -110,7 +113,7 @@
             color: var(--text-gray);
             font-weight: 500;
         }
-        
+
         .nav-links a.active {
             color: #1A8961;
             border-bottom: 2px solid #1A8961;
@@ -132,7 +135,7 @@
             align-items: center;
             gap: 50px;
             /* Placeholder for the tiger background image */
-            background-image: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+            background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
         }
 
         .hero-content {
@@ -245,7 +248,7 @@
         .fakultas-card {
             padding: 40px;
             border-radius: var(--border-radius-lg);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
         .card-teknik {
@@ -290,8 +293,13 @@
             line-height: 1.7;
         }
 
-        .card-teknik p { color: var(--text-gray); }
-        .card-ekonomi p { color: #d1d5db; }
+        .card-teknik p {
+            color: var(--text-gray);
+        }
+
+        .card-ekonomi p {
+            color: #d1d5db;
+        }
 
         .prodi-list {
             display: flex;
@@ -311,8 +319,10 @@
             gap: 10px;
             flex: 1;
         }
-        
-        .prodi-pill i { color: #1A8961; }
+
+        .prodi-pill i {
+            color: #1A8961;
+        }
 
         /* List style for Ekonomi */
         .prodi-check-list {
@@ -348,7 +358,7 @@
             background-color: var(--bg-white);
             padding: 30px 25px;
             border-radius: var(--border-radius-sm);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
         }
 
         .alur-icon {
@@ -390,7 +400,7 @@
             max-width: 1000px;
             margin: 0 auto;
             /* Placeholder pattern */
-            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.02) 10px, rgba(255,255,255,0.02) 20px);
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.02) 10px, rgba(255, 255, 255, 0.02) 20px);
         }
 
         .cta-box h2 {
@@ -467,7 +477,7 @@
 
 
         /* --- RESPONSIVE DESIGN (Mobile & Tablet) --- */
-        
+
         /* Tablet */
         @media (max-width: 992px) {
             .hero {
@@ -476,13 +486,22 @@
                 padding: 60px 5%;
             }
 
-            .hero-content h1 { font-size: 2.3rem; }
-            
-            .fakultas-grid { grid-template-columns: 1fr; }
-            
-            .alur-grid { grid-template-columns: repeat(2, 1fr); }
-            
-            .nav-links { display: none; /* Sembunyikan menu di tablet/mobile untuk kesederhanaan */ }
+            .hero-content h1 {
+                font-size: 2.3rem;
+            }
+
+            .fakultas-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .alur-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-links {
+                display: none;
+                /* Sembunyikan menu di tablet/mobile untuk kesederhanaan */
+            }
         }
 
         /* Mobile */
@@ -493,19 +512,34 @@
                 padding: 15px 5%;
             }
 
-            .auth-buttons { width: 100%; justify-content: center; }
-            
-            .hero-content h1 { font-size: 1.8rem; }
-            
-            .prodi-list { flex-direction: column; }
-            
-            .alur-grid { grid-template-columns: 1fr; }
-            
-            .cta-box { padding: 40px 15px; }
-            .cta-box h2 { font-size: 1.6rem; }
+            .auth-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .prodi-list {
+                flex-direction: column;
+            }
+
+            .alur-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-box {
+                padding: 40px 15px;
+            }
+
+            .cta-box h2 {
+                font-size: 1.6rem;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -516,18 +550,19 @@
             <a href="#">Bantuan</a>
         </nav>
         <div class="auth-buttons">
-            <button class="btn btn-outline">Masuk</button>
-            <button class="btn btn-dark">Daftar</button>
+            <a href="login.html" class="btn btn-outline">Masuk</a>
+            <a href="daftar.html" class="btn btn-dark">Daftar</a>
         </div>
     </header>
 
     <section class="hero">
         <div class="hero-content">
             <h1>Wujudkan Masa Depan Gemilang Bersama Kami</h1>
-            <p>Bergabunglah dengan Universitas Crypto, tempat Inovasi dan Integritas bertemu untuk mencetak pemimpin masa depan bangsa.</p>
+            <p>Bergabunglah dengan Universitas Crypto, tempat Inovasi dan Integritas bertemu untuk mencetak pemimpin
+                masa depan bangsa.</p>
             <button class="btn btn-primary">Daftar Sekarang</button>
         </div>
-        
+
         <div class="hero-card">
             <div class="icon-box">
                 <i class="fa-solid fa-bullhorn"></i>
@@ -546,7 +581,8 @@
     <section class="fakultas">
         <div class="section-title">
             <h2>Fakultas & Program Studi</h2>
-            <p>Pilih jalur pendidikan yang sesuai dengan minat dan aspirasi karir Anda melalui berbagai program unggulan kami.</p>
+            <p>Pilih jalur pendidikan yang sesuai dengan minat dan aspirasi karir Anda melalui berbagai program unggulan
+                kami.</p>
         </div>
 
         <div class="fakultas-grid">
@@ -555,7 +591,8 @@
                     <i class="fa-solid fa-microchip"></i>
                 </div>
                 <h3>Fakultas Teknik</h3>
-                <p>Berfokus pada inovasi teknologi dan pembangunan infrastruktur berkelanjutan untuk menjawab tantangan industri masa depan.</p>
+                <p>Berfokus pada inovasi teknologi dan pembangunan infrastruktur berkelanjutan untuk menjawab tantangan
+                    industri masa depan.</p>
                 <div class="prodi-list">
                     <div class="prodi-pill">
                         <i class="fa-solid fa-laptop-code"></i> Teknik Informatika
@@ -571,7 +608,8 @@
                     <i class="fa-solid fa-money-bill-wave"></i>
                 </div>
                 <h3>Fakultas Ekonomi</h3>
-                <p>Mempersiapkan profesional bisnis yang kompeten, beretika, dan mampu bersaing di pasar global yang dinamis.</p>
+                <p>Mempersiapkan profesional bisnis yang kompeten, beretika, dan mampu bersaing di pasar global yang
+                    dinamis.</p>
                 <ul class="prodi-check-list">
                     <li><i class="fa-regular fa-circle-check"></i> Manajemen</li>
                     <li><i class="fa-regular fa-circle-check"></i> Akuntansi</li>
@@ -613,7 +651,8 @@
     <section class="cta-section">
         <div class="cta-box">
             <h2>Siap Menjadi Pejuang Perubahan?</h2>
-            <p>Jangan lewatkan kesempatan untuk bergabung di salah satu universitas terbaik dengan fasilitas modern dan kurikulum industri.</p>
+            <p>Jangan lewatkan kesempatan untuk bergabung di salah satu universitas terbaik dengan fasilitas modern dan
+                kurikulum industri.</p>
             <button class="btn btn-primary">Daftar Sekarang</button>
             <span class="help-text">Butuh bantuan? Hubungi Pusat Bantuan PMB kami di (021) 1234-5678</span>
         </div>
@@ -623,7 +662,8 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">Universitas Crypto</div>
-                <p>Mencetak generasi unggul yang berjiwa pejuang, profesional, dan berintegritas tinggi untuk Indonesia maju.</p>
+                <p>Mencetak generasi unggul yang berjiwa pejuang, profesional, dan berintegritas tinggi untuk Indonesia
+                    maju.</p>
                 <div class="social-links">
                     <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
                     <a href="#" class="social-icon"><i class="fa-solid fa-share-nodes"></i></a>
@@ -637,4 +677,5 @@
     </footer>
 
 </body>
+
 </html>
