@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Pendaftar - Bagus Permadi</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        .top-action-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-back:hover { background: var(--bg-color); }
+
+        .action-right {
+            display: flex;
+            gap: 12px;
+        }
+        .btn-print {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-edit-data {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: #0d4a36;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Profile Top Card */
+        .profile-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+        .profile-top-row {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--bg-color);
+        }
+        .profile-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #f1f5f9;
+        }
+        .profile-main-info {
+            flex: 1;
+        }
+        .profile-main-info h2 {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        .profile-main-info .id-pendaftar {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .profile-badges {
+            display: flex;
+            gap: 16px;
+        }
+        .badge-box {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+        }
+        .badge-box-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: #94a3b8;
+            letter-spacing: 0.5px;
+        }
+        .badge-pill-green {
+            background: #e6f4ed;
+            color: #117b53;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .badge-pill-blue {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .profile-bottom-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding-top: 20px;
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .meta-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: #f8fafc;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            border: 1px solid var(--border-color);
+        }
+        .meta-text-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: #94a3b8;
+            letter-spacing: 0.5px;
+        }
+        .meta-text-val {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-top: 2px;
+        }
+
+        /* Tabs Nav */
+        .tabs-nav {
+            display: flex;
+            gap: 32px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+        .tab-link {
+            padding: 12px 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+        }
+        .tab-link.active {
+            color: #117b53;
+            border-bottom-color: #117b53;
+        }
+
+        /* Data Section Cards */
+        .section-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+        .section-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 40px;
+        }
+        .data-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+        .data-label-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-secondary);
+            width: 160px;
+        }
+        .data-label-group i {
+            width: 16px;
+            text-align: center;
+            color: #94a3b8;
+        }
+        .data-val {
+            font-weight: 700;
+            color: var(--text-primary);
+            text-align: right;
+            flex: 1;
+        }
+
+        /* Alamat Block */
+        .alamat-block {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .alamat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: #f8fafc;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            border: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+        .alamat-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .alamat-label { font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+        .alamat-val { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+
+        .alamat-details-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--bg-color);
+        }
+        .sub-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .sub-meta-label { font-size: 10px; font-weight: 700; color: #94a3b8; letter-spacing: 0.5px; }
+        .sub-meta-val { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+    </style>
+</head>
+<body>
+    <header class="top-header">
+        <div class="logo-area">
+            <h1>Universitas Crypto</h1>
+        </div>
+        <div class="user-area">
+            <img src="https://ui-avatars.com/api/?name=Admin&background=1a2530&color=fff" alt="User Avatar" class="avatar">
+        </div>
+    </header>
+
+    <div class="layout-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">UP</span>
+                    <span class="brand-subtitle">Portal PMB</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <i class="fa-solid fa-border-all"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="dokumen.html" class="nav-item">
+                    <i class="fa-regular fa-file-lines"></i>
+                    <span>Dokumen</span>
+                </a>
+                <a href="prodi.html" class="nav-item">
+                    <i class="fa-solid fa-users-gear"></i>
+                    <span>Manajemen Prodi</span>
+                </a>
+                <a href="pendaftaran.html" class="nav-item active">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>Pendaftaran</span>
+                </a>
+                <a href="laporan.html" class="nav-item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Laporan</span>
+                </a>
+                <a href="pengumuman.html" class="nav-item">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span>Pengumuman</span>
+                </a>
+                <a href="ajuan.html" class="nav-item">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Ajuan Mata Kuliah</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-regular fa-envelope"></i>
+                    <span>Pesan</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Keluar</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <!-- Top Action Bar -->
+            <div class="top-action-bar">
+                <a href="pendaftaran.html" class="btn-back">
+                    <i class="fa-solid fa-arrow-left"></i> Kembali
+                </a>
+                <div class="action-right">
+                    <button class="btn-print"><i class="fa-solid fa-print"></i> Cetak Biodata</button>
+                    <button class="btn-edit-data"><i class="fa-regular fa-pen-to-square"></i> Ubah Data</button>
+                </div>
+            </div>
+
+            <!-- Profile Top Card -->
+            <div class="profile-card">
+                <div class="profile-top-row">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&auto=format&fit=crop&q=80" alt="Foto Bagus Permadi" class="profile-photo">
+                    <div class="profile-main-info">
+                        <h2>Bagus Permadi</h2>
+                        <div class="id-pendaftar">ID Pendaftar : 24091001</div>
+                    </div>
+                    <div class="profile-badges">
+                        <div class="badge-box">
+                            <span class="badge-box-label">STATUS PENDAFTARAN</span>
+                            <span class="badge-pill-green">Verifikasi Dokumen</span>
+                        </div>
+                        <div class="badge-box">
+                            <span class="badge-box-label">GELOMBANG</span>
+                            <span class="badge-pill-blue">Gelombang 1 2024/2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-bottom-row">
+                    <div class="meta-item">
+                        <div class="meta-icon"><i class="fa-regular fa-calendar-check"></i></div>
+                        <div>
+                            <div class="meta-text-label">TANGGAL DAFTAR</div>
+                            <div class="meta-text-val">12 Oktober 2024</div>
+                        </div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-icon"><i class="fa-regular fa-clock"></i></div>
+                        <div>
+                            <div class="meta-text-label">TERAKHIR DIPERBARUI</div>
+                            <div class="meta-text-val">19 Mei 2025, 14:25 WIB</div>
+                        </div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-icon"><i class="fa-solid fa-globe"></i></div>
+                        <div>
+                            <div class="meta-text-label">SUMBER PENDAFTARAN</div>
+                            <div class="meta-text-val">Website PMB</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs Nav -->
+            <div class="tabs-nav">
+                <span class="tab-link active">Biodata Lengkap</span>
+                <span class="tab-link">Data Akademik</span>
+                <span class="tab-link">Pilihan Program Studi</span>
+                <span class="tab-link">Riwayat Pendaftaran</span>
+            </div>
+
+            <!-- Section: Data Pribadi -->
+            <div class="section-card">
+                <h3>Data Pribadi</h3>
+                <div class="data-grid">
+                    <!-- Left Col -->
+                    <div class="data-row">
+                        <div class="data-label-group"><i class="fa-regular fa-user"></i> Nama Lengkap</div>
+                        <div class="data-val">Bagus Permadi</div>
+                    </div>
+                    <!-- Right Col -->
+                    <div class="data-row">
+                        <div class="data-label-group"><i class="fa-regular fa-flag"></i> Kewarganegaraan</div>
+                        <div class="data-val">Warga Negara Indonesia</div>
+                    </div>
+
+                    <!-- Left Col -->
+                    <div class="data-row">
+                        <div class="data-label-group"><i class="fa-regular fa-id-card"></i> NIK</div>
+                        <div class="data-val">3275101209010001</div>
+                    </div>
+                    <!-- Right Col -->
+                    <div class="data-row">
+                        <div class="data-label-group"><i class="fa-regular fa-heart"></i> Status Pernikahan</div>
+                        <div class="data-val">Belum Menikah</div>
+                    </div>
+
+                    <!-- Left Col -->
+                    <div class="data-row">
+                        <div class="data-label-group"><i class="fa-solid fa-location-dot"></i> Tempat Lahir</div>
+                        <div class="data-val">Yogyakarta</div>
+                    </div>
+                    <!-- Right Col -->
+                    <div class="data-row">
+                        <div class="data-label-group"><i class="fa-solid fa-phone"></i> No. WhatsApp</div>
+                        <div class="data-val">0812-3456-7890</div>
+                    </div>
+
+                    <!-- Left Col -->
+                    <div class="data-row">
+                        <div class="data-label-group"><i class="fa-regular fa-calendar"></i> Tanggal Lahir</div>
+                        <div class="data-val">12 September 2001</div>
+                    </div>
+                    <!-- Right Col -->
+                    <div class="data-row">
+                        <div class="data-label-group"><i class="fa-regular fa-envelope"></i> Email</div>
+                        <div class="data-val">baguspermadi@email.com</div>
+                    </div>
+
+                    <!-- Left Col -->
+                    <div class="data-row">
+                        <div class="data-label-group"><i class="fa-solid fa-venus-mars"></i> Jenis Kelamin</div>
+                        <div class="data-val">Laki-laki</div>
+                    </div>
+                    <!-- Right Col -->
+                    <div class="data-row">
+                        <div class="data-label-group"><i class="fa-solid fa-droplet"></i> Golongan Darah</div>
+                        <div class="data-val">O</div>
+                    </div>
+
+                    <!-- Left Col -->
+                    <div class="data-row">
+                        <div class="data-label-group"><i class="fa-solid fa-kaaba"></i> Agama</div>
+                        <div class="data-val">Islam</div>
+                    </div>
+                    <!-- Right Col -->
+                    <div class="data-row">
+                        <div class="data-label-group"><i class="fa-solid fa-users"></i> Anak Ke</div>
+                        <div class="data-val">2 dari 3 bersaudara</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section: Alamat -->
+            <div class="section-card">
+                <h3>Alamat</h3>
+                <div class="alamat-block">
+                    <div class="alamat-icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="alamat-content">
+                        <span class="alamat-label">Alamat Lengkap</span>
+                        <span class="alamat-val">Jl. Kaliurang No. 123, Sleman, Yogyakarta</span>
+                    </div>
+                </div>
+
+                <div class="alamat-details-grid">
+                    <div class="sub-meta">
+                        <span class="sub-meta-label">RT / RW</span>
+                        <span class="sub-meta-val">03 / 12</span>
+                    </div>
+                    <div class="sub-meta">
+                        <span class="sub-meta-label">KELURAHAN / DESA</span>
+                        <span class="sub-meta-val">Caturtunggal</span>
+                    </div>
+                    <div class="sub-meta">
+                        <span class="sub-meta-label">KECAMATAN</span>
+                        <span class="sub-meta-val">Depok</span>
+                    </div>
+                    <div class="sub-meta">
+                        <span class="sub-meta-label">KOTA / KABUPATEN</span>
+                        <span class="sub-meta-val">Sleman</span>
+                    </div>
+                    <div class="sub-meta">
+                        <span class="sub-meta-label">PROVINSI</span>
+                        <span class="sub-meta-val">DI Yogyakarta</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

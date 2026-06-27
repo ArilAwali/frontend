@@ -1,0 +1,332 @@
+/* Stats Row */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+.icon-green { background: #e6f4ed; color: #117b53; }
+.icon-orange { background: #ffedd5; color: #f97316; }
+.icon-blue { background: #dbeafe; color: #3b82f6; }
+.icon-red { background: #fee2e2; color: #ef4444; }
+
+.stat-content { display: flex; flex-direction: column; }
+.stat-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; font-weight: 500; }
+.stat-val { font-size: 24px; font-weight: 700; color: var(--text-primary); }
+.stat-sub { font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
+
+/* Filters */
+.filter-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    align-items: center;
+}
+.search-input {
+    flex: 1;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%239ca3af" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>') no-repeat 12px center;
+    font-size: 13px;
+    outline: none;
+}
+.filter-select {
+    padding: 10px 32px 10px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="%2364748b" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>') no-repeat right 12px center;
+    color: var(--text-primary);
+    font-size: 13px;
+    appearance: none;
+    cursor: pointer;
+    font-weight: 500;
+}
+.btn-filter {
+    padding: 10px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+/* Pagination */
+.pagination-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    padding-top: 16px;
+}
+.page-info {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+.pagination {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+.page-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: transparent;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-primary);
+}
+.page-btn:hover { background: var(--bg-color); }
+.page-btn.active {
+    background: #0d4a36;
+    color: #fff;
+}
+
+/* Detail Panel */
+.main-content.with-panel {
+    margin-right: 420px; /* Slightly wider for the tables */
+}
+
+.detail-panel {
+    width: 420px;
+    background: #fff;
+    border-left: 1px solid var(--border-color);
+    height: calc(100vh - 64px);
+    position: fixed;
+    right: 0;
+    top: 64px;
+    overflow-y: auto;
+    padding: 24px;
+    z-index: 98;
+    box-shadow: -4px 0 15px rgba(0,0,0,0.02);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+.panel-header h3 { font-size: 16px; font-weight: 600; color: var(--text-primary); }
+.close-btn { background: none; border: none; cursor: pointer; color: var(--text-secondary); font-size: 16px; }
+
+.detail-profile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    background: #f8fafc;
+    padding: 16px;
+    border-radius: 12px;
+}
+.detail-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--light-green);
+    color: var(--primary-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+.detail-name h4 { 
+    font-size: 15px; 
+    margin-bottom: 4px; 
+    color: var(--text-primary);
+}
+.detail-name span { font-size: 12px; color: var(--text-secondary); display: block; margin-top: 2px;}
+
+.info-section { margin-bottom: 24px; }
+.info-section h5 { 
+    font-size: 11px; 
+    color: var(--text-primary); 
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+/* Inner Table for Mata Kuliah */
+.mk-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-bottom: 24px;
+}
+.mk-table th {
+    text-align: left;
+    padding: 8px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    border-bottom: 1px solid var(--border-color);
+}
+.mk-table td {
+    padding: 8px;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--bg-color);
+}
+
+.info-grid { 
+    display: grid; 
+    grid-template-columns: 130px 1fr; 
+    gap: 10px; 
+    font-size: 12px; 
+}
+.info-label { color: var(--text-secondary); }
+.info-val { font-weight: 500; color: var(--text-primary); text-align: right;}
+
+/* Timeline for Riwayat Verifikasi */
+.timeline {
+    position: relative;
+    padding-left: 20px;
+    margin-top: 12px;
+}
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 6px;
+    bottom: 0;
+    width: 2px;
+    background: var(--border-color);
+}
+.timeline-item {
+    position: relative;
+    margin-bottom: 16px;
+    font-size: 12px;
+}
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border-color);
+}
+.timeline-item.active::before {
+    background: #f97316; /* orange */
+    box-shadow: 0 0 0 2px #ffedd5;
+}
+.timeline-item.done::before {
+    background: var(--primary-green);
+}
+.tl-time { font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+.tl-desc { color: var(--text-secondary); }
+
+/* Buttons */
+.panel-actions { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 12px; 
+    margin-top: 24px; 
+}
+.btn-approve { 
+    padding: 12px; 
+    border: none; 
+    background: #117b53; 
+    color: #fff; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-size: 13px; 
+    font-weight: 600; 
+    display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.btn-reject { 
+    padding: 12px; 
+    border: none; 
+    background: #ef4444; 
+    color: #fff; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-size: 13px; 
+    font-weight: 600; 
+    display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.btn-outline { 
+    padding: 12px; 
+    border: 1px solid var(--border-color); 
+    background: #fff; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-size: 13px; 
+    font-weight: 600; 
+    grid-column: span 2;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    color: var(--text-primary);
+}
+.note-text {
+    font-size: 11px;
+    color: var(--blue);
+    background: var(--light-blue);
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 16px;
+}
+
+/* Info Box */
+.info-box {
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: 12px;
+    padding: 16px 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-top: 24px;
+}
+.info-box-icon {
+    width: 32px;
+    height: 32px;
+    background: #e0f2fe;
+    color: #0284c7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+.info-box-text {
+    font-size: 13px;
+    color: #0369a1;
+    line-height: 1.6;
+}
+
+.badge-orange {
+    background-color: #ffedd5;
+    color: #c2410c;
+}

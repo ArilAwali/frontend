@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengumuman - Universitas Crypto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --sidebar-bg: #091a38;
+            --main-bg: #f5f6f8;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --primary-green: #0d4a36;
+            --light-green: #e6f4ed;
+            --accent-blue: #0f4c81;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--main-bg);
+            color: var(--text-dark);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styling matches portal standard */
+        .sidebar {
+            width: 260px;
+            background-color: var(--sidebar-bg);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 24px 20px;
+            flex-shrink: 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+        }
+        .sidebar::-webkit-scrollbar { display: none; }
+
+        .sidebar a {
+            color: #94a3b8;
+            text-decoration: none;
+            padding: 10px 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 4px;
+            transition: all 0.2s;
+        }
+        .sidebar a:hover, .sidebar a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        .sidebar a.active {
+            background-color: #1e3a8a;
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Main Content Layout */
+        .main-wrapper {
+            flex: 1;
+            margin-left: 260px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Topbar Header */
+        .topbar {
+            height: 64px;
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 40px;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 90;
+        }
+        .topbar-icons {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: var(--text-muted);
+        }
+        .icon-badge {
+            position: relative;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .badge-dot {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #ef4444;
+            color: white;
+            font-size: 9px;
+            font-weight: 700;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #0d4a36;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+        }
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .user-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .user-role {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Content Body */
+        .content-body {
+            padding: 32px 40px;
+            flex: 1;
+        }
+        .page-header h1 {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        /* Search & Filter Bar */
+        .filter-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            gap: 16px;
+        }
+        .search-box {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 10px 16px 10px 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: white;
+            font-size: 13px;
+            outline: none;
+        }
+        .search-box input::placeholder { color: #94a3b8; }
+
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+        }
+        .filter-tab {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            background: white;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-tab.active {
+            background: #0d4a36;
+            color: white;
+            border-color: #0d4a36;
+        }
+
+        /* Grid Layout */
+        .announcement-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 24px;
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Featured Card */
+        .card-featured {
+            background: linear-gradient(135deg, #0f2b5c 0%, #1e3a8a 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 28px;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(15, 43, 92, 0.15);
+        }
+        .card-featured .card-header-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .icon-circle-featured {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .badge-red {
+            background: #ef4444;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+        .time-muted {
+            font-size: 12px;
+            opacity: 0.75;
+        }
+        .card-featured h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        .card-featured p {
+            font-size: 13px;
+            opacity: 0.85;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .btn-read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+        }
+        .btn-read-more:hover { text-decoration: underline; }
+
+        /* Standard Cards */
+        .card-standard {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        .card-standard .card-header-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .icon-circle-standard {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e6f4ed;
+            color: #0d4a36;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        .badge-green-text {
+            background: #e6f4ed;
+            color: #0d4a36;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+        .badge-blue-text {
+            background: #dbeafe;
+            color: #1e40af;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+        .time-gray {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-left: auto;
+        }
+        .card-standard h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .card-standard p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+        .btn-read-more-dark {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        /* Right Column Widgets */
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .widget-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        .widget-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .widget-title a {
+            font-size: 12px;
+            color: #0d4a36;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .cat-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .cat-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        .cat-item-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .cat-item-left i {
+            width: 16px;
+            color: var(--text-muted);
+        }
+        .cat-count {
+            font-size: 12px;
+            color: var(--text-muted);
+            background: var(--main-bg);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .agenda-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .agenda-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .date-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .date-box.blue { background: #0f2b5c; color: white; }
+        .date-box.gray { background: var(--main-bg); color: var(--text-dark); border: 1px solid var(--border-color); }
+        .date-month { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+        .date-day { font-size: 16px; font-weight: 800; line-height: 1; margin-top: 2px;}
+
+        .agenda-info h4 {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        .agenda-info p {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 24px 40px;
+            font-size: 12px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Reusable Sidebar Component Container -->
+    <aside class="sidebar"></aside>
+
+    <div class="main-wrapper">
+        <!-- Topbar -->
+        <header class="topbar">
+            <div class="topbar-icons">
+                <div class="icon-badge">
+                    <i class="far fa-bell"></i>
+                    <div class="badge-dot">1</div>
+                </div>
+                <div class="icon-badge">
+                    <i class="far fa-envelope"></i>
+                </div>
+            </div>
+            <div class="user-profile">
+                <div class="user-avatar">MD</div>
+                <div class="user-info">
+                    <div class="user-name">Muhammad Dhafin <i class="fas fa-chevron-down" style="font-size: 10px; color: var(--text-muted);"></i></div>
+                    <div class="user-role">Mahasiswa</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Body -->
+        <main class="content-body">
+            <div class="page-header">
+                <h1>Pengumuman</h1>
+                <p>Pusat informasi dan pemberitahuan resmi dari universitas.</p>
+            </div>
+
+            <!-- Filter Row -->
+            <div class="filter-row">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Cari pengumuman...">
+                </div>
+                <div class="filter-tabs">
+                    <button class="filter-tab active">Semua</button>
+                    <button class="filter-tab">Akademik</button>
+                    <button class="filter-tab">Event</button>
+                    <button class="filter-tab">Administrasi</button>
+                </div>
+            </div>
+
+            <!-- Announcement Grid -->
+            <div class="announcement-grid">
+                <!-- Left Column (Articles) -->
+                <div class="left-column">
+                    <!-- Featured Card -->
+                    <div class="card-featured">
+                        <div class="card-header-top">
+                            <div class="icon-circle-featured">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <span class="badge-red">PENTING</span>
+                            <span class="time-muted">Mei 06, 09:00 WIB</span>
+                        </div>
+                        <h2>Jadwal Daftar Ulang Mahasiswa Baru Gelombang 1</h2>
+                        <p>Bagi seluruh calon mahasiswa baru yang telah dinyatakan lulus pada Seleksi Gelombang 1, diwajibkan untuk segera melakukan proses daftar...</p>
+                        <a href="#" class="btn-read-more">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="card-standard">
+                        <div class="card-header-top">
+                            <div class="icon-circle-standard">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <span class="badge-green-text">AKADEMIK</span>
+                            <span class="time-gray">Kemarin, 14:30 WIB</span>
+                        </div>
+                        <h3>Perubahan Jadwal Perkuliahan Pengantar Teknologi Informasi</h3>
+                        <p>Diberitahukan kepada mahasiswa kelas TI-1A dan TI-1B, bahwa jadwal perkuliahan mata kuliah Pengantar Teknologi Informasi yang semula...</p>
+                        <a href="#" class="btn-read-more-dark">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="card-standard">
+                        <div class="card-header-top">
+                            <div class="icon-circle-standard" style="background:#dbeafe; color:#1e40af;">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <span class="badge-blue-text">ADMINISTRASI</span>
+                            <span class="time-gray">10 Mei 2025</span>
+                        </div>
+                        <h3>Batas Akhir Pembayaran Uang Kuliah Tunggal (UKT) Semester Ganjil</h3>
+                        <p>Mengingatkan kembali kepada seluruh mahasiswa aktif bahwa batas akhir pembayaran UKT untuk semester ganjil tahun akademik 2025/2026 adalah...</p>
+                        <a href="#" class="btn-read-more-dark">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Right Column (Widgets) -->
+                <div class="right-column">
+                    <!-- Widget 1: Kategori -->
+                    <div class="widget-card">
+                        <div class="widget-title">Kategori Pengumuman</div>
+                        <div class="cat-list">
+                            <div class="cat-item">
+                                <div class="cat-item-left"><i class="fas fa-book"></i> Akademik</div>
+                                <span class="cat-count">24</span>
+                            </div>
+                            <div class="cat-item">
+                                <div class="cat-item-left"><i class="fas fa-bullhorn"></i> Event & Kegiatan</div>
+                                <span class="cat-count">12</span>
+                            </div>
+                            <div class="cat-item">
+                                <div class="cat-item-left"><i class="fas fa-university"></i> Administrasi</div>
+                                <span class="cat-count">8</span>
+                            </div>
+                            <div class="cat-item">
+                                <div class="cat-item-left"><i class="fas fa-briefcase"></i> Karir & Magang</div>
+                                <span class="cat-count">5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Widget 2: Agenda -->
+                    <div class="widget-card">
+                        <div class="widget-title">
+                            Agenda Terdekat
+                            <a href="#">Lihat Kalender</a>
+                        </div>
+                        <div class="agenda-list">
+                            <div class="agenda-item">
+                                <div class="date-box blue">
+                                    <span class="date-month">MEI</span>
+                                    <span class="date-day">20</span>
+                                </div>
+                                <div class="agenda-info">
+                                    <h4>Mulai Daftar Ulang Maba</h4>
+                                    <p>08:00 - Selesai</p>
+                                </div>
+                            </div>
+                            <div class="agenda-item">
+                                <div class="date-box gray">
+                                    <span class="date-month">JUN</span>
+                                    <span class="date-day">30</span>
+                                </div>
+                                <div class="agenda-info">
+                                    <h4>Batas Akhir Bayar UKT</h4>
+                                    <p>23:59 WIB</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            © 2025 Universitas Crypto. Semua hak dilindungi.
+        </footer>
+    </div>
+
+    <!-- Reusable Sidebar JS Component -->
+    <script src="sidebar.js"></script>
+</body>
+</html>

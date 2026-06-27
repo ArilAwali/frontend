@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan - Universitas Crypto</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/laporan.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="top-header">
+        <div class="logo-area">
+            <h1>Universitas Crypto</h1>
+        </div>
+        <div class="user-area">
+            <img src="https://ui-avatars.com/api/?name=Admin&background=1a2530&color=fff" alt="User Avatar" class="avatar">
+        </div>
+    </header>
+
+    <div class="layout-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">UP</span>
+                    <span class="brand-subtitle">Portal PMB</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <i class="fa-solid fa-border-all"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="dokumen.html" class="nav-item">
+                    <i class="fa-regular fa-file-lines"></i>
+                    <span>Dokumen</span>
+                </a>
+                <a href="prodi.html" class="nav-item">
+                    <i class="fa-solid fa-users-gear"></i>
+                    <span>Manajemen Prodi</span>
+                </a>
+                <a href="pendaftaran.html" class="nav-item">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>Pendaftaran</span>
+                </a>
+                <a href="laporan.html" class="nav-item active">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Laporan</span>
+                </a>
+                <a href="pengumuman.html" class="nav-item">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span>Pengumuman</span>
+                </a>
+                <a href="ajuan.html" class="nav-item">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Ajuan Mata Kuliah</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-regular fa-envelope"></i>
+                    <span>Pesan</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Keluar</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h2>Laporan Penerimaan Mahasiswa Baru</h2>
+            </div>
+
+            <div class="laporan-stats">
+                <div class="lap-card">
+                    <span class="lap-title">Periode</span>
+                    <div class="lap-value">Okt 2026</div>
+                    <span class="lap-sub text-green"><i class="fa-regular fa-circle-check"></i> Aktif Sekarang</span>
+                </div>
+                <div class="lap-card">
+                    <span class="lap-title">Rata-rata Pendaftar</span>
+                    <div class="lap-value">200</div>
+                    <span class="lap-sub">Per Minggu</span>
+                </div>
+                <div class="lap-card">
+                    <span class="lap-title">Program Terfavorit</span>
+                    <div class="lap-value">Teknik Informatika</div>
+                    <span class="lap-sub" style="color: #b45309;">848 Pendaftar</span>
+                </div>
+                <div class="lap-card">
+                    <span class="lap-title">Target Kuota</span>
+                    <div class="lap-value-flex">
+                        <h3>95%</h3>
+                        <div class="kuota-bar-wrap">
+                            <div class="kuota-bar-bg-light">
+                                <div class="kuota-bar-fill" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="lap-sub">1,900 / 2,000 Kursi</span>
+                </div>
+            </div>
+
+            <div class="laporan-grid">
+                <div class="lap-card chart-card">
+                    <div class="chart-header">
+                        <h4>Tren Pendaftaran Mingguan</h4>
+                        <div class="chart-legend"><span class="dot"></span> Total Registrasi</div>
+                    </div>
+                    <div class="chart-body">
+                        <svg width="100%" height="100%" viewBox="0 0 500 200" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#0d4a36" stop-opacity="0.15"/>
+                                    <stop offset="100%" stop-color="#0d4a36" stop-opacity="0"/>
+                                </linearGradient>
+                            </defs>
+                            
+                            <!-- Grid Lines -->
+                            <line x1="0" y1="50" x2="500" y2="50" stroke="#f1f5f9" stroke-width="1"/>
+                            <line x1="0" y1="100" x2="500" y2="100" stroke="#f1f5f9" stroke-width="1"/>
+                            <line x1="0" y1="150" x2="500" y2="150" stroke="#f1f5f9" stroke-width="1"/>
+                            <line x1="0" y1="200" x2="500" y2="200" stroke="#f1f5f9" stroke-width="1"/>
+                            
+                            <!-- Area -->
+                            <path d="M 10 180 C 80 140, 120 160, 160 150 C 200 140, 220 30, 260 30 C 300 30, 330 150, 380 150 C 430 150, 460 50, 500 50 L 500 200 L 10 200 Z" fill="url(#chartGradient)"/>
+                            
+                            <!-- Line -->
+                            <path d="M 10 180 C 80 140, 120 160, 160 150 C 200 140, 220 30, 260 30 C 300 30, 330 150, 380 150 C 430 150, 460 50, 500 50" fill="none" stroke="#0d4a36" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="lap-card distro-card">
+                    <h4>Distribusi Fakultas</h4>
+                    <div class="distro-list">
+                        
+                        <div class="distro-item">
+                            <div class="distro-header">
+                                <span class="distro-name">Teknik & Sains</span>
+                                <span class="distro-pct">42%</span>
+                            </div>
+                            <div class="distro-bar-bg">
+                                <div class="distro-bar-fill fill-green" style="width: 42%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="distro-item">
+                            <div class="distro-header">
+                                <span class="distro-name">Ekonomi</span>
+                                <span class="distro-pct">28%</span>
+                            </div>
+                            <div class="distro-bar-bg">
+                                <div class="distro-bar-fill fill-green" style="width: 28%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="distro-item">
+                            <div class="distro-header">
+                                <span class="distro-name">Ilmu Komunikasi</span>
+                                <span class="distro-pct">15%</span>
+                            </div>
+                            <div class="distro-bar-bg">
+                                <div class="distro-bar-fill fill-green" style="width: 15%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="distro-item">
+                            <div class="distro-header">
+                                <span class="distro-name">Hukum</span>
+                                <span class="distro-pct">10%</span>
+                            </div>
+                            <div class="distro-bar-bg">
+                                <div class="distro-bar-fill fill-green" style="width: 10%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="distro-item">
+                            <div class="distro-header">
+                                <span class="distro-name">Lainnya</span>
+                                <span class="distro-pct">5%</span>
+                            </div>
+                            <div class="distro-bar-bg">
+                                <div class="distro-bar-fill fill-gray" style="width: 5%;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer">
+                &copy; 2026 Universitas Perjuangan. Sistem Penerimaan Mahasiswa Baru.
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

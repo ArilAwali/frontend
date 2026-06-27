@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengumuman - Universitas Crypto</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/pengumuman.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="top-header" style="justify-content: space-between;">
+        <div class="breadcrumb" style="padding-left: 24px;">
+            <span>Pengumuman</span> <i class="fa-solid fa-chevron-right" style="margin:0 8px;"></i> Kelola Pengumuman
+        </div>
+        <div class="top-right-icons">
+            <button class="icon-btn">
+                <i class="fa-regular fa-bell"></i>
+                <div class="badge-count">6</div>
+            </button>
+            <button class="icon-btn">
+                <i class="fa-regular fa-envelope"></i>
+                <div class="badge-count">2</div>
+            </button>
+            <div class="user-profile">
+                <div class="user-avatar">A</div>
+                <div class="user-name">Admin PMB <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 6px; color: var(--text-secondary);"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="layout-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">UP</span>
+                    <span class="brand-subtitle">Portal PMB</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <i class="fa-solid fa-border-all"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="dokumen.html" class="nav-item">
+                    <i class="fa-regular fa-file-lines"></i>
+                    <span>Dokumen</span>
+                </a>
+                <a href="prodi.html" class="nav-item">
+                    <i class="fa-solid fa-users-gear"></i>
+                    <span>Manajemen Prodi</span>
+                </a>
+                <a href="pendaftaran.html" class="nav-item">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>Pendaftaran</span>
+                </a>
+                <a href="laporan.html" class="nav-item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Laporan</span>
+                </a>
+                <a href="pengumuman.html" class="nav-item active">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span>Pengumuman</span>
+                </a>
+                <a href="ajuan.html" class="nav-item">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Ajuan Mata Kuliah</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-regular fa-envelope"></i>
+                    <span>Pesan</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Keluar</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <div class="page-header-text">
+                    <h2>Kelola Pengumuman</h2>
+                    <p>Kelola dan publikasikan informasi penting untuk mahasiswa.</p>
+                </div>
+                <button class="btn-buat">
+                    <i class="fa-solid fa-plus"></i> Buat Pengumuman
+                </button>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-icon icon-green">
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-title">TOTAL PENGUMUMAN</div>
+                        <div class="stat-value">24</div>
+                        <div class="stat-desc">Semua Pengumuman</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon icon-blue">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-title">DIPUBLIKASIKAN</div>
+                        <div class="stat-value">18</div>
+                        <div class="stat-desc">Pengumuman Aktif</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon icon-orange">
+                        <i class="fa-regular fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-title">DIJADWALKAN</div>
+                        <div class="stat-value">4</div>
+                        <div class="stat-desc">Akan Tayang</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon icon-red">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-title">ARSIP</div>
+                        <div class="stat-value">2</div>
+                        <div class="stat-desc">Tidak Aktif</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <div class="filter-row">
+                    <input type="text" class="search-input" placeholder="Cari judul pengumuman...">
+                    <select class="filter-select">
+                        <option>Semua Kategori</option>
+                    </select>
+                    <select class="filter-select">
+                        <option>Semua Status</option>
+                    </select>
+                    <input type="text" class="date-input" value="01/05/2025 - 20/05/2025">
+                    <button class="btn-filter"><i class="fa-solid fa-filter"></i> Filter</button>
+                </div>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 40px;"><input type="checkbox"></th>
+                            <th>JUDUL PENGUMUMAN</th>
+                            <th>KATEGORI</th>
+                            <th>TANGGAL</th>
+                            <th>STATUS</th>
+                            <th>DILIHAT</th>
+                            <th style="text-align: right;">AKSI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Row 1 -->
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="judul-wrapper">
+                                    <div class="judul-title">
+                                        <span class="badge-penting">PENTING</span> Jadwal Daftar Ulang Mahasiswa Baru Gelombang 1
+                                    </div>
+                                    <div class="judul-desc">Informasi jadwal dan tata cara daftar ulang...</div>
+                                </div>
+                            </td>
+                            <td><span class="kat-akademik">Akademik</span></td>
+                            <td>
+                                <div class="date-main">18 Mei 2025</div>
+                                <div class="date-sub">10:00 WIB</div>
+                            </td>
+                            <td><span class="status-badge status-pub">Dipublikasikan</span></td>
+                            <td><span class="view-count">532</span></td>
+                            <td style="text-align: right;">
+                                <div class="action-btns" style="justify-content: flex-end;">
+                                    <button class="btn-action"><i class="fa-regular fa-eye"></i></button>
+                                    <button class="btn-action"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn-action"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Row 2 -->
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="judul-wrapper">
+                                    <div class="judul-title">
+                                        Perubahan Jadwal Ujian Akhir Semester Genap 2024/2025
+                                    </div>
+                                    <div class="judul-desc">Sehubungan dengan perubahan kalender...</div>
+                                </div>
+                            </td>
+                            <td><span class="kat-akademik">Akademik</span></td>
+                            <td>
+                                <div class="date-main">16 Mei 2025</div>
+                                <div class="date-sub">14:30 WIB</div>
+                            </td>
+                            <td><span class="status-badge status-pub">Dipublikasikan</span></td>
+                            <td><span class="view-count">420</span></td>
+                            <td style="text-align: right;">
+                                <div class="action-btns" style="justify-content: flex-end;">
+                                    <button class="btn-action"><i class="fa-regular fa-eye"></i></button>
+                                    <button class="btn-action"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn-action"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Row 3 -->
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="judul-wrapper">
+                                    <div class="judul-title">
+                                        Batas Akhir Pembayaran UKT Semester Genap 2024/2025
+                                    </div>
+                                    <div class="judul-desc">Diharapkan seluruh mahasiswa melakukan...</div>
+                                </div>
+                            </td>
+                            <td><span class="kat-administrasi">Administrasi</span></td>
+                            <td>
+                                <div class="date-main">15 Mei 2025</div>
+                                <div class="date-sub">09:15 WIB</div>
+                            </td>
+                            <td><span class="status-badge status-pub">Dipublikasikan</span></td>
+                            <td><span class="view-count">812</span></td>
+                            <td style="text-align: right;">
+                                <div class="action-btns" style="justify-content: flex-end;">
+                                    <button class="btn-action"><i class="fa-regular fa-eye"></i></button>
+                                    <button class="btn-action"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn-action"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Row 4 -->
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="judul-wrapper">
+                                    <div class="judul-title">
+                                        Sosialisasi Program Merdeka Belajar Kampus Merdeka (MBKM)
+                                    </div>
+                                    <div class="judul-desc">Ayo manfaatkan kesempatan untuk mengembangkan...</div>
+                                </div>
+                            </td>
+                            <td><span class="kat-kemahasiswaan">Kemahasiswaan</span></td>
+                            <td>
+                                <div class="date-main">14 Mei 2025</div>
+                                <div class="date-sub">16:00 WIB</div>
+                            </td>
+                            <td><span class="status-badge status-jadwal">Dijadwalkan</span></td>
+                            <td><span class="view-count">-</span></td>
+                            <td style="text-align: right;">
+                                <div class="action-btns" style="justify-content: flex-end;">
+                                    <button class="btn-action"><i class="fa-regular fa-eye"></i></button>
+                                    <button class="btn-action"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn-action"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Row 5 -->
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="judul-wrapper">
+                                    <div class="judul-title">
+                                        Maintenance Sistem Informasi Akademik (SIA)
+                                    </div>
+                                    <div class="judul-desc">Sistem Informasi Akademik akan dilakukan...</div>
+                                </div>
+                            </td>
+                            <td><span class="kat-informasi">Informasi</span></td>
+                            <td>
+                                <div class="date-main">12 Mei 2025</div>
+                                <div class="date-sub">11:20 WIB</div>
+                            </td>
+                            <td><span class="status-badge status-pub">Dipublikasikan</span></td>
+                            <td><span class="view-count">256</span></td>
+                            <td style="text-align: right;">
+                                <div class="action-btns" style="justify-content: flex-end;">
+                                    <button class="btn-action"><i class="fa-regular fa-eye"></i></button>
+                                    <button class="btn-action"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn-action"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Row 6 -->
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="judul-wrapper">
+                                    <div class="judul-title">
+                                        Pengumuman Libur Hari Raya Waisak 2025
+                                    </div>
+                                    <div class="judul-desc">Diberitahukan kepada seluruh civitas akademika...</div>
+                                </div>
+                            </td>
+                            <td><span class="kat-informasi">Informasi</span></td>
+                            <td>
+                                <div class="date-main">28 April 2025</div>
+                                <div class="date-sub">08:00 WIB</div>
+                            </td>
+                            <td><span class="status-badge status-arsip-red">Arsip</span></td>
+                            <td><span class="view-count">195</span></td>
+                            <td style="text-align: right;">
+                                <div class="action-btns" style="justify-content: flex-end;">
+                                    <button class="btn-action"><i class="fa-regular fa-eye"></i></button>
+                                    <button class="btn-action"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn-action"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Row 7 -->
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="judul-wrapper">
+                                    <div class="judul-title">
+                                        Pendaftaran Beasiswa Prestasi Akademik
+                                    </div>
+                                    <div class="judul-desc">Telah dibuka pendaftaran Beasiswa Prestasi Akademik...</div>
+                                </div>
+                            </td>
+                            <td><span class="kat-kemahasiswaan">Kemahasiswaan</span></td>
+                            <td>
+                                <div class="date-main">20 April 2025</div>
+                                <div class="date-sub">13:45 WIB</div>
+                            </td>
+                            <td><span class="status-badge status-arsip-red">Arsip</span></td>
+                            <td><span class="view-count">301</span></td>
+                            <td style="text-align: right;">
+                                <div class="action-btns" style="justify-content: flex-end;">
+                                    <button class="btn-action"><i class="fa-regular fa-eye"></i></button>
+                                    <button class="btn-action"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn-action"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="pagination-row">
+                    <div class="page-info">Menampilkan 1 - 7 dari 24 data</div>
+                    <div class="pagination">
+                        <button class="page-btn"><i class="fa-solid fa-chevron-left" style="margin-right: 6px;"></i> Sebelumnya</button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn">4</button>
+                        <button class="page-btn">Berikutnya <i class="fa-solid fa-chevron-right" style="margin-left: 6px;"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</body>
+</html>

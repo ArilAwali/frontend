@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Pendaftar - Universitas Crypto</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/pendaftaran.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="top-header">
+        <div class="logo-area">
+            <h1>Universitas Crypto</h1>
+        </div>
+        <div class="user-area">
+            <img src="https://ui-avatars.com/api/?name=Admin&background=1a2530&color=fff" alt="User Avatar" class="avatar">
+        </div>
+    </header>
+
+    <div class="layout-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">UP</span>
+                    <span class="brand-subtitle">Portal PMB</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <i class="fa-solid fa-border-all"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="dokumen.html" class="nav-item">
+                    <i class="fa-regular fa-file-lines"></i>
+                    <span>Dokumen</span>
+                </a>
+                <a href="prodi.html" class="nav-item">
+                    <i class="fa-solid fa-users-gear"></i>
+                    <span>Manajemen Prodi</span>
+                </a>
+                <a href="pendaftaran.html" class="nav-item active">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>Pendaftaran</span>
+                </a>
+                <a href="laporan.html" class="nav-item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Laporan</span>
+                </a>
+                <a href="pengumuman.html" class="nav-item">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span>Pengumuman</span>
+                </a>
+                <a href="ajuan.html" class="nav-item">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Ajuan Mata Kuliah</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-regular fa-envelope"></i>
+                    <span>Pesan</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Keluar</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content with-panel">
+            <div class="page-header">
+                <h2>Data Pendaftar</h2>
+                <p>Kelola dan pantau semua data pendaftar yang telah melakukan registrasi pada sistem PMB.</p>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-box">
+                    <div class="stat-icon icon-green">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Total Pendaftar</div>
+                        <div class="stat-val">2,458</div>
+                        <div class="stat-sub">Semua pendaftar</div>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon icon-blue">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Pendaftar Aktif</div>
+                        <div class="stat-val">1,824</div>
+                        <div class="stat-sub"><span class="blue">74.2%</span> dari total</div>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon icon-yellow">
+                        <i class="fa-solid fa-file-signature"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Pendaftar Diterima</div>
+                        <div class="stat-val">612</div>
+                        <div class="stat-sub"><span class="yellow">24.9%</span> dari total</div>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon icon-red">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Pendaftar Ditolak</div>
+                        <div class="stat-val">22</div>
+                        <div class="stat-sub"><span class="red">0.9%</span> dari total</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card pendaftaran-list">
+                <div class="filter-row">
+                    <input type="text" class="search-input" placeholder="Cari nama, NIM, email, atau no. pendaftaran...">
+                    <select class="filter-select">
+                        <option>Semua Gelombang</option>
+                    </select>
+                    <select class="filter-select">
+                        <option>Semua Program Studi</option>
+                    </select>
+                    <select class="filter-select">
+                        <option>Semua Status</option>
+                    </select>
+                    <button class="btn-filter"><i class="fa-solid fa-filter"></i> Filter</button>
+                    <button class="btn-export"><i class="fa-solid fa-download"></i> Export Data</button>
+                </div>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox"></th>
+                            <th>NO</th>
+                            <th>PENDAFTAR</th>
+                            <th>NO. PENDAFTARAN</th>
+                            <th>PROGRAM STUDI</th>
+                            <th>GELOMBANG</th>
+                            <th>TANGGAL DAFTAR</th>
+                            <th>STATUS</th>
+                            <th>AKSI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Row 1 -->
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>1</td>
+                            <td>
+                                <div class="student-info" onclick="window.location.href='detail_pendaftar.html'" style="cursor:pointer;">
+                                    <div class="avatar-initial bg-light-green">BP</div>
+                                    <div>
+                                        <div class="student-name">Bagus Permadi</div>
+                                        <div class="student-id">bagas@email.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>PMB-2025-0001</td>
+                            <td>Teknik Informatika</td>
+                            <td>Gelombang 1</td>
+                            <td>
+                                <div>20 Mei 2025</div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top:2px;">10:30 WIB</div>
+                            </td>
+                            <td><span class="badge badge-green">Diterima</span></td>
+                            <td><button class="action-btn"><i class="fa-solid fa-ellipsis"></i></button></td>
+                        </tr>
+                        <!-- Row 2 -->
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>2</td>
+                            <td>
+                                <div class="student-info" onclick="window.location.href='detail_pendaftar.html'" style="cursor:pointer;">
+                                    <div class="avatar-initial bg-light-yellow">SN</div>
+                                    <div>
+                                        <div class="student-name">Siti Nurhaliza</div>
+                                        <div class="student-id">siti@email.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>PMB-2025-0002</td>
+                            <td>Manajemen</td>
+                            <td>Gelombang 1</td>
+                            <td>
+                                <div>20 Mei 2025</div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top:2px;">09:15 WIB</div>
+                            </td>
+                            <td><span class="badge badge-blue">Verifikasi</span></td>
+                            <td><button class="action-btn"><i class="fa-solid fa-ellipsis"></i></button></td>
+                        </tr>
+                        <!-- Row 3 -->
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>3</td>
+                            <td>
+                                <div class="student-info" onclick="window.location.href='detail_pendaftar.html'" style="cursor:pointer;">
+                                    <div class="avatar-initial bg-light-blue">RK</div>
+                                    <div>
+                                        <div class="student-name">Rahmat Kurnia</div>
+                                        <div class="student-id">rahmat@email.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>PMB-2025-0003</td>
+                            <td>Teknik Sipil</td>
+                            <td>Gelombang 1</td>
+                            <td>
+                                <div>19 Mei 2025</div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top:2px;">14:20 WIB</div>
+                            </td>
+                            <td><span class="badge badge-blue">Verifikasi</span></td>
+                            <td><button class="action-btn"><i class="fa-solid fa-ellipsis"></i></button></td>
+                        </tr>
+                        <!-- Row 4 -->
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>4</td>
+                            <td>
+                                <div class="student-info" onclick="window.location.href='detail_pendaftar.html'" style="cursor:pointer;">
+                                    <div class="avatar-initial bg-light-red">AW</div>
+                                    <div>
+                                        <div class="student-name">Adi Wijaya</div>
+                                        <div class="student-id">adi@email.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>PMB-2025-0004</td>
+                            <td>Akuntansi</td>
+                            <td>Gelombang 1</td>
+                            <td>
+                                <div>19 Mei 2025</div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top:2px;">10:10 WIB</div>
+                            </td>
+                            <td><span class="badge badge-red">Ditolak</span></td>
+                            <td><button class="action-btn"><i class="fa-solid fa-ellipsis"></i></button></td>
+                        </tr>
+                        <!-- Row 5 -->
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>5</td>
+                            <td>
+                                <div class="student-info" onclick="window.location.href='detail_pendaftar.html'" style="cursor:pointer;">
+                                    <div class="avatar-initial bg-light-purple">MA</div>
+                                    <div>
+                                        <div class="student-name">Maya Amalia</div>
+                                        <div class="student-id">maya@email.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>PMB-2025-0005</td>
+                            <td>Teknik Informatika</td>
+                            <td>Gelombang 1</td>
+                            <td>
+                                <div>19 Mei 2025</div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top:2px;">11:00 WIB</div>
+                            </td>
+                            <td><span class="badge badge-green">Diterima</span></td>
+                            <td><button class="action-btn"><i class="fa-solid fa-ellipsis"></i></button></td>
+                        </tr>
+                        <!-- Row 6 -->
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>6</td>
+                            <td>
+                                <div class="student-info" onclick="window.location.href='detail_pendaftar.html'" style="cursor:pointer;">
+                                    <div class="avatar-initial bg-light-yellow" style="background:#f1f5f9; color:#64748b;">DL</div>
+                                    <div>
+                                        <div class="student-name">Dewi Lestari</div>
+                                        <div class="student-id">dewi@email.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>PMB-2025-0006</td>
+                            <td>Manajemen</td>
+                            <td>Gelombang 1</td>
+                            <td>
+                                <div>18 Mei 2025</div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top:2px;">15:10 WIB</div>
+                            </td>
+                            <td><span class="badge badge-blue">Verifikasi</span></td>
+                            <td><button class="action-btn"><i class="fa-solid fa-ellipsis"></i></button></td>
+                        </tr>
+                        <!-- Row 7 -->
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>7</td>
+                            <td>
+                                <div class="student-info" onclick="window.location.href='detail_pendaftar.html'" style="cursor:pointer;">
+                                    <div class="avatar-initial bg-light-blue" style="background:#e0f2fe; color:#0369a1;">TH</div>
+                                    <div>
+                                        <div class="student-name">Taufik Hidayat</div>
+                                        <div class="student-id">taufik@email.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>PMB-2025-0007</td>
+                            <td>Teknik Informatika</td>
+                            <td>Gelombang 1</td>
+                            <td>
+                                <div>18 Mei 2025</div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top:2px;">09:30 WIB</div>
+                            </td>
+                            <td><span class="badge badge-blue">Verifikasi</span></td>
+                            <td><button class="action-btn"><i class="fa-solid fa-ellipsis"></i></button></td>
+                        </tr>
+                        <!-- Row 8 -->
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>8</td>
+                            <td>
+                                <div class="student-info" onclick="window.location.href='detail_pendaftar.html'" style="cursor:pointer;">
+                                    <div class="avatar-initial bg-light-purple" style="background:#f3e8ff; color:#7e22ce;">LM</div>
+                                    <div>
+                                        <div class="student-name">Lina Marlina</div>
+                                        <div class="student-id">lina@email.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>PMB-2025-0008</td>
+                            <td>Akuntansi</td>
+                            <td>Gelombang 1</td>
+                            <td>
+                                <div>17 Mei 2025</div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top:2px;">08:40 WIB</div>
+                            </td>
+                            <td><span class="badge badge-green">Diterima</span></td>
+                            <td><button class="action-btn"><i class="fa-solid fa-ellipsis"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="pagination-row">
+                    <div class="page-info">Menampilkan 1 - 8 dari 2,458 data</div>
+                    <div class="pagination">
+                        <button class="page-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <span class="page-dots">...</span>
+                        <button class="page-btn">308</button>
+                        <button class="page-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Detail Panel -->
+        <aside class="detail-panel" id="detailPanel">
+            <div class="panel-header">
+                <h3>Detail Pendaftar</h3>
+                <button class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="detail-profile">
+                <div class="detail-avatar">BP</div>
+                <div class="detail-name">
+                    <h4>Bagas Permadi <span class="badge-sm badge-diterima">Diterima</span></h4>
+                    <span>PMB-2025-0001</span>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h5>INFORMASI PRIBADI</h5>
+                <div class="info-grid">
+                    <div class="info-label">NIK Pendaftar</div>
+                    <div class="info-val">3204010001</div>
+                    
+                    <div class="info-label">Tempat, Tgl Lahir</div>
+                    <div class="info-val">Bandung, 12 Januari<br>2005</div>
+                    
+                    <div class="info-label">Jenis Kelamin</div>
+                    <div class="info-val">Laki-laki</div>
+                    
+                    <div class="info-label">Agama</div>
+                    <div class="info-val">Islam</div>
+                    
+                    <div class="info-label">No. HP</div>
+                    <div class="info-val">0812-3456-7890</div>
+                    
+                    <div class="info-label">Email</div>
+                    <div class="info-val">bagas@email.com</div>
+                    
+                    <div class="info-label">Alamat</div>
+                    <div class="info-val">Jl. Sukajadi No. 123<br>Bandung, Jawa Barat</div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h5>INFORMASI PENDAFTARAN</h5>
+                <div class="info-grid">
+                    <div class="info-label">Program Studi</div>
+                    <div class="info-val">Teknik Informatika</div>
+                    
+                    <div class="info-label">Fakultas</div>
+                    <div class="info-val">Fakultas Teknik</div>
+                    
+                    <div class="info-label">Gelombang</div>
+                    <div class="info-val">Gelombang 1</div>
+                    
+                    <div class="info-label">Tanggal Daftar</div>
+                    <div class="info-val">20 Mei 2025, 10:30 WIB</div>
+                    
+                    <div class="info-label">Asal Sekolah</div>
+                    <div class="info-val">SMAN 1 Bandung</div>
+                    
+                    <div class="info-label">Jurusan</div>
+                    <div class="info-val">IPA</div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h5>PROGRES PENDAFTARAN</h5>
+                <div class="progress-list">
+                    <div class="progress-item">
+                        <div class="progress-item-left">
+                            <i class="fa-solid fa-circle-check"></i> Formulir Pendaftaran
+                        </div>
+                        <div class="progress-status">Selesai</div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-item-left">
+                            <i class="fa-solid fa-circle-check"></i> Unggah Dokumen
+                        </div>
+                        <div class="progress-status">Selesai</div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-item-left">
+                            <i class="fa-solid fa-circle-check"></i> Pembayaran
+                        </div>
+                        <div class="progress-status">Selesai</div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-item-left">
+                            <i class="fa-solid fa-circle-check"></i> Verifikasi Admin
+                        </div>
+                        <div class="progress-status">Selesai</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-actions">
+                <button class="btn-outline"><i class="fa-regular fa-folder"></i> Lihat Dokumen</button>
+                <button class="btn-outline">Riwayat Pendaftar <i class="fa-solid fa-chevron-right"></i></button>
+                <button class="btn-primary"><i class="fa-solid fa-pen"></i> Edit Data</button>
+            </div>
+        </aside>
+    </div>
+</body>
+</html>

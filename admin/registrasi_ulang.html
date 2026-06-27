@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifikasi Registrasi Ulang - Universitas Crypto Admin</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/dokumen.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .badge-status { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; display: inline-block; }
+        .badge-pending { background-color: #FEF3C7; color: #D97706; }
+        .badge-verified { background-color: #DCFCE7; color: #16A34A; }
+        .badge-rejected { background-color: #FEE2E2; color: #DC2626; }
+        .btn-sm-action { padding: 6px 12px; border-radius: 6px; border: none; font-size: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: 0.2s; text-decoration: none; }
+        .btn-verify { background-color: #10B981; color: white; }
+        .btn-verify:hover { background-color: #059669; }
+        .btn-detail { background-color: #2563EB; color: white; }
+        .btn-detail:hover { background-color: #1D4ED8; }
+        .table-custom { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .table-custom th { text-align: left; padding: 12px 16px; background: #F8FAFC; font-size: 12px; color: #64748B; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid #E2E8F0; }
+        .table-custom td { padding: 14px 16px; border-bottom: 1px solid #E2E8F0; font-size: 13px; color: #334155; vertical-align: middle; }
+    </style>
+</head>
+<body>
+    <header class="top-header">
+        <div class="logo-area">
+            <h1>Universitas Crypto</h1>
+        </div>
+        <div class="user-area">
+            <img src="https://ui-avatars.com/api/?name=Admin&background=1a2530&color=fff" alt="User Avatar" class="avatar">
+        </div>
+    </header>
+
+    <div class="layout-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">UP</span>
+                    <span class="brand-subtitle">Portal PMB Admin</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <i class="fa-solid fa-border-all"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="dokumen.html" class="nav-item">
+                    <i class="fa-regular fa-file-lines"></i>
+                    <span>Dokumen</span>
+                </a>
+                <a href="registrasi_ulang.html" class="nav-item active">
+                    <i class="fa-solid fa-address-card"></i>
+                    <span>Registrasi Ulang</span>
+                </a>
+                <a href="prodi.html" class="nav-item">
+                    <i class="fa-solid fa-users-gear"></i>
+                    <span>Manajemen Prodi</span>
+                </a>
+                <a href="pendaftaran.html" class="nav-item">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>Pendaftaran</span>
+                </a>
+                <a href="laporan.html" class="nav-item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Laporan</span>
+                </a>
+                <a href="pengumuman.html" class="nav-item">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span>Pengumuman</span>
+                </a>
+                <a href="ajuan.html" class="nav-item">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Ajuan Mata Kuliah</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Keluar</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h2>Verifikasi Registrasi Ulang & Pembayaran UKT</h2>
+                <p>Kelola dan verifikasi pengajuan registrasi ulang serta bukti pembayaran UKT mahasiswa baru.</p>
+            </div>
+
+            <div class="stats-grid-5">
+                <div class="stat-card row-card">
+                    <div class="stat-icon-wrapper bg-light-blue text-blue">
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-title">Total Ajuan</div>
+                        <div class="stat-value-sm">1,240</div>
+                    </div>
+                </div>
+                <div class="stat-card row-card">
+                    <div class="stat-icon-wrapper bg-light-yellow text-yellow">
+                        <i class="fa-regular fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-title">Menunggu Verifikasi</div>
+                        <div class="stat-value-sm">85</div>
+                    </div>
+                </div>
+                <div class="stat-card row-card">
+                    <div class="stat-icon-wrapper bg-light-green text-green">
+                        <i class="fa-regular fa-circle-check"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-title">Terverifikasi (Lunas)</div>
+                        <div class="stat-value-sm">1,120</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="background: white; padding: 24px; border-radius: 12px; margin-top: 24px;">
+                <div class="filter-bar" style="display: flex; gap: 16px; margin-bottom: 20px;">
+                    <div class="search-box" style="flex: 1; position: relative;">
+                        <input type="text" placeholder="Cari nama mahasiswa, no pendaftaran..." style="width: 100%; padding: 10px 14px; border: 1px solid #E2E8F0; border-radius: 8px;">
+                    </div>
+                </div>
+
+                <table class="table-custom">
+                    <thead>
+                        <tr>
+                            <th>No. Pendaftaran</th>
+                            <th>Nama Mahasiswa</th>
+                            <th>Program Studi</th>
+                            <th>Status UKT</th>
+                            <th>Bukti Pembayaran</th>
+                            <th>Tanggal Pengajuan</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>UC202600123</b></td>
+                            <td>Muhammad Dhafin</td>
+                            <td>Teknik Informatika</td>
+                            <td><span class="badge-status badge-pending">Sedang Diproses</span></td>
+                            <td><a href="../user/pembayaran_ukt.html" target="_blank" style="color: #2563EB; font-weight: 600;"><i class="fa-solid fa-paperclip"></i> Bukti_UKT.jpg</a></td>
+                            <td>19 Juli 2026</td>
+                            <td>
+                                <button class="btn-sm-action btn-verify" onclick="alert('Registrasi Ulang Muhammad Dhafin Berhasil Diverifikasi!')"><i class="fa-solid fa-check"></i> Verifikasi</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>UC202600124</b></td>
+                            <td>Siti Aminah</td>
+                            <td>Sistem Informasi</td>
+                            <td><span class="badge-status badge-verified">Lunas</span></td>
+                            <td><a href="#" style="color: #2563EB; font-weight: 600;"><i class="fa-solid fa-paperclip"></i> Bukti_SA.pdf</a></td>
+                            <td>18 Juli 2026</td>
+                            <td>
+                                <button class="btn-sm-action btn-detail" onclick="alert('Membuka detail pendaftar...')"><i class="fa-regular fa-eye"></i> Detail</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>UC202600125</b></td>
+                            <td>Budi Santoso</td>
+                            <td>Teknik Elektro</td>
+                            <td><span class="badge-status badge-verified">Lunas</span></td>
+                            <td><a href="#" style="color: #2563EB; font-weight: 600;"><i class="fa-solid fa-paperclip"></i> Transfer_Budi.png</a></td>
+                            <td>18 Juli 2026</td>
+                            <td>
+                                <button class="btn-sm-action btn-detail" onclick="alert('Membuka detail pendaftar...')"><i class="fa-regular fa-eye"></i> Detail</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
