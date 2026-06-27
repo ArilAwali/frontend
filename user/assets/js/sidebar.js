@@ -35,7 +35,7 @@
         let extendedMenuHtml = '';
         if (isRegistered) {
             extendedMenuHtml = `
-            <div class="nav-section menu-section" style="margin-top: 15px;">
+            <div class="nav-section menu-section">
                 <div class="menu-title">AKADEMIK</div>
                 <a href="${portalPrefix}dashboard-akademik.html" class="nav-link nav-item menu-item ${page === 'dashboard-akademik.html' ? 'active' : ''}"><i class="fas fa-columns fa-solid fa-border-all"></i> <span>Dashboard Akademik</span></a>
                 <a href="${portalPrefix}krs.html" class="nav-link nav-item menu-item ${page === 'krs.html' ? 'active' : ''}"><i class="fas fa-book-open fa-solid fa-book"></i> <span>KRS</span></a>
@@ -44,14 +44,14 @@
                 <a href="${portalPrefix}jadwal.html" class="nav-link nav-item menu-item ${page === 'jadwal.html' ? 'active' : ''}"><i class="far fa-calendar-alt fa-regular fa-calendar-days"></i> <span>Jadwal Kuliah</span></a>
             </div>
 
-            <div class="nav-section menu-section" style="margin-top: 15px;">
+            <div class="nav-section menu-section">
                 <div class="menu-title">KOMUNIKASI</div>
                 <a href="#" class="nav-link nav-item menu-item"><i class="far fa-envelope fa-regular fa-envelope"></i> <span>Pesan</span></a>
                 <a href="${portalPrefix}pengumuman.html" class="nav-link nav-item menu-item ${(page === 'pengumuman.html' || page === 'informasi.html') ? 'active' : ''}"><i class="fas fa-bullhorn fa-solid fa-bullhorn"></i> <span>Pengumuman</span></a>
                 <a href="${portalPrefix}forum.html" class="nav-link nav-item menu-item ${page === 'forum.html' ? 'active' : ''}"><i class="far fa-comments fa-regular fa-comments"></i> <span>Diskusi / Forum</span></a>
             </div>
 
-            <div class="nav-section menu-section" style="margin-top: 15px;">
+            <div class="nav-section menu-section">
                 <div class="menu-title">ADMINISTRASI</div>
                 <a href="${portalPrefix}keuangan.html" class="nav-link nav-item menu-item ${(page === 'keuangan.html' || page === 'keuangan-detail.html') ? 'active' : ''}"><i class="fas fa-wallet fa-solid fa-money-bill-wave"></i> <span>Keuangan</span></a>
             </div>
@@ -61,7 +61,7 @@
         // 6. Render HTML Sidebar
         const html = `
         <div class="sidebar-header brand logo-area">
-            <div class="title-wrapper" style="display:flex; align-items:center; gap:12px; font-weight:700;">
+            <div class="title-wrapper">
                 <i class="fas fa-university fa-solid fa-building-columns"></i>
                 <div class="brand-text">
                     <h2>Universitas<br>Crypto</h2>
@@ -74,15 +74,15 @@
             <i class="fas fa-home fa-solid fa-house"></i> <span>Beranda</span>
         </a>
 
-        <div class="nav-section menu-section" style="margin-top: 15px;">
+        <div class="nav-section menu-section">
             <div class="menu-title">PMB (PENDAFTARAN)</div>
             ${pmbMenuHtml}
         </div>
 
         ${extendedMenuHtml}
 
-        <div class="logout-btn" style="margin-top: auto; padding-top: 20px;">
-            <a href="${rootPrefix}login.html" class="btn-logout nav-link nav-item menu-item" id="sidebarLogout" style="display:flex; align-items:center; gap:8px; justify-content:center;"><i class="fas fa-sign-out-alt fa-solid fa-arrow-right-from-bracket"></i> <span>Keluar</span></a>
+        <div class="logout-btn">
+            <a href="${rootPrefix}login.html" class="btn-logout nav-link nav-item menu-item" id="sidebarLogout"><i class="fas fa-sign-out-alt fa-solid fa-arrow-right-from-bracket"></i> <span>Keluar</span></a>
         </div>
         `;
 

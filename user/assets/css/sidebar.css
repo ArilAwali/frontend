@@ -61,6 +61,7 @@
 
 /* Sidebar Sections */
 .menu-section {
+    margin-top: 15px;
     margin-bottom: 20px;
 }
 
@@ -126,6 +127,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 8px; /* Gap between icon and text */
     padding: 12px;
     color: #FFFFFF !important;
     background-color: transparent;
@@ -137,4 +139,18 @@
 .btn-logout:hover {
     background-color: rgba(255, 255, 255, 0.05) !important;
     border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Layout Spacing to prevent content from being hidden under the fixed sidebar */
+.main-wrapper,
+.main-content {
+    margin-left: 260px !important;
+}
+
+/* Brand title-wrapper */
+.brand .title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
 }
