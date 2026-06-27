@@ -260,6 +260,11 @@
       min-height: 100px;
     }
 
+    .disabled-control {
+      background: #f0f0f0;
+      cursor: not-allowed;
+    }
+
     /* Radio Buttons */
     .radio-group {
       display: flex;
@@ -407,7 +412,8 @@
         <p>Pastikan data yang Anda masukkan benar dan sesuai dengan dokumen resmi.</p>
       </div>
 
-      <form class="form-card">
+      <form id="biodataForm" class="form-card">
+        <div id="info_banner" style="display: none;"></div>
 
         <div class="section-title">
           <svg viewBox="0 0 24 24">
@@ -420,17 +426,18 @@
         <div class="form-grid">
           <div class="form-group">
             <label>Nama Lengkap</label>
-            <input type="text" class="input-control" placeholder="Masukkan Nama Sesuai Ijazah">
+            <input type="text" id="nama_lengkap" class="input-control disabled-control"
+              placeholder="Masukkan Nama Sesuai Ijazah" disabled>
           </div>
 
           <div class="form-group">
             <label>Tanggal Lahir</label>
-            <input type="text" class="input-control" placeholder="mm / dd / yyyy">
+            <input type="date" id="tanggal_lahir" class="input-control" required>
           </div>
 
           <div class="form-group">
             <label>Tempat Lahir</label>
-            <input type="text" class="input-control" placeholder="Kota/Kabupaten">
+            <input type="text" id="tempat_lahir" class="input-control" placeholder="Kota/Kabupaten" required>
           </div>
 
           <div class="form-group">
@@ -443,13 +450,13 @@
                 <line x1="14" y1="13" x2="19" y2="13"></line>
                 <line x1="5" y1="17" x2="19" y2="17"></line>
               </svg>
-              <input type="text" class="input-control" placeholder="16 digit NIK">
+              <input type="text" id="nik" class="input-control disabled-control" placeholder="16 digit NIK" disabled>
             </div>
           </div>
 
           <div class="form-group">
             <label>Agama</label>
-            <select class="input-control">
+            <select id="agama" class="input-control" required>
               <option value="" disabled selected>Pilih Agama</option>
               <option value="islam">Islam</option>
               <option value="kristen">Kristen Protestan</option>
@@ -464,11 +471,11 @@
             <label>Jenis Kelamin</label>
             <div class="radio-group">
               <label class="radio-item">
-                <input type="radio" name="gender" value="Laki-laki">
+                <input type="radio" name="gender" value="L" required>
                 <span>Laki-laki</span>
               </label>
               <label class="radio-item">
-                <input type="radio" name="gender" value="Perempuan">
+                <input type="radio" name="gender" value="P" required>
                 <span>Perempuan</span>
               </label>
             </div>
@@ -494,7 +501,7 @@
                   d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
                 </path>
               </svg>
-              <input type="text" class="input-control" placeholder="08xxxxxxxx">
+              <input type="text" id="nomor_wa" class="input-control disabled-control" placeholder="08xxxxxxxx" disabled>
             </div>
           </div>
 
@@ -505,52 +512,56 @@
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                 <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
-              <input type="email" class="input-control" placeholder="contoh@email.com">
+              <input type="email" id="email" class="input-control disabled-control" placeholder="contoh@email.com"
+                disabled>
             </div>
           </div>
 
           <div class="form-group full-width">
             <label>Alamat Lengkap</label>
-            <textarea class="input-control" placeholder="Masukkan alamat lengkap sesuai KTP"></textarea>
+            <textarea id="alamat_lengkap" class="input-control" placeholder="Masukkan alamat lengkap sesuai KTP"
+              required></textarea>
           </div>
 
           <div class="form-group">
             <label>Provinsi</label>
-            <select class="input-control">
+            <select id="provinsi" class="input-control" required>
               <option value="" disabled selected>Pilih Provinsi</option>
-              <option>Jawa Barat</option>
-              <option>DKI Jakarta</option>
-              <option>Jawa Tengah</option>
+              <option value="Jawa Barat">Jawa Barat</option>
+              <option value="DKI Jakarta">DKI Jakarta</option>
+              <option value="Jawa Tengah">Jawa Tengah</option>
             </select>
           </div>
 
           <div class="form-group">
             <label>Kota/Kabupaten</label>
-            <select class="input-control">
+            <select id="kota_kabupaten" class="input-control" required>
               <option value="" disabled selected>Pilih Kota/Kabupaten</option>
-              <option>Kota Bandung</option>
-              <option>Kab. Tasikmalaya</option>
+              <option value="Kota Bandung">Kota Bandung</option>
+              <option value="Kab. Tasikmalaya">Kab. Tasikmalaya</option>
             </select>
           </div>
 
           <div class="form-group">
             <label>Kecamatan</label>
-            <select class="input-control">
+            <select id="kecamatan" class="input-control" required>
               <option value="" disabled selected>Pilih Kecamatan</option>
-              <option>Cibeureum</option>
-              <option>Tawang</option>
+              <option value="Cibeureum">Cibeureum</option>
+              <option value="Tawang">Tawang</option>
             </select>
           </div>
 
           <div class="form-group">
             <label>Kode Pos</label>
-            <input type="text" class="input-control" placeholder="5 Digit Kode Pos">
+            <input type="number" id="kode_pos" class="input-control" placeholder="5 Digit Kode Pos" required>
           </div>
         </div>
 
-        <div class="form-actions">
-          <button type="button" class="btn btn-outline">Simpan Draf</button>
-          <button type="button" class="btn btn-primary">Simpan & Lanjutkan</button>
+        <div class="form-actions" style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+          <button type="button" id="btn_simpan_draf" class="btn btn-outline"
+            style="padding: 12px 24px; border: 1px solid var(--border-color); border-radius: 8px; font-weight: 600; cursor: pointer; background: white;">Simpan
+            Draf</button>
+          <button type="submit" class="btn btn-primary">Kirim & Lanjutkan</button>
         </div>
 
       </form>
@@ -569,6 +580,207 @@
   </div>
 
   <script src="../assets/js/sidebar.js"></script>
+  <script>
+    let isEditMode = false;
+
+    // Fungsi utility untuk me-nonaktifkan seluruh form kontrol & memberikan style khusus
+    function disableAllInputs() {
+      const selectors = [
+        '#tempat_lahir',
+        '#tanggal_lahir',
+        '#agama',
+        'input[name="gender"]',
+        '#alamat_lengkap',
+        '#provinsi',
+        '#kota_kabupaten',
+        '#kecamatan',
+        '#kode_pos'
+      ];
+      selectors.forEach(sel => {
+        const elements = document.querySelectorAll(sel);
+        elements.forEach(el => {
+          el.disabled = true;
+          el.classList.add('disabled-control');
+        });
+      });
+    }
+
+    // Load Data Akun & Biodata saat pertama kali masuk halaman
+    async function loadData() {
+      try {
+        // 1. Ambil info akun untuk populate field read-only
+        const accountData = await fetchAPI('/portal/status');
+        if (accountData.success) {
+          document.getElementById('nama_lengkap').value = accountData.data.nama_lengkap || '';
+          document.getElementById('nik').value = accountData.data.nik || '';
+          document.getElementById('nomor_wa').value = accountData.data.nomor_wa || '';
+          document.getElementById('email').value = accountData.data.email || '';
+        }
+
+        // 2. Ambil biodata resmi jika sudah pernah diisi ke database
+        const biodataResponse = await fetchAPI('/biodata/biodata');
+        if (biodataResponse.success && biodataResponse.data) {
+          isEditMode = true;
+          const bio = biodataResponse.data;
+
+          document.getElementById('tempat_lahir').value = bio.tempat_lahir || '';
+          if (bio.tanggal_lahir) {
+            // Potong format ISO timestamp jika ada, ambil YYYY-MM-DD
+            document.getElementById('tanggal_lahir').value = bio.tanggal_lahir.split('T')[0];
+          }
+
+          if (bio.agama) {
+            document.getElementById('agama').value = bio.agama;
+          }
+
+          if (bio.jenis_kelamin) {
+            const genderRadio = document.querySelector(`input[name="gender"][value="${bio.jenis_kelamin}"]`);
+            if (genderRadio) genderRadio.checked = true;
+          }
+
+          document.getElementById('alamat_lengkap').value = bio.alamat_lengkap || '';
+
+          if (bio.provinsi) document.getElementById('provinsi').value = bio.provinsi;
+          if (bio.kota_kabupaten) document.getElementById('kota_kabupaten').value = bio.kota_kabupaten;
+          if (bio.kecamatan) document.getElementById('kecamatan').value = bio.kecamatan;
+
+          document.getElementById('kode_pos').value = bio.kode_pos || '';
+
+          // Hapus draf karena data resmi sudah terdaftar
+          localStorage.removeItem('biodata_draft');
+
+          // TAMPILAN LOCK & BANNER (Ketika Biodata Sudah Terkirim)
+          // 1. Tampilkan banner info di atas form
+          const banner = document.getElementById('info_banner');
+          if (banner) {
+            banner.style.display = 'block';
+            banner.innerHTML = `
+              <div style="background-color: #e0f2fe; border: 1px solid #bae6fd; border-radius: 8px; padding: 16px; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 12px; color: #0369a1;">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></svg>
+                </svg>
+                <div>
+                  <h5 style="margin: 0 0 4px 0; font-weight: 700; font-size: 14px;">Informasi Pengiriman</h5>
+                  <p style="margin: 0; font-size: 13px; line-height: 1.4;">Anda telah mengirimkan biodata pendaftaran. Semua data di bawah ini telah dikunci dan tidak dapat diubah kembali.</p>
+                </div>
+              </div>
+            `;
+          }
+
+          // 2. Ganti tombol Simpan Draf & Simpan Lanjutkan menjadi tombol Navigasi saja
+          const actions = document.querySelector('.form-actions');
+          if (actions) {
+            actions.innerHTML = `
+              <button type="button" class="btn btn-primary" onclick="window.location.href='formulir.html'" style="padding: 12px 24px; background: var(--primary-green); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                Lanjutkan ke Formulir
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            `;
+          }
+
+          // 3. Kunci seluruh input dan beri style khusus disabled
+          disableAllInputs();
+        } else {
+          // 3. Jika data resmi tidak ada, cek draf di browser
+          const draftStr = localStorage.getItem('biodata_draft');
+          if (draftStr) {
+            const draft = JSON.parse(draftStr);
+
+            if (draft.tempat_lahir) document.getElementById('tempat_lahir').value = draft.tempat_lahir;
+            if (draft.tanggal_lahir) document.getElementById('tanggal_lahir').value = draft.tanggal_lahir;
+            if (draft.agama) document.getElementById('agama').value = draft.agama;
+
+            if (draft.jenis_kelamin) {
+              const genderRadio = document.querySelector(`input[name="gender"][value="${draft.jenis_kelamin}"]`);
+              if (genderRadio) genderRadio.checked = true;
+            }
+
+            if (draft.alamat_lengkap) document.getElementById('alamat_lengkap').value = draft.alamat_lengkap;
+            if (draft.provinsi) document.getElementById('provinsi').value = draft.provinsi;
+            if (draft.kota_kabupaten) document.getElementById('kota_kabupaten').value = draft.kota_kabupaten;
+            if (draft.kecamatan) document.getElementById('kecamatan').value = draft.kecamatan;
+            if (draft.kode_pos) document.getElementById('kode_pos').value = draft.kode_pos;
+          }
+        }
+      } catch (error) {
+        console.error('Error saat meload data biodata:', error);
+      }
+    }
+
+    // Event handler untuk tombol Simpan Draf
+    const drafBtn = document.getElementById('btn_simpan_draf');
+    if (drafBtn) {
+      drafBtn.addEventListener('click', () => {
+        // Draf boleh disimpan tanpa harus mengisi semua kolom wajib
+        const genderInput = document.querySelector('input[name="gender"]:checked');
+        const draftData = {
+          tempat_lahir: document.getElementById('tempat_lahir').value,
+          tanggal_lahir: document.getElementById('tanggal_lahir').value,
+          jenis_kelamin: genderInput ? genderInput.value : '',
+          agama: document.getElementById('agama').value,
+          alamat_lengkap: document.getElementById('alamat_lengkap').value,
+          provinsi: document.getElementById('provinsi').value,
+          kota_kabupaten: document.getElementById('kota_kabupaten').value,
+          kecamatan: document.getElementById('kecamatan').value,
+          kode_pos: document.getElementById('kode_pos').value
+        };
+
+        localStorage.setItem('biodata_draft', JSON.stringify(draftData));
+        alert('Biodata berhasil disimpan sementara, jika format dirasa sudah benar silahkan klik tombol Simpan dan Lanjutkan');
+      });
+    }
+
+    // Submit Handler untuk Biodata Form
+    document.getElementById('biodataForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Jika user sudah pernah mengirimkan biodata sebelumnya, blokir submit ulang
+      if (isEditMode) {
+        alert('Anda sudah pernah mengirimkan biodata');
+        window.location.href = 'formulir.html';
+        return;
+      }
+
+      const genderInput = document.querySelector('input[name="gender"]:checked');
+      if (!genderInput) {
+        alert('Silakan pilih jenis kelamin Anda!');
+        return;
+      }
+
+      const payload = {
+        tempat_lahir: document.getElementById('tempat_lahir').value,
+        tanggal_lahir: document.getElementById('tanggal_lahir').value,
+        jenis_kelamin: genderInput.value,
+        agama: document.getElementById('agama').value,
+        alamat_lengkap: document.getElementById('alamat_lengkap').value,
+        provinsi: document.getElementById('provinsi').value,
+        kota_kabupaten: document.getElementById('kota_kabupaten').value,
+        kecamatan: document.getElementById('kecamatan').value,
+        kode_pos: document.getElementById('kode_pos').value
+      };
+
+      try {
+        const response = await fetchAPI('/biodata/biodata', {
+          method: 'POST', // Selalu POST untuk pengiriman pertama kali
+          body: JSON.stringify(payload)
+        });
+
+        alert('Biodata anda berhasil dikirim');
+        localStorage.removeItem('biodata_draft'); // Hapus draf karena sudah sukses kirim resmi
+        window.location.href = 'formulir.html'; // Pindah ke halaman berikutnya
+      } catch (error) {
+        alert('Gagal menyimpan biodata: ' + error.message);
+      }
+    });
+
+    // Jalankan load data saat halaman siap
+    window.addEventListener('DOMContentLoaded', loadData);
+  </script>
 </body>
 
 </html>

@@ -38,14 +38,19 @@
             }
         }
 
-        // 5. Bangun menu PMB (Pendaftaran) secara dinamis (Registrasi Ulang selalu muncul)
+        // 5. Bangun menu PMB (Pendaftaran) secara dinamis
         let pmbMenuHtml = `
             <a href="${portalPrefix}biodata.html" class="nav-link nav-item menu-item ${page === 'biodata.html' ? 'active' : ''}"><i class="fas fa-user fa-regular fa-user"></i> <span>Biodata</span></a>
             <a href="${portalPrefix}formulir.html" class="nav-link nav-item menu-item ${page === 'formulir.html' ? 'active' : ''}"><i class="fas fa-file-alt fa-solid fa-bars-staggered"></i> <span>Formulir Pendaftaran</span></a>
             <a href="${portalPrefix}dokumen.html" class="nav-link nav-item menu-item ${page === 'dokumen.html' ? 'active' : ''}"><i class="fas fa-folder fa-regular fa-file-lines"></i> <span>Dokumen</span></a>
             <a href="${portalPrefix}status-pendaftaran.html" class="nav-link nav-item menu-item ${page === 'status-pendaftaran.html' ? 'active' : ''}"><i class="fas fa-check-circle fa-regular fa-circle-check"></i> <span>Status Pendaftaran</span></a>
-            <a href="${portalPrefix}registrasi-ulang.html" class="nav-link nav-item menu-item ${(page === 'registrasi-ulang.html' || page === 'pembayaran-ukt.html') ? 'active' : ''}"><i class="fas fa-id-card fa-regular fa-id-card"></i> <span>Registrasi Ulang</span></a>
         `;
+
+        if (isRegistered) {
+            pmbMenuHtml += `
+            <a href="${portalPrefix}registrasi-ulang.html" class="nav-link nav-item menu-item ${(page === 'registrasi-ulang.html' || page === 'pembayaran-ukt.html') ? 'active' : ''}"><i class="fas fa-id-card fa-regular fa-id-card"></i> <span>Registrasi Ulang</span></a>
+            `;
+        }
 
         // 6. Bangun menu tambahan jika mahasiswa sudah dinyatakan LULUS
         let extendedMenuHtml = '';
