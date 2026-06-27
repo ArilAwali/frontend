@@ -1,77 +1,409 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Status Pendaftaran</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
     <style>
         /* Shared Styles (Sama dengan sebelumnya) */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { display: flex; background-color: #FAFAFA; color: #333; min-height: 100vh; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            display: flex;
+            background-color: #FAFAFA;
+            color: #333;
+            min-height: 100vh;
+        }
+
         /* Main Content */
-        .main-content { flex: 1; padding: 0 40px 40px 40px; display: flex; flex-direction: column; }
-        .topbar { display: flex; justify-content: flex-end; align-items: center; padding: 20px 0; gap: 20px; margin-bottom: 30px; }
-        .topbar-icons { display: flex; gap: 20px; color: #666; font-size: 18px; }
-        .profile { display: flex; align-items: center; gap: 12px; }
-        .profile-avatar { width: 36px; height: 36px; background-color: #0A369D; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; }
-        .profile-info { display: flex; flex-direction: column; }
-        .profile-info .name { font-size: 14px; font-weight: 600; color: #111; }
-        .profile-info .role { font-size: 12px; color: #777; }
+        .main-content {
+            flex: 1;
+            padding: 0 40px 40px 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 20px 0;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .topbar-icons {
+            display: flex;
+            gap: 20px;
+            color: #666;
+            font-size: 18px;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .profile-avatar {
+            width: 36px;
+            height: 36px;
+            background-color: #0A369D;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-info .name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111;
+        }
+
+        .profile-info .role {
+            font-size: 12px;
+            color: #777;
+        }
+
         /* Page Header */
-        .page-header { margin-bottom: 30px; }
-        .page-header h1 { font-size: 24px; font-weight: 700; color: #111827; margin-bottom: 6px; }
-        .page-header p { font-size: 14px; color: #6B7280; }
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 6px;
+        }
+
+        .page-header p {
+            font-size: 14px;
+            color: #6B7280;
+        }
+
         /* Dashboard Grid Layout */
-        .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
-        .left-panel { display: flex; flex-direction: column; gap: 24px; }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
         /* Cards & Panels */
-        .panel-card { background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 12px; padding: 24px; }
-        .panel-title { font-size: 16px; font-weight: 600; color: #111827; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
+        .panel-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .panel-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         /* Stepper */
-        .stepper-container { display: flex; align-items: flex-start; justify-content: space-between; position: relative; margin-top: 10px; }
-        .step { display: flex; flex-direction: column; align-items: center; text-align: center; width: 80px; z-index: 2; }
-        .step-icon { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 12px; background: #fff; }
-        .step-text { font-size: 13px; font-weight: 600; color: #111827; margin-bottom: 4px; }
-        .step-sub { font-size: 11px; color: #6B7280; font-weight: 500; }
+        .stepper-container {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 80px;
+            z-index: 2;
+        }
+
+        .step-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 12px;
+            background: #fff;
+        }
+
+        .step-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+
+        .step-sub {
+            font-size: 11px;
+            color: #6B7280;
+            font-weight: 500;
+        }
+
         /* Stepper States */
-        .step.done .step-icon { background: #15803D; color: white; }
-        .step.active .step-icon { background: #FFFFFF; color: #15803D; border: 2px solid #15803D; }
-        .step.active .step-sub { color: #15803D; }
-        .step.wait .step-icon { background: #F3F4F6; color: #9CA3AF; }
+        .step.done .step-icon {
+            background: #15803D;
+            color: white;
+        }
+
+        .step.active .step-icon {
+            background: #FFFFFF;
+            color: #15803D;
+            border: 2px solid #15803D;
+        }
+
+        .step.active .step-sub {
+            color: #15803D;
+        }
+
+        .step.wait .step-icon {
+            background: #F3F4F6;
+            color: #9CA3AF;
+        }
+
         /* Connecting Lines */
-        .step-line { flex: 1; height: 2px; background: #E5E7EB; margin-top: 22px; position: relative; z-index: 1; }
-        .step-line.done { background: #15803D; }
+        .step-line {
+            flex: 1;
+            height: 2px;
+            background: #E5E7EB;
+            margin-top: 22px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-line.done {
+            background: #15803D;
+        }
+
         /* Data Completion Cards */
-        .data-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-        .data-card { background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; }
-        .dc-icon { width: 40px; height: 40px; border-radius: 50%; background: #F0FDF4; color: #15803D; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 16px; }
-        .dc-title { font-size: 14px; font-weight: 600; color: #111827; margin-bottom: 4px; }
-        .dc-desc { font-size: 12px; color: #6B7280; margin-bottom: 16px; flex: 1; }
-        .dc-badge { display: inline-block; padding: 4px 10px; background: #DCFCE7; color: #15803D; font-size: 11px; font-weight: 600; border-radius: 4px; margin-bottom: 20px; width: max-content; }
-        .btn-outline { width: 100%; padding: 10px; background: transparent; border: 1px solid #E5E7EB; border-radius: 6px; font-size: 13px; font-weight: 600; color: #374151; cursor: pointer; transition: 0.2s; }
-        .btn-outline:hover { background: #F9FAFB; }
+        .data-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .data-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dc-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #F0FDF4;
+            color: #15803D;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .dc-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+
+        .dc-desc {
+            font-size: 12px;
+            color: #6B7280;
+            margin-bottom: 16px;
+            flex: 1;
+        }
+
+        .dc-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #DCFCE7;
+            color: #15803D;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            width: max-content;
+        }
+
+        .btn-outline {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: 1px solid #E5E7EB;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: #F9FAFB;
+        }
+
         /* Access Module */
-        .access-module { background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 12px; padding: 24px; display: flex; gap: 20px; align-items: flex-start; }
-        .am-icon { width: 64px; height: 64px; background: #E5E7EB; color: #9CA3AF; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 30px; flex-shrink: 0; }
-        .am-content h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: #111827; }
-        .am-content p { font-size: 13px; color: #6B7280; line-height: 1.5; margin-bottom: 16px; }
-        .am-btn { font-size: 13px; font-weight: 600; color: #9CA3AF; display: flex; align-items: center; gap: 8px; }
+        .access-module {
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .am-icon {
+            width: 64px;
+            height: 64px;
+            background: #E5E7EB;
+            color: #9CA3AF;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            flex-shrink: 0;
+        }
+
+        .am-content h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #111827;
+        }
+
+        .am-content p {
+            font-size: 13px;
+            color: #6B7280;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .am-btn {
+            font-size: 13px;
+            font-weight: 600;
+            color: #9CA3AF;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         /* Announcements */
-        .btn-sm { font-size: 12px; padding: 4px 12px; background: #E5E7EB; color: #4B5563; border-radius: 20px; text-decoration: none; font-weight: 500; }
-        .announcement-list { display: flex; flex-direction: column; gap: 12px; }
-        .announcement-item { display: flex; gap: 16px; padding: 16px; border: 1px solid #E5E7EB; border-radius: 12px; align-items: flex-start; }
-        .ann-icon { width: 36px; height: 36px; background: #F3F4F6; color: #6B7280; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
-        .ann-content h4 { font-size: 13px; font-weight: 600; color: #111827; margin-bottom: 4px; line-height: 1.4; }
-        .ann-content p { font-size: 12px; color: #6B7280; }
+        .btn-sm {
+            font-size: 12px;
+            padding: 4px 12px;
+            background: #E5E7EB;
+            color: #4B5563;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .announcement-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .announcement-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            align-items: flex-start;
+        }
+
+        .ann-icon {
+            width: 36px;
+            height: 36px;
+            background: #F3F4F6;
+            color: #6B7280;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .ann-content h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 4px;
+            line-height: 1.4;
+        }
+
+        .ann-content p {
+            font-size: 12px;
+            color: #6B7280;
+        }
+
         /* Footer */
-        .site-footer { display: flex; justify-content: space-between; padding-top: 30px; font-size: 12px; color: #9CA3AF; margin-top: auto; }
-        .footer-links { display: flex; gap: 16px; }
-        .footer-links a { color: #6B7280; text-decoration: none; }
+        .site-footer {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 30px;
+            font-size: 12px;
+            color: #9CA3AF;
+            margin-top: auto;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-links a {
+            color: #6B7280;
+            text-decoration: none;
+        }
     </style>
     <link rel="stylesheet" href="../assets/css/sidebar.css">
 </head>
+
 <body>
 
     <aside class="sidebar"></aside>
@@ -99,7 +431,7 @@
 
         <div class="dashboard-grid">
             <div class="left-panel">
-                
+
                 <div class="panel-card">
                     <h3 class="panel-title">Status Pendaftaran</h3>
                     <div class="stepper-container">
@@ -109,28 +441,28 @@
                             <div class="step-sub">Selesai</div>
                         </div>
                         <div class="step-line done"></div>
-                        
+
                         <div class="step done">
                             <div class="step-icon"><i class="fas fa-file-alt"></i></div>
                             <div class="step-text">Biodata</div>
                             <div class="step-sub">Selesai</div>
                         </div>
                         <div class="step-line done"></div>
-                        
+
                         <div class="step done">
                             <div class="step-icon"><i class="fas fa-file-signature"></i></div>
                             <div class="step-text">Formulir</div>
                             <div class="step-sub">Selesai</div>
                         </div>
                         <div class="step-line done"></div>
-                        
+
                         <div class="step active">
                             <div class="step-icon"><i class="fas fa-hourglass-half"></i></div>
                             <div class="step-text">Verifikasi</div>
                             <div class="step-sub">Sedang Diproses</div>
                         </div>
                         <div class="step-line"></div>
-                        
+
                         <div class="step wait">
                             <div class="step-icon"><i class="fas fa-bullhorn"></i></div>
                             <div class="step-text">Pengumuman</div>
@@ -170,7 +502,8 @@
                     <div class="am-icon"><i class="fas fa-graduation-cap"></i></div>
                     <div class="am-content">
                         <h3>Akses Modul Akademik</h3>
-                        <p>Modul Akademik akan aktif setelah Anda dinyatakan lulus dan melakukan daftar ulang sebagai mahasiswa Universitas Crypto.</p>
+                        <p>Modul Akademik akan aktif setelah Anda dinyatakan lulus dan melakukan daftar ulang sebagai
+                            mahasiswa Universitas Crypto.</p>
                         <div class="am-btn">
                             Akses Modul Akademik <i class="fas fa-lock" style="margin-left: 6px;"></i>
                         </div>
@@ -223,4 +556,5 @@
     </main>
     <script src="../assets/js/sidebar.js"></script>
 </body>
+
 </html>

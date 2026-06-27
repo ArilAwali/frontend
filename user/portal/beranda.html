@@ -27,11 +27,13 @@
       --font-heading: "Plus Jakarta Sans", sans-serif;
       --font-body: "Work Sans", sans-serif;
     }
+
     * {
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       box-sizing: border-box;
     }
+
     body {
       margin: 0;
       font-family: var(--font-body);
@@ -41,6 +43,7 @@
       height: 100vh;
       overflow: hidden;
     }
+
     /* =========================
    SIDEBAR
 ========================= */
@@ -53,6 +56,7 @@
       flex-direction: column;
       overflow-y: auto;
     }
+
     /* TOP HEADER */
     .top-header {
       display: flex;
@@ -62,10 +66,12 @@
       gap: 24px;
       background: transparent;
     }
+
     .header-icons {
       display: flex;
       gap: 16px;
     }
+
     .header-icons svg {
       width: 24px;
       height: 24px;
@@ -74,12 +80,14 @@
       fill: none;
       cursor: pointer;
     }
+
     .user-profile {
       display: flex;
       align-items: center;
       gap: 12px;
       cursor: pointer;
     }
+
     .avatar {
       width: 40px;
       height: 40px;
@@ -92,10 +100,12 @@
       font-weight: 700;
       font-size: 14px;
     }
+
     .user-info {
       display: flex;
       flex-direction: column;
     }
+
     .user-name {
       font-weight: 700;
       font-size: 14px;
@@ -104,10 +114,12 @@
       align-items: center;
       gap: 4px;
     }
+
     .user-role {
       font-size: 12px;
       color: var(--text-muted);
     }
+
     /* DASHBOARD CONTENT */
     .dashboard-content {
       padding: 0 40px 40px 40px;
@@ -115,35 +127,42 @@
       margin: 0 auto;
       width: 100%;
     }
+
     .greeting {
       margin-bottom: 32px;
     }
+
     .greeting h1 {
       font-family: var(--font-heading);
       font-size: 32px;
       font-weight: 800;
       margin-bottom: 8px;
     }
+
     .greeting p {
       color: var(--text-muted);
       font-size: 15px;
     }
+
     /* GRID LAYOUT */
     .grid-container {
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 24px;
     }
+
     .col-left {
       display: flex;
       flex-direction: column;
       gap: 24px;
     }
+
     .col-right {
       display: flex;
       flex-direction: column;
       gap: 24px;
     }
+
     /* CARDS */
     .card {
       background: var(--bg-card);
@@ -152,6 +171,7 @@
       padding: 24px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
     }
+
     .card-title {
       font-family: var(--font-heading);
       font-weight: 700;
@@ -159,9 +179,11 @@
       color: var(--primary-green);
       margin-bottom: 24px;
     }
+
     .card-title-dark {
       color: var(--text-main);
     }
+
     /* STEPPER (Status Pendaftaran) */
     .stepper-container {
       position: relative;
@@ -171,6 +193,7 @@
       margin-bottom: 10px;
       padding: 0 20px;
     }
+
     .stepper-line {
       position: absolute;
       top: 20px;
@@ -180,6 +203,7 @@
       background: var(--border-color);
       z-index: 1;
     }
+
     .stepper-line-active {
       position: absolute;
       top: 20px;
@@ -190,6 +214,7 @@
       background: #22c55e;
       z-index: 2;
     }
+
     .step-item {
       position: relative;
       z-index: 3;
@@ -200,6 +225,7 @@
       width: 80px;
       text-align: center;
     }
+
     .step-circle {
       width: 40px;
       height: 40px;
@@ -210,21 +236,25 @@
       align-items: center;
       justify-content: center;
     }
+
     .step-item.completed .step-circle {
       background: #e6f4ea;
       border-color: #22c55e;
       color: #22c55e;
     }
+
     .step-item.current .step-circle {
       background: white;
       border-color: var(--text-main);
       color: var(--text-main);
     }
+
     .step-item.pending .step-circle {
       background: #f3f4f6;
       border-color: var(--border-color);
       color: #9ca3af;
     }
+
     .step-circle svg {
       width: 20px;
       height: 20px;
@@ -232,21 +262,25 @@
       stroke-width: 2;
       fill: none;
     }
+
     .step-text h5 {
       font-weight: 700;
       font-size: 13px;
       margin-bottom: 4px;
     }
+
     .step-text p {
       font-size: 11px;
       color: var(--text-muted);
     }
+
     /* LENGKAPI DATA CARDS */
     .data-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
+
     .data-card {
       border: 1px solid var(--border-color);
       border-radius: 12px;
@@ -254,6 +288,7 @@
       display: flex;
       flex-direction: column;
     }
+
     .data-icon {
       width: 40px;
       height: 40px;
@@ -265,6 +300,7 @@
       margin-bottom: 16px;
       color: #22c55e;
     }
+
     .data-icon svg {
       width: 20px;
       height: 20px;
@@ -272,11 +308,13 @@
       stroke-width: 2;
       fill: none;
     }
+
     .data-card h4 {
       font-weight: 700;
       font-size: 15px;
       margin-bottom: 6px;
     }
+
     .data-card p {
       font-size: 12px;
       color: var(--text-muted);
@@ -284,6 +322,7 @@
       margin-bottom: 16px;
       flex: 1;
     }
+
     .badge {
       display: inline-block;
       padding: 4px 8px;
@@ -293,10 +332,12 @@
       margin-bottom: 16px;
       width: fit-content;
     }
+
     .badge-success {
       background: var(--success-bg);
       color: var(--success-text);
     }
+
     .btn-outline {
       width: 100%;
       padding: 10px;
@@ -308,15 +349,18 @@
       cursor: pointer;
       color: var(--text-main);
     }
+
     .btn-outline:hover {
       background: #f9fafb;
     }
+
     /* AKSES MODUL */
     .modul-card {
       display: flex;
       gap: 24px;
       align-items: center;
     }
+
     .modul-icon {
       width: 80px;
       height: 80px;
@@ -327,6 +371,7 @@
       justify-content: center;
       flex-shrink: 0;
     }
+
     .modul-icon svg {
       width: 40px;
       height: 40px;
@@ -334,18 +379,21 @@
       stroke-width: 2;
       fill: none;
     }
+
     .modul-info h4 {
       font-family: var(--font-heading);
       font-weight: 700;
       font-size: 16px;
       margin-bottom: 8px;
     }
+
     .modul-info p {
       font-size: 13px;
       color: var(--text-muted);
       line-height: 1.5;
       margin-bottom: 16px;
     }
+
     .btn-locked {
       display: inline-flex;
       align-items: center;
@@ -359,10 +407,12 @@
       color: #9ca3af;
       cursor: not-allowed;
     }
+
     .btn-locked svg {
       width: 16px;
       height: 16px;
     }
+
     /* RIGHT COLUMN WIDGETS */
     /* Status Saat Ini */
     .status-box {
@@ -374,6 +424,7 @@
       gap: 16px;
       margin-bottom: 16px;
     }
+
     .status-icon {
       width: 32px;
       height: 32px;
@@ -385,17 +436,20 @@
       color: #ea580c;
       flex-shrink: 0;
     }
+
     .status-info h5 {
       font-weight: 700;
       font-size: 14px;
       color: #ea580c;
       margin-bottom: 4px;
     }
+
     .status-info p {
       font-size: 12px;
       color: var(--text-muted);
       line-height: 1.4;
     }
+
     /* Pengumuman */
     .header-with-link {
       display: flex;
@@ -403,17 +457,20 @@
       align-items: center;
       margin-bottom: 20px;
     }
+
     .header-with-link a {
       font-size: 12px;
       font-weight: 600;
       color: var(--primary-green);
       text-decoration: none;
     }
+
     .list-pengumuman {
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
+
     .pengumuman-item {
       display: flex;
       gap: 16px;
@@ -422,6 +479,7 @@
       border-radius: 12px;
       align-items: center;
     }
+
     .p-icon {
       width: 32px;
       height: 32px;
@@ -432,16 +490,19 @@
       justify-content: center;
       color: var(--text-muted);
     }
+
     .p-info h5 {
       font-weight: 600;
       font-size: 13px;
       margin-bottom: 4px;
       color: var(--text-main);
     }
+
     .p-info span {
       font-size: 11px;
       color: var(--text-muted);
     }
+
     /* Bantuan */
     .bantuan-text {
       font-size: 13px;
@@ -449,6 +510,7 @@
       line-height: 1.5;
       margin-bottom: 16px;
     }
+
     /* FOOTER */
     .dash-footer {
       display: flex;
@@ -460,26 +522,30 @@
       color: var(--text-muted);
       margin-top: auto;
     }
+
     .footer-links {
       display: flex;
       gap: 16px;
     }
+
     .footer-links a {
       color: var(--text-muted);
       text-decoration: none;
       font-weight: 500;
     }
+
     /* RESPONSIVE */
     @media (max-width: 1024px) {
       .grid-container {
         grid-template-columns: 1fr;
       }
+
       .data-grid {
         grid-template-columns: 1fr;
       }
     }
   </style>
-  
+
 </head>
 
 <body>
@@ -599,7 +665,7 @@
                 <h4>Biodata</h4>
                 <p>Lengkapi data diri Anda</p>
                 <span class="badge badge-success">SELESAI</span>
-                <button class="btn-outline">Lihat / Ubah</button>
+                <a href="biodata.html"><button class="btn-outline">Lihat / Ubah</button></a>
               </div>
 
               <div class="data-card">
@@ -613,7 +679,7 @@
                 <h4>Formulir Pendaftaran</h4>
                 <p>Isi formulir pendaftaran</p>
                 <span class="badge badge-success">SELESAI</span>
-                <button class="btn-outline">Lihat / Ubah</button>
+                <a href="formulir.html"><button class="btn-outline">Lihat / Ubah</button></a>
               </div>
 
               <div class="data-card">
@@ -624,7 +690,7 @@
                 <h4>Dokumen</h4>
                 <p>Upload berkas persyaratan</p>
                 <span class="badge badge-success">SELESAI</span>
-                <button class="btn-outline">Lihat</button>
+                <a href="dokumen.html"><button class="btn-outline">Lihat</button></a>
               </div>
 
             </div>
