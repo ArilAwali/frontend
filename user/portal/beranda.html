@@ -2,6 +2,8 @@
 <html lang="id">
 
 <head>
+  <script src="../../config/auth-guard.js"></script>
+  <script src="../../config/api.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Beranda</title>
@@ -580,7 +582,7 @@
     <main class="dashboard-content">
 
       <div class="greeting">
-        <h1>Halo, Muhammad Dhafin 👋</h1>
+        <h1 id="user_greeting">Halo, Calon Mahasiswa 👋</h1>
         <p>Lengkapi data dan pantau proses pendaftaran Anda.</p>
       </div>
 
@@ -590,11 +592,12 @@
 
           <div class="card">
             <h3 class="card-title">Status Pendaftaran</h3>
-            <div class="stepper-container">
+            <div class="stepper-container" id="stepper_container">
               <div class="stepper-line"></div>
-              <div class="stepper-line-active"></div>
+              <div class="stepper-line-active" id="stepper_line_active" style="width: 0%;"></div>
 
-              <div class="step-item completed">
+              <!-- Step 1: Akun -->
+              <div class="step-item completed" id="step_akun">
                 <div class="step-circle"><svg viewBox="0 0 24 24">
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg></div>
@@ -604,18 +607,20 @@
                 </div>
               </div>
 
-              <div class="step-item completed">
+              <!-- Step 2: Biodata -->
+              <div class="step-item pending" id="step_biodata">
                 <div class="step-circle"><svg viewBox="0 0 24 24">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
                   </svg></div>
                 <div class="step-text">
                   <h5>Biodata</h5>
-                  <p>Selesai</p>
+                  <p id="sub_biodata">Menunggu</p>
                 </div>
               </div>
 
-              <div class="step-item completed">
+              <!-- Step 3: Formulir -->
+              <div class="step-item pending" id="step_formulir">
                 <div class="step-circle"><svg viewBox="0 0 24 24">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                     <polyline points="14 2 14 8 20 8"></polyline>
@@ -625,29 +630,43 @@
                   </svg></div>
                 <div class="step-text">
                   <h5>Formulir</h5>
-                  <p>Selesai</p>
+                  <p id="sub_formulir">Menunggu</p>
                 </div>
               </div>
 
-              <div class="step-item current">
+              <!-- Step 4: Dokumen -->
+              <div class="step-item pending" id="step_dokumen">
+                <div class="step-circle"><svg viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                  </svg></div>
+                <div class="step-text">
+                  <h5>Dokumen</h5>
+                  <p id="sub_dokumen">Menunggu</p>
+                </div>
+              </div>
+
+              <!-- Step 5: Verifikasi -->
+              <div class="step-item pending" id="step_verifikasi">
                 <div class="step-circle"><svg viewBox="0 0 24 24">
                     <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
                     <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
                   </svg></div>
                 <div class="step-text">
                   <h5>Verifikasi</h5>
-                  <p>Sedang Diproses</p>
+                  <p id="sub_verifikasi">Menunggu</p>
                 </div>
               </div>
 
-              <div class="step-item pending">
+              <!-- Step 6: Pengumuman -->
+              <div class="step-item pending" id="step_pengumuman">
                 <div class="step-circle"><svg viewBox="0 0 24 24">
                     <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                     <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                   </svg></div>
                 <div class="step-text">
                   <h5>Pengumuman</h5>
-                  <p>Menunggu</p>
+                  <p id="sub_pengumuman">Menunggu</p>
                 </div>
               </div>
             </div>
@@ -664,7 +683,7 @@
                   </svg></div>
                 <h4>Biodata</h4>
                 <p>Lengkapi data diri Anda</p>
-                <span class="badge badge-success">SELESAI</span>
+                <span class="badge" id="badge_biodata">BELUM LENGKAP</span>
                 <a href="biodata.html"><button class="btn-outline">Lihat / Ubah</button></a>
               </div>
 
@@ -678,7 +697,7 @@
                   </svg></div>
                 <h4>Formulir Pendaftaran</h4>
                 <p>Isi formulir pendaftaran</p>
-                <span class="badge badge-success">SELESAI</span>
+                <span class="badge" id="badge_formulir">BELUM LENGKAP</span>
                 <a href="formulir.html"><button class="btn-outline">Lihat / Ubah</button></a>
               </div>
 
@@ -689,15 +708,15 @@
                   </svg></div>
                 <h4>Dokumen</h4>
                 <p>Upload berkas persyaratan</p>
-                <span class="badge badge-success">SELESAI</span>
+                <span class="badge" id="badge_dokumen">BELUM LENGKAP</span>
                 <a href="dokumen.html"><button class="btn-outline">Lihat</button></a>
               </div>
 
             </div>
           </div>
 
-          <div class="card modul-card">
-            <div class="modul-icon">
+          <div class="card modul-card" id="academic_module_card">
+            <div class="modul-icon" id="academic_module_icon">
               <svg viewBox="0 0 24 24">
                 <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
                 <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
@@ -707,9 +726,9 @@
               <h4 class="card-title-dark">Akses Modul Akademik</h4>
               <p>Modul Akademik akan aktif setelah Anda dinyatakan lulus dan melakukan daftar ulang sebagai mahasiswa
                 Universitas Crypto.</p>
-              <button class="btn-locked">
-                Akses Modul Akademik
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <button class="btn-locked" id="btn_academic_access">
+                <span>Akses Modul Akademik</span>
+                <svg id="academic_lock_svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                   <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                 </svg>
@@ -724,18 +743,18 @@
           <div class="card">
             <h3 class="card-title card-title-dark">Status Saat Ini</h3>
             <div class="status-box">
-              <div class="status-icon">
+              <div class="status-icon" id="main_status_icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
                   <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
                 </svg>
               </div>
               <div class="status-info">
-                <h5>Pendaftaran Sedang Diproses</h5>
-                <p>Silakan menunggu pengumuman hasil seleksi dari pihak universitas.</p>
+                <h5 id="main_status_title">Pendaftaran Sedang Diproses</h5>
+                <p id="main_status_desc">Silakan menunggu pengumuman hasil seleksi dari pihak universitas.</p>
               </div>
             </div>
-            <button class="btn-outline">Lihat Detail</button>
+            <a href="status-pendaftaran.html"><button class="btn-outline">Lihat Detail</button></a>
           </div>
 
           <div class="card">
@@ -792,7 +811,7 @@
           <div class="card">
             <h3 class="card-title card-title-dark">Bantuan</h3>
             <p class="bantuan-text">Jika ada pertanyaan atau kendala, silakan hubungi kami.</p>
-            <button class="btn-outline">Hubungi Admin</button>
+            <a href="bantuan.html"><button class="btn-outline">Hubungi Admin</button></a>
           </div>
 
         </div>
@@ -811,6 +830,181 @@
   </div>
 
   <script src="../assets/js/sidebar.js"></script>
+  <script>
+    async function loadStats() {
+      try {
+        // Query status, biodata, rapor, dan dokumen secara paralel
+        const [statusRes, biodataRes, raporRes, dokumenRes] = await Promise.all([
+          fetchAPI('/portal/status'),
+          fetchAPI('/biodata/biodata'),
+          fetchAPI('/biodata/rapor'),
+          fetchAPI('/dokumen')
+        ]);
+
+        if (statusRes.success) {
+          const user = statusRes.data;
+          
+          // 1. Tampilkan nama user secara dinamis
+          document.getElementById('user_greeting').textContent = `Halo, ${user.nama_lengkap} 👋`;
+          
+          // 2. Render status kelengkapan data
+          const isBiodataFilled = !!biodataRes.data;
+          const isFormulirFilled = !!raporRes.data;
+          const isDokumenUploaded = !!(dokumenRes.data && dokumenRes.data.ktp && dokumenRes.data.ijazah_skl && dokumenRes.data.pas_foto);
+
+          updateDataBadge('badge_biodata', isBiodataFilled);
+          updateDataBadge('badge_formulir', isFormulirFilled);
+          updateDataBadge('badge_dokumen', isDokumenUploaded);
+
+          // 3. Update Stepper Status secara dinamis
+          let completedSteps = 1; // Akun selalu selesai
+          
+          if (isBiodataFilled) {
+            setStepStatus('step_biodata', 'completed', 'Selesai');
+            completedSteps = 2;
+          } else {
+            setStepStatus('step_biodata', 'current', 'Belum Lengkap');
+          }
+
+          if (isFormulirFilled) {
+            setStepStatus('step_formulir', 'completed', 'Selesai');
+            if (completedSteps === 2) completedSteps = 3;
+          } else {
+            if (completedSteps === 2) {
+              setStepStatus('step_formulir', 'current', 'Belum Lengkap');
+            } else {
+              setStepStatus('step_formulir', 'pending', 'Menunggu');
+            }
+          }
+
+          // Dokumen Stepper
+          if (isDokumenUploaded) {
+            setStepStatus('step_dokumen', 'completed', 'Selesai');
+            if (completedSteps === 3) completedSteps = 4;
+          } else {
+            if (completedSteps === 3) {
+              setStepStatus('step_dokumen', 'current', 'Belum Lengkap');
+            } else {
+              setStepStatus('step_dokumen', 'pending', 'Menunggu');
+            }
+          }
+
+          // Verifikasi Stepper
+          if (user.status_verifikasi === 'diverifikasi') {
+            setStepStatus('step_verifikasi', 'completed', 'Terverifikasi');
+            if (completedSteps === 4) completedSteps = 5;
+          } else if (user.status_verifikasi === 'ditolak') {
+            setStepStatus('step_verifikasi', 'current', 'Ditolak');
+          } else {
+            // belum_diverifikasi
+            if (isDokumenUploaded) {
+              setStepStatus('step_verifikasi', 'current', 'Sedang Diproses');
+            } else {
+              setStepStatus('step_verifikasi', 'pending', 'Menunggu Berkas');
+            }
+          }
+
+          // Pengumuman Seleksi
+          if (user.status_kelulusan === 'lulus') {
+            setStepStatus('step_pengumuman', 'completed', 'Lulus');
+            completedSteps = 6;
+          } else if (user.status_kelulusan === 'tidak_lulus') {
+            setStepStatus('step_pengumuman', 'current', 'Tidak Lulus');
+          } else {
+            setStepStatus('step_pengumuman', 'pending', 'Menunggu');
+          }
+
+          // Atur width dari stepper-line-active
+          const lineActive = document.getElementById('stepper_line_active');
+          if (lineActive) {
+            const widthPercentage = ((completedSteps - 1) / 5) * 100;
+            lineActive.style.width = `${widthPercentage}%`;
+          }
+
+          // 4. Update Card Status Saat Ini
+          const mainStatusTitle = document.getElementById('main_status_title');
+          const mainStatusDesc = document.getElementById('main_status_desc');
+          
+          if (user.status_kelulusan === 'lulus') {
+            mainStatusTitle.textContent = 'Dinyatakan Lulus!';
+            mainStatusDesc.textContent = 'Selamat! Anda dinyatakan lulus seleksi. Harap segera lakukan registrasi ulang dan pembayaran UKT.';
+            document.getElementById('main_status_icon').style.color = 'var(--success-text)';
+          } else if (user.status_kelulusan === 'tidak_lulus') {
+            mainStatusTitle.textContent = 'Tidak Lulus Seleksi';
+            mainStatusDesc.textContent = 'Mohon maaf, Anda dinyatakan belum lulus seleksi pendaftaran periode ini.';
+            document.getElementById('main_status_icon').style.color = '#dc2626';
+          } else {
+            if (user.status_verifikasi === 'diverifikasi') {
+              mainStatusTitle.textContent = 'Berkas Terverifikasi';
+              mainStatusDesc.textContent = 'Berkas administrasi Anda telah sukses diverifikasi. Pengumuman kelulusan akan segera diproses.';
+            } else if (user.status_verifikasi === 'ditolak') {
+              mainStatusTitle.textContent = 'Verifikasi Berkas Ditolak';
+              mainStatusDesc.textContent = `Mohon maaf, berkas Anda ditolak. Catatan: ${user.catatan || 'Periksa kembali dokumen yang Anda upload.'}`;
+            } else {
+              mainStatusTitle.textContent = 'Berkas Sedang Diverifikasi';
+              mainStatusDesc.textContent = 'Berkas pendaftaran Anda sedang dalam tahap antrean verifikasi oleh petugas PMB.';
+            }
+          }
+
+          // 5. Unlock Akses Modul Akademik
+          if (user.status_kelulusan === 'lulus') {
+            const card = document.getElementById('academic_module_card');
+            const icon = document.getElementById('academic_module_icon');
+            const btn = document.getElementById('btn_academic_access');
+            const lockSvg = document.getElementById('academic_lock_svg');
+
+            if (card) card.style.border = '1px solid #86efac';
+            if (icon) {
+              icon.style.background = '#dcfce7';
+              icon.style.color = 'var(--success-text)';
+            }
+            if (btn) {
+              btn.className = 'btn-primary';
+              btn.style.background = 'var(--primary-green)';
+              btn.style.color = 'white';
+              btn.style.cursor = 'pointer';
+              btn.innerHTML = `
+                <span>Masuk Dashboard Akademik</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              `;
+              btn.onclick = () => { window.location.href = 'dashboard-akademik.html'; };
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error saat memuat statistik dashboard:', error);
+      }
+    }
+
+    function updateDataBadge(id, isCompleted) {
+      const badge = document.getElementById(id);
+      if (!badge) return;
+      if (isCompleted) {
+        badge.className = 'badge badge-success';
+        badge.textContent = 'SELESAI';
+        badge.style.background = 'var(--success-bg)';
+        badge.style.color = 'var(--success-text)';
+      } else {
+        badge.className = 'badge badge-warning';
+        badge.textContent = 'BELUM LENGKAP';
+        badge.style.background = 'var(--warning-bg)';
+        badge.style.color = 'var(--warning-text)';
+      }
+    }
+
+    function setStepStatus(stepId, status, label) {
+      const step = document.getElementById(stepId);
+      if (!step) return;
+      
+      step.className = `step-item ${status}`; // completed, current, pending
+      const subText = step.querySelector('.step-text p');
+      if (subText) subText.textContent = label;
+    }
+
+    window.addEventListener('DOMContentLoaded', loadStats);
+  </script>
 </body>
 
 </html>

@@ -15,9 +15,30 @@
         let rootPrefix = isPortal ? '../' : '';
 
         // 3. Ambil status registrasi ulang dari localStorage
-        const isRegistered = localStorage.getItem('isRegistered') === 'true';
+        let isRegistered = localStorage.getItem('isRegistered') === 'true';
 
-        // 4. Bangun menu PMB (Pendaftaran) secara dinamis
+        // 4. Sinkronisasi status kelulusan secara asinkron dari API
+        if (typeof fetchAPI === 'function') {
+            const token = localStorage.getItem('token');
+            if (token) {
+                fetchAPI('/portal/status')
+                    .then(response => {
+                        if (response.success) {
+                            const isLulus = response.data.status_kelulusan === 'lulus';
+                            if (isRegistered !== isLulus) {
+                                localStorage.setItem('isRegistered', isLulus ? 'true' : 'false');
+                                // Re-render sidebar jika status berubah
+                                initSidebar();
+                            }
+                        }
+                    })
+                    .catch(err => {
+                        console.warn('Gagal memverifikasi status kelulusan untuk sidebar:', err);
+                    });
+            }
+        }
+
+        // 5. Bangun menu PMB (Pendaftaran) secara dinamis
         let pmbMenuHtml = `
             <a href="${portalPrefix}biodata.html" class="nav-link nav-item menu-item ${page === 'biodata.html' ? 'active' : ''}"><i class="fas fa-user fa-regular fa-user"></i> <span>Biodata</span></a>
             <a href="${portalPrefix}formulir.html" class="nav-link nav-item menu-item ${page === 'formulir.html' ? 'active' : ''}"><i class="fas fa-file-alt fa-solid fa-bars-staggered"></i> <span>Formulir Pendaftaran</span></a>
@@ -25,13 +46,13 @@
             <a href="${portalPrefix}status-pendaftaran.html" class="nav-link nav-item menu-item ${page === 'status-pendaftaran.html' ? 'active' : ''}"><i class="fas fa-check-circle fa-regular fa-circle-check"></i> <span>Status Pendaftaran</span></a>
         `;
 
-        if (!isRegistered) {
+        if (isRegistered) {
             pmbMenuHtml += `
-                <a href="${portalPrefix}registrasi-ulang.html" class="nav-link nav-item menu-item ${(page === 'registrasi-ulang.html' || page === 'pembayaran-ukt.html') ? 'active' : ''}"><i class="fas fa-id-card fa-regular fa-id-card"></i> <span>Registrasi Ulang</span></a>
+            <a href="${portalPrefix}registrasi-ulang.html" class="nav-link nav-item menu-item ${(page === 'registrasi-ulang.html' || page === 'pembayaran-ukt.html') ? 'active' : ''}"><i class="fas fa-id-card fa-regular fa-id-card"></i> <span>Registrasi Ulang</span></a>
             `;
         }
 
-        // 5. Bangun menu tambahan jika SUDAH registrasi
+        // 6. Bangun menu tambahan jika mahasiswa sudah dinyatakan LULUS
         let extendedMenuHtml = '';
         if (isRegistered) {
             extendedMenuHtml = `
@@ -46,9 +67,8 @@
 
             <div class="nav-section menu-section">
                 <div class="menu-title">KOMUNIKASI</div>
-                <a href="#" class="nav-link nav-item menu-item"><i class="far fa-envelope fa-regular fa-envelope"></i> <span>Pesan</span></a>
                 <a href="${portalPrefix}pengumuman.html" class="nav-link nav-item menu-item ${(page === 'pengumuman.html' || page === 'informasi.html') ? 'active' : ''}"><i class="fas fa-bullhorn fa-solid fa-bullhorn"></i> <span>Pengumuman</span></a>
-                <a href="${portalPrefix}forum.html" class="nav-link nav-item menu-item ${page === 'forum.html' ? 'active' : ''}"><i class="far fa-comments fa-regular fa-comments"></i> <span>Diskusi / Forum</span></a>
+                <a href="${portalPrefix}forum.html" class="nav-link nav-item menu-item ${page === 'forum.html' ? 'active' : ''}"><i class="far fa-comments fa-regular fa-comments"></i> <span>Diskusi</span></a>
             </div>
 
             <div class="nav-section menu-section">
@@ -58,7 +78,7 @@
             `;
         }
 
-        // 6. Render HTML Sidebar
+        // 7. Render HTML Sidebar
         const html = `
         <div class="sidebar-header brand logo-area">
             <div class="title-wrapper">
@@ -88,11 +108,11 @@
 
         sidebarContainer.innerHTML = html;
 
-        // Reset state saat menekan tombol keluar
+        // Reset state saat menekan tombol keluar (Logout)
         const logoutBtn = document.getElementById('sidebarLogout');
         if (logoutBtn) {
             logoutBtn.addEventListener('click', function() {
-                localStorage.removeItem('isRegistered');
+                localStorage.clear(); // Bersihkan semua kredensial login dan status
             });
         }
     }

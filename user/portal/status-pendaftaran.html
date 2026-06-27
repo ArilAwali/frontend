@@ -2,6 +2,8 @@
 <html lang="id">
 
 <head>
+    <script src="../../config/auth-guard.js"></script>
+    <script src="../../config/api.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Status Pendaftaran</title>
@@ -425,7 +427,7 @@
         </header>
 
         <div class="page-header">
-            <h1>Halo, Muhammad Dhafin</h1>
+            <h1 id="user_greeting">Halo, Calon Mahasiswa</h1>
             <p>Lengkapi data dan pantau proses pendaftaran Anda.</p>
         </div>
 
@@ -435,35 +437,48 @@
                 <div class="panel-card">
                     <h3 class="panel-title">Status Pendaftaran</h3>
                     <div class="stepper-container">
-                        <div class="step done">
+                        <!-- Step 1: Akun -->
+                        <div class="step done" id="step_akun">
                             <div class="step-icon"><i class="fas fa-check"></i></div>
                             <div class="step-text">Buat Akun</div>
                             <div class="step-sub">Selesai</div>
                         </div>
                         <div class="step-line done"></div>
 
-                        <div class="step done">
+                        <!-- Step 2: Biodata -->
+                        <div class="step wait" id="step_biodata">
                             <div class="step-icon"><i class="fas fa-file-alt"></i></div>
                             <div class="step-text">Biodata</div>
-                            <div class="step-sub">Selesai</div>
+                            <div class="step-sub">Menunggu</div>
                         </div>
-                        <div class="step-line done"></div>
+                        <div class="step-line" id="line_biodata"></div>
 
-                        <div class="step done">
+                        <!-- Step 3: Formulir -->
+                        <div class="step wait" id="step_formulir">
                             <div class="step-icon"><i class="fas fa-file-signature"></i></div>
                             <div class="step-text">Formulir</div>
-                            <div class="step-sub">Selesai</div>
+                            <div class="step-sub">Menunggu</div>
                         </div>
-                        <div class="step-line done"></div>
+                        <div class="step-line" id="line_formulir"></div>
 
-                        <div class="step active">
+                        <!-- Step 4: Dokumen -->
+                        <div class="step wait" id="step_dokumen">
+                            <div class="step-icon"><i class="fas fa-file"></i></div>
+                            <div class="step-text">Dokumen</div>
+                            <div class="step-sub">Menunggu</div>
+                        </div>
+                        <div class="step-line" id="line_dokumen"></div>
+
+                        <!-- Step 5: Verifikasi -->
+                        <div class="step wait" id="step_verifikasi">
                             <div class="step-icon"><i class="fas fa-hourglass-half"></i></div>
                             <div class="step-text">Verifikasi</div>
-                            <div class="step-sub">Sedang Diproses</div>
+                            <div class="step-sub">Menunggu</div>
                         </div>
-                        <div class="step-line"></div>
+                        <div class="step-line" id="line_verifikasi"></div>
 
-                        <div class="step wait">
+                        <!-- Step 6: Pengumuman -->
+                        <div class="step wait" id="step_pengumuman">
                             <div class="step-icon"><i class="fas fa-bullhorn"></i></div>
                             <div class="step-text">Pengumuman</div>
                             <div class="step-sub">Menunggu</div>
@@ -478,33 +493,35 @@
                             <div class="dc-icon"><i class="far fa-user"></i></div>
                             <div class="dc-title">Biodata</div>
                             <div class="dc-desc">Lengkapi data diri Anda</div>
-                            <span class="dc-badge">Selesai</span>
-                            <button class="btn-outline">Lihat / Ubah</button>
+                            <span class="dc-badge" id="badge_biodata">Belum Lengkap</span>
+                            <button class="btn-outline" onclick="window.location.href='biodata.html'">Lihat /
+                                Ubah</button>
                         </div>
                         <div class="data-card">
                             <div class="dc-icon"><i class="far fa-file-alt"></i></div>
                             <div class="dc-title">Formulir Pendaftaran</div>
                             <div class="dc-desc">Isi formulir pendaftaran</div>
-                            <span class="dc-badge">Selesai</span>
-                            <button class="btn-outline">Lihat / Ubah</button>
+                            <span class="dc-badge" id="badge_formulir">Belum Lengkap</span>
+                            <button class="btn-outline" onclick="window.location.href='formulir.html'">Lihat /
+                                Ubah</button>
                         </div>
                         <div class="data-card">
                             <div class="dc-icon"><i class="far fa-file"></i></div>
                             <div class="dc-title">Dokumen</div>
                             <div class="dc-desc">Upload berkas persyaratan</div>
-                            <span class="dc-badge">Selesai</span>
-                            <button class="btn-outline">Lihat</button>
+                            <span class="dc-badge" id="badge_dokumen">Belum Lengkap</span>
+                            <button class="btn-outline" onclick="window.location.href='dokumen.html'">Lihat</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="access-module">
-                    <div class="am-icon"><i class="fas fa-graduation-cap"></i></div>
+                <div class="access-module" id="academic_module_card">
+                    <div class="am-icon" id="academic_module_icon"><i class="fas fa-graduation-cap"></i></div>
                     <div class="am-content">
                         <h3>Akses Modul Akademik</h3>
                         <p>Modul Akademik akan aktif setelah Anda dinyatakan lulus dan melakukan daftar ulang sebagai
                             mahasiswa Universitas Crypto.</p>
-                        <div class="am-btn">
+                        <div class="am-btn" id="btn_academic_access" style="cursor: not-allowed;">
                             Akses Modul Akademik <i class="fas fa-lock" style="margin-left: 6px;"></i>
                         </div>
                     </div>
@@ -555,6 +572,156 @@
         </footer>
     </main>
     <script src="../assets/js/sidebar.js"></script>
+    <script>
+        async function loadStatusDetails() {
+            try {
+                // Fetch data secara paralel
+                const [statusRes, biodataRes, raporRes, dokumenRes] = await Promise.all([
+                    fetchAPI('/portal/status'),
+                    fetchAPI('/biodata/biodata'),
+                    fetchAPI('/biodata/rapor'),
+                    fetchAPI('/dokumen')
+                ]);
+
+                if (statusRes.success) {
+                    const user = statusRes.data;
+
+                    // 1. Tampilkan nama user secara dinamis
+                    document.getElementById('user_greeting').textContent = `Halo, ${user.nama_lengkap}`;
+
+                    // 2. Render status kelengkapan berkas
+                    const isBiodataFilled = !!biodataRes.data;
+                    const isFormulirFilled = !!raporRes.data;
+                    const isDokumenUploaded = !!(dokumenRes.data && dokumenRes.data.ktp && dokumenRes.data.ijazah_skl && dokumenRes.data.pas_foto);
+
+                    updateBadge('badge_biodata', isBiodataFilled);
+                    updateBadge('badge_formulir', isFormulirFilled);
+                    updateBadge('badge_dokumen', isDokumenUploaded);
+
+                    // 3. Update Stepper Status secara dinamis
+                    if (isBiodataFilled) {
+                        setStep('step_biodata', 'done', 'Selesai');
+                        document.getElementById('line_biodata').className = 'step-line done';
+                    } else {
+                        setStep('step_biodata', 'active', 'Belum Lengkap');
+                    }
+
+                    if (isFormulirFilled) {
+                        setStep('step_formulir', 'done', 'Selesai');
+                        document.getElementById('line_formulir').className = 'step-line done';
+                    } else {
+                        if (isBiodataFilled) setStep('step_formulir', 'active', 'Belum Lengkap');
+                    }
+
+                    // Dokumen
+                    if (isDokumenUploaded) {
+                        setStep('step_dokumen', 'done', 'Selesai');
+                        document.getElementById('line_dokumen').className = 'step-line done';
+                    } else {
+                        if (isFormulirFilled) setStep('step_dokumen', 'active', 'Belum Lengkap');
+                    }
+
+                    // Verifikasi berkas pendaftaran
+                    if (user.status_verifikasi === 'diverifikasi') {
+                        setStep('step_verifikasi', 'done', 'Terverifikasi');
+                        document.getElementById('line_verifikasi').className = 'step-line done';
+                    } else if (user.status_verifikasi === 'ditolak') {
+                        setStep('step_verifikasi', 'active', 'Ditolak');
+                    } else {
+                        // belum_diverifikasi
+                        if (isDokumenUploaded) {
+                            setStep('step_verifikasi', 'active', 'Sedang Diproses');
+                        } else {
+                            setStep('step_verifikasi', 'wait', 'Menunggu Berkas');
+                        }
+                    }
+
+                    // Status Kelulusan
+                    if (user.status_kelulusan === 'lulus') {
+                        setStep('step_pengumuman', 'done', 'Lulus');
+                    } else if (user.status_kelulusan === 'tidak_lulus') {
+                        setStep('step_pengumuman', 'active', 'Tidak Lulus');
+                    } else {
+                        setStep('step_pengumuman', 'wait', 'Menunggu');
+                    }
+
+                    // 4. Unlock Modul Akademik Card
+                    if (user.status_kelulusan === 'lulus') {
+                        const card = document.getElementById('academic_module_card');
+                        const icon = document.getElementById('academic_module_icon');
+                        const btn = document.getElementById('btn_academic_access');
+
+                        if (card) card.style.border = '1px solid #86efac';
+                        if (icon) {
+                            icon.style.background = '#dcfce7';
+                            icon.style.color = '#137333';
+                        }
+                        if (btn) {
+                            btn.style.color = '#137333';
+                            btn.style.fontWeight = '700';
+                            btn.style.cursor = 'pointer';
+                            btn.innerHTML = `Masuk Dashboard Akademik <i class="fas fa-unlock" style="margin-left: 6px;"></i>`;
+                            btn.onclick = () => { window.location.href = 'dashboard-akademik.html'; };
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error saat mengambil status pendaftaran detail:', error);
+            }
+        }
+
+        function updateBadge(id, isCompleted) {
+            const badge = document.getElementById(id);
+            if (!badge) return;
+            if (isCompleted) {
+                badge.className = 'dc-badge';
+                badge.textContent = 'Selesai';
+                badge.style.background = '#e6f4ea';
+                badge.style.color = '#137333';
+            } else {
+                badge.className = 'dc-badge warning';
+                badge.textContent = 'Belum Lengkap';
+                badge.style.background = '#fef08a';
+                badge.style.color = '#b45309';
+            }
+        }
+
+        function setStep(stepId, className, subtext) {
+            const step = document.getElementById(stepId);
+            if (!step) return;
+
+            // map class name
+            let mappedClass = 'wait';
+            let iconHtml = '';
+            if (className === 'done') {
+                mappedClass = 'step done';
+                iconHtml = '<i class="fas fa-check"></i>';
+            } else if (className === 'active') {
+                mappedClass = 'step active';
+                if (stepId === 'step_biodata') iconHtml = '<i class="fas fa-file-alt"></i>';
+                else if (stepId === 'step_formulir') iconHtml = '<i class="fas fa-file-signature"></i>';
+                else if (stepId === 'step_dokumen') iconHtml = '<i class="fas fa-file"></i>';
+                else if (stepId === 'step_verifikasi') iconHtml = '<i class="fas fa-hourglass-half"></i>';
+                else if (stepId === 'step_pengumuman') iconHtml = '<i class="fas fa-bullhorn"></i>';
+            } else {
+                mappedClass = 'step wait';
+                if (stepId === 'step_biodata') iconHtml = '<i class="fas fa-file-alt"></i>';
+                else if (stepId === 'step_formulir') iconHtml = '<i class="fas fa-file-signature"></i>';
+                else if (stepId === 'step_dokumen') iconHtml = '<i class="fas fa-file"></i>';
+                else if (stepId === 'step_verifikasi') iconHtml = '<i class="fas fa-hourglass-half"></i>';
+                else if (stepId === 'step_pengumuman') iconHtml = '<i class="fas fa-bullhorn"></i>';
+            }
+
+            step.className = mappedClass;
+            const iconContainer = step.querySelector('.step-icon');
+            if (iconContainer) iconContainer.innerHTML = iconHtml;
+
+            const sub = step.querySelector('.step-sub');
+            if (sub) sub.textContent = subtext;
+        }
+
+        window.addEventListener('DOMContentLoaded', loadStatusDetails);
+    </script>
 </body>
 
 </html>
