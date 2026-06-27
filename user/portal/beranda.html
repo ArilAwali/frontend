@@ -634,20 +634,8 @@
                 </div>
               </div>
 
-              <!-- Step 4: Dokumen -->
-              <div class="step-item pending" id="step_dokumen">
-                <div class="step-circle"><svg viewBox="0 0 24 24">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                  </svg></div>
-                <div class="step-text">
-                  <h5>Dokumen</h5>
-                  <p id="sub_dokumen">Menunggu</p>
-                </div>
-              </div>
-
-              <!-- Step 5: Verifikasi -->
-              <!-- <div class="step-item pending" id="step_verifikasi">
+              <!-- Step 4: Verifikasi -->
+              <div class="step-item pending" id="step_verifikasi">
                 <div class="step-circle"><svg viewBox="0 0 24 24">
                     <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
                     <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
@@ -656,9 +644,9 @@
                   <h5>Verifikasi Dokumen</h5>
                   <p id="sub_verifikasi">Menunggu</p>
                 </div>
-              </div> -->
+              </div>
 
-              <!-- Step 6: Pengumuman -->
+              <!-- Step 5: Pengumuman -->
               <div class="step-item pending" id="step_pengumuman">
                 <div class="step-circle"><svg viewBox="0 0 24 24">
                     <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
@@ -877,22 +865,10 @@
             }
           }
 
-          // Dokumen Stepper
-          if (isDokumenUploaded) {
-            setStepStatus('step_dokumen', 'completed', 'Selesai');
-            if (completedSteps === 3) completedSteps = 4;
-          } else {
-            if (completedSteps === 3) {
-              setStepStatus('step_dokumen', 'current', 'Belum Lengkap');
-            } else {
-              setStepStatus('step_dokumen', 'pending', 'Menunggu');
-            }
-          }
-
           // Verifikasi Stepper
           if (user.status_verifikasi === 'diverifikasi') {
             setStepStatus('step_verifikasi', 'completed', 'Terverifikasi');
-            if (completedSteps === 4) completedSteps = 5;
+            if (completedSteps === 3) completedSteps = 4;
           } else if (user.status_verifikasi === 'ditolak') {
             setStepStatus('step_verifikasi', 'current', 'Ditolak');
           } else {
@@ -900,25 +876,29 @@
             if (isDokumenUploaded) {
               setStepStatus('step_verifikasi', 'current', 'Sedang Diproses');
             } else {
-              setStepStatus('step_verifikasi', 'pending', 'Menunggu Berkas');
+              if (completedSteps === 3) {
+                setStepStatus('step_verifikasi', 'current', 'Menunggu Berkas');
+              } else {
+                setStepStatus('step_verifikasi', 'pending', 'Menunggu Berkas');
+              }
             }
           }
 
           // Pengumuman Seleksi
           if (user.status_kelulusan === 'lulus') {
             setStepStatus('step_pengumuman', 'completed', 'Lulus');
-            completedSteps = 6;
+            completedSteps = 5;
           } else if (user.status_kelulusan === 'tidak_lulus') {
             setStepStatus('step_pengumuman', 'current', 'Tidak Lulus');
           } else {
             setStepStatus('step_pengumuman', 'pending', 'Menunggu');
           }
 
-          // Atur width dari stepper-line-active
+          // Atur width dari stepper-line-active menggunakan formula calc agar presisi
           const lineActive = document.getElementById('stepper_line_active');
           if (lineActive) {
-            const widthPercentage = ((completedSteps - 1) / 6) * 100;
-            lineActive.style.width = `${widthPercentage}%`;
+            const widthPercentage = ((completedSteps - 1) / 4) * 100;
+            lineActive.style.width = `calc(${widthPercentage}% - ${(widthPercentage / 100) * 80}px)`;
           }
 
           // 4. Update Card Status Saat Ini

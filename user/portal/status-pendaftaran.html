@@ -461,21 +461,13 @@
                         </div>
                         <div class="step-line" id="line_formulir"></div>
 
-                        <!-- Step 4: Dokumen -->
-                        <div class="step wait" id="step_dokumen">
-                            <div class="step-icon"><i class="fas fa-file"></i></div>
-                            <div class="step-text">Dokumen</div>
-                            <div class="step-sub">Menunggu</div>
-                        </div>
-                        <div class="step-line" id="line_dokumen"></div>
-
-                        <!-- Step 5: Verifikasi -->
-                        <!-- <div class="step wait" id="step_verifikasi">
+                        <!-- Step 4: Verifikasi -->
+                        <div class="step wait" id="step_verifikasi">
                             <div class="step-icon"><i class="fas fa-hourglass-half"></i></div>
                             <div class="step-text">Verifikasi Dokumen</div>
                             <div class="step-sub">Menunggu</div>
                         </div>
-                        <div class="step-line" id="line_verifikasi"></div> -->
+                        <div class="step-line" id="line_verifikasi"></div>
 
                         <!-- Step 6: Pengumuman -->
                         <div class="step wait" id="step_pengumuman">
@@ -613,14 +605,6 @@
                         if (isBiodataFilled) setStep('step_formulir', 'active', 'Belum Lengkap');
                     }
 
-                    // Dokumen
-                    if (isDokumenUploaded) {
-                        setStep('step_dokumen', 'done', 'Selesai');
-                        document.getElementById('line_dokumen').className = 'step-line done';
-                    } else {
-                        if (isFormulirFilled) setStep('step_dokumen', 'active', 'Belum Lengkap');
-                    }
-
                     // Verifikasi berkas pendaftaran
                     if (user.status_verifikasi === 'diverifikasi') {
                         setStep('step_verifikasi', 'done', 'Terverifikasi');
@@ -632,7 +616,11 @@
                         if (isDokumenUploaded) {
                             setStep('step_verifikasi', 'active', 'Sedang Diproses');
                         } else {
-                            setStep('step_verifikasi', 'wait', 'Menunggu Berkas');
+                            if (isFormulirFilled) {
+                                setStep('step_verifikasi', 'active', 'Menunggu Berkas');
+                            } else {
+                                setStep('step_verifikasi', 'wait', 'Menunggu Berkas');
+                            }
                         }
                     }
 
@@ -642,7 +630,11 @@
                     } else if (user.status_kelulusan === 'tidak_lulus') {
                         setStep('step_pengumuman', 'active', 'Tidak Lulus');
                     } else {
-                        setStep('step_pengumuman', 'wait', 'Menunggu');
+                        if (user.status_verifikasi === 'diverifikasi') {
+                            setStep('step_pengumuman', 'active', 'Menunggu Pengumuman');
+                        } else {
+                            setStep('step_pengumuman', 'wait', 'Menunggu');
+                        }
                     }
 
                     // 4. Unlock Modul Akademik Card

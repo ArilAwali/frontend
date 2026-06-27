@@ -1,105 +1,596 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-  <script src="../../config/auth-guard.js"></script>
-  <script src="../../config/api.js"></script>
+    <script src="../../config/auth-guard.js"></script>
+    <script src="../../config/api.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pembayaran & Upload Pembayaran - Universitas Crypto</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { display: flex; background-color: #FAFAFA; color: #333333; min-height: 100vh; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            display: flex;
+            background-color: #FAFAFA;
+            color: #333333;
+            min-height: 100vh;
+        }
+
         /* Main Content */
-        .main-content { flex: 1; padding: 0 40px 40px 40px; display: flex; flex-direction: column; min-height: 100vh; }
+        .main-content {
+            flex: 1;
+            padding: 0 40px 40px 40px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
         /* Topbar */
-        .topbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; margin-bottom: 15px; }
-        .breadcrumb-text { font-size: 13px; color: #8A99AF; font-weight: 500; display: flex; align-items: center; gap: 6px; }
-        .breadcrumb-text a { color: #8A99AF; text-decoration: none; }
-        .breadcrumb-text a:hover { color: #111827; }
-        .topbar-right { display: flex; align-items: center; gap: 20px; }
-        .topbar-icons { display: flex; gap: 18px; color: #5C6B82; font-size: 17px; }
-        .icon-wrapper { position: relative; cursor: pointer; }
-        .notification-dot { position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background-color: #EF4444; border-radius: 50%; border: 2px solid #FAFAFA; }
-        .profile { display: flex; align-items: center; gap: 12px; cursor: pointer; }
-        .profile-info { display: flex; flex-direction: column; text-align: right; }
-        .profile-info .name { font-size: 14px; font-weight: 600; color: #111827; line-height: 1.2; }
-        .profile-info .role { font-size: 11px; color: #6B7280; font-weight: 500; text-transform: uppercase; }
-        .profile-avatar { width: 36px; height: 36px; background-color: #00A86B; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; }
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 15px;
+        }
+
+        .breadcrumb-text {
+            font-size: 13px;
+            color: #8A99AF;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .breadcrumb-text a {
+            color: #8A99AF;
+            text-decoration: none;
+        }
+
+        .breadcrumb-text a:hover {
+            color: #111827;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .topbar-icons {
+            display: flex;
+            gap: 18px;
+            color: #5C6B82;
+            font-size: 17px;
+        }
+
+        .icon-wrapper {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .notification-dot {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 8px;
+            height: 8px;
+            background-color: #EF4444;
+            border-radius: 50%;
+            border: 2px solid #FAFAFA;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            text-align: right;
+        }
+
+        .profile-info .name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111827;
+            line-height: 1.2;
+        }
+
+        .profile-info .role {
+            font-size: 11px;
+            color: #6B7280;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .profile-avatar {
+            width: 36px;
+            height: 36px;
+            background-color: #00A86B;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
         /* Page Header Row */
-        .page-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .page-header-title h1 { font-size: 24px; font-weight: 700; color: #111827; }
-        .academic-year-badge { background: #FFFFFF; border: 1px solid #E5E7EB; padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 500; color: #374151; box-shadow: 0 1px 2px rgba(0,0,0,0.03); }
+        .page-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .page-header-title h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .academic-year-badge {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+        }
+
         /* Tabs Header */
-        .tabs-container { display: flex; gap: 32px; border-bottom: 1px solid #E5E7EB; margin-bottom: 24px; }
-        .tab-button { padding-bottom: 12px; font-size: 14px; font-weight: 600; color: #6B7280; text-decoration: none; position: relative; cursor: pointer; }
-        .tab-button.active { color: #2563EB; }
-        .tab-button.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2.5px; background-color: #2563EB; border-radius: 2px; }
+        .tabs-container {
+            display: flex;
+            gap: 32px;
+            border-bottom: 1px solid #E5E7EB;
+            margin-bottom: 24px;
+        }
+
+        .tab-button {
+            padding-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #6B7280;
+            text-decoration: none;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .tab-button.active {
+            color: #2563EB;
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2.5px;
+            background-color: #2563EB;
+            border-radius: 2px;
+        }
+
         /* 2 Columns Grid Content */
-        .content-grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
-        .panel-card { background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 12px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
-        .panel-card-title { font-size: 16px; font-weight: 600; color: #111827; margin-bottom: 20px; }
-        .panel-card-subtitle { font-size: 13px; color: #6B7280; margin-top: -12px; margin-bottom: 20px; line-height: 1.5; }
+        .content-grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .panel-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+        }
+
+        .panel-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 20px;
+        }
+
+        .panel-card-subtitle {
+            font-size: 13px;
+            color: #6B7280;
+            margin-top: -12px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
         /* Left Table Rincian Pembayaran */
-        .details-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
-        .details-table td { padding: 10px 0; font-size: 13.5px; }
-        .details-table .col-label { color: #6B7280; font-weight: 400; width: 42%; }
-        .details-table .col-colon { width: 4%; color: #9CA3AF; }
-        .details-table .col-val { color: #111827; font-weight: 600; width: 54%; }
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+        }
+
+        .details-table td {
+            padding: 10px 0;
+            font-size: 13.5px;
+        }
+
+        .details-table .col-label {
+            color: #6B7280;
+            font-weight: 400;
+            width: 42%;
+        }
+
+        .details-table .col-colon {
+            width: 4%;
+            color: #9CA3AF;
+        }
+
+        .details-table .col-val {
+            color: #111827;
+            font-weight: 600;
+            width: 54%;
+        }
+
         /* Total Tagihan Box */
-        .tagihan-box { background-color: #EFF6FF; border-radius: 10px; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-        .tagihan-left .t-label { font-size: 13px; font-weight: 600; color: #2563EB; margin-bottom: 2px; }
-        .tagihan-left .t-amount { font-size: 22px; font-weight: 800; color: #1D4ED8; }
-        .tagihan-right { text-align: right; }
-        .tagihan-right .d-label { font-size: 11px; color: #6B7280; font-weight: 500; margin-bottom: 2px; }
-        .tagihan-right .d-val { font-size: 12px; font-weight: 700; color: #DC2626; }
+        .tagihan-box {
+            background-color: #EFF6FF;
+            border-radius: 10px;
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .tagihan-left .t-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2563EB;
+            margin-bottom: 2px;
+        }
+
+        .tagihan-left .t-amount {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1D4ED8;
+        }
+
+        .tagihan-right {
+            text-align: right;
+        }
+
+        .tagihan-right .d-label {
+            font-size: 11px;
+            color: #6B7280;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .tagihan-right .d-val {
+            font-size: 12px;
+            font-weight: 700;
+            color: #DC2626;
+        }
+
         /* Metode Pembayaran Section */
-        .metode-title { font-size: 14px; font-weight: 600; color: #111827; margin-bottom: 12px; }
-        .bank-info-group { display: flex; flex-direction: column; gap: 8px; font-size: 13px; margin-bottom: 12px; }
-        .bank-info-row { display: flex; align-items: center; }
-        .bank-logo-col { width: 110px; font-weight: 800; color: #005696; font-style: italic; font-size: 14px; }
-        .bank-label-col { width: 100px; color: #6B7280; }
-        .bank-colon-col { width: 15px; color: #9CA3AF; }
-        .bank-val-col { color: #111827; font-weight: 700; }
-        .note-footnote { font-size: 11px; color: #9CA3AF; font-style: italic; }
+        .metode-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 12px;
+        }
+
+        .bank-info-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .bank-info-row {
+            display: flex;
+            align-items: center;
+        }
+
+        .bank-logo-col {
+            width: 110px;
+            font-weight: 800;
+            color: #005696;
+            font-style: italic;
+            font-size: 14px;
+        }
+
+        .bank-label-col {
+            width: 100px;
+            color: #6B7280;
+        }
+
+        .bank-colon-col {
+            width: 15px;
+            color: #9CA3AF;
+        }
+
+        .bank-val-col {
+            color: #111827;
+            font-weight: 700;
+        }
+
+        .note-footnote {
+            font-size: 11px;
+            color: #9CA3AF;
+            font-style: italic;
+        }
+
         /* Right Panel Upload Zone */
-        .dropzone-box { border: 2px dashed #BFDBFE; background-color: #FAFCFF; border-radius: 12px; padding: 32px 20px; text-align: center; cursor: pointer; transition: 0.2s; margin-bottom: 20px; }
-        .dropzone-box:hover { border-color: #3B82F6; background-color: #EFF6FF; }
-        .dropzone-icon-circle { width: 56px; height: 56px; background-color: #DBEAFE; color: #2563EB; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 14px auto; }
-        .dropzone-main-text { font-size: 14px; font-weight: 600; color: #1E293B; margin-bottom: 4px; }
-        .dropzone-sub-text { font-size: 12px; color: #94A3B8; margin-bottom: 10px; font-style: italic; }
-        .btn-select-file { padding: 8px 20px; background-color: #2563EB; color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-block; }
-        .btn-select-file:hover { background-color: #1D4ED8; }
-        .file-info-limit { font-size: 10.5px; color: #94A3B8; margin-top: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.3px; }
+        .dropzone-box {
+            border: 2px dashed #BFDBFE;
+            background-color: #FAFCFF;
+            border-radius: 12px;
+            padding: 32px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-bottom: 20px;
+        }
+
+        .dropzone-box:hover {
+            border-color: #3B82F6;
+            background-color: #EFF6FF;
+        }
+
+        .dropzone-icon-circle {
+            width: 56px;
+            height: 56px;
+            background-color: #DBEAFE;
+            color: #2563EB;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 14px auto;
+        }
+
+        .dropzone-main-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1E293B;
+            margin-bottom: 4px;
+        }
+
+        .dropzone-sub-text {
+            font-size: 12px;
+            color: #94A3B8;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .btn-select-file {
+            padding: 8px 20px;
+            background-color: #2563EB;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-select-file:hover {
+            background-color: #1D4ED8;
+        }
+
+        .file-info-limit {
+            font-size: 10.5px;
+            color: #94A3B8;
+            margin-top: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
         /* Ketentuan Box */
-        .ketentuan-card { background-color: #EFF6FF; border-radius: 10px; padding: 16px 18px; margin-bottom: 20px; border: 1px solid #DBEAFE; }
-        .ketentuan-header { font-size: 13px; font-weight: 700; color: #1D4ED8; margin-bottom: 8px; }
-        .ketentuan-ul { padding-left: 16px; font-size: 12px; color: #374151; line-height: 1.6; }
-        .ketentuan-ul li { margin-bottom: 4px; }
-        .ketentuan-ul code { background-color: #FFFFFF; padding: 2px 5px; border-radius: 4px; font-family: monospace; font-size: 11px; border: 1px solid #BFDBFE; color: #1E40AF; }
+        .ketentuan-card {
+            background-color: #EFF6FF;
+            border-radius: 10px;
+            padding: 16px 18px;
+            margin-bottom: 20px;
+            border: 1px solid #DBEAFE;
+        }
+
+        .ketentuan-header {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1D4ED8;
+            margin-bottom: 8px;
+        }
+
+        .ketentuan-ul {
+            padding-left: 16px;
+            font-size: 12px;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .ketentuan-ul li {
+            margin-bottom: 4px;
+        }
+
+        .ketentuan-ul code {
+            background-color: #FFFFFF;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 11px;
+            border: 1px solid #BFDBFE;
+            color: #1E40AF;
+        }
+
         /* Submit Upload Button */
-        .btn-submit-proof { width: 100%; padding: 12px; background-color: #DBEAFE; color: #1D4ED8; border: 1px solid #BFDBFE; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; }
-        .btn-submit-proof.active-btn { background-color: #2563EB; color: #FFFFFF; border: none; box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2); }
-        .btn-submit-proof.active-btn:hover { background-color: #1D4ED8; }
+        .btn-submit-proof {
+            width: 100%;
+            padding: 12px;
+            background-color: #DBEAFE;
+            color: #1D4ED8;
+            border: 1px solid #BFDBFE;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+
+        .btn-submit-proof.active-btn {
+            background-color: #2563EB;
+            color: #FFFFFF;
+            border: none;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-submit-proof.active-btn:hover {
+            background-color: #1D4ED8;
+        }
+
         /* Footer */
-        .site-footer { display: flex; justify-content: space-between; padding-top: 30px; font-size: 12px; color: #9CA3AF; margin-top: auto; }
-        .footer-links { display: flex; gap: 16px; }
-        .footer-links a { color: #6B7280; text-decoration: none; }
+        .site-footer {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 30px;
+            font-size: 12px;
+            color: #9CA3AF;
+            margin-top: auto;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-links a {
+            color: #6B7280;
+            text-decoration: none;
+        }
+
         /* Modal Overlay (Foto 1) */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
-        .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-card { background: #FFFFFF; width: 100%; max-width: 400px; border-radius: 16px; padding: 32px 28px; text-align: center; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); transform: scale(0.95); transition: transform 0.3s ease; }
-        .modal-overlay.active .modal-card { transform: scale(1); }
-        .modal-icon-outer { width: 84px; height: 84px; background-color: #C7D9FE; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; }
-        .modal-icon-inner { width: 44px; height: 44px; background-color: #0B1727; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; }
-        .modal-title { font-size: 20px; font-weight: 700; color: #111827; margin-bottom: 10px; line-height: 1.3; }
-        .modal-desc { font-size: 13px; color: #6B7280; line-height: 1.6; margin-bottom: 24px; padding: 0 8px; }
-        .btn-modal-close { width: 100%; padding: 12px; background-color: #0B1727; color: #FFFFFF; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; }
-        .btn-modal-close:hover { background-color: #1E293B; }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card {
+            background: #FFFFFF;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 16px;
+            padding: 32px 28px;
+            text-align: center;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-icon-outer {
+            width: 84px;
+            height: 84px;
+            background-color: #C7D9FE;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px auto;
+        }
+
+        .modal-icon-inner {
+            width: 44px;
+            height: 44px;
+            background-color: #0B1727;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .modal-desc {
+            font-size: 13px;
+            color: #6B7280;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            padding: 0 8px;
+        }
+
+        .btn-modal-close {
+            width: 100%;
+            padding: 12px;
+            background-color: #0B1727;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-modal-close:hover {
+            background-color: #1E293B;
+        }
     </style>
     <link rel="stylesheet" href="../assets/css/sidebar.css">
 </head>
+
 <body>
 
     <!-- Dynamic sidebar loaded by sidebar.js -->
@@ -152,11 +643,11 @@
 
         <!-- Main 2 Column Content Grid -->
         <div class="content-grid-2col">
-            
+
             <!-- Left Panel: Rincian Pembayaran -->
             <div class="panel-card">
                 <div class="panel-card-title">Rincian Pembayaran</div>
-                
+
                 <table class="details-table">
                     <tr>
                         <td class="col-label">Jenis Pembayaran</td>
@@ -211,7 +702,8 @@
                 <div class="metode-title">Metode Pembayaran</div>
                 <div class="bank-info-group">
                     <div class="bank-info-row">
-                        <span class="bank-logo-col"><i class="fas fa-university" style="margin-right: 4px;"></i> Bank BCA</span>
+                        <span class="bank-logo-col"><i class="fas fa-university" style="margin-right: 4px;"></i> Bank
+                            BCA</span>
                         <span class="bank-label-col">No. Rekening</span>
                         <span class="bank-colon-col">:</span>
                         <span class="bank-val-col">1234 5678 9012 3456</span>
@@ -237,7 +729,8 @@
                 <div class="panel-card-title">Upload Bukti Pembayaran</div>
                 <div class="panel-card-subtitle">Upload bukti pembayaran setelah Anda melakukan pembayaran.</div>
 
-                <input type="file" id="fileInputEl" style="display: none;" accept=".jpg,.jpeg,.png,.pdf" onchange="onFileSelected(event)">
+                <input type="file" id="fileInputEl" style="display: none;" accept=".jpg,.jpeg,.png,.pdf"
+                    onchange="onFileSelected(event)">
 
                 <div class="dropzone-box" onclick="document.getElementById('fileInputEl').click()">
                     <div class="dropzone-icon-circle">
@@ -254,14 +747,16 @@
                     <div class="ketentuan-header">Ketentuan Upload</div>
                     <ul class="ketentuan-ul">
                         <li>Pastikan bukti pembayaran jelas dan dapat terbaca.</li>
-                        <li>Nama file menggunakan format:<br><code>NOPENDAFTARAN_NAMA_TANGGAL</code><br><span style="font-size: 11px; color: #6B7280;">Contoh: <code>UC202600123_MUHAMMADDHAFIN_20072026.jpg</code></span></li>
+                        <li>Nama file menggunakan format:<br><code>NOPENDAFTARAN_NAMA_TANGGAL</code><br><span
+                                style="font-size: 11px; color: #6B7280;">Contoh:
+                                <code>UC202600123_MUHAMMADDHAFIN_20072026.jpg</code></span></li>
                         <li>Hanya bukti pembayaran yang sesuai dengan total tagihan yang akan diproses.</li>
                     </ul>
                 </div>
 
                 <!-- Action Submit Button -->
-                <button type="button" class="btn-submit-proof active-btn" onclick="openSuccessModal()">
-                    <i class="fas fa-paper-plane"></i> Kirim Bukti Pembayaran
+                <button type="button" class="btn-submit-proof active-btn" onclick="kirimPembayaran()">
+                    <i class="fas fa-paper-plane"></i> Ajukan registrasi ulang
                 </button>
             </div>
 
@@ -287,7 +782,8 @@
                 </div>
             </div>
             <h2 class="modal-title">Dokumen Berhasil Diunggah!</h2>
-            <p class="modal-desc">Berkas Anda telah tersimpan dengan aman di sistem. Tim kami akan segera melakukan verifikasi.</p>
+            <p class="modal-desc">Berkas Anda telah tersimpan dengan aman di sistem. Tim kami akan segera melakukan
+                verifikasi.</p>
             <button class="btn-modal-close" onclick="finishAndRedirect()">Selesai</button>
         </div>
     </div>
@@ -301,14 +797,38 @@
             }
         }
 
+        async function kirimPembayaran() {
+            const fileInput = document.getElementById('fileInputEl');
+            if (fileInput.files.length === 0) {
+                alert('Silakan pilih berkas bukti transfer terlebih dahulu.');
+                return;
+            }
+
+            try {
+                // Kirim request ke backend untuk semester 1
+                const response = await fetchAPI('/akademik/keuangan/bayar', {
+                    method: 'POST',
+                    body: JSON.stringify({ semester: 1 })
+                });
+                if (response.success) {
+                    openSuccessModal();
+                } else {
+                    alert('Gagal memproses pembayaran: ' + response.message);
+                }
+            } catch (error) {
+                alert('Terjadi kesalahan saat memproses pembayaran: ' + error.message);
+            }
+        }
+
         function openSuccessModal() {
             document.getElementById('successModal').classList.add('active');
         }
 
         function finishAndRedirect() {
             document.getElementById('successModal').classList.remove('active');
-            window.location.href = 'registrasi_ulang.html';
+            window.location.href = 'registrasi-ulang.html';
         }
     </script>
 </body>
+
 </html>

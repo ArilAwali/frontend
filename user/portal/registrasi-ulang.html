@@ -104,32 +104,6 @@
             font-weight: 700;
             font-size: 13px;
         }
-        /* Demo Controller Switcher */
-        .demo-bar {
-            background: #1E293B;
-            color: #F8FAFC;
-            padding: 10px 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-        }
-        .demo-bar button {
-            padding: 6px 14px;
-            background: #3B82F6;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-            transition: 0.2s;
-        }
-        .demo-bar button:hover {
-            background: #2563EB;
-        }
         /* Page Header */
         .page-header-row {
             display: flex;
@@ -250,12 +224,13 @@
         .step-line.active-line {
             background: #2563EB;
         }
-        /* 3 Cards Grid Layout */
+        /* Cards Grid Layout */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 1fr;
+            max-width: 500px;
+            margin: 0 auto 24px auto;
             gap: 20px;
-            margin-bottom: 24px;
         }
         .card-item {
             background: #FFFFFF;
@@ -338,6 +313,11 @@
             background-color: #FEE2E2;
             color: #DC2626;
             border: 1px solid #FCA5A5;
+        }
+        .badge-pending {
+            background-color: #FEF3C7;
+            color: #D97706;
+            border: 1px solid #FCD34D;
         }
         .badge-lengkap-blue {
             background-color: #DBEAFE;
@@ -513,6 +493,157 @@
             transform: scale(0.95);
             transition: transform 0.3s ease;
         }
+        .modal-card.wide {
+            max-width: 500px;
+            text-align: left;
+            padding: 28px 24px;
+        }
+        .modal-header-payment {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #E2E8F0;
+            padding-bottom: 14px;
+            margin-bottom: 16px;
+        }
+        .modal-header-payment h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1E293B;
+            margin: 0;
+        }
+        .modal-close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #94A3B8;
+            cursor: pointer;
+            transition: 0.2s;
+            line-height: 1;
+        }
+        .modal-close-btn:hover {
+            color: #475569;
+        }
+        .payment-info-box {
+            background-color: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+        }
+        .payment-info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+        .payment-info-row:last-child {
+            margin-bottom: 0;
+        }
+        .payment-info-row .p-label {
+            color: #64748B;
+        }
+        .payment-info-row .p-val {
+            font-weight: 600;
+            color: #1E293B;
+        }
+        .payment-virtual-account {
+            background-color: #EFF6FF;
+            border: 1px dashed #3B82F6;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .payment-virtual-account .va-title {
+            font-size: 11px;
+            color: #3B82F6;
+            font-weight: 600;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+        .payment-virtual-account .va-number {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1E3A8A;
+            letter-spacing: 1px;
+        }
+        .dropzone-box { 
+            border: 2px dashed #BFDBFE; 
+            background-color: #FAFCFF; 
+            border-radius: 12px; 
+            padding: 24px 20px; 
+            text-align: center; 
+            cursor: pointer; 
+            transition: 0.2s; 
+            margin-bottom: 20px; 
+        }
+        .dropzone-box:hover { 
+            border-color: #3B82F6; 
+            background-color: #EFF6FF; 
+        }
+        .dropzone-icon-circle { 
+            width: 48px; 
+            height: 48px; 
+            background-color: #DBEAFE; 
+            color: #2563EB; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 20px; 
+            margin: 0 auto 10px auto; 
+        }
+        .dropzone-main-text { 
+            font-size: 13px; 
+            font-weight: 600; 
+            color: #1E293B; 
+            margin-bottom: 4px; 
+        }
+        .dropzone-sub-text { 
+            font-size: 11px; 
+            color: #94A3B8; 
+            margin-bottom: 8px; 
+            font-style: italic; 
+        }
+        .btn-select-file {
+            background-color: #FFFFFF;
+            border: 1px solid #CBD5E1;
+            color: #475569;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-select-file:hover {
+            background-color: #F8FAFC;
+        }
+        .file-info-limit {
+            font-size: 10px;
+            color: #94A3B8;
+            margin-top: 8px;
+        }
+        .btn-submit-proof-pay {
+            width: 100%;
+            padding: 12px;
+            background-color: #2563EB;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-submit-proof-pay:hover {
+            background-color: #1D4ED8;
+        }
         .modal-overlay.active .modal-card {
             transform: scale(1);
         }
@@ -566,6 +697,48 @@
         .btn-modal-close:hover {
             background-color: #1E293B;
         }
+        /* Info/Warning Alert Boxes */
+        .info-alert-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 1px solid;
+            margin-bottom: 24px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .info-alert-box.success {
+            background-color: #ECFDF5;
+            border-color: #A7F3D0;
+            color: #065F46;
+        }
+        .info-alert-box.success .info-alert-icon i {
+            color: #10B981;
+        }
+        .info-alert-box.warning {
+            background-color: #FDF2F8;
+            border-color: #FBCFE8;
+            color: #9D174D;
+        }
+        .info-alert-box.warning .info-alert-icon i {
+            color: #EC4899;
+        }
+        .info-alert-icon {
+            font-size: 20px;
+            margin-top: 2px;
+        }
+        .info-alert-content h4 {
+            font-size: 15px;
+            font-weight: 700;
+            margin: 0 0 4px 0;
+        }
+        .info-alert-content p {
+            margin: 0;
+            font-size: 13px;
+            font-weight: 500;
+        }
     </style>
     
 </head>
@@ -593,21 +766,14 @@
                 </div>
                 <div class="profile">
                     <div class="profile-info">
-                        <span class="name">Muhammad Dhafin</span>
+                        <span class="name" id="profileName">Muhammad Dhafin</span>
                         <span class="role">PENDAFTAR</span>
                     </div>
-                    <div class="profile-avatar">MD</div>
+                    <div class="profile-avatar" id="profileAvatar">MD</div>
                     <i class="fas fa-chevron-down" style="font-size: 11px; color: #9CA3AF;"></i>
                 </div>
             </div>
         </header>
-
-        <!-- Demo Mode Toggle Switcher -->
-        <div class="demo-bar">
-            <span><i class="fas fa-sliders-h" style="margin-right: 8px;"></i> Toggle Tampilan Demo (Klik untuk beralih
-                antara Gambar 2 dan Gambar 4):</span>
-            <button id="toggleDemoBtn" onclick="switchDemoMode()">Tampilkan Status: Belum Lunas (Gambar 4)</button>
-        </div>
 
         <!-- Page Header Row -->
         <div class="page-header-row">
@@ -625,36 +791,45 @@
             <div class="panel-title">Status Registrasi Ulang</div>
             <div class="stepper-container">
 
-                <div class="step done">
-                    <div class="step-icon"><i class="fas fa-check"></i></div>
+                <div class="step wait" id="step_ukt">
+                    <div class="step-icon"><i class="fas fa-receipt"></i></div>
                     <div class="step-text">Pembayaran UKT</div>
-                    <div class="step-sub">SELESAI</div>
+                    <div class="step-sub" id="sub_ukt">BELUM</div>
                 </div>
 
-                <div class="step-line done"></div>
+                <div class="step-line" id="line_ukt_verifikasi"></div>
 
-                <div class="step done">
-                    <div class="step-icon"><i class="fas fa-check"></i></div>
-                    <div class="step-text">Verifikasi Berkas</div>
-                    <div class="step-sub">SELESAI</div>
+                <div class="step wait" id="step_verifikasi">
+                    <div class="step-icon"><i class="fas fa-hourglass-half"></i></div>
+                    <div class="step-text">Verifikasi Staf</div>
+                    <div class="step-sub" id="sub_verifikasi">BELUM</div>
                 </div>
 
-                <div class="step-line active-line"></div>
+                <div class="step-line" id="line_verifikasi_aktif"></div>
 
-                <div class="step active">
-                    <div class="step-icon"><i class="far fa-file-alt"></i></div>
-                    <div class="step-text">Registrasi Ulang</div>
-                    <div class="step-sub">SEDANG DIPROSES</div>
-                </div>
-
-                <div class="step-line"></div>
-
-                <div class="step wait">
+                <div class="step wait" id="step_aktif">
                     <div class="step-icon"><i class="far fa-user"></i></div>
                     <div class="step-text">Mahasiswa Aktif</div>
-                    <div class="step-sub">BELUM</div>
+                    <div class="step-sub" id="sub_aktif">BELUM</div>
                 </div>
 
+            </div>
+        </div>
+
+        <!-- Info Boxes (Success / Warning) -->
+        <div class="info-alert-box success" id="infoSuccessBox" style="display: none;">
+            <div class="info-alert-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="info-alert-content">
+                <h4>Registrasi Ulang Selesai</h4>
+                <p>Status pendaftaran Anda kini telah AKTIF. Seluruh menu akademik telah terbuka di sidebar Anda.</p>
+            </div>
+        </div>
+
+        <div class="info-alert-box warning" id="infoWarningBox" style="display: none;">
+            <div class="info-alert-icon"><i class="fas fa-exclamation-circle"></i></div>
+            <div class="info-alert-content">
+                <h4>UKT Belum Lunas</h4>
+                <p>Silakan lakukan pembayaran UKT Semester 1 sebesar Rp 8.000.000 terlebih dahulu untuk dapat melanjutkan proses pengajuan Registrasi Ulang.</p>
             </div>
         </div>
 
@@ -674,108 +849,35 @@
                     <div class="card-body-details">
                         <div class="detail-item-row">
                             <span class="d-label">Status</span>
-                            <span class="badge-status badge-lunas" id="uktBadge">Lunas <i class="fas fa-check"
+                            <span class="badge-status badge-belum" id="uktBadge">Belum Lunas <i class="fas fa-times"
                                     style="font-size: 9px;"></i></span>
                         </div>
                         <div class="detail-item-row">
                             <span class="d-label">Nominal</span>
-                            <span class="d-value">Rp. 8.000.000</span>
+                            <span class="d-value" id="uktNominal">Rp. 8.000.000</span>
                         </div>
                         <div class="detail-item-row">
                             <span class="d-label">Tanggal Bayar</span>
-                            <span class="d-value">19 Juli 2026</span>
+                            <span class="d-value" id="uktTanggalBayar">-</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="card-actions-row" id="uktActionBtns">
-                    <a href="#" onclick="alert('Mengunduh Invoice PDF...')" class="btn-card-action green">
-                        <i class="fas fa-download"></i> Download Invoice
+                    <a href="pembayaran-ukt.html" class="btn-card-action red">
+                        Bayar Sekarang
                     </a>
-                    <button class="btn-icon-square" title="Cetak Bukti" onclick="window.print()">
-                        <i class="fas fa-print"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Card 2: Upload Berkas -->
-            <div class="card-item">
-                <div>
-                    <div class="card-header-row">
-                        <div class="card-icon-box bg-blue-light">
-                            <i class="far fa-file-alt"></i>
-                        </div>
-                        <h3>Upload Berkas</h3>
-                    </div>
-
-                    <div class="card-body-details">
-                        <div class="detail-item-row">
-                            <span class="d-label">Status</span>
-                            <span class="badge-status badge-lengkap-blue">Lengkap <i class="fas fa-check"
-                                    style="font-size: 9px;"></i></span>
-                        </div>
-                        <div class="detail-item-row">
-                            <span class="d-label">Total Dokumen</span>
-                            <span class="d-value">6 / 6 Dokumen</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-actions-row">
-                    <a href="dokumen.html" class="btn-card-action blue">
-                        <i class="fas fa-plus"></i> Upload Ulang
-                    </a>
-                    <a href="dokumen.html" class="btn-card-action gray">
-                        Lihat Berkas
+                    <a href="pembayaran-ukt.html" class="btn-icon-square" title="Bayar Sekarang">
+                        <i class="fas fa-credit-card"></i>
                     </a>
                 </div>
             </div>
 
-            <!-- Card 3: Biodata Mahasiswa -->
-            <div class="card-item">
-                <div>
-                    <div class="card-header-row">
-                        <div class="card-icon-box bg-yellow-light">
-                            <i class="far fa-user"></i>
-                        </div>
-                        <h3>Biodata Mahasiswa</h3>
-                    </div>
 
-                    <div class="card-body-details">
-                        <div class="detail-item-row">
-                            <span class="d-label">Status</span>
-                            <span class="badge-status badge-lengkap-yellow">Lengkap <i class="fas fa-check"
-                                    style="font-size: 9px;"></i></span>
-                        </div>
-                        <div class="detail-item-row">
-                            <span class="d-label">Tanggal Perubahan</span>
-                            <span class="d-value">18 Juli 2026</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-actions-row">
-                    <a href="biodata.html" class="btn-card-action yellow">
-                        <i class="fas fa-pencil-alt"></i> Edit Biodata
-                    </a>
-                    <a href="biodata.html" class="btn-icon-square" title="Lihat Detail Biodata">
-                        <i class="far fa-eye"></i>
-                    </a>
-                </div>
-            </div>
 
         </div>
 
-        <!-- Panel 3: Bottom Checkbox & Submit Button -->
-        <div class="submission-card">
-            <label class="checkbox-container">
-                <input type="checkbox" id="checkAgreement">
-                <span>Saya menyatakan bahwa semua data dan dokumen yang saya berikan adalah benar.</span>
-            </label>
-            <button class="btn-submit-primary" onclick="submitForm()">
-                Ajukan Registrasi Ulang
-            </button>
-        </div>
+
 
         <!-- Footer -->
         <footer class="site-footer">
@@ -787,6 +889,8 @@
             </div>
         </footer>
     </main>
+
+
 
     <!-- Modal Success Popup (Foto 1) -->
     <div class="modal-overlay" id="successModal">
@@ -805,52 +909,188 @@
 
     <script src="../assets/js/sidebar.js"></script>
     <script>
-        let isLunasState = true;
-
-        function switchDemoMode() {
-            isLunasState = !isLunasState;
-            const uktBadge = document.getElementById('uktBadge');
-            const uktActionBtns = document.getElementById('uktActionBtns');
-            const toggleBtn = document.getElementById('toggleDemoBtn');
-
-            if (isLunasState) {
-                // Tampilan Gambar 2 (Lunas)
-                uktBadge.className = 'badge-status badge-lunas';
-                uktBadge.innerHTML = 'Lunas <i class="fas fa-check" style="font-size: 9px;"></i>';
-                uktActionBtns.innerHTML = `
-                    <a href="#" onclick="alert('Mengunduh Invoice PDF...')" class="btn-card-action green">
-                        <i class="fas fa-download"></i> Download Invoice
-                    </a>
-                    <button class="btn-icon-square" title="Cetak Bukti" onclick="window.print()">
-                        <i class="fas fa-print"></i>
-                    </button>
-                `;
-                toggleBtn.innerText = 'Tampilkan Status: Belum Lunas (Gambar 4)';
-            } else {
-                // Tampilan Gambar 4 (Belum Lunas)
-                uktBadge.className = 'badge-status badge-belum';
-                uktBadge.innerHTML = 'Belum Lunas <i class="fas fa-check" style="font-size: 9px;"></i>';
-                uktActionBtns.innerHTML = `
-                    <a href="pembayaran-ukt.html" class="btn-card-action red">
-                        Bayar Sekarang
-                    </a>
-                `;
-                toggleBtn.innerText = 'Tampilkan Status: Lunas (Gambar 2)';
+        let isLunasState = false;
+ 
+        async function loadRegistrationStatus() {
+            try {
+                // Fetch data secara paralel
+                const [statusRes, keuanganRes] = await Promise.all([
+                    fetchAPI('/portal/status'),
+                    fetchAPI('/akademik/keuangan').catch(err => {
+                        console.warn('Gagal mengambil keuangan:', err);
+                        return { success: false, data: [] };
+                    })
+                ]);
+ 
+                if (statusRes.success) {
+                    const user = statusRes.data;
+ 
+                    // 1. Tampilkan nama user secara dinamis
+                    document.getElementById('profileName').textContent = user.nama_lengkap;
+                    // Initials for avatar
+                    const initials = user.nama_lengkap.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                    document.getElementById('profileAvatar').textContent = initials;
+                    
+                    const roleEl = document.querySelector('.profile-info .role');
+                    if (roleEl) {
+                        roleEl.textContent = user.nim ? `MHS - NIM: ${user.nim}` : 'PENDAFTAR';
+                    }
+ 
+                    // 2. Cek keuangan (UKT Semester 1)
+                    const uktRecord = keuanganRes.data ? keuanganRes.data.find(k => k.semester === 1) : null;
+                    const uktStatus = uktRecord ? uktRecord.status : 'belum_bayar';
+                    isLunasState = (uktStatus === 'lunas');
+ 
+                    const uktBadge = document.getElementById('uktBadge');
+                    const uktNominal = document.getElementById('uktNominal');
+                    const uktTanggalBayar = document.getElementById('uktTanggalBayar');
+                    const uktActionBtns = document.getElementById('uktActionBtns');
+ 
+                    if (uktStatus === 'lunas') {
+                        uktBadge.className = 'badge-status badge-lunas';
+                        uktBadge.innerHTML = 'Lunas <i class="fas fa-check" style="font-size: 9px;"></i>';
+                        uktNominal.textContent = `Rp. ${Number(uktRecord.tagihan).toLocaleString('id-ID')}`;
+                        uktTanggalBayar.textContent = uktRecord.tanggal_bayar ? new Date(uktRecord.tanggal_bayar).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : '-';
+                        uktActionBtns.innerHTML = `
+                            <a href="#" onclick="alert('Mengunduh Invoice PDF...')" class="btn-card-action green">
+                                <i class="fas fa-download"></i> Download Invoice
+                            </a>
+                            <button class="btn-icon-square" title="Cetak Bukti" onclick="window.print()">
+                                <i class="fas fa-print"></i>
+                            </button>
+                        `;
+                    } else if (uktStatus === 'menunggu_verifikasi') {
+                        uktBadge.className = 'badge-status badge-pending';
+                        uktBadge.innerHTML = 'Menunggu Verifikasi <i class="fas fa-hourglass-half" style="font-size: 9px;"></i>';
+                        uktNominal.textContent = uktRecord ? `Rp. ${Number(uktRecord.tagihan).toLocaleString('id-ID')}` : 'Rp. 8.000.000';
+                        uktTanggalBayar.textContent = '-';
+                        uktActionBtns.innerHTML = `
+                            <button class="btn-card-action gray" disabled style="cursor: not-allowed; opacity: 0.7;">
+                                Menunggu Verifikasi Staf
+                            </button>
+                        `;
+                    } else {
+                        uktBadge.className = 'badge-status badge-belum';
+                        uktBadge.innerHTML = 'Belum Lunas <i class="fas fa-times" style="font-size: 9px;"></i>';
+                        uktNominal.textContent = uktRecord ? `Rp. ${Number(uktRecord.tagihan).toLocaleString('id-ID')}` : 'Rp. 8.000.000';
+                        uktTanggalBayar.textContent = '-';
+                        uktActionBtns.innerHTML = `
+                            <a href="pembayaran-ukt.html" class="btn-card-action red">
+                                Bayar Sekarang
+                            </a>
+                            <a href="pembayaran-ukt.html" class="btn-icon-square" title="Bayar Sekarang">
+                                <i class="fas fa-credit-card"></i>
+                            </a>
+                        `;
+                    }
+ 
+                    // 3. Update Stepper Status secara dinamis (3 steps)
+                    updateStepperUI(uktStatus, user.status_kelulusan);
+ 
+                    // 4. Tampilkan success info / warning info box
+                    const infoSuccessBox = document.getElementById('infoSuccessBox');
+                    const infoWarningBox = document.getElementById('infoWarningBox');
+ 
+                    if (user.status_kelulusan === 'aktif') {
+                        // State 3: Mahasiswa Aktif
+                        infoSuccessBox.style.display = 'flex';
+                        infoWarningBox.style.display = 'none';
+                    } else if (uktStatus === 'menunggu_verifikasi') {
+                        // State 2: Menunggu Verifikasi
+                        infoSuccessBox.style.display = 'none';
+                        infoWarningBox.style.display = 'flex';
+                        infoWarningBox.style.backgroundColor = '#FEF3C7';
+                        infoWarningBox.style.borderColor = '#FCD34D';
+                        infoWarningBox.style.color = '#92400E';
+                        infoWarningBox.querySelector('h4').textContent = 'Menunggu Verifikasi';
+                        infoWarningBox.querySelector('p').textContent = 'Pembayaran UKT Anda sedang diverifikasi oleh staf keuangan/akademik. Silakan tunggu beberapa saat.';
+                        const warnIcon = infoWarningBox.querySelector('i');
+                        if (warnIcon) {
+                            warnIcon.className = 'fas fa-hourglass-half';
+                            warnIcon.style.color = '#D97706';
+                        }
+                    } else {
+                        // State 1: Belum Bayar
+                        infoSuccessBox.style.display = 'none';
+                        infoWarningBox.style.display = 'flex';
+                        infoWarningBox.style.backgroundColor = '#FDF2F8';
+                        infoWarningBox.style.borderColor = '#FBCFE8';
+                        infoWarningBox.style.color = '#9D174D';
+                        infoWarningBox.querySelector('h4').textContent = 'UKT Belum Lunas';
+                        infoWarningBox.querySelector('p').textContent = 'Silakan lakukan pembayaran UKT Semester 1 sebesar Rp 8.000.000 terlebih dahulu untuk dapat melanjutkan proses pengajuan Registrasi Ulang.';
+                        const warnIcon = infoWarningBox.querySelector('i');
+                        if (warnIcon) {
+                            warnIcon.className = 'fas fa-exclamation-circle';
+                            warnIcon.style.color = '#EC4899';
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error saat load data registrasi ulang:', error);
             }
         }
-
-        function submitForm() {
-            const checkbox = document.getElementById('checkAgreement');
-            if (!checkbox.checked) {
-                alert('Silakan centang persetujuan kebenaran data terlebih dahulu.');
-                return;
+ 
+        function updateStepperUI(uktStatus, userStatus) {
+            const stepUkt = document.getElementById('step_ukt');
+            const subUkt = document.getElementById('sub_ukt');
+            const lineUktVerifikasi = document.getElementById('line_ukt_verifikasi');
+ 
+            const stepVerifikasi = document.getElementById('step_verifikasi');
+            const subVerifikasi = document.getElementById('sub_verifikasi');
+            const lineVerifikasiAktif = document.getElementById('line_verifikasi_aktif');
+ 
+            const stepAktif = document.getElementById('step_aktif');
+            const subAktif = document.getElementById('sub_aktif');
+ 
+            // 1. Step UKT
+            if (uktStatus === 'menunggu_verifikasi' || uktStatus === 'lunas') {
+                stepUkt.className = 'step done';
+                stepUkt.querySelector('.step-icon').innerHTML = '<i class="fas fa-check"></i>';
+                subUkt.textContent = 'SELESAI';
+                lineUktVerifikasi.className = 'step-line done';
+            } else {
+                stepUkt.className = 'step active';
+                stepUkt.querySelector('.step-icon').innerHTML = '<i class="fas fa-receipt"></i>';
+                subUkt.textContent = 'BELUM';
+                lineUktVerifikasi.className = 'step-line';
             }
-            document.getElementById('successModal').classList.add('active');
+ 
+            // 2. Step Verifikasi
+            if (uktStatus === 'lunas' || userStatus === 'aktif') {
+                stepVerifikasi.className = 'step done';
+                stepVerifikasi.querySelector('.step-icon').innerHTML = '<i class="fas fa-check"></i>';
+                subVerifikasi.textContent = 'SELESAI';
+                lineVerifikasiAktif.className = 'step-line done';
+            } else if (uktStatus === 'menunggu_verifikasi') {
+                stepVerifikasi.className = 'step active';
+                stepVerifikasi.querySelector('.step-icon').innerHTML = '<i class="fas fa-hourglass-half"></i>';
+                subVerifikasi.textContent = 'MENUNGGU VERIFIKASI';
+                lineVerifikasiAktif.className = 'step-line';
+            } else {
+                stepVerifikasi.className = 'step wait';
+                stepVerifikasi.querySelector('.step-icon').innerHTML = '<i class="fas fa-hourglass-half"></i>';
+                subVerifikasi.textContent = 'BELUM';
+                lineVerifikasiAktif.className = 'step-line';
+            }
+ 
+            // 3. Step Mahasiswa Aktif
+            if (userStatus === 'aktif') {
+                stepAktif.className = 'step done';
+                stepAktif.querySelector('.step-icon').innerHTML = '<i class="fas fa-check"></i>';
+                subAktif.textContent = 'AKTIF';
+            } else {
+                stepAktif.className = 'step wait';
+                stepAktif.querySelector('.step-icon').innerHTML = '<i class="far fa-user"></i>';
+                subAktif.textContent = 'BELUM';
+            }
         }
 
         function closeModal() {
             document.getElementById('successModal').classList.remove('active');
+            window.location.reload();
         }
+ 
+        window.addEventListener('DOMContentLoaded', loadRegistrationStatus);
     </script>
 </body>
 
