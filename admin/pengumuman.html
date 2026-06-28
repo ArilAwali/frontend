@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <script src="../config/admin-guard.js"></script>
     <script src="../config/api.js"></script>
@@ -14,7 +15,10 @@
         /* Modal CRUD */
         .modal-overlay {
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: rgba(15, 23, 42, 0.5);
             display: none;
             justify-content: center;
@@ -22,18 +26,21 @@
             z-index: 1000;
             backdrop-filter: blur(4px);
         }
+
         .modal-overlay.show {
             display: flex;
         }
+
         .modal-content {
             background: white;
             width: 550px;
             max-width: 90%;
             border-radius: 12px;
             padding: 24px;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
             position: relative;
         }
+
         .modal-title {
             font-size: 18px;
             font-weight: 700;
@@ -42,6 +49,7 @@
             border-bottom: 1px solid var(--border-color, #e2e8f0);
             padding-bottom: 12px;
         }
+
         .form-group {
             margin-bottom: 16px;
             display: flex;
@@ -49,12 +57,16 @@
             gap: 6px;
             text-align: left;
         }
+
         .form-group label {
             font-size: 13px;
             font-weight: 600;
             color: var(--text-primary, #1e293b);
         }
-        .form-group input, .form-group textarea, .form-group select {
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 10px 12px;
             border: 1px solid var(--border-color, #e2e8f0);
@@ -64,10 +76,12 @@
             background: white;
             color: #1e293b;
         }
+
         .form-group textarea {
             height: 120px;
             resize: vertical;
         }
+
         .modal-actions {
             display: flex;
             justify-content: flex-end;
@@ -76,6 +90,7 @@
             border-top: 1px solid var(--border-color, #e2e8f0);
             padding-top: 16px;
         }
+
         .btn-cancel {
             background: white;
             border: 1px solid var(--border-color, #e2e8f0);
@@ -86,6 +101,7 @@
             color: var(--text-secondary, #64748b);
             cursor: pointer;
         }
+
         .btn-save {
             background: #005640;
             border: none;
@@ -96,11 +112,13 @@
             font-weight: 600;
             cursor: pointer;
         }
+
         .btn-save:hover {
             opacity: 0.9;
         }
     </style>
 </head>
+
 <body>
     <header class="top-header" style="justify-content: space-between;">
         <div class="breadcrumb" style="padding-left: 24px;">
@@ -117,7 +135,8 @@
             </button>
             <div class="user-profile">
                 <div class="user-avatar">A</div>
-                <div class="user-name">Admin PMB <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 6px; color: var(--text-secondary);"></i></div>
+                <div class="user-name">Admin PMB <i class="fa-solid fa-chevron-down"
+                        style="font-size: 10px; margin-left: 6px; color: var(--text-secondary);"></i></div>
             </div>
         </div>
     </header>
@@ -167,9 +186,9 @@
                     <i class="fa-solid fa-book-open"></i>
                     <span>Ajuan Mata Kuliah</span>
                 </a>
-                <a href="#" class="nav-item">
-                    <i class="fa-regular fa-envelope"></i>
-                    <span>Pesan</span>
+                <a href="forum.html" class="nav-item">
+                    <i class="fa-regular fa-comments"></i>
+                    <span>Diskusi</span>
                 </a>
             </nav>
 
@@ -237,7 +256,8 @@
 
             <div class="table-container">
                 <div class="filter-row">
-                    <input type="text" id="searchInput" class="search-input" placeholder="Cari judul pengumuman..." oninput="filterTable()">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Cari judul pengumuman..."
+                        oninput="filterTable()">
                     <select id="categoryFilter" class="filter-select" onchange="filterTable()">
                         <option value="Semua">Semua Kategori</option>
                         <option value="Akademik">Akademik</option>
@@ -339,7 +359,7 @@
                 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
                 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
             ];
-            
+
             const day = date.getDate();
             const month = months[date.getMonth()];
             const year = date.getFullYear();
@@ -412,7 +432,7 @@
             currentMode = mode;
             const modal = document.getElementById('crudModal');
             const titleText = document.getElementById('modalTitleText');
-            
+
             document.getElementById('announcementForm').reset();
             document.getElementById('editId').value = '';
 
@@ -497,7 +517,7 @@
         }
 
         // Handle logout
-        document.querySelector('.sidebar-footer a').addEventListener('click', function(e) {
+        document.querySelector('.sidebar-footer a').addEventListener('click', function (e) {
             e.preventDefault();
             localStorage.clear();
             window.location.href = 'admin-login.html';
@@ -506,4 +526,5 @@
         window.addEventListener('DOMContentLoaded', loadAnnouncements);
     </script>
 </body>
+
 </html>
