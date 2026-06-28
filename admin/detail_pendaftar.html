@@ -609,6 +609,7 @@
                             <option value="proses">Menunggu Seleksi</option>
                             <option value="lulus">Lulus / Diterima</option>
                             <option value="tidak_lulus">Tidak Lulus / Ditolak</option>
+                            <option value="aktif">Mahasiswa Aktif</option>
                         </select>
                     </div>
                     
@@ -778,7 +779,23 @@
                     document.getElementById('val_prodi2').textContent = biodata.pilihan_prodi_2_nama || '-';
 
                     // 5. Select kelulusan
-                    document.getElementById('select_status_kelulusan').value = user.status_kelulusan || 'proses';
+                    const selectEl = document.getElementById('select_status_kelulusan');
+                    selectEl.value = user.status_kelulusan || 'proses';
+                    if (user.status_kelulusan === 'aktif') {
+                        selectEl.disabled = true;
+                        const btnSave = document.getElementById('btn_save_status');
+                        btnSave.disabled = true;
+                        btnSave.innerHTML = '<i class="fa-solid fa-lock"></i> Status Terkunci (Aktif)';
+                        btnSave.style.opacity = '0.6';
+                        btnSave.style.cursor = 'not-allowed';
+                    } else {
+                        selectEl.disabled = false;
+                        const btnSave = document.getElementById('btn_save_status');
+                        btnSave.disabled = false;
+                        btnSave.innerHTML = '<i class="fa-regular fa-floppy-disk"></i> Simpan Status Kelulusan';
+                        btnSave.style.opacity = '1';
+                        btnSave.style.cursor = 'pointer';
+                    }
                 } else {
                     alert('Gagal memuat detail pendaftar.');
                 }

@@ -985,13 +985,13 @@
                     }
  
                     // 3. Update Stepper Status secara dinamis (3 steps)
-                    updateStepperUI(uktStatus, user.status_kelulusan);
+                    updateStepperUI(uktStatus, user.status_kelulusan, user.nim);
  
                     // 4. Tampilkan success info / warning info box
                     const infoSuccessBox = document.getElementById('infoSuccessBox');
                     const infoWarningBox = document.getElementById('infoWarningBox');
  
-                    if (user.status_kelulusan === 'aktif') {
+                    if (user.status_kelulusan === 'aktif' || user.nim) {
                         // State 3: Mahasiswa Aktif
                         infoSuccessBox.style.display = 'flex';
                         infoWarningBox.style.display = 'none';
@@ -1030,7 +1030,7 @@
             }
         }
  
-        function updateStepperUI(uktStatus, userStatus) {
+        function updateStepperUI(uktStatus, userStatus, userNim) {
             const stepUkt = document.getElementById('step_ukt');
             const subUkt = document.getElementById('sub_ukt');
             const lineUktVerifikasi = document.getElementById('line_ukt_verifikasi');
@@ -1056,7 +1056,7 @@
             }
  
             // 2. Step Verifikasi
-            if (uktStatus === 'lunas' || userStatus === 'aktif') {
+            if (uktStatus === 'lunas' || userStatus === 'aktif' || userNim) {
                 stepVerifikasi.className = 'step done';
                 stepVerifikasi.querySelector('.step-icon').innerHTML = '<i class="fas fa-check"></i>';
                 subVerifikasi.textContent = 'SELESAI';
@@ -1074,7 +1074,7 @@
             }
  
             // 3. Step Mahasiswa Aktif
-            if (userStatus === 'aktif') {
+            if (userStatus === 'aktif' || userNim) {
                 stepAktif.className = 'step done';
                 stepAktif.querySelector('.step-icon').innerHTML = '<i class="fas fa-check"></i>';
                 subAktif.textContent = 'AKTIF';
