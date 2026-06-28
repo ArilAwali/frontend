@@ -84,48 +84,51 @@
         </aside>
 
         <main class="main-content">
-            <div class="page-header">
+            <div class="page-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
                 <h2>Laporan Penerimaan Mahasiswa Baru</h2>
+                <button id="btnExportCsv" class="btn-primary" style="background-color: var(--primary-color); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 500;">
+                    <i class="fa-solid fa-file-csv"></i> Ekspor CSV
+                </button>
             </div>
 
             <div class="laporan-stats">
                 <div class="lap-card">
                     <span class="lap-title">Periode</span>
-                    <div class="lap-value">Okt 2026</div>
+                    <div class="lap-value" id="periodeVal">-</div>
                     <span class="lap-sub text-green"><i class="fa-regular fa-circle-check"></i> Aktif Sekarang</span>
                 </div>
                 <div class="lap-card">
-                    <span class="lap-title">Rata-rata Pendaftar</span>
-                    <div class="lap-value">200</div>
-                    <span class="lap-sub">Per Minggu</span>
+                    <span class="lap-title">Total Pendaftar</span>
+                    <div class="lap-value" id="totalPendaftarVal">0</div>
+                    <span class="lap-sub" id="totalPendaftarSub">Pendaftar</span>
                 </div>
                 <div class="lap-card">
                     <span class="lap-title">Program Terfavorit</span>
-                    <div class="lap-value">Teknik Informatika</div>
-                    <span class="lap-sub" style="color: #b45309;">848 Pendaftar</span>
+                    <div class="lap-value" id="favProdiName">-</div>
+                    <span class="lap-sub" id="favProdiCount" style="color: #b45309;">0 Pendaftar</span>
                 </div>
                 <div class="lap-card">
                     <span class="lap-title">Target Kuota</span>
                     <div class="lap-value-flex">
-                        <h3>95%</h3>
+                        <h3 id="targetPct">0%</h3>
                         <div class="kuota-bar-wrap">
                             <div class="kuota-bar-bg-light">
-                                <div class="kuota-bar-fill" style="width: 95%;"></div>
+                                <div class="kuota-bar-fill" id="targetBarFill" style="width: 0%;"></div>
                             </div>
                         </div>
                     </div>
-                    <span class="lap-sub">1,900 / 2,000 Kursi</span>
+                    <span class="lap-sub" id="targetDetail">0 / 0 Kursi</span>
                 </div>
             </div>
 
             <div class="laporan-grid">
                 <div class="lap-card chart-card">
                     <div class="chart-header">
-                        <h4>Tren Pendaftaran Mingguan</h4>
+                        <h4>Tren Pendaftaran Harian</h4>
                         <div class="chart-legend"><span class="dot"></span> Total Registrasi</div>
                     </div>
                     <div class="chart-body">
-                        <svg width="100%" height="100%" viewBox="0 0 500 200" preserveAspectRatio="none">
+                        <svg width="100%" height="100%" viewBox="0 0 500 200" preserveAspectRatio="none" style="overflow: visible;">
                             <defs>
                                 <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
                                     <stop offset="0%" stop-color="#0d4a36" stop-opacity="0.15" />
@@ -139,82 +142,201 @@
                             <line x1="0" y1="150" x2="500" y2="150" stroke="#f1f5f9" stroke-width="1" />
                             <line x1="0" y1="200" x2="500" y2="200" stroke="#f1f5f9" stroke-width="1" />
 
-                            <!-- Area -->
-                            <path
-                                d="M 10 180 C 80 140, 120 160, 160 150 C 200 140, 220 30, 260 30 C 300 30, 330 150, 380 150 C 430 150, 460 50, 500 50 L 500 200 L 10 200 Z"
-                                fill="url(#chartGradient)" />
+                            <!-- Area (Dynamic) -->
+                            <path id="chartAreaPath" d="" fill="url(#chartGradient)" />
 
-                            <!-- Line -->
-                            <path
-                                d="M 10 180 C 80 140, 120 160, 160 150 C 200 140, 220 30, 260 30 C 300 30, 330 150, 380 150 C 430 150, 460 50, 500 50"
-                                fill="none" stroke="#0d4a36" stroke-width="3" stroke-linecap="round" />
+                            <!-- Line (Dynamic) -->
+                            <path id="chartLinePath" d="" fill="none" stroke="#0d4a36" stroke-width="3" stroke-linecap="round" />
                         </svg>
                     </div>
                 </div>
 
                 <div class="lap-card distro-card">
                     <h4>Distribusi Fakultas</h4>
-                    <div class="distro-list">
-
-                        <div class="distro-item">
-                            <div class="distro-header">
-                                <span class="distro-name">Teknik & Sains</span>
-                                <span class="distro-pct">42%</span>
-                            </div>
-                            <div class="distro-bar-bg">
-                                <div class="distro-bar-fill fill-green" style="width: 42%;"></div>
-                            </div>
-                        </div>
-
-                        <div class="distro-item">
-                            <div class="distro-header">
-                                <span class="distro-name">Ekonomi</span>
-                                <span class="distro-pct">28%</span>
-                            </div>
-                            <div class="distro-bar-bg">
-                                <div class="distro-bar-fill fill-green" style="width: 28%;"></div>
-                            </div>
-                        </div>
-
-                        <div class="distro-item">
-                            <div class="distro-header">
-                                <span class="distro-name">Ilmu Komunikasi</span>
-                                <span class="distro-pct">15%</span>
-                            </div>
-                            <div class="distro-bar-bg">
-                                <div class="distro-bar-fill fill-green" style="width: 15%;"></div>
-                            </div>
-                        </div>
-
-                        <div class="distro-item">
-                            <div class="distro-header">
-                                <span class="distro-name">Hukum</span>
-                                <span class="distro-pct">10%</span>
-                            </div>
-                            <div class="distro-bar-bg">
-                                <div class="distro-bar-fill fill-green" style="width: 10%;"></div>
-                            </div>
-                        </div>
-
-                        <div class="distro-item">
-                            <div class="distro-header">
-                                <span class="distro-name">Lainnya</span>
-                                <span class="distro-pct">5%</span>
-                            </div>
-                            <div class="distro-bar-bg">
-                                <div class="distro-bar-fill fill-gray" style="width: 5%;"></div>
-                            </div>
-                        </div>
-
+                    <div class="distro-list" id="distroList">
+                        <!-- Dimuat dinamis oleh JS -->
                     </div>
                 </div>
             </div>
 
             <footer class="footer">
-                &copy; 2026 Universitas Perjuangan. Sistem Penerimaan Mahasiswa Baru.
+                &copy; 2026 Universitas Crypto. Sistem Penerimaan Mahasiswa Baru.
             </footer>
         </main>
     </div>
+
+    <script>
+        async function loadLaporanData() {
+            try {
+                // Set Periode secara dinamis (Bulan & Tahun saat ini)
+                const now = new Date();
+                const periodeFormatted = now.toLocaleDateString('id-ID', { month: 'short', year: 'numeric' });
+                document.getElementById('periodeVal').textContent = periodeFormatted;
+
+                // 1. Ambil data Statistik Dashboard
+                const statsRes = await fetchAPI('/admin/dashboard');
+                if (statsRes.success && statsRes.data) {
+                    const stats = statsRes.data;
+
+                    // KPI Total Pendaftar
+                    document.getElementById('totalPendaftarVal').textContent = stats.kpi.total_pendaftar.toLocaleString('id-ID');
+                    document.getElementById('totalPendaftarSub').textContent = `Dari target ${stats.kpi.target_pendaftaran.toLocaleString('id-ID')}`;
+
+                    // Program Studi Terfavorit
+                    if (stats.chart_prodi_terfavorit && stats.chart_prodi_terfavorit.length > 0) {
+                        const topProdi = stats.chart_prodi_terfavorit[0];
+                        document.getElementById('favProdiName').textContent = topProdi.program_studi;
+                        document.getElementById('favProdiCount').textContent = `${topProdi.jumlah.toLocaleString('id-ID')} Pendaftar`;
+                    } else {
+                        document.getElementById('favProdiName').textContent = '-';
+                        document.getElementById('favProdiCount').textContent = '0 Pendaftar';
+                    }
+
+                    // Target Kuota
+                    document.getElementById('targetPct').textContent = `${stats.kpi.progress_target_persen}%`;
+                    document.getElementById('targetBarFill').style.width = `${stats.kpi.progress_target_persen}%`;
+                    document.getElementById('targetDetail').textContent = `${stats.kpi.total_pendaftar.toLocaleString('id-ID')} / ${stats.kpi.target_pendaftaran.toLocaleString('id-ID')} Kursi`;
+
+                    // Render Distribusi Fakultas
+                    renderFakultasDistro(stats.pendaftar_per_fakultas, stats.kpi.total_pendaftar);
+                }
+
+                // 2. Ambil data Tren Pendaftaran (Tambahkan prefix /admin)
+                const trendRes = await fetchAPI('/admin/laporan/pmb');
+                if (trendRes.success && Array.isArray(trendRes.data)) {
+                    renderTrendChart(trendRes.data);
+                }
+            } catch (error) {
+                console.error('Error memuat data laporan:', error);
+            }
+        }
+
+        function renderFakultasDistro(pendaftarPerFakultas, totalPendaftar) {
+            const container = document.getElementById('distroList');
+            container.innerHTML = '';
+
+            if (!pendaftarPerFakultas || pendaftarPerFakultas.length === 0) {
+                container.innerHTML = `<p style="text-align: center; color: var(--text-secondary); padding: 12px 0;">Belum ada data pendaftar per fakultas</p>`;
+                return;
+            }
+
+            const total = totalPendaftar || 1;
+
+            pendaftarPerFakultas.forEach((pf, index) => {
+                const pct = Math.round((pf.jumlah / total) * 100);
+                const colors = ['fill-green', 'fill-gray'];
+                const colorClass = colors[index % colors.length];
+
+                const item = document.createElement('div');
+                item.className = 'distro-item';
+                item.innerHTML = `
+                    <div class="distro-header">
+                        <span class="distro-name">${pf.fakultas}</span>
+                        <span class="distro-pct">${pct}%</span>
+                    </div>
+                    <div class="distro-bar-bg">
+                        <div class="distro-bar-fill ${colorClass}" style="width: ${pct}%;"></div>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function renderTrendChart(trends) {
+            const areaPath = document.getElementById('chartAreaPath');
+            const linePath = document.getElementById('chartLinePath');
+
+            if (!trends || trends.length === 0) {
+                return;
+            }
+
+            // Jika hanya ada 1 data tanggal, duplikasi agar membentuk garis horizontal
+            if (trends.length === 1) {
+                const first = trends[0];
+                trends = [
+                    { tanggal: first.tanggal, jumlah: 0 },
+                    { tanggal: first.tanggal, jumlah: first.jumlah }
+                ];
+            }
+
+            const maxVal = Math.max(...trends.map(t => t.jumlah), 5);
+            const N = trends.length;
+
+            const width = 500;
+            const height = 200;
+            const paddingX = 20;
+            const paddingY = 20;
+
+            const xStep = (width - paddingX * 2) / (N - 1);
+            let points = [];
+
+            trends.forEach((t, i) => {
+                const x = paddingX + i * xStep;
+                const y = (height - paddingY) - ((t.jumlah / maxVal) * (height - paddingY * 2));
+                points.push({ x, y });
+            });
+
+            // Bangun path SVG Line
+            let lineD = `M ${points[0].x} ${points[0].y}`;
+            for (let i = 1; i < points.length; i++) {
+                lineD += ` L ${points[i].x} ${points[i].y}`;
+            }
+
+            // Bangun path SVG Area
+            const areaD = `${lineD} L ${points[points.length - 1].x} 200 L ${points[0].x} 200 Z`;
+
+            areaPath.setAttribute('d', areaD);
+            linePath.setAttribute('d', lineD);
+
+            // Perbarui legend dengan tanggal awal dan akhir
+            const legend = document.querySelector('.chart-legend');
+            if (legend && N > 0) {
+                const startDate = new Date(trends[0].tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' });
+                const endDate = new Date(trends[N - 1].tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' });
+                legend.innerHTML = `<span class="dot"></span> Periode: ${startDate} - ${endDate} | Total Registrasi Harian`;
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Logout handler
+            const logoutItem = document.querySelector('.sidebar-footer a');
+            if (logoutItem) {
+                logoutItem.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    localStorage.clear();
+                    window.location.href = 'admin-login.html';
+                });
+            }
+
+            // CSV Export handler
+            document.getElementById('btnExportCsv').addEventListener('click', async () => {
+                try {
+                    const token = localStorage.getItem('token');
+                    const response = await fetch('http://localhost:5000/api/admin/pendaftar/export', {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    if (!response.ok) throw new Error('Gagal mengekspor data.');
+                    
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `pendaftar_${new Date().toISOString().split('T')[0]}.csv`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                } catch (error) {
+                    console.error('Error export CSV:', error);
+                    alert('Gagal mengekspor data pendaftar.');
+                }
+            });
+
+            loadLaporanData();
+        });
+    </script>
 </body>
 
 </html>

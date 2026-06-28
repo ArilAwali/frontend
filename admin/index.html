@@ -112,7 +112,7 @@
                 </div>
                 <div class="stat-card dark-green-card">
                     <div class="stat-title">Target Pendaftaran</div>
-                    <div class="stat-value" id="kpi_target">3,000</div>
+                    <div class="stat-value" id="kpi_target">3000</div>
                     <div class="stat-trend" id="kpi_target_trend">0% Tercapai</div>
                 </div>
             </div>
@@ -216,6 +216,7 @@
                     // 1. Metrik KPI Utama
                     document.getElementById('kpi_total').textContent = stats.kpi.total_pendaftar.toLocaleString('id-ID');
                     document.getElementById('kpi_target_trend').textContent = `${stats.kpi.progress_target_persen}% Tercapai`;
+                    document.getElementById('kpi_target').textContent = stats.kpi.target_pendaftaran.toLocaleString('id-ID');
 
                     // 2. Metrik KPI Fakultas
                     const teknik = stats.pendaftar_per_fakultas.find(f => f.fakultas.toLowerCase() === 'teknik') || { jumlah: 0 };

@@ -188,25 +188,13 @@
 </head>
 
 <body>
-    <header class="top-header" style="justify-content: space-between;">
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <a href="forum.html" class="btn-back" style="margin-bottom: 0; padding-left: 24px;"><i
-                    class="fa-solid fa-arrow-left"></i> Kembali ke Forum</a>
+    <header class="top-header">
+        <div class="logo-area">
+            <h1>Universitas Crypto</h1>
         </div>
-        <div class="top-right-icons">
-            <button class="icon-btn">
-                <i class="fa-regular fa-bell"></i>
-                <div class="badge-count">6</div>
-            </button>
-            <button class="icon-btn">
-                <i class="fa-regular fa-envelope"></i>
-                <div class="badge-count">2</div>
-            </button>
-            <div class="user-profile">
-                <div class="user-avatar" id="headerAvatar">A</div>
-                <div class="user-name" id="headerName">Admin PMB <i class="fa-solid fa-chevron-down"
-                        style="font-size: 10px; margin-left: 6px; color: var(--text-secondary);"></i></div>
-            </div>
+        <div class="user-area">
+            <img src="https://ui-avatars.com/api/?name=Admin&background=1a2530&color=fff" alt="User Avatar"
+                class="avatar">
         </div>
     </header>
 
@@ -271,6 +259,12 @@
         </aside>
 
         <main class="main-content" style="max-width: 900px; margin: 0 auto; width: 100%;">
+            <!-- Top Action Bar -->
+            <div class="top-action-bar" style="margin-bottom: 20px;">
+                <a href="forum.html" class="btn-back">
+                    <i class="fa-solid fa-arrow-left"></i> Kembali ke Forum
+                </a>
+            </div>
 
             <!-- Detail Thread Card -->
             <div class="post-card" id="threadDetailCard">
