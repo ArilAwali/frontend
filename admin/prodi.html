@@ -89,14 +89,14 @@
                     <h2>Manajemen Program Studi</h2>
                     <p>Kelola daftar dan detail program studi yang tersedia untuk pendaftaran mahasiswa baru.</p>
                 </div>
-                <button class="btn-primary"><i class="fa-solid fa-plus"></i> Tambah Prodi</button>
+                <button class="btn-primary" onclick="openModal('create')"><i class="fa-solid fa-plus"></i> Tambah Prodi</button>
             </div>
 
             <div class="stats-grid-3">
                 <div class="stat-card horizontal-stat">
                     <div class="stat-info">
                         <div class="stat-title">Total Prodi</div>
-                        <div class="stat-value">4</div>
+                        <div class="stat-value" id="statTotal">0</div>
                     </div>
                     <div class="stat-icon bg-light-gray text-secondary">
                         <i class="fa-solid fa-table-list"></i>
@@ -104,17 +104,17 @@
                 </div>
                 <div class="stat-card horizontal-stat">
                     <div class="stat-info">
-                        <div class="stat-title">Prodi Aktif</div>
-                        <div class="stat-value">4</div>
+                        <div class="stat-title">Jumlah Fakultas</div>
+                        <div class="stat-value" id="statFakultas">0</div>
                     </div>
                     <div class="stat-icon bg-light-green text-green">
-                        <i class="fa-regular fa-circle-check"></i>
+                        <i class="fa-solid fa-building"></i>
                     </div>
                 </div>
                 <div class="stat-card horizontal-stat">
                     <div class="stat-info">
-                        <div class="stat-title">Prodi Terfavorit</div>
-                        <div class="stat-value-text">Teknik Informatika</div>
+                        <div class="stat-title">Prodi Terbanyak</div>
+                        <div class="stat-value-text" id="statFavorit">-</div>
                     </div>
                     <div class="stat-icon bg-light-green text-green">
                         <i class="fa-solid fa-arrow-trend-up"></i>
@@ -127,7 +127,7 @@
                     <h3>Daftar Program Studi</h3>
                     <div class="search-box-sm">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" placeholder="Cari prodi...">
+                        <input type="text" id="searchInput" placeholder="Cari prodi..." oninput="renderTable()">
                     </div>
                 </div>
 
@@ -137,44 +137,220 @@
                             <th>Kode</th>
                             <th>Nama</th>
                             <th>Fakultas</th>
-                            <th>Kuota</th>
                             <th>Status</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>TI-01</strong></td>
-                            <td>Teknik Informatika</td>
-                            <td>FTI</td>
-                            <td>150</td>
-                            <td><span class="badge badge-green">Aktif</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>SI-02</strong></td>
-                            <td>Sistem Informasi</td>
-                            <td>FTI</td>
-                            <td>120</td>
-                            <td><span class="badge badge-green">Aktif</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>AK-03</strong></td>
-                            <td>Akuntansi</td>
-                            <td>FEB</td>
-                            <td>200</td>
-                            <td><span class="badge badge-green">Aktif</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>MN-04</strong></td>
-                            <td>Manajemen</td>
-                            <td>FEB</td>
-                            <td>250</td>
-                            <td><span class="badge badge-green">Aktif</span></td>
-                        </tr>
+                    <tbody id="prodiTableBody">
+                        <!-- Dimuat dinamis -->
                     </tbody>
                 </table>
             </div>
         </main>
     </div>
+
+    <!-- Modal CRUD -->
+    <div id="prodiModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Tambah Program Studi</h2>
+                <button class="btn-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="prodiForm" onsubmit="saveProdi(event)">
+                <input type="hidden" id="editId" value="">
+                <div class="form-group">
+                    <label for="kodeInput">Kode Program Studi</label>
+                    <input type="text" id="kodeInput" required placeholder="Contoh: TI-01">
+                </div>
+                <div class="form-group">
+                    <label for="namaInput">Nama Program Studi</label>
+                    <input type="text" id="namaInput" required placeholder="Contoh: Teknik Informatika">
+                </div>
+                <div class="form-group">
+                    <label for="fakultasInput">Fakultas</label>
+                    <input type="text" id="fakultasInput" required placeholder="Contoh: Fakultas Teknik Informatika">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal()">Batal</button>
+                    <button type="submit" class="btn-save">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let allProdi = [];
+
+        async function initPage() {
+            try {
+                await loadProdi();
+            } catch (err) {
+                console.error('Error init page:', err);
+            }
+        }
+
+        async function loadProdi() {
+            try {
+                const res = await fetchAPI('/admin/prodi');
+                if (res.success && Array.isArray(res.data)) {
+                    allProdi = res.data;
+                    renderTable();
+                    updateStats();
+                }
+            } catch (err) {
+                console.error('Error loadProdi:', err);
+            }
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('prodiTableBody');
+            const keyword = (document.getElementById('searchInput').value || '').toLowerCase();
+            tbody.innerHTML = '';
+
+            const filtered = allProdi.filter(p =>
+                p.kode.toLowerCase().includes(keyword) ||
+                p.nama.toLowerCase().includes(keyword) ||
+                p.fakultas.toLowerCase().includes(keyword)
+            );
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color: var(--text-secondary); padding: 30px;">Tidak ada program studi ditemukan.</td></tr>`;
+                return;
+            }
+
+            filtered.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${p.kode}</strong></td>
+                    <td>${p.nama}</td>
+                    <td>${p.fakultas}</td>
+                    <td><span class="badge badge-green">Aktif</span></td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="btn-edit" title="Edit" onclick="openModal('edit', '${p.id}')"><i class="fa-solid fa-pen"></i></button>
+                            <button class="btn-delete" title="Hapus" onclick="hapusProdi('${p.id}', '${p.nama}')"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function updateStats() {
+            document.getElementById('statTotal').textContent = allProdi.length;
+
+            const fakultasSet = new Set(allProdi.map(p => p.fakultas));
+            document.getElementById('statFakultas').textContent = fakultasSet.size;
+
+            if (allProdi.length > 0) {
+                // Pick the first prodi alphabetically as "terbanyak" placeholder
+                document.getElementById('statFavorit').textContent = allProdi[0].nama;
+            } else {
+                document.getElementById('statFavorit').textContent = '-';
+            }
+        }
+
+        const modal = document.getElementById('prodiModal');
+
+        function openModal(mode, id) {
+            document.getElementById('prodiForm').reset();
+            document.getElementById('editId').value = '';
+
+            if (mode === 'create') {
+                document.getElementById('modalTitle').textContent = 'Tambah Program Studi';
+            } else {
+                document.getElementById('modalTitle').textContent = 'Edit Program Studi';
+                const item = allProdi.find(p => p.id === id);
+                if (item) {
+                    document.getElementById('editId').value = item.id;
+                    document.getElementById('kodeInput').value = item.kode;
+                    document.getElementById('namaInput').value = item.nama;
+                    document.getElementById('fakultasInput').value = item.fakultas;
+                }
+            }
+
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('show'), 10);
+        }
+
+        function closeModal() {
+            modal.classList.remove('show');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+
+        // Close on backdrop click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        async function saveProdi(event) {
+            event.preventDefault();
+
+            const id = document.getElementById('editId').value;
+            const kode = document.getElementById('kodeInput').value.trim();
+            const nama = document.getElementById('namaInput').value.trim();
+            const fakultas = document.getElementById('fakultasInput').value.trim();
+
+            const payload = { kode, nama, fakultas };
+
+            try {
+                let res;
+                if (id) {
+                    // Update
+                    res = await fetchAPI(`/admin/prodi/${id}`, {
+                        method: 'PUT',
+                        body: JSON.stringify(payload)
+                    });
+                } else {
+                    // Create
+                    res = await fetchAPI('/admin/prodi', {
+                        method: 'POST',
+                        body: JSON.stringify(payload)
+                    });
+                }
+
+                if (res.success) {
+                    alert(id ? 'Program studi berhasil diperbarui!' : 'Program studi baru berhasil ditambahkan!');
+                    closeModal();
+                    await loadProdi();
+                } else {
+                    alert(res.message || 'Gagal menyimpan program studi.');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Terjadi kesalahan saat menyimpan program studi.');
+            }
+        }
+
+        async function hapusProdi(id, nama) {
+            if (!confirm(`Apakah Anda yakin ingin menghapus program studi "${nama}"?`)) return;
+
+            try {
+                const res = await fetchAPI(`/admin/prodi/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (res.success) {
+                    alert(`Program studi "${nama}" berhasil dihapus.`);
+                    await loadProdi();
+                } else {
+                    alert(res.message || 'Gagal menghapus program studi.');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Terjadi kesalahan saat menghapus program studi.');
+            }
+        }
+
+        // Handle logout
+        document.querySelector('.sidebar-footer a').addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.clear();
+            window.location.href = 'admin-login.html';
+        });
+
+        window.addEventListener('DOMContentLoaded', initPage);
+    </script>
 </body>
 
 </html>
