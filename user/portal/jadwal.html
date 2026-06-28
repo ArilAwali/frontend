@@ -65,9 +65,9 @@
                     <i class="far fa-envelope"></i>
                 </div>
                 <div class="profile">
-                    <div class="profile-avatar">MD</div>
+                    <div class="profile-avatar" id="profileAvatar">-</div>
                     <div class="profile-info">
-                        <span class="name">Muhammad Dhafin</span>
+                        <span class="name" id="profileName">-</span>
                         <span class="role">Mahasiswa</span>
                     </div>
                     <i class="fas fa-chevron-down" style="font-size: 12px; color: #777;"></i>
@@ -78,14 +78,14 @@
         <div class="page-header">
             <div class="page-title">
                 <h1>Jadwal Kuliah</h1>
-                <p>Semester Ganjil 2025/2026</p>
+                <p id="academicYear">Semester Ganjil 2026/2027</p>
             </div>
-            <button class="btn-download">
-                <i class="fas fa-file-download"></i> Unduh PDF
+            <button class="btn-download" onclick="window.print()">
+                <i class="fas fa-file-download"></i> Cetak Jadwal
             </button>
         </div>
 
-        <div class="schedule-wrapper">
+        <div class="schedule-wrapper" id="scheduleGridContainer">
             <table class="schedule-table">
                 <thead>
                     <tr>
@@ -97,108 +97,21 @@
                         <th>Jumat</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>08:00</td>
-                        <td>
-                            <div class="course-card bg-green" style="top: 20px; height: 70px;">
-                                <div class="cc-title">Pengantar Kriptografi</div>
-                                <div class="cc-detail"><i class="fas fa-map-marker-alt"></i> Ruang 101</div>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td>
-                            <div class="course-card bg-gray" style="top: 10px; height: 120px;">
-                                <div class="cc-title">Matematika Diskrit</div>
-                                <div class="cc-detail"><i class="fas fa-map-marker-alt"></i> Ruang 205</div>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    
-                    <tr>
-                        <td>09:00</td>
-                        <td></td>
-                        <td>
-                            <div class="course-card bg-blue" style="top: 10px; height: 140px;">
-                                <div class="cc-title">Blockchain Fundamentals</div>
-                                <div class="cc-detail"><i class="fas fa-map-marker-alt"></i> Lab Komputer A</div>
-                                <div class="cc-detail"><i class="far fa-user"></i> Dr. Budi Santoso</div>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <div class="course-card bg-blue" style="top: 10px; height: 140px;">
-                                <div class="cc-title">Pemrograman Web</div>
-                                <div class="cc-detail"><i class="fas fa-map-marker-alt"></i> Lab Komputer C</div>
-                                <div class="cc-detail"><i class="far fa-user"></i> Anita Wijaya, M.Kom</div>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>10:00</td>
-                        <td></td>
-                        <td></td> <td></td>
-                        <td>
-                            <div class="course-card bg-green" style="top: 10px; height: 110px;">
-                                <div class="cc-title">Struktur Data</div>
-                                <div class="cc-detail"><i class="fas fa-map-marker-alt"></i> Lab Komputer B</div>
-                            </div>
-                        </td>
-                        <td></td> </tr>
-
-                    <tr>
-                        <td>11:00</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td> <td></td>
-                    </tr>
-
-                    <tr>
-                        <td>12:00</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td>13:00</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td>14:00</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td>15:00</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                <tbody id="scheduleTableBody">
+                    <tr><td>08:00</td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td>09:00</td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td>10:00</td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td>11:00</td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td>12:00</td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td>13:00</td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td>14:00</td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td>15:00</td><td></td><td></td><td></td><td></td><td></td></tr>
                 </tbody>
             </table>
         </div>
 
         <footer class="site-footer">
-            <div>&copy; 2025 Universitas Crypto. Semua hak dilindungi.</div>
+            <div>&copy; 2026 Universitas Crypto. Semua hak dilindungi.</div>
             <div class="footer-links">
                 <a href="#">Bantuan</a>
                 <a href="#">Syarat & Ketentuan</a>
@@ -207,5 +120,154 @@
         </footer>
     </main>
     <script src="../assets/js/sidebar.js"></script>
+    <script>
+        const daysMap = {
+            'senin': 1,
+            'selasa': 2,
+            'rabu': 3,
+            'kamis': 4,
+            'jumat': 5
+        };
+
+        const hoursMap = {
+            '08:00': 0,
+            '09:00': 1,
+            '10:00': 2,
+            '11:00': 3,
+            '12:00': 4,
+            '13:00': 5,
+            '14:00': 6,
+            '15:00': 7
+        };
+
+        function parseTime(timeStr) {
+            const [h, m] = timeStr.split(':').map(Number);
+            return h + m / 60;
+        }
+
+        async function initJadwal() {
+            try {
+                // 1. Fetch User Profile status
+                const statusRes = await fetchAPI('/portal/status');
+                if (statusRes.success) {
+                    const user = statusRes.data;
+                    document.getElementById('profileName').textContent = user.nama_lengkap;
+                    
+                    const initials = user.nama_lengkap.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                    document.getElementById('profileAvatar').textContent = initials;
+                    
+                    const roleEl = document.querySelector('.profile-info .role');
+                    if (roleEl) {
+                        roleEl.textContent = user.nim ? `MHS - NIM: ${user.nim}` : 'PENDAFTAR';
+                    }
+                }
+
+                // Hapus warning penolakan/belum disetujui jika ada sebelumnya
+                const oldAlert = document.getElementById('krsAlertMsg');
+                if (oldAlert) oldAlert.remove();
+
+                // 2. Fetch KRS details
+                const krsRes = await fetchAPI('/akademik/krs');
+                const tbody = document.getElementById('scheduleTableBody');
+                const rows = tbody.querySelectorAll('tr');
+
+                // Clear cell contents first
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    for (let i = 1; i < cells.length; i++) {
+                        cells[i].innerHTML = '';
+                    }
+                });
+
+                if (krsRes.success && Array.isArray(krsRes.data) && krsRes.data.length > 0) {
+                    const firstKrs = krsRes.data[0];
+                    const krsStatus = firstKrs.status_persetujuan;
+
+                    if (krsStatus === 'disetujui') {
+                        // Plot classes to grid
+                        krsRes.data.forEach(c => {
+                            const dayIdx = daysMap[c.hari.toLowerCase()];
+                            if (dayIdx === undefined) return;
+
+                            const [startStr, endStr] = c.jam.split(' - ');
+                            const startHourStr = startStr.substring(0, 5);
+                            const startHour = startHourStr.split(':')[0];
+                            const rowIdx = hoursMap[startHour + ':00'];
+
+                            if (rowIdx === undefined) return;
+
+                            const startDecimal = parseTime(startHourStr);
+                            const endDecimal = parseTime(endStr.substring(0, 5));
+                            const duration = endDecimal - startDecimal;
+
+                            const rowStartHour = parseInt(startHour, 10);
+                            const offsetMinutes = (startDecimal - rowStartHour) * 60;
+                            const topOffset = Math.round(offsetMinutes * (80 / 60));
+                            const cardHeight = Math.round(duration * 80) - 10;
+
+                            const targetRow = rows[rowIdx];
+                            const targetCell = targetRow.querySelectorAll('td')[dayIdx];
+
+                            const colors = ['bg-green', 'bg-blue', 'bg-gray'];
+                            const colorClass = colors[c.kode_matakuliah.charCodeAt(c.kode_matakuliah.length - 1) % colors.length];
+
+                            const card = document.createElement('div');
+                            card.className = `course-card ${colorClass}`;
+                            card.style.top = `${topOffset}px`;
+                            card.style.height = `${cardHeight}px`;
+                            card.innerHTML = `
+                                <div class="cc-title">${c.nama_matakuliah}</div>
+                                <div class="cc-detail"><i class="fas fa-map-marker-alt"></i> ${c.ruangan || 'Lantai 1'}</div>
+                                <div class="cc-detail"><i class="far fa-user"></i> ${c.dosen || '-'}</div>
+                                <div class="cc-detail"><i class="far fa-clock"></i> ${c.jam}</div>
+                            `;
+                            targetCell.appendChild(card);
+                        });
+                    } else {
+                        // Status pending / proses / ditolak
+                        const alertDiv = document.createElement('div');
+                        alertDiv.id = 'krsAlertMsg';
+                        alertDiv.style.backgroundColor = '#FEF3C7';
+                        alertDiv.style.border = '1px solid #FCD34D';
+                        alertDiv.style.color = '#92400E';
+                        alertDiv.style.padding = '16px';
+                        alertDiv.style.borderRadius = '8px';
+                        alertDiv.style.marginBottom = '24px';
+                        alertDiv.style.fontSize = '14px';
+                        alertDiv.innerHTML = `
+                            <i class="fas fa-exclamation-triangle" style="margin-right: 8px;"></i>
+                            <strong>Jadwal Kuliah Belum Aktif:</strong> KRS Anda saat ini berstatus <strong>"${krsStatus === 'proses' ? 'Menunggu Verifikasi' : 'Ditolak/Belum Diajukan'}"</strong>. Jadwal kuliah akan ditampilkan setelah KRS Anda disetujui oleh akademik.
+                        `;
+                        const mainContent = document.querySelector('.main-content');
+                        const pageHeader = document.querySelector('.page-header');
+                        mainContent.insertBefore(alertDiv, pageHeader.nextElementSibling);
+                    }
+                } else {
+                    // Belum diajukan
+                    const alertDiv = document.createElement('div');
+                    alertDiv.id = 'krsAlertMsg';
+                    alertDiv.style.backgroundColor = '#EFF6FF';
+                    alertDiv.style.border = '1px solid #BFDBFE';
+                    alertDiv.style.color = '#1E40AF';
+                    alertDiv.style.padding = '16px';
+                    alertDiv.style.borderRadius = '8px';
+                    alertDiv.style.marginBottom = '24px';
+                    alertDiv.style.fontSize = '14px';
+                    alertDiv.innerHTML = `
+                        <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
+                        <strong>KRS Belum Diajukan:</strong> Anda belum memprogram mata kuliah untuk semester ini. Silakan kunjungi halaman <a href="krs.html" style="font-weight: 600; text-decoration: underline; color: #1D4ED8;">Kartu Rencana Studi (KRS)</a> untuk memilih mata kuliah.
+                    `;
+                    const mainContent = document.querySelector('.main-content');
+                    const pageHeader = document.querySelector('.page-header');
+                    mainContent.insertBefore(alertDiv, pageHeader.nextElementSibling);
+                }
+
+            } catch (error) {
+                console.error('Error init jadwal:', error);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', initJadwal);
+    </script>
 </body>
 </html>

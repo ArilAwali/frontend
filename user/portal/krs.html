@@ -423,10 +423,10 @@
             </div>
             <div class="user-profile">
                 <div class="user-info-top">
-                    <h4>Muhammad Dhafin</h4>
+                    <h4 id="profileName">-</h4>
                     <span>Mahasiswa</span>
                 </div>
-                <div class="avatar-small">MD</div>
+                <div class="avatar-small" id="profileAvatar">-</div>
                 <i class="fas fa-chevron-down" style="font-size: 10px; color: #94a3b8; cursor: pointer;"></i>
             </div>
         </header>
@@ -434,31 +434,31 @@
         <div class="content">
             <div class="page-header">
                 <h1>Kartu Rencana Studi</h1>
-                <p>Pilih mata kuliah untuk Semester Ganjil 2025/2026. Perhatikan prasyarat dan kuota kelas.</p>
+                <p>Pilih mata kuliah untuk Semester Ganjil 2026/2027. Perhatikan prasyarat dan kuota kelas.</p>
             </div>
 
             <div class="info-card">
                 <div class="info-grid">
                     <div class="info-item">
                         <h5>Program Studi</h5>
-                        <p>Teknik Informatika (S1)</p>
+                        <p id="val_prodi">-</p>
                     </div>
                     <div class="info-item">
                         <h5>Semester</h5>
-                        <p>3</p>
+                        <p id="val_semester">1</p>
                     </div>
                     <div class="info-item">
-                        <h5>Dosen Wali</h5>
-                        <p>Dr. Anita S., M.Kom</p>
+                        <h5>Tahun Akademik</h5>
+                        <p id="val_tahun_akademik">2026/2027</p>
                     </div>
                 </div>
 
                 <div class="status-box">
                     <div class="status-text">
                         <h5>Status Persetujuan</h5>
-                        <p><i class="far fa-file-alt"></i> Belum Diajukan</p>
+                        <p id="krsStatusText"><i class="far fa-file-alt"></i> Belum Diajukan</p>
                     </div>
-                    <button class="btn-ajukan">Ajukan KRS</button>
+                    <button class="btn-ajukan" id="btnAjukanKrs">Ajukan KRS</button>
                 </div>
             </div>
 
@@ -467,72 +467,8 @@
                 <div class="card">
                     <h3 class="card-header">Daftar Mata Kuliah Ditawarkan</h3>
                     
-                    <div class="course-list">
-                        <div class="course-item">
-                            <div class="course-main">
-                                <div class="course-title-row">
-                                    <span class="badge-wajib">Wajib</span>
-                                    <span class="course-code">CS301</span>
-                                </div>
-                                <h4 class="course-name">Struktur Data dan Algoritma</h4>
-                                <div class="course-meta">
-                                    <span><i class="fas fa-layer-group"></i> 3 SKS</span>
-                                    <span><i class="fas fa-user-tie"></i> Bpk. Budi Santoso</span>
-                                    <span><i class="far fa-clock"></i> Sen, 08:00 - 10:30 (R. 301)</span>
-                                </div>
-                            </div>
-                            <div class="course-action">
-                                <div class="course-quota">
-                                    <span>Kuota</span>
-                                    <strong>15/40</strong>
-                                </div>
-                                <button class="btn-add"><i class="fas fa-plus"></i></button>
-                            </div>
-                        </div>
-
-                        <div class="course-item">
-                            <div class="course-main">
-                                <div class="course-title-row">
-                                    <span class="badge-wajib">Wajib</span>
-                                    <span class="course-code">CS302</span>
-                                </div>
-                                <h4 class="course-name">Basis Data Lanjut</h4>
-                                <div class="course-meta">
-                                    <span><i class="fas fa-layer-group"></i> 3 SKS</span>
-                                    <span><i class="fas fa-user-tie"></i> Ibu Ratna D.</span>
-                                    <span><i class="far fa-clock"></i> Sel, 10:00 - 12:30 (Lab 2)</span>
-                                </div>
-                            </div>
-                            <div class="course-action">
-                                <div class="course-quota">
-                                    <span>Kuota</span>
-                                    <strong>28/40</strong>
-                                </div>
-                                <button class="btn-add"><i class="fas fa-plus"></i></button>
-                            </div>
-                        </div>
-
-                        <div class="course-item">
-                            <div class="course-main">
-                                <div class="course-title-row">
-                                    <span class="badge-pilihan">Pilihan</span>
-                                    <span class="course-code">EL305</span>
-                                </div>
-                                <h4 class="course-name">Kecerdasan Buatan Dasar</h4>
-                                <div class="course-meta">
-                                    <span><i class="fas fa-layer-group"></i> 3 SKS</span>
-                                    <span><i class="fas fa-user-tie"></i> Dr. Hendra K.</span>
-                                    <span><i class="far fa-clock"></i> Rab, 13:00 - 14:40 (R. 205)</span>
-                                </div>
-                            </div>
-                            <div class="course-action">
-                                <div class="course-quota">
-                                    <span>Kuota</span>
-                                    <strong>38/40</strong>
-                                </div>
-                                <button class="btn-add"><i class="fas fa-plus"></i></button>
-                            </div>
-                        </div>
+                    <div class="course-list" id="availableCourseList">
+                        <!-- Dimuat dinamis oleh JS -->
                     </div>
                 </div>
 
@@ -542,20 +478,20 @@
                         
                         <div class="summary-row">
                             <span>SKS Diambil</span>
-                            <strong>2</strong>
+                            <strong id="selectedSks">0</strong>
                         </div>
                         <div class="summary-row">
                             <span>Maksimal SKS</span>
-                            <strong>24</strong>
+                            <strong id="maxSks">24</strong>
                         </div>
                         
                         <div class="capacity-bar">
                             <div class="capacity-header">
                                 <span>Kapasitas</span>
-                                <span>8%</span>
+                                <span id="capacityPercentage">0%</span>
                             </div>
                             <div class="progress-bg">
-                                <div class="progress-fill"></div>
+                                <div class="progress-fill" id="capacityProgress" style="width: 0%;"></div>
                             </div>
                         </div>
                     </div>
@@ -563,15 +499,11 @@
                     <div class="card">
                         <h3 class="card-header">Mata Kuliah Terpilih</h3>
                         
-                        <div class="selected-item">
-                            <div class="selected-info">
-                                <h4>Kecerdasan Buatan Dasar</h4>
-                                <p>EL305 - 2 SKS</p>
-                            </div>
-                            <button class="btn-remove" title="Batal Pilih"><i class="fas fa-undo"></i></button>
+                        <div id="selectedCourseList">
+                            <!-- Dimuat dinamis oleh JS -->
                         </div>
 
-                        <div class="dashed-box">
+                        <div class="dashed-box" id="emptySelectedHelper">
                             Pilih mata kuliah dari daftar di samping untuk menambahkannya ke KRS Anda.
                         </div>
                     </div>
@@ -581,10 +513,285 @@
         </div>
 
         <div class="footer">
-            © 2025 Universitas Crypto. Semua hak dilindungi.
+            © 2026 Universitas Crypto. Semua hak dilindungi.
         </div>
     </main>
 
     <script src="../assets/js/sidebar.js"></script>
+    <script>
+        let availableClasses = [];
+        let selectedClasses = [];
+        const currentSemester = 1;
+        const currentTahunAkademik = "2026/2027";
+
+        async function initKrs() {
+            try {
+                // 1. Fetch user status & info
+                const statusRes = await fetchAPI('/portal/status');
+                if (statusRes.success) {
+                    const user = statusRes.data;
+                    document.getElementById('profileName').textContent = user.nama_lengkap;
+                    
+                    const initials = user.nama_lengkap.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                    document.getElementById('profileAvatar').textContent = initials;
+                    
+                    const roleEl = document.querySelector('.user-info-top span');
+                    if (roleEl) {
+                        roleEl.textContent = user.nim ? `MHS - NIM: ${user.nim}` : 'PENDAFTAR';
+                    }
+
+                    const biodataRes = await fetchAPI('/biodata').catch(() => null);
+                    let prodiNama = 'Teknik Informatika (S1)';
+                    if (biodataRes && biodataRes.success && biodataRes.data) {
+                        prodiNama = biodataRes.data.pilihan_prodi_1_nama || prodiNama;
+                    }
+                    document.getElementById('val_prodi').textContent = prodiNama;
+                }
+
+                // Hapus warning penolakan jika ada sebelumnya
+                const oldRejection = document.getElementById('rejectionNote');
+                if (oldRejection) oldRejection.remove();
+
+                // 2. Fetch current KRS status & available classes
+                const [krsRes, classesRes] = await Promise.all([
+                    fetchAPI('/akademik/krs').catch(err => {
+                        console.warn('Gagal memuat KRS:', err);
+                        return { success: false, data: [] };
+                    }),
+                    fetchAPI('/akademik/krs/kelas').catch(err => {
+                        console.warn('Gagal memuat kelas:', err);
+                        return { success: false, data: [] };
+                    })
+                ]);
+
+                if (classesRes.success) {
+                    availableClasses = classesRes.data;
+                }
+
+                if (krsRes.success && Array.isArray(krsRes.data) && krsRes.data.length > 0) {
+                    const firstKrs = krsRes.data[0];
+                    const status = firstKrs.status_persetujuan || 'proses';
+                    const catatan = firstKrs.catatan || '';
+
+                    // Map krs.data ke kelas detail yang cocok di availableClasses
+                    selectedClasses = krsRes.data.map(k => {
+                        const match = availableClasses.find(ac => ac.kelas_id === k.kelas_id);
+                        return match ? match : {
+                            kelas_id: k.kelas_id,
+                            kode_matakuliah: k.kode_matakuliah,
+                            nama_matakuliah: k.nama_matakuliah,
+                            sks: k.sks,
+                            dosen: k.dosen,
+                            hari: k.hari,
+                            jam: k.jam,
+                            ruangan: k.ruangan,
+                            terdaftar: 0,
+                            kuota: 40
+                        };
+                    });
+
+                    renderKrsUI(status, catatan);
+                } else {
+                    selectedClasses = [];
+                    renderKrsUI('belum_diajukan', '');
+                }
+
+            } catch (error) {
+                console.error('Error saat inisialisasi KRS:', error);
+                alert('Gagal mengambil data KRS.');
+            }
+        }
+
+        function renderKrsUI(status, catatan) {
+            const statusTextEl = document.getElementById('krsStatusText');
+            const btnAjukan = document.getElementById('btnAjukanKrs');
+            
+            let isReadOnly = false;
+            
+            if (status === 'belum_diajukan') {
+                statusTextEl.innerHTML = '<i class="far fa-file-alt"></i> Belum Diajukan';
+                statusTextEl.style.color = 'var(--text-secondary)';
+                btnAjukan.disabled = false;
+                btnAjukan.textContent = 'Ajukan KRS';
+                btnAjukan.style.opacity = '1';
+                btnAjukan.style.cursor = 'pointer';
+            } else if (status === 'proses') {
+                statusTextEl.innerHTML = '<i class="fas fa-hourglass-half"></i> Menunggu Verifikasi';
+                statusTextEl.style.color = '#D97706';
+                btnAjukan.disabled = true;
+                btnAjukan.textContent = 'Menunggu Verifikasi';
+                btnAjukan.style.opacity = '0.6';
+                btnAjukan.style.cursor = 'not-allowed';
+                isReadOnly = true;
+            } else if (status === 'disetujui') {
+                statusTextEl.innerHTML = '<i class="fas fa-check-circle"></i> Disetujui';
+                statusTextEl.style.color = 'var(--green-dark)';
+                btnAjukan.disabled = true;
+                btnAjukan.textContent = 'KRS Disetujui';
+                btnAjukan.style.opacity = '0.6';
+                btnAjukan.style.cursor = 'not-allowed';
+                isReadOnly = true;
+            } else if (status === 'ditolak') {
+                statusTextEl.innerHTML = `<i class="fas fa-exclamation-circle"></i> Ditolak (Revisi)`;
+                statusTextEl.style.color = '#EF4444';
+                btnAjukan.disabled = false;
+                btnAjukan.textContent = 'Ajukan Ulang KRS';
+                btnAjukan.style.opacity = '1';
+                btnAjukan.style.cursor = 'pointer';
+                
+                if (catatan) {
+                    const rejectionDiv = document.createElement('div');
+                    rejectionDiv.id = 'rejectionNote';
+                    rejectionDiv.style.backgroundColor = '#FEE2E2';
+                    rejectionDiv.style.border = '1px solid #FCA5A5';
+                    rejectionDiv.style.color = '#991B1B';
+                    rejectionDiv.style.padding = '12px 16px';
+                    rejectionDiv.style.borderRadius = '8px';
+                    rejectionDiv.style.marginBottom = '20px';
+                    rejectionDiv.style.fontSize = '13px';
+                    rejectionDiv.innerHTML = `<strong>Catatan Penolakan Staf:</strong> ${catatan}`;
+                    
+                    const container = document.querySelector('.content');
+                    const firstCard = container.querySelector('.info-card').nextElementSibling;
+                    container.insertBefore(rejectionDiv, firstCard);
+                }
+            }
+
+            // Render list mata kuliah ditawarkan (kiri)
+            const availableListEl = document.getElementById('availableCourseList');
+            availableListEl.innerHTML = '';
+            
+            availableClasses.forEach(c => {
+                const isSelected = selectedClasses.some(sc => sc.kelas_id === c.kelas_id);
+                
+                const div = document.createElement('div');
+                div.className = 'course-item';
+                
+                let buttonHtml = '';
+                if (isReadOnly) {
+                    buttonHtml = '';
+                } else if (isSelected) {
+                    buttonHtml = `<button class="btn-add" disabled style="background-color: #E2E8F0; color: #94A3B8; cursor: not-allowed;"><i class="fas fa-check"></i></button>`;
+                } else {
+                    buttonHtml = `<button class="btn-add" onclick="addCourse('${c.kelas_id}')"><i class="fas fa-plus"></i></button>`;
+                }
+
+                div.innerHTML = `
+                    <div class="course-main">
+                        <div class="course-title-row">
+                            <span class="badge-wajib">Wajib</span>
+                            <span class="course-code">${c.kode_matakuliah}</span>
+                        </div>
+                        <h4 class="course-name">${c.nama_matakuliah}</h4>
+                        <div class="course-meta">
+                            <span><i class="fas fa-layer-group"></i> ${c.sks} SKS</span>
+                            <span><i class="fas fa-user-tie"></i> ${c.dosen}</span>
+                            <span><i class="far fa-clock"></i> ${c.hari}, ${c.jam} (${c.ruangan})</span>
+                        </div>
+                    </div>
+                    <div class="course-action">
+                        <div class="course-quota">
+                            <span>Kuota</span>
+                            <strong>${c.terdaftar}/${c.kuota}</strong>
+                        </div>
+                        ${buttonHtml}
+                    </div>
+                `;
+                availableListEl.appendChild(div);
+            });
+
+            // Render list terpilih (kanan)
+            const selectedListEl = document.getElementById('selectedCourseList');
+            selectedListEl.innerHTML = '';
+            
+            const helperEl = document.getElementById('emptySelectedHelper');
+            
+            if (selectedClasses.length === 0) {
+                helperEl.style.display = 'block';
+            } else {
+                helperEl.style.display = 'none';
+                selectedClasses.forEach(c => {
+                    const div = document.createElement('div');
+                    div.className = 'selected-item';
+                    
+                    let removeButtonHtml = '';
+                    if (!isReadOnly) {
+                        removeButtonHtml = `<button class="btn-remove" onclick="removeCourse('${c.kelas_id}')" title="Batal Pilih"><i class="fas fa-undo"></i></button>`;
+                    }
+
+                    div.innerHTML = `
+                        <div class="selected-info">
+                            <h4>${c.nama_matakuliah}</h4>
+                            <p>${c.kode_matakuliah || ''} - ${c.sks} SKS</p>
+                        </div>
+                        ${removeButtonHtml}
+                    `;
+                    selectedListEl.appendChild(div);
+                });
+            }
+
+            // Update Ringkasan SKS
+            const totalSks = selectedClasses.reduce((sum, c) => sum + c.sks, 0);
+            document.getElementById('selectedSks').textContent = totalSks;
+            
+            const percent = Math.min(100, Math.round((totalSks / 24) * 100));
+            document.getElementById('capacityPercentage').textContent = percent + '%';
+            document.getElementById('capacityProgress').style.width = percent + '%';
+        }
+
+        function addCourse(kelasId) {
+            const course = availableClasses.find(c => c.kelas_id === kelasId);
+            if (!course) return;
+
+            const totalSks = selectedClasses.reduce((sum, c) => sum + c.sks, 0);
+            if (totalSks + course.sks > 24) {
+                alert('Batas maksimal SKS (24 SKS) terlampaui!');
+                return;
+            }
+
+            selectedClasses.push(course);
+            renderKrsUI('belum_diajukan', '');
+        }
+
+        function removeCourse(kelasId) {
+            selectedClasses = selectedClasses.filter(c => c.kelas_id !== kelasId);
+            renderKrsUI('belum_diajukan', '');
+        }
+
+        document.getElementById('btnAjukanKrs').addEventListener('click', async () => {
+            if (selectedClasses.length === 0) {
+                alert('Pilih minimal satu mata kuliah untuk diajukan!');
+                return;
+            }
+
+            if (!confirm('Apakah Anda yakin ingin mengajukan KRS ini? Setelah diajukan, Anda tidak dapat mengubahnya hingga disetujui atau ditolak oleh akademik.')) {
+                return;
+            }
+
+            const kelas_ids = selectedClasses.map(c => c.kelas_id);
+            try {
+                const res = await fetchAPI('/akademik/krs', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        kelas_ids,
+                        semester: currentSemester,
+                        tahun_akademik: currentTahunAkademik
+                    })
+                });
+
+                if (res.success) {
+                    alert('KRS Anda berhasil diajukan!');
+                    initKrs();
+                } else {
+                    alert('Gagal mengajukan KRS: ' + res.message);
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Terjadi kesalahan saat mengajukan KRS: ' + err.message);
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', initKrs);
+    </script>
 </body>
 </html>

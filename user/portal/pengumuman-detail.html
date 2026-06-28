@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <script src="../../config/auth-guard.js"></script>
+  <script src="../../config/api.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Pengumuman - Universitas Crypto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --sidebar-bg: #091a38;
+            --main-bg: #f5f6f8;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --primary-green: #0d4a36;
+            --light-green: #e6f4ed;
+            --accent-blue: #0f4c81;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background-color: var(--main-bg);
+            color: var(--text-dark);
+            display: flex;
+            min-height: 100vh;
+        }
+        /* Main Content Layout */
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        /* Topbar Header */
+        .topbar {
+            height: 64px;
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 40px;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 90;
+        }
+        .topbar-icons {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: var(--text-muted);
+        }
+        .icon-badge {
+            position: relative;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .badge-dot {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #ef4444;
+            color: white;
+            font-size: 9px;
+            font-weight: 700;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #0d4a36;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+        }
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .user-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .user-role {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+        /* Content Body */
+        .content-body {
+            padding: 32px 40px;
+            flex: 1;
+        }
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-bottom: 24px;
+            transition: color 0.2s;
+        }
+        .btn-back:hover {
+            color: var(--text-dark);
+        }
+        /* Grid Layout */
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 24px;
+        }
+        .detail-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px;
+        }
+        .detail-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+        }
+        .badge-green { background: #e6f4ed; color: #0d4a36; }
+        .badge-blue { background: #dbeafe; color: #1e40af; }
+        .badge-red { background: #fee2e2; color: #b91c1c; }
+        
+        .detail-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+        .detail-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+            display: flex;
+            gap: 16px;
+        }
+        .detail-body {
+            font-size: 15px;
+            color: #334155;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+        /* Right Column Widgets */
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .widget-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        .widget-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .recent-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .recent-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .recent-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .recent-item-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.4;
+            transition: color 0.2s;
+        }
+        .recent-item:hover .recent-item-title {
+            color: var(--accent-blue);
+        }
+        .recent-item-date {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 24px 40px;
+            font-size: 12px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+            background: white;
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+</head>
+<body>
+
+    <!-- Reusable Sidebar Component Container -->
+    <aside class="sidebar"></aside>
+
+    <div class="main-wrapper">
+        <!-- Topbar -->
+        <header class="topbar">
+            <div class="topbar-icons">
+                <div class="icon-badge">
+                    <i class="far fa-bell"></i>
+                </div>
+                <div class="icon-badge">
+                    <i class="far fa-envelope"></i>
+                </div>
+            </div>
+            <div class="user-profile">
+                <div class="user-avatar" id="profileAvatar">-</div>
+                <div class="user-info">
+                    <div class="user-name" id="profileName">- <i class="fas fa-chevron-down" style="font-size: 10px; color: var(--text-muted);"></i></div>
+                    <div class="user-role" id="profileRole">Mahasiswa</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Body -->
+        <main class="content-body">
+            <a href="pengumuman.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Kembali ke Pengumuman
+            </a>
+
+            <!-- Detail Grid -->
+            <div class="detail-grid">
+                <!-- Left Column (Article Content) -->
+                <div class="detail-card">
+                    <span id="detailBadge" class="detail-badge badge-green">AKADEMIK</span>
+                    <h1 id="detailTitle" class="detail-title">Memuat judul...</h1>
+                    <div class="detail-meta">
+                        <span><i class="far fa-calendar-alt" style="margin-right: 6px;"></i> <span id="detailDate">-</span></span>
+                    </div>
+                    <div id="detailBody" class="detail-body">Memuat konten pengumuman...</div>
+                </div>
+
+                <!-- Right Column (Widgets) -->
+                <div class="right-column">
+                    <!-- Widget: Pengumuman Terbaru -->
+                    <div class="widget-card">
+                        <div class="widget-title">Pengumuman Terbaru</div>
+                        <div class="recent-list" id="recentList">
+                            <!-- Dimuat dinamis -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            © 2026 Universitas Crypto. Semua hak dilindungi.
+        </footer>
+    </div>
+
+    <!-- Reusable Sidebar JS Component -->
+    <script src="../assets/js/sidebar.js"></script>
+    <script>
+        async function initPage() {
+            try {
+                // 1. Load User Profile
+                const statusRes = await fetchAPI('/portal/status');
+                if (statusRes.success) {
+                    const user = statusRes.data;
+                    document.getElementById('profileName').innerHTML = `${user.nama_lengkap} <i class="fas fa-chevron-down" style="font-size: 10px; color: var(--text-muted);"></i>`;
+                    
+                    const initials = user.nama_lengkap.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                    document.getElementById('profileAvatar').textContent = initials;
+                    document.getElementById('profileRole').textContent = user.nim ? `MHS - NIM: ${user.nim}` : 'PENDAFTAR';
+                }
+
+                // Get ID from URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const id = urlParams.get('id');
+
+                if (!id) {
+                    document.getElementById('detailTitle').textContent = 'Error';
+                    document.getElementById('detailBody').textContent = 'ID pengumuman tidak ditemukan di URL.';
+                    return;
+                }
+
+                // 2. Load Detail
+                const detailRes = await fetchAPI(`/portal/pengumuman/${id}`);
+                if (detailRes.success && detailRes.data) {
+                    const item = detailRes.data;
+                    
+                    document.getElementById('detailTitle').textContent = item.judul;
+                    document.getElementById('detailBody').textContent = item.konten;
+                    document.getElementById('detailDate').textContent = formatDate(item.created_at);
+                    
+                    const badge = document.getElementById('detailBadge');
+                    badge.textContent = item.kategori.toUpperCase();
+
+                    if (item.kategori.toLowerCase() === 'pmb') {
+                        badge.className = 'detail-badge badge-blue';
+                    } else if (item.kategori.toLowerCase() === 'administrasi') {
+                        badge.className = 'detail-badge badge-red';
+                    } else {
+                        badge.className = 'detail-badge badge-green';
+                    }
+                } else {
+                    document.getElementById('detailTitle').textContent = 'Tidak Ditemukan';
+                    document.getElementById('detailBody').textContent = 'Pengumuman dengan ID tersebut tidak ditemukan.';
+                }
+
+                // 3. Load Recent Widget
+                const listRes = await fetchAPI('/portal/pengumuman');
+                if (listRes.success && Array.isArray(listRes.data)) {
+                    const recentList = document.getElementById('recentList');
+                    recentList.innerHTML = '';
+                    
+                    // Display up to 5 items, excluding current item
+                    const filteredList = listRes.data.filter(item => item.id !== id).slice(0, 5);
+                    
+                    if (filteredList.length === 0) {
+                        recentList.innerHTML = '<div style="font-size: 12px; color: var(--text-muted);">Tidak ada pengumuman lain.</div>';
+                    } else {
+                        filteredList.forEach(item => {
+                            const div = document.createElement('div');
+                            div.className = 'recent-item';
+                            div.onclick = () => { window.location.href = `pengumuman-detail.html?id=${item.id}`; };
+                            div.innerHTML = `
+                                <div class="recent-item-title">${item.judul}</div>
+                                <div class="recent-item-date">${formatDate(item.created_at)}</div>
+                            `;
+                            recentList.appendChild(div);
+                        });
+                    }
+                }
+
+            } catch (err) {
+                console.error('Error init detail page:', err);
+            }
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            if (isNaN(date.getTime())) return dateStr;
+
+            const months = [
+                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+            ];
+
+            const day = date.getDate();
+            const month = months[date.getMonth()];
+            const year = date.getFullYear();
+            
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+
+            return `${day} ${month} ${year}, ${hours}:${minutes} WIB`;
+        }
+
+        window.addEventListener('DOMContentLoaded', initPage);
+    </script>
+</body>
+</html>

@@ -1,344 +1,95 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-  <script src="../../config/auth-guard.js"></script>
-  <script src="../../config/api.js"></script>
+    <script src="../config/admin-guard.js"></script>
+    <script src="../config/api.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>forum</title>
+    <title>Forum Diskusi - Universitas Crypto</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
     <style>
-        :root {
-            --sidebar-bg: #07193a;
-            --sidebar-hover: rgba(255, 255, 255, 0.05);
-            --sidebar-active: #0d3a75;
-            --bg-color: #f7f9fc;
-            --text-dark: #2c3e50;
-            --text-gray: #7a8c9e;
-            --text-light-gray: #a0aec0;
-            --border-color: #e2e8f0;
-            --green-badge-bg: #e6f4ea;
-            --green-badge-text: #1e8e3e;
-            --font-family: 'Inter', sans-serif;
+        /* Forum Layout Style Admin */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            align-items: start;
+            margin-top: 24px;
+            width: 100%;
         }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: var(--font-family);
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            display: flex;
-            min-height: 100vh;
-        }
-        /* Main Content Styles */
-        .main-wrapper {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        /* Top Header */
-        .top-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            background-color: var(--bg-color);
-            border-bottom: 1px solid var(--border-color);
-        }
-        .top-header h1 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #07193a;
-        }
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        .header-actions i {
-            font-size: 18px;
-            color: var(--text-gray);
-            cursor: pointer;
-        }
-        .user-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            object-fit: cover;
-            cursor: pointer;
-        }
-        /* Content Area */
-        .content-area {
-            padding: 30px;
-            display: flex;
-            gap: 25px;
-            align-items: flex-start;
-            flex-grow: 1;
-        }
-        /* Left Column: Post Card */
-        .post-column {
-            flex: 2;
-        }
+
         .post-card {
             background-color: white;
             border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
             border: 1px solid var(--border-color);
+            margin-bottom: 20px;
         }
+
         .post-header {
             display: flex;
             align-items: center;
             gap: 15px;
             margin-bottom: 15px;
         }
-        .post-author-img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
+
         .post-meta {
             display: flex;
             align-items: center;
             gap: 10px;
         }
+
         .badge {
-            background-color: var(--green-badge-bg);
-            color: var(--green-badge-text);
+            background-color: #e6f4ed;
+            color: #0d4a36;
             padding: 4px 10px;
             border-radius: 4px;
             font-size: 10px;
             font-weight: 700;
             letter-spacing: 0.5px;
         }
+
         .post-time {
             font-size: 12px;
-            color: var(--text-light-gray);
+            color: var(--text-secondary);
         }
+
         .post-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
-            color: #1a202c;
-            margin-bottom: 10px;
+            color: var(--text-primary);
+            margin-bottom: 8px;
             line-height: 1.4;
         }
+
         .post-body {
             font-size: 13px;
-            color: var(--text-gray);
+            color: var(--text-secondary);
             line-height: 1.6;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
         }
+
         .post-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+
         .post-stats {
             display: flex;
             gap: 20px;
             font-size: 12px;
-            color: var(--text-light-gray);
+            color: var(--text-secondary);
             font-weight: 500;
         }
-        .post-stats span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .participant-avatars {
-            display: flex;
-            align-items: center;
-        }
-        .participant-avatars img {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            border: 2px solid white;
-            margin-left: -8px;
-            object-fit: cover;
-        }
-        .participant-avatars img:first-child {
-            margin-left: 0;
-        }
-        .avatar-count {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background-color: #edf2f7;
-            color: var(--text-gray);
-            font-size: 10px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid white;
-            margin-left: -8px;
-            z-index: 10;
-        }
-        /* Right Column: Hot Topics */
-        .sidebar-widgets {
-            flex: 1;
-            min-width: 300px;
-        }
-        .widget-card {
-            background-color: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            border: 1px solid var(--border-color);
-        }
-        .widget-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-        .widget-header i {
-            color: var(--green-badge-text);
-            font-size: 16px;
-        }
-        .widget-header h3 {
-            font-size: 15px;
-            font-weight: 700;
-            color: #1a202c;
-        }
-        .hot-topic-item {
-            margin-bottom: 20px;
-        }
-        .hot-topic-item:last-child {
-            margin-bottom: 0;
-        }
-        .hot-topic-title {
-            font-size: 13px;
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 6px;
-            line-height: 1.4;
-            cursor: pointer;
-        }
-        .hot-topic-title:hover {
-            color: var(--sidebar-active);
-        }
-        .hot-topic-meta {
-            font-size: 11px;
-            color: var(--text-light-gray);
-        }
-        /* Footer */
-        .main-footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 11px;
-            color: var(--text-light-gray);
-            border-top: 1px solid var(--border-color);
-            background-color: var(--bg-color);
-        }
-        /* Modal Style */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(15, 23, 42, 0.4);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(4px);
-        }
-        .modal-overlay.show {
-            display: flex;
-        }
-        .modal-content {
-            background: white;
-            width: 550px;
-            max-width: 90%;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
-        }
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 12px;
-        }
-        .modal-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #07193a;
-        }
-        .btn-close {
-            background: none;
-            border: none;
-            font-size: 20px;
-            color: var(--text-light-gray);
-            cursor: pointer;
-        }
-        .form-group {
-            margin-bottom: 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .form-group label {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-        .form-group input, .form-group textarea, .form-group select {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 13px;
-            outline: none;
-            background: white;
-            color: var(--text-dark);
-        }
-        .form-group textarea {
-            height: 120px;
-            resize: vertical;
-        }
-        .modal-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            margin-top: 24px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 16px;
-        }
-        .btn-cancel {
-            background: white;
-            border: 1px solid var(--border-color);
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-gray);
-            cursor: pointer;
-        }
-        .btn-save {
-            background: #07193a;
-            border: none;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .btn-save:hover {
-            opacity: 0.9;
-        }
+
         .btn-buat {
-            background: #07193a;
+            background: #117b53;
             color: white;
             border: none;
             padding: 10px 18px;
@@ -351,9 +102,38 @@
             gap: 8px;
             transition: 0.2s;
         }
+
         .btn-buat:hover {
-            opacity: 0.9;
+            background: #0d4a36;
         }
+
+        /* Sidebar widgets */
+        .widget-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .widget-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .widget-header i {
+            color: #117b53;
+            font-size: 16px;
+        }
+
+        .widget-header h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
         .cat-item {
             display: flex;
             justify-content: space-between;
@@ -361,93 +141,274 @@
             padding: 10px 12px;
             border-radius: 8px;
             font-size: 13px;
-            color: var(--text-dark);
+            color: var(--text-primary);
             cursor: pointer;
             transition: 0.2s;
             margin-bottom: 4px;
         }
-        .cat-item:hover, .cat-item.active {
-            background-color: var(--border-color);
-            color: #07193a;
+
+        .cat-item:hover,
+        .cat-item.active {
+            background-color: var(--light-green);
+            color: var(--dark-green);
             font-weight: 600;
         }
+
         .cat-count {
             font-size: 11px;
-            background: #edf2f7;
-            color: var(--text-gray);
+            background: #f1f5f9;
+            color: var(--text-secondary);
             padding: 2px 8px;
             border-radius: 10px;
         }
-        .post-card {
-            background-color: white;
+
+        /* Modal Style */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.4);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            width: 550px;
+            max-width: 90%;
             border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            border: 1px solid var(--border-color);
+            padding: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .btn-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 13px;
+            outline: none;
+            background: white;
+            color: var(--text-primary);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 24px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 16px;
+        }
+
+        .btn-cancel {
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .btn-save {
+            background: var(--primary-green);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-save:hover {
+            background: var(--dark-green);
         }
     </style>
-    <link rel="stylesheet" href="../assets/css/sidebar.css">
 </head>
-<body>
-    <aside class="sidebar"></aside>
 
-    <div class="main-wrapper">
-        <header class="top-header">
-            <div style="display: flex; align-items: center; gap: 20px;">
-                <h1>Diskusi / Forum</h1>
-                <button class="btn-buat" onclick="openModal()"><i class="fa-solid fa-plus"></i> Diskusi Baru</button>
+<body>
+    <header class="top-header" style="justify-content: space-between;">
+        <div class="breadcrumb" style="padding-left: 24px;">
+            <span>Diskusi</span> <i class="fa-solid fa-chevron-right" style="margin:0 8px;"></i> Forum Diskusi
+        </div>
+        <div class="top-right-icons">
+            <button class="icon-btn">
+                <i class="fa-regular fa-bell"></i>
+                <div class="badge-count">6</div>
+            </button>
+            <button class="icon-btn">
+                <i class="fa-regular fa-envelope"></i>
+                <div class="badge-count">2</div>
+            </button>
+            <div class="user-profile">
+                <div class="user-avatar" id="headerAvatar">A</div>
+                <div class="user-name" id="headerName">Admin PMB <i class="fa-solid fa-chevron-down"
+                        style="font-size: 10px; margin-left: 6px; color: var(--text-secondary);"></i></div>
             </div>
-            <div class="header-actions">
-                <i class="fa-regular fa-bell" onclick="alert('Tidak ada notifikasi baru.')"></i>
-                <i class="fa-regular fa-envelope" onclick="alert('Kotak pesan kosong.')"></i>
-                <div class="user-profile-header" style="display: flex; align-items: center; gap: 10px;">
-                    <div class="user-avatar" id="headerAvatar" style="width: 32px; height: 32px; border-radius: 50%; background: #005640; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px;">U</div>
-                    <span id="headerName" style="font-size: 13px; font-weight: 600; color: var(--text-dark);">Nama Mahasiswa</span>
+        </div>
+    </header>
+
+    <div class="layout-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">UP</span>
+                    <span class="brand-subtitle">Portal PMB</span>
                 </div>
             </div>
-        </header>
 
-        <main class="content-area">
-            <div class="post-column" id="threadsList">
-                <!-- Dimuat dinamis oleh JS -->
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <i class="fa-solid fa-border-all"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="dokumen.html" class="nav-item">
+                    <i class="fa-regular fa-file-lines"></i>
+                    <span>Dokumen</span>
+                </a>
+                <a href="registrasi_ulang.html" class="nav-item">
+                    <i class="fa-solid fa-address-card"></i>
+                    <span>Registrasi Ulang</span>
+                </a>
+                <a href="prodi.html" class="nav-item">
+                    <i class="fa-solid fa-users-gear"></i>
+                    <span>Manajemen Prodi</span>
+                </a>
+                <a href="pendaftaran.html" class="nav-item">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>Pendaftaran</span>
+                </a>
+                <a href="laporan.html" class="nav-item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Laporan</span>
+                </a>
+                <a href="pengumuman.html" class="nav-item">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span>Pengumuman</span>
+                </a>
+                <a href="ajuan.html" class="nav-item">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Ajuan Mata Kuliah</span>
+                </a>
+                <a href="forum.html" class="nav-item active">
+                    <i class="fa-regular fa-comments"></i>
+                    <span>Diskusi</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Keluar</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header" style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="page-header-text">
+                    <h2>Forum Diskusi</h2>
+                    <p>Berdiskusi dan berkomunikasi dengan seluruh mahasiswa berjalan.</p>
+                </div>
+                <button class="btn-buat" onclick="openModal()"><i class="fa-solid fa-plus"></i> Diskusi Baru</button>
             </div>
 
-            <div class="sidebar-widgets">
-                <div class="widget-card">
-                    <div class="widget-header">
-                        <i class="fa-solid fa-tags"></i>
-                        <h3>Kategori Diskusi</h3>
-                    </div>
-                    <div class="cat-list">
-                        <div class="cat-item active" onclick="setCategoryFilter('Semua', this)">
-                            <span>Semua Kategori</span>
-                            <span class="cat-count" id="count-semua">0</span>
+            <div class="content-grid">
+                <div class="post-column" id="threadsList">
+                    <!-- Dimuat dinamis -->
+                </div>
+
+                <div class="sidebar-widgets">
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <i class="fa-solid fa-tags"></i>
+                            <h3>Kategori Diskusi</h3>
                         </div>
-                        <div class="cat-item" onclick="setCategoryFilter('Mata Kuliah', this)">
-                            <span>Mata Kuliah</span>
-                            <span class="cat-count" id="count-matakuliah">0</span>
-                        </div>
-                        <div class="cat-item" onclick="setCategoryFilter('Akademik', this)">
-                            <span>Akademik</span>
-                            <span class="cat-count" id="count-akademik">0</span>
-                        </div>
-                        <div class="cat-item" onclick="setCategoryFilter('PMB', this)">
-                            <span>PMB</span>
-                            <span class="cat-count" id="count-pmb">0</span>
-                        </div>
-                        <div class="cat-item" onclick="setCategoryFilter('Umum', this)">
-                            <span>Umum</span>
-                            <span class="cat-count" id="count-umum">0</span>
+                        <div class="cat-list">
+                            <div class="cat-item active" onclick="setCategoryFilter('Semua', this)">
+                                <span>Semua Kategori</span>
+                                <span class="cat-count" id="count-semua">0</span>
+                            </div>
+                            <div class="cat-item" onclick="setCategoryFilter('Mata Kuliah', this)">
+                                <span>Mata Kuliah</span>
+                                <span class="cat-count" id="count-matakuliah">0</span>
+                            </div>
+                            <div class="cat-item" onclick="setCategoryFilter('Akademik', this)">
+                                <span>Akademik</span>
+                                <span class="cat-count" id="count-akademik">0</span>
+                            </div>
+                            <div class="cat-item" onclick="setCategoryFilter('PMB', this)">
+                                <span>PMB</span>
+                                <span class="cat-count" id="count-pmb">0</span>
+                            </div>
+                            <div class="cat-item" onclick="setCategoryFilter('Umum', this)">
+                                <span>Umum</span>
+                                <span class="cat-count" id="count-umum">0</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
-
-        <footer class="main-footer">
-            © 2026 Universitas Crypto. Semua hak dilindungi.
-        </footer>
     </div>
 
     <!-- Modal Buat Thread Baru -->
@@ -473,7 +434,8 @@
                 </div>
                 <div class="form-group">
                     <label for="kontenInput">Isi Diskusi</label>
-                    <textarea id="kontenInput" required placeholder="Tuliskan pertanyaan atau informasi diskusi Anda..."></textarea>
+                    <textarea id="kontenInput" required
+                        placeholder="Tuliskan pertanyaan atau informasi diskusi Anda..."></textarea>
                 </div>
                 <div class="modal-actions">
                     <button type="button" class="btn-cancel" onclick="closeModal()">Batal</button>
@@ -490,27 +452,30 @@
         async function initPage() {
             try {
                 // 1. Load User Profile
-                const statusRes = await fetchAPI('/portal/status');
-                if (statusRes.success) {
-                    const user = statusRes.data;
-                    
-                    const nameEl = document.getElementById('headerName');
-                    if (nameEl) {
-                        nameEl.textContent = user.nama_lengkap;
+                const userStr = localStorage.getItem('user');
+                let name = 'Staf Administrasi';
+                if (userStr) {
+                    const user = JSON.parse(userStr);
+                    if (user.nama_lengkap) {
+                        name = user.nama_lengkap;
+                    } else if (user.email) {
+                        const parts = user.email.split('@')[0].split(/[._-]/);
+                        name = parts.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
                     }
+                }
+                document.getElementById('headerName').innerHTML = `${name} <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 6px; color: var(--text-secondary);"></i>`;
 
-                    const avatarEl = document.getElementById('headerAvatar');
-                    if (avatarEl) {
-                        const initials = user.nama_lengkap.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-                        avatarEl.textContent = initials;
-                    }
+                const avatarEl = document.getElementById('headerAvatar');
+                if (avatarEl) {
+                    const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                    avatarEl.textContent = initials;
                 }
 
                 // 2. Load Threads
                 await loadThreads();
 
             } catch (err) {
-                console.error('Error init forum page:', err);
+                console.error('Error init page:', err);
             }
         }
 
@@ -555,9 +520,9 @@
 
             if (filtered.length === 0) {
                 listContainer.innerHTML = `
-                    <div style="text-align: center; color: var(--text-light-gray); padding: 40px; background: white; border-radius: 12px; border: 1px solid var(--border-color);">
+                    <div style="text-align: center; color: var(--text-secondary); padding: 40px; background: white; border-radius: 12px; border: 1px solid var(--border-color);">
                         <i class="fa-regular fa-comments" style="font-size: 36px; margin-bottom: 12px; color: #cbd5e1;"></i>
-                        <p>Belum ada diskusi dalam kategori ini. Jadilah yang pertama memulai!</p>
+                        <p>Belum ada diskusi dalam kategori ini.</p>
                     </div>
                 `;
                 return;
@@ -566,7 +531,7 @@
             filtered.forEach(item => {
                 const initials = item.pembuat.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
                 const snippet = item.konten.length > 180 ? item.konten.substring(0, 180) + '...' : item.konten;
-                
+
                 const card = document.createElement('div');
                 card.className = 'post-card';
                 card.style.cursor = 'pointer';
@@ -575,7 +540,7 @@
                 };
 
                 let categoryBadgeColor = '#e6f4ea';
-                let categoryTextColor = '#1e8e3e';
+                let categoryTextColor = '#0d4a36';
 
                 if (item.kategori.toLowerCase() === 'akademik') {
                     categoryBadgeColor = '#dbeafe';
@@ -590,15 +555,15 @@
 
                 card.innerHTML = `
                     <div class="post-header">
-                        <div style="width: 40px; height: 40px; border-radius: 50%; background: #07193a; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px;">${initials}</div>
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: #0d4a36; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px;">${initials}</div>
                         <div class="post-meta">
                             <span class="badge" style="background-color: ${categoryBadgeColor}; color: ${categoryTextColor};">${item.kategori.toUpperCase()}</span>
                             <span class="post-time">• ${formatDate(item.created_at)}</span>
                         </div>
                     </div>
                     
-                    <h2 class="post-title" style="font-size: 16px; margin-top: 5px;">${item.judul}</h2>
-                    <p style="font-size: 12px; color: var(--text-light-gray); margin-bottom: 8px;">Diposting oleh: <strong>${item.pembuat}</strong> (${item.pembuat_role.toUpperCase()})</p>
+                    <h2 class="post-title" style="font-size: 15px; margin-top: 5px;">${item.judul}</h2>
+                    <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">Diposting oleh: <strong>${item.pembuat}</strong> (${item.pembuat_role.toUpperCase()})</p>
                     <p class="post-body" style="margin-bottom: 15px; font-size: 13px;">${snippet}</p>
                     
                     <div class="post-footer">
@@ -613,7 +578,7 @@
 
         function updateCategoryCounts() {
             const counts = { semua: allThreads.length, matakuliah: 0, akademik: 0, pmb: 0, umum: 0 };
-            
+
             allThreads.forEach(item => {
                 const cat = item.kategori.toLowerCase();
                 if (cat === 'mata kuliah') counts.matakuliah++;
@@ -687,8 +652,15 @@
             }
         });
 
+        // Handle logout
+        document.querySelector('.sidebar-footer a').addEventListener('click', function (e) {
+            e.preventDefault();
+            localStorage.clear();
+            window.location.href = 'admin-login.html';
+        });
+
         window.addEventListener('DOMContentLoaded', initPage);
     </script>
-    <script src="../assets/js/sidebar.js"></script>
 </body>
+
 </html>

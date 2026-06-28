@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <script src="../config/admin-guard.js"></script>
     <script src="../config/api.js"></script>
@@ -11,13 +12,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
     <header class="top-header">
         <div class="logo-area">
             <h1>Universitas Crypto</h1>
         </div>
         <div class="user-area">
-            <img src="https://ui-avatars.com/api/?name=Admin&background=1a2530&color=fff" alt="User Avatar" class="avatar">
+            <img src="https://ui-avatars.com/api/?name=Admin&background=1a2530&color=fff" alt="User Avatar"
+                class="avatar">
         </div>
     </header>
 
@@ -66,9 +69,9 @@
                     <i class="fa-solid fa-book-open"></i>
                     <span>Ajuan Mata Kuliah</span>
                 </a>
-                <a href="#" class="nav-item">
-                    <i class="fa-regular fa-envelope"></i>
-                    <span>Pesan</span>
+                <a href="forum.html" class="nav-item">
+                    <i class="fa-regular fa-comments"></i>
+                    <span>Diskusi</span>
                 </a>
             </nav>
 
@@ -80,7 +83,7 @@
             </div>
         </aside>
 
-        <main class="main-content with-panel">
+        <main class="main-content">
             <div class="page-header">
                 <h2>Ajuan Mata Kuliah</h2>
                 <p>Kelola dan verifikasi ajuan mata kuliah yang diajukan oleh mahasiswa.</p>
@@ -93,7 +96,7 @@
                     </div>
                     <div class="stat-content">
                         <div class="stat-label">Total Ajuan</div>
-                        <div class="stat-val">128</div>
+                        <div class="stat-val" id="statTotal">0</div>
                         <div class="stat-sub">Ajuan Mata Kuliah</div>
                     </div>
                 </div>
@@ -103,8 +106,8 @@
                     </div>
                     <div class="stat-content">
                         <div class="stat-label">Menunggu</div>
-                        <div class="stat-val">36</div>
-                        <div class="stat-sub">28.1% dari total</div>
+                        <div class="stat-val" id="statPending">0</div>
+                        <div class="stat-sub" id="statPendingPercent">0% dari total</div>
                     </div>
                 </div>
                 <div class="stat-box">
@@ -113,8 +116,8 @@
                     </div>
                     <div class="stat-content">
                         <div class="stat-label">Disetujui</div>
-                        <div class="stat-val">78</div>
-                        <div class="stat-sub">60.9% dari total</div>
+                        <div class="stat-val" id="statApproved">0</div>
+                        <div class="stat-sub" id="statApprovedPercent">0% dari total</div>
                     </div>
                 </div>
                 <div class="stat-box">
@@ -123,8 +126,8 @@
                     </div>
                     <div class="stat-content">
                         <div class="stat-label">Ditolak</div>
-                        <div class="stat-val">14</div>
-                        <div class="stat-sub">10.9% dari total</div>
+                        <div class="stat-val" id="statRejected">0</div>
+                        <div class="stat-sub" id="statRejectedPercent">0% dari total</div>
                     </div>
                 </div>
             </div>
@@ -136,7 +139,7 @@
                         <option>Semua Status</option>
                     </select>
                     <select class="filter-select">
-                        <option>Semester: Genap 2024/2025</option>
+                        <option>Semester 1 (2026/2027)</option>
                     </select>
                     <button class="btn-filter"><i class="fa-solid fa-filter"></i> Filter</button>
                 </div>
@@ -148,132 +151,19 @@
                             <th>MAHASISWA</th>
                             <th>NIM</th>
                             <th>PROGRAM STUDI</th>
-                            <th>JUMLAH MK</th>
+                            <th>JUMLAH SKS</th>
                             <th>TANGGAL AJUAN</th>
                             <th>STATUS</th>
                             <th>AKSI</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- Row 1 -->
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                <div class="student-info">
-                                    <div class="avatar-initial bg-light-green">BP</div>
-                                    <div>
-                                        <div class="student-name">Bagas Permadi</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>2201010001</td>
-                            <td>Teknik Informatika</td>
-                            <td>6 Mata Kuliah</td>
-                            <td>
-                                <div>20 Mei 2025</div>
-                                <div style="font-size: 11px; color: var(--text-secondary); margin-top:2px;">10:30 WIB</div>
-                            </td>
-                            <td><span class="badge badge-orange">Menunggu</span></td>
-                            <td><button class="action-btn"><i class="fa-regular fa-eye"></i></button></td>
-                        </tr>
-                        <!-- Row 2 -->
-                        <tr>
-                            <td>2</td>
-                            <td>
-                                <div class="student-info">
-                                    <div class="avatar-initial bg-light-yellow">SN</div>
-                                    <div>
-                                        <div class="student-name">Siti Nurhaliza</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>2201010002</td>
-                            <td>Manajemen</td>
-                            <td>5 Mata Kuliah</td>
-                            <td>
-                                <div>20 Mei 2025</div>
-                                <div style="font-size: 11px; color: var(--text-secondary); margin-top:2px;">09:15 WIB</div>
-                            </td>
-                            <td><span class="badge badge-orange">Menunggu</span></td>
-                            <td><button class="action-btn"><i class="fa-regular fa-eye"></i></button></td>
-                        </tr>
-                        <!-- Row 3 -->
-                        <tr>
-                            <td>3</td>
-                            <td>
-                                <div class="student-info">
-                                    <div class="avatar-initial bg-light-blue">RK</div>
-                                    <div>
-                                        <div class="student-name">Rahmat Kurnia</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>2201010003</td>
-                            <td>Teknik Sipil</td>
-                            <td>6 Mata Kuliah</td>
-                            <td>
-                                <div>19 Mei 2025</div>
-                                <div style="font-size: 11px; color: var(--text-secondary); margin-top:2px;">14:20 WIB</div>
-                            </td>
-                            <td><span class="badge badge-green">Disetujui</span></td>
-                            <td><button class="action-btn"><i class="fa-regular fa-eye"></i></button></td>
-                        </tr>
-                        <!-- Row 4 -->
-                        <tr>
-                            <td>4</td>
-                            <td>
-                                <div class="student-info">
-                                    <div class="avatar-initial bg-light-red">AW</div>
-                                    <div>
-                                        <div class="student-name">Adi Wijaya</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>2201010004</td>
-                            <td>Akuntansi</td>
-                            <td>5 Mata Kuliah</td>
-                            <td>
-                                <div>19 Mei 2025</div>
-                                <div style="font-size: 11px; color: var(--text-secondary); margin-top:2px;">10:15 WIB</div>
-                            </td>
-                            <td><span class="badge badge-red">Ditolak</span></td>
-                            <td><button class="action-btn"><i class="fa-regular fa-eye"></i></button></td>
-                        </tr>
-                        <!-- Row 5 -->
-                        <tr>
-                            <td>5</td>
-                            <td>
-                                <div class="student-info">
-                                    <div class="avatar-initial bg-light-purple">MA</div>
-                                    <div>
-                                        <div class="student-name">Maya Amalia</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>2201010005</td>
-                            <td>Teknik Informatika</td>
-                            <td>4 Mata Kuliah</td>
-                            <td>
-                                <div>18 Mei 2025</div>
-                                <div style="font-size: 11px; color: var(--text-secondary); margin-top:2px;">11:00 WIB</div>
-                            </td>
-                            <td><span class="badge badge-green">Disetujui</span></td>
-                            <td><button class="action-btn"><i class="fa-regular fa-eye"></i></button></td>
-                        </tr>
+                    <tbody id="ajuanKrsTableBody">
+                        <!-- Dimuat dinamis oleh JS -->
                     </tbody>
                 </table>
 
                 <div class="pagination-row">
-                    <div class="page-info">Menampilkan 1 - 5 dari 128 data</div>
-                    <div class="pagination">
-                        <button class="page-btn"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button class="page-btn active">1</button>
-                        <button class="page-btn">2</button>
-                        <button class="page-btn">3</button>
-                        <span class="page-dots">...</span>
-                        <button class="page-btn">26</button>
-                        <button class="page-btn"><i class="fa-solid fa-chevron-right"></i></button>
-                    </div>
+                    <div class="page-info">Menampilkan semua ajuan krs</div>
                 </div>
             </div>
 
@@ -290,22 +180,22 @@
         </main>
 
         <!-- Detail Panel -->
-        <aside class="detail-panel" id="detailPanel">
+        <aside class="detail-panel" id="detailPanel" style="display: none;">
             <div class="panel-header">
                 <h3>Detail Ajuan</h3>
                 <button class="close-btn"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
             <div class="detail-profile">
-                <div class="detail-avatar">BP</div>
+                <div class="detail-avatar" id="detailAvatar">-</div>
                 <div class="detail-name">
-                    <h4>Bagas Permadi</h4>
-                    <span>2201010001<br>Teknik Informatika - S1 • Semester 4</span>
+                    <h4 id="detailName">-</h4>
+                    <span id="detailSub">-</span>
                 </div>
             </div>
 
             <div class="info-section">
-                <h5>Mata Kuliah yang Diajukan (6)</h5>
+                <h5>Mata Kuliah yang Diajukan</h5>
                 <table class="mk-table">
                     <thead>
                         <tr>
@@ -316,13 +206,8 @@
                             <th>KELAS</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr><td>1</td><td>T1201</td><td>Struktur Data</td><td>3</td><td>A</td></tr>
-                        <tr><td>2</td><td>T1202</td><td>Algoritma dan Pemrograman</td><td>4</td><td>A</td></tr>
-                        <tr><td>3</td><td>T1203</td><td>Arsitektur Komputer</td><td>3</td><td>B</td></tr>
-                        <tr><td>4</td><td>T1204</td><td>Basis Data</td><td>3</td><td>A</td></tr>
-                        <tr><td>5</td><td>T1205</td><td>Jaringan Komputer</td><td>3</td><td>B</td></tr>
-                        <tr><td>6</td><td>T1206</td><td>Sistem Operasi</td><td>3</td><td>A</td></tr>
+                    <tbody id="detailKrsTableBody">
+                        <!-- Dimuat dinamis oleh JS -->
                     </tbody>
                 </table>
             </div>
@@ -331,43 +216,287 @@
                 <h5>INFORMASI AJUAN</h5>
                 <div class="info-grid">
                     <div class="info-label">Tanggal Ajuan</div>
-                    <div class="info-val">: 20 Mei 2025, 10:30 WIB</div>
-                    
+                    <div class="info-val" id="detailTanggal">: -</div>
+
                     <div class="info-label">Semester</div>
-                    <div class="info-val">: Genap 2024/2025</div>
-                    
+                    <div class="info-val" id="detailSemester">: -</div>
+
                     <div class="info-label">Total SKS</div>
-                    <div class="info-val">: 19 SKS</div>
-                    
+                    <div class="info-val" id="detailTotalSks">: -</div>
+
                     <div class="info-label">Catatan Mahasiswa</div>
-                    <div class="info-val">: Tidak ada catatan</div>
+                    <div class="info-val" id="detailCatatan">: -</div>
                 </div>
             </div>
 
             <div class="info-section">
                 <h5>RIWAYAT VERIFIKASI</h5>
                 <div class="timeline">
-                    <div class="timeline-item done">
-                        <div class="tl-time">20 Mei 2025, 10:30 WIB</div>
-                        <div class="tl-desc">Ajuan diajukan<br>Oleh Bagas Permadi</div>
-                    </div>
-                    <div class="timeline-item active">
-                        <div class="tl-time">Menunggu verifikasi admin</div>
-                        <div class="tl-desc">Belum diverifikasi</div>
-                    </div>
+                    <!-- Dimuat dinamis oleh JS -->
                 </div>
             </div>
 
             <div class="panel-actions">
-                <button class="btn-approve"><i class="fa-solid fa-check"></i> Setujui Ajuan</button>
-                <button class="btn-reject"><i class="fa-solid fa-xmark"></i> Tolak Ajuan</button>
-                <button class="btn-outline"><i class="fa-solid fa-rotate-left"></i> Minta Revisi</button>
+                <button class="btn-approve" id="btnApproveKrs"><i class="fa-solid fa-check"></i> Setujui Ajuan</button>
+                <button class="btn-reject" id="btnRejectKrs"><i class="fa-solid fa-xmark"></i> Tolak Ajuan</button>
             </div>
-            
+
             <div class="note-text">
                 Jika ajuan disetujui, mata kuliah akan masuk ke KRS mahasiswa.
             </div>
         </aside>
     </div>
+
+    <script>
+        let submissions = [];
+        let activeUserId = null;
+        let activeSemester = 1;
+        let activeTahunAkademik = "2026/2027";
+
+        async function loadSubmissions() {
+            try {
+                const response = await fetchAPI('/admin/krs/ajuan');
+                if (response.success) {
+                    submissions = response.data;
+                    renderTable();
+                    renderStats();
+                } else {
+                    alert('Gagal memuat ajuan KRS: ' + response.message);
+                }
+            } catch (error) {
+                console.error('Error load ajuan KRS:', error);
+                alert('Gagal memuat ajuan KRS.');
+            }
+        }
+
+        function renderStats() {
+            const total = submissions.length;
+            const pending = submissions.filter(s => s.status_persetujuan === 'proses').length;
+            const approved = submissions.filter(s => s.status_persetujuan === 'disetujui').length;
+            const rejected = submissions.filter(s => s.status_persetujuan === 'ditolak').length;
+
+            document.getElementById('statTotal').textContent = total;
+            document.getElementById('statPending').textContent = pending;
+            document.getElementById('statApproved').textContent = approved;
+            document.getElementById('statRejected').textContent = rejected;
+
+            const getPercent = (val) => total > 0 ? Math.round((val / total) * 100) : 0;
+            document.getElementById('statPendingPercent').textContent = `${getPercent(pending)}% dari total`;
+            document.getElementById('statApprovedPercent').textContent = `${getPercent(approved)}% dari total`;
+            document.getElementById('statRejectedPercent').textContent = `${getPercent(rejected)}% dari total`;
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('ajuanKrsTableBody');
+            tbody.innerHTML = '';
+
+            if (submissions.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-secondary); padding: 24px;">Tidak ada ajuan KRS ditemukan.</td></tr>`;
+                return;
+            }
+
+            submissions.forEach((s, idx) => {
+                let badgeClass = 'badge-orange';
+                let badgeLabel = 'Menunggu';
+                if (s.status_persetujuan === 'disetujui') {
+                    badgeClass = 'badge-green';
+                    badgeLabel = 'Disetujui';
+                } else if (s.status_persetujuan === 'ditolak') {
+                    badgeClass = 'badge-red';
+                    badgeLabel = 'Ditolak';
+                }
+
+                const initials = s.nama_lengkap.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${idx + 1}</td>
+                    <td>
+                        <div class="student-info">
+                            <div class="avatar-initial bg-light-blue" style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background-color: #E2E8F0; color: #1E3A8A; font-weight: 600; font-size: 12px; margin-right: 10px;">${initials}</div>
+                            <div>
+                                <div class="student-name" style="font-weight: 600;">${s.nama_lengkap}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${s.nim || '-'}</td>
+                    <td>Teknik Informatika</td>
+                    <td>${s.total_sks} SKS</td>
+                    <td>
+                        <div>${new Date(s.created_at || Date.now()).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
+                    </td>
+                    <td><span class="badge ${badgeClass}">${badgeLabel}</span></td>
+                    <td>
+                        <button class="action-btn" onclick="viewDetail('${s.user_id}', ${s.semester}, '${s.tahun_akademik}')">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        async function viewDetail(userId, semester, tahunAkademik) {
+            try {
+                const response = await fetchAPI(`/admin/krs/ajuan/${userId}?semester=${semester}&tahun_akademik=${tahunAkademik}`);
+                if (response.success) {
+                    const details = response.data;
+                    const subInfo = submissions.find(s => s.user_id === userId && s.semester === semester && s.tahun_akademik === tahunAkademik);
+                    if (!subInfo) return;
+
+                    activeUserId = userId;
+                    activeSemester = semester;
+                    activeTahunAkademik = tahunAkademik;
+
+                    document.getElementById('detailAvatar').textContent = subInfo.nama_lengkap.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                    document.getElementById('detailName').textContent = subInfo.nama_lengkap;
+                    document.getElementById('detailSub').innerHTML = `${subInfo.nim || '-'}<br>Teknik Informatika - S1 • Semester ${semester}`;
+
+                    const krsTbody = document.getElementById('detailKrsTableBody');
+                    krsTbody.innerHTML = '';
+                    details.forEach((d, idx) => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${idx + 1}</td>
+                            <td>${d.kode_matakuliah}</td>
+                            <td>${d.nama_matakuliah}</td>
+                            <td>${d.sks}</td>
+                            <td>A</td>
+                        `;
+                        krsTbody.appendChild(tr);
+                    });
+
+                    document.getElementById('detailTanggal').textContent = `: ${new Date(subInfo.created_at || Date.now()).toLocaleString('id-ID')}`;
+                    document.getElementById('detailSemester').textContent = `: ${semester} (${tahunAkademik})`;
+                    document.getElementById('detailTotalSks').textContent = `: ${subInfo.total_sks} SKS`;
+                    document.getElementById('detailCatatan').textContent = `: ${subInfo.catatan || 'Tidak ada catatan'}`;
+
+                    const timelineContainer = document.querySelector('.timeline');
+                    timelineContainer.innerHTML = `
+                        <div class="timeline-item done">
+                            <div class="tl-time">${new Date(subInfo.created_at || Date.now()).toLocaleString('id-ID')}</div>
+                            <div class="tl-desc">KRS diajukan oleh mahasiswa</div>
+                        </div>
+                        <div class="timeline-item ${subInfo.status_persetujuan !== 'proses' ? 'done' : 'active'}">
+                            <div class="tl-time">${subInfo.status_persetujuan !== 'proses' ? 'Verifikasi Selesai' : 'Menunggu verifikasi admin'}</div>
+                            <div class="tl-desc">${subInfo.status_persetujuan === 'disetujui' ? 'Disetujui' : subInfo.status_persetujuan === 'ditolak' ? 'Ditolak' : 'Belum diverifikasi'}</div>
+                        </div>
+                    `;
+
+                    const btnApprove = document.getElementById('btnApproveKrs');
+                    const btnReject = document.getElementById('btnRejectKrs');
+                    if (subInfo.status_persetujuan !== 'proses') {
+                        btnApprove.disabled = true;
+                        btnApprove.style.opacity = '0.5';
+                        btnApprove.style.cursor = 'not-allowed';
+                        btnReject.disabled = true;
+                        btnReject.style.opacity = '0.5';
+                        btnReject.style.cursor = 'not-allowed';
+                    } else {
+                        btnApprove.disabled = false;
+                        btnApprove.style.opacity = '1';
+                        btnApprove.style.cursor = 'pointer';
+                        btnReject.disabled = false;
+                        btnReject.style.opacity = '1';
+                        btnReject.style.cursor = 'pointer';
+                    }
+
+                    openDetailPanel();
+                } else {
+                    alert('Gagal mengambil detail ajuan KRS: ' + response.message);
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Gagal mengambil detail ajuan KRS.');
+            }
+        }
+
+        function openDetailPanel() {
+            document.getElementById('detailPanel').style.display = 'block';
+            document.querySelector('.main-content').classList.add('with-panel');
+        }
+
+        function closeDetailPanel() {
+            document.getElementById('detailPanel').style.display = 'none';
+            document.querySelector('.main-content').classList.remove('with-panel');
+        }
+
+        document.querySelector('.close-btn').addEventListener('click', closeDetailPanel);
+
+        document.getElementById('btnApproveKrs').addEventListener('click', async () => {
+            if (!activeUserId) return;
+            if (!confirm('Apakah Anda yakin ingin menyetujui KRS mahasiswa ini?')) return;
+
+            try {
+                const response = await fetchAPI(`/admin/krs/ajuan/${activeUserId}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({
+                        semester: activeSemester,
+                        tahun_akademik: activeTahunAkademik,
+                        status_persetujuan: 'disetujui'
+                    })
+                });
+
+                if (response.success) {
+                    alert('Ajuan KRS berhasil disetujui!');
+                    closeDetailPanel();
+                    loadSubmissions();
+                } else {
+                    alert('Gagal menyetujui KRS: ' + response.message);
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Gagal memproses persetujuan KRS.');
+            }
+        });
+
+        document.getElementById('btnRejectKrs').addEventListener('click', async () => {
+            if (!activeUserId) return;
+
+            const catatan = prompt('Masukkan catatan/alasan penolakan KRS:');
+            if (catatan === null) return;
+            if (!catatan.trim()) {
+                alert('Catatan/alasan penolakan wajib diisi!');
+                return;
+            }
+
+            try {
+                const response = await fetchAPI(`/admin/krs/ajuan/${activeUserId}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({
+                        semester: activeSemester,
+                        tahun_akademik: activeTahunAkademik,
+                        status_persetujuan: 'ditolak',
+                        catatan: catatan
+                    })
+                });
+
+                if (response.success) {
+                    alert('Ajuan KRS berhasil ditolak.');
+                    closeDetailPanel();
+                    loadSubmissions();
+                } else {
+                    alert('Gagal menolak KRS: ' + response.message);
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Gagal memproses penolakan KRS.');
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const logoutItem = document.querySelector('.sidebar-footer a');
+            if (logoutItem) {
+                logoutItem.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    localStorage.clear();
+                    window.location.href = 'admin-login.html';
+                });
+            }
+
+            loadSubmissions();
+        });
+    </script>
 </body>
+
 </html>

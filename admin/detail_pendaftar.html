@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <script src="../config/admin-guard.js"></script>
     <script src="../config/api.js"></script>
@@ -17,6 +18,7 @@
             align-items: center;
             margin-bottom: 24px;
         }
+
         .btn-back {
             display: inline-flex;
             align-items: center;
@@ -32,12 +34,16 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-        .btn-back:hover { background: var(--bg-color); }
+
+        .btn-back:hover {
+            background: var(--bg-color);
+        }
 
         .action-right {
             display: flex;
             gap: 12px;
         }
+
         .btn-print {
             display: inline-flex;
             align-items: center;
@@ -51,6 +57,7 @@
             font-weight: 600;
             cursor: pointer;
         }
+
         .btn-edit-data {
             display: inline-flex;
             align-items: center;
@@ -73,6 +80,7 @@
             padding: 28px;
             margin-bottom: 24px;
         }
+
         .profile-top-row {
             display: flex;
             align-items: center;
@@ -80,6 +88,7 @@
             padding-bottom: 24px;
             border-bottom: 1px solid var(--bg-color);
         }
+
         .profile-photo {
             width: 100px;
             height: 100px;
@@ -87,15 +96,18 @@
             object-fit: cover;
             border: 3px solid #f1f5f9;
         }
+
         .profile-main-info {
             flex: 1;
         }
+
         .profile-main-info h2 {
             font-size: 24px;
             font-weight: 800;
             color: var(--text-primary);
             margin-bottom: 4px;
         }
+
         .profile-main-info .id-pendaftar {
             font-size: 13px;
             color: var(--text-secondary);
@@ -105,18 +117,21 @@
             display: flex;
             gap: 16px;
         }
+
         .badge-box {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
             gap: 6px;
         }
+
         .badge-box-label {
             font-size: 10px;
             font-weight: 700;
             color: #94a3b8;
             letter-spacing: 0.5px;
         }
+
         .badge-pill-green {
             background: #e6f4ed;
             color: #117b53;
@@ -125,6 +140,7 @@
             font-size: 12px;
             font-weight: 700;
         }
+
         .badge-pill-blue {
             background: #e0f2fe;
             color: #0369a1;
@@ -140,11 +156,13 @@
             gap: 20px;
             padding-top: 20px;
         }
+
         .meta-item {
             display: flex;
             align-items: center;
             gap: 12px;
         }
+
         .meta-icon {
             width: 36px;
             height: 36px;
@@ -157,12 +175,14 @@
             font-size: 14px;
             border: 1px solid var(--border-color);
         }
+
         .meta-text-label {
             font-size: 10px;
             font-weight: 700;
             color: #94a3b8;
             letter-spacing: 0.5px;
         }
+
         .meta-text-val {
             font-size: 13px;
             font-weight: 700;
@@ -177,6 +197,7 @@
             border-bottom: 1px solid var(--border-color);
             margin-bottom: 24px;
         }
+
         .tab-link {
             padding: 12px 0;
             font-size: 14px;
@@ -186,6 +207,7 @@
             border-bottom: 3px solid transparent;
             cursor: pointer;
         }
+
         .tab-link.active {
             color: #117b53;
             border-bottom-color: #117b53;
@@ -199,6 +221,7 @@
             padding: 28px;
             margin-bottom: 24px;
         }
+
         .section-card h3 {
             font-size: 16px;
             font-weight: 700;
@@ -211,12 +234,14 @@
             grid-template-columns: 1fr 1fr;
             gap: 20px 40px;
         }
+
         .data-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
             font-size: 13px;
         }
+
         .data-label-group {
             display: flex;
             align-items: center;
@@ -224,11 +249,13 @@
             color: var(--text-secondary);
             width: 160px;
         }
+
         .data-label-group i {
             width: 16px;
             text-align: center;
             color: #94a3b8;
         }
+
         .data-val {
             font-weight: 700;
             color: var(--text-primary);
@@ -242,6 +269,7 @@
             gap: 16px;
             margin-bottom: 24px;
         }
+
         .alamat-icon {
             width: 36px;
             height: 36px;
@@ -255,13 +283,24 @@
             border: 1px solid var(--border-color);
             flex-shrink: 0;
         }
+
         .alamat-content {
             display: flex;
             flex-direction: column;
             gap: 4px;
         }
-        .alamat-label { font-size: 12px; color: var(--text-secondary); font-weight: 500; }
-        .alamat-val { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+
+        .alamat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .alamat-val {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
 
         .alamat-details-grid {
             display: grid;
@@ -270,22 +309,36 @@
             padding-top: 16px;
             border-top: 1px solid var(--bg-color);
         }
+
         .sub-meta {
             display: flex;
             flex-direction: column;
             gap: 4px;
         }
-        .sub-meta-label { font-size: 10px; font-weight: 700; color: #94a3b8; letter-spacing: 0.5px; }
-        .sub-meta-val { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+
+        .sub-meta-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: #94a3b8;
+            letter-spacing: 0.5px;
+        }
+
+        .sub-meta-val {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
     </style>
 </head>
+
 <body>
     <header class="top-header">
         <div class="logo-area">
             <h1>Universitas Crypto</h1>
         </div>
         <div class="user-area">
-            <img src="https://ui-avatars.com/api/?name=Admin&background=1a2530&color=fff" alt="User Avatar" class="avatar">
+            <img src="https://ui-avatars.com/api/?name=Admin&background=1a2530&color=fff" alt="User Avatar"
+                class="avatar">
         </div>
     </header>
 
@@ -334,9 +387,9 @@
                     <i class="fa-solid fa-book-open"></i>
                     <span>Ajuan Mata Kuliah</span>
                 </a>
-                <a href="#" class="nav-item">
-                    <i class="fa-regular fa-envelope"></i>
-                    <span>Pesan</span>
+                <a href="forum.html" class="nav-item">
+                    <i class="fa-regular fa-comments"></i>
+                    <span>Diskusi</span>
                 </a>
             </nav>
 
@@ -363,7 +416,8 @@
             <!-- Profile Top Card -->
             <div class="profile-card">
                 <div class="profile-top-row">
-                    <img src="https://ui-avatars.com/api/?name=Pendaftar&background=1a2530&color=fff" alt="Foto Pendaftar" class="profile-photo" id="profile_photo">
+                    <img src="https://ui-avatars.com/api/?name=Pendaftar&background=1a2530&color=fff"
+                        alt="Foto Pendaftar" class="profile-photo" id="profile_photo">
                     <div class="profile-main-info">
                         <h2 id="profile_name">-</h2>
                         <div class="id-pendaftar" id="profile_id">ID Pendaftar : -</div>
@@ -549,34 +603,42 @@
                 <table class="data-table" style="width: 100%; border-collapse: collapse; margin-top: 12px;">
                     <thead>
                         <tr>
-                            <th style="text-align: left; padding: 12px; border-bottom: 2px solid var(--border-color);">Semester</th>
-                            <th style="text-align: right; padding: 12px; border-bottom: 2px solid var(--border-color);">Nilai Rata-rata</th>
+                            <th style="text-align: left; padding: 12px; border-bottom: 2px solid var(--border-color);">
+                                Semester</th>
+                            <th style="text-align: right; padding: 12px; border-bottom: 2px solid var(--border-color);">
+                                Nilai Rata-rata</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td style="padding: 12px; border-bottom: 1px solid var(--bg-color);">Semester 1</td>
-                            <td style="text-align: right; padding: 12px; border-bottom: 1px solid var(--bg-color); font-weight: 700;" id="val_sem1">0.00</td>
+                            <td style="text-align: right; padding: 12px; border-bottom: 1px solid var(--bg-color); font-weight: 700;"
+                                id="val_sem1">0.00</td>
                         </tr>
                         <tr>
                             <td style="padding: 12px; border-bottom: 1px solid var(--bg-color);">Semester 2</td>
-                            <td style="text-align: right; padding: 12px; border-bottom: 1px solid var(--bg-color); font-weight: 700;" id="val_sem2">0.00</td>
+                            <td style="text-align: right; padding: 12px; border-bottom: 1px solid var(--bg-color); font-weight: 700;"
+                                id="val_sem2">0.00</td>
                         </tr>
                         <tr>
                             <td style="padding: 12px; border-bottom: 1px solid var(--bg-color);">Semester 3</td>
-                            <td style="text-align: right; padding: 12px; border-bottom: 1px solid var(--bg-color); font-weight: 700;" id="val_sem3">0.00</td>
+                            <td style="text-align: right; padding: 12px; border-bottom: 1px solid var(--bg-color); font-weight: 700;"
+                                id="val_sem3">0.00</td>
                         </tr>
                         <tr>
                             <td style="padding: 12px; border-bottom: 1px solid var(--bg-color);">Semester 4</td>
-                            <td style="text-align: right; padding: 12px; border-bottom: 1px solid var(--bg-color); font-weight: 700;" id="val_sem4">0.00</td>
+                            <td style="text-align: right; padding: 12px; border-bottom: 1px solid var(--bg-color); font-weight: 700;"
+                                id="val_sem4">0.00</td>
                         </tr>
                         <tr>
                             <td style="padding: 12px; border-bottom: 1px solid var(--bg-color);">Semester 5</td>
-                            <td style="text-align: right; padding: 12px; border-bottom: 1px solid var(--bg-color); font-weight: 700;" id="val_sem5">0.00</td>
+                            <td style="text-align: right; padding: 12px; border-bottom: 1px solid var(--bg-color); font-weight: 700;"
+                                id="val_sem5">0.00</td>
                         </tr>
                         <tr style="background-color: var(--bg-color);">
                             <td style="padding: 12px; font-weight: 700;">Rata-rata Keseluruhan</td>
-                            <td style="text-align: right; padding: 12px; font-weight: 800; color: #117b53;" id="val_sem_avg">0.00</td>
+                            <td style="text-align: right; padding: 12px; font-weight: 800; color: #117b53;"
+                                id="val_sem_avg">0.00</td>
                         </tr>
                     </tbody>
                 </table>
@@ -600,20 +662,25 @@
             <!-- Tab: Status Kelulusan -->
             <div class="section-card" id="tab_status" style="display: none;">
                 <h3>Kelola Kelulusan Mahasiswa</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 13px;">Tentukan apakah calon mahasiswa ini memenuhi kriteria kelulusan akademik Universitas Crypto.</p>
-                
+                <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 13px;">Tentukan apakah calon
+                    mahasiswa ini memenuhi kriteria kelulusan akademik Universitas Crypto.</p>
+
                 <div style="max-width: 480px; display: flex; flex-direction: column; gap: 16px;">
                     <div style="display: flex; flex-direction: column; gap: 8px;">
-                        <label for="select_status_kelulusan" style="font-size: 12px; font-weight: 700; color: var(--text-secondary);">STATUS KELULUSAN</label>
-                        <select id="select_status_kelulusan" class="filter-select" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: white; font-weight: 600;">
+                        <label for="select_status_kelulusan"
+                            style="font-size: 12px; font-weight: 700; color: var(--text-secondary);">STATUS
+                            KELULUSAN</label>
+                        <select id="select_status_kelulusan" class="filter-select"
+                            style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: white; font-weight: 600;">
                             <option value="proses">Menunggu Seleksi</option>
                             <option value="lulus">Lulus / Diterima</option>
                             <option value="tidak_lulus">Tidak Lulus / Ditolak</option>
                             <option value="aktif">Mahasiswa Aktif</option>
                         </select>
                     </div>
-                    
-                    <button id="btn_save_status" class="btn-edit-data" style="width: fit-content; padding: 12px 24px; margin-top: 8px;">
+
+                    <button id="btn_save_status" class="btn-edit-data"
+                        style="width: fit-content; padding: 12px 24px; margin-top: 8px;">
                         <i class="fa-regular fa-floppy-disk"></i> Simpan Status Kelulusan
                     </button>
                 </div>
@@ -665,7 +732,7 @@
             const badge = document.getElementById('profile_status_badge');
             if (!badge) return;
             badge.textContent = getStatusLabel(status);
-            
+
             // Remove any existing badge class and apply based on status
             badge.className = '';
             if (status === 'lulus') {
@@ -706,7 +773,7 @@
                     document.getElementById('profile_name').textContent = user.nama_lengkap || '-';
                     document.getElementById('profile_id').textContent = `ID Pendaftar : ${user.id}`;
                     document.title = `Detail Pendaftar - ${user.nama_lengkap || 'Calon Mahasiswa'}`;
-                    
+
                     updateStatusBadgeStyle(user.status_kelulusan);
 
                     if (dokumen.pas_foto) {
@@ -763,7 +830,7 @@
                             else if (r.semester === 5) sem5Val = parseFloat(r.matematika) || 0;
                         });
                     }
-                    
+
                     document.getElementById('val_sem1').textContent = sem1Val.toFixed(2);
                     document.getElementById('val_sem2').textContent = sem2Val.toFixed(2);
                     document.getElementById('val_sem3').textContent = sem3Val.toFixed(2);
@@ -834,4 +901,5 @@
         });
     </script>
 </body>
+
 </html>

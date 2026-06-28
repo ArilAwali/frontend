@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <script src="../config/admin-guard.js"></script>
     <script src="../config/api.js"></script>
@@ -10,7 +11,114 @@
     <link rel="stylesheet" href="assets/css/pengumuman.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Modal CRUD */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            width: 550px;
+            max-width: 90%;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary, #1e293b);
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color, #e2e8f0);
+            padding-bottom: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary, #1e293b);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color, #e2e8f0);
+            border-radius: 6px;
+            font-size: 13px;
+            outline: none;
+            background: white;
+            color: #1e293b;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 24px;
+            border-top: 1px solid var(--border-color, #e2e8f0);
+            padding-top: 16px;
+        }
+
+        .btn-cancel {
+            background: white;
+            border: 1px solid var(--border-color, #e2e8f0);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary, #64748b);
+            cursor: pointer;
+        }
+
+        .btn-save {
+            background: #005640;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-save:hover {
+            opacity: 0.9;
+        }
+    </style>
 </head>
+
 <body>
     <header class="top-header" style="justify-content: space-between;">
         <div class="breadcrumb" style="padding-left: 24px;">
@@ -27,7 +135,8 @@
             </button>
             <div class="user-profile">
                 <div class="user-avatar">A</div>
-                <div class="user-name">Admin PMB <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 6px; color: var(--text-secondary);"></i></div>
+                <div class="user-name">Admin PMB <i class="fa-solid fa-chevron-down"
+                        style="font-size: 10px; margin-left: 6px; color: var(--text-secondary);"></i></div>
             </div>
         </div>
     </header>
@@ -77,9 +186,9 @@
                     <i class="fa-solid fa-book-open"></i>
                     <span>Ajuan Mata Kuliah</span>
                 </a>
-                <a href="#" class="nav-item">
-                    <i class="fa-regular fa-envelope"></i>
-                    <span>Pesan</span>
+                <a href="forum.html" class="nav-item">
+                    <i class="fa-regular fa-comments"></i>
+                    <span>Diskusi</span>
                 </a>
             </nav>
 
@@ -97,7 +206,7 @@
                     <h2>Kelola Pengumuman</h2>
                     <p>Kelola dan publikasikan informasi penting untuk mahasiswa.</p>
                 </div>
-                <button class="btn-buat">
+                <button class="btn-buat" onclick="openModal('create')">
                     <i class="fa-solid fa-plus"></i> Buat Pengumuman
                 </button>
             </div>
@@ -109,53 +218,52 @@
                     </div>
                     <div class="stat-info">
                         <div class="stat-title">TOTAL PENGUMUMAN</div>
-                        <div class="stat-value">24</div>
+                        <div class="stat-value" id="statTotal">0</div>
                         <div class="stat-desc">Semua Pengumuman</div>
                     </div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon icon-blue">
-                        <i class="fa-solid fa-paper-plane"></i>
+                        <i class="fa-solid fa-university"></i>
                     </div>
                     <div class="stat-info">
-                        <div class="stat-title">DIPUBLIKASIKAN</div>
-                        <div class="stat-value">18</div>
-                        <div class="stat-desc">Pengumuman Aktif</div>
+                        <div class="stat-title">KATEGORI PMB</div>
+                        <div class="stat-value" id="statPmb">0</div>
+                        <div class="stat-desc">Info Pendaftaran</div>
                     </div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon icon-orange">
-                        <i class="fa-regular fa-clock"></i>
+                        <i class="fa-solid fa-book"></i>
                     </div>
                     <div class="stat-info">
-                        <div class="stat-title">DIJADWALKAN</div>
-                        <div class="stat-value">4</div>
-                        <div class="stat-desc">Akan Tayang</div>
+                        <div class="stat-title">KATEGORI AKADEMIK</div>
+                        <div class="stat-value" id="statAkademik">0</div>
+                        <div class="stat-desc">Info Perkuliahan</div>
                     </div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon icon-red">
-                        <i class="fa-regular fa-trash-can"></i>
+                        <i class="fa-solid fa-wallet"></i>
                     </div>
                     <div class="stat-info">
-                        <div class="stat-title">ARSIP</div>
-                        <div class="stat-value">2</div>
-                        <div class="stat-desc">Tidak Aktif</div>
+                        <div class="stat-title">KATEGORI ADMINISTRASI</div>
+                        <div class="stat-value" id="statAdministrasi">0</div>
+                        <div class="stat-desc">Info Pembayaran UKT</div>
                     </div>
                 </div>
             </div>
 
             <div class="table-container">
                 <div class="filter-row">
-                    <input type="text" class="search-input" placeholder="Cari judul pengumuman...">
-                    <select class="filter-select">
-                        <option>Semua Kategori</option>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Cari judul pengumuman..."
+                        oninput="filterTable()">
+                    <select id="categoryFilter" class="filter-select" onchange="filterTable()">
+                        <option value="Semua">Semua Kategori</option>
+                        <option value="Akademik">Akademik</option>
+                        <option value="PMB">PMB</option>
+                        <option value="Administrasi">Administrasi</option>
                     </select>
-                    <select class="filter-select">
-                        <option>Semua Status</option>
-                    </select>
-                    <input type="text" class="date-input" value="01/05/2025 - 20/05/2025">
-                    <button class="btn-filter"><i class="fa-solid fa-filter"></i> Filter</button>
                 </div>
 
                 <table class="data-table">
@@ -164,212 +272,259 @@
                             <th style="width: 40px;"><input type="checkbox"></th>
                             <th>JUDUL PENGUMUMAN</th>
                             <th>KATEGORI</th>
-                            <th>TANGGAL</th>
-                            <th>STATUS</th>
-                            <th>DILIHAT</th>
+                            <th>TANGGAL DIPOSTING</th>
                             <th style="text-align: right;">AKSI</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- Row 1 -->
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>
-                                <div class="judul-wrapper">
-                                    <div class="judul-title">
-                                        <span class="badge-penting">PENTING</span> Jadwal Daftar Ulang Mahasiswa Baru Gelombang 1
-                                    </div>
-                                    <div class="judul-desc">Informasi jadwal dan tata cara daftar ulang...</div>
-                                </div>
-                            </td>
-                            <td><span class="kat-akademik">Akademik</span></td>
-                            <td>
-                                <div class="date-main">18 Mei 2025</div>
-                                <div class="date-sub">10:00 WIB</div>
-                            </td>
-                            <td><span class="status-badge status-pub">Dipublikasikan</span></td>
-                            <td><span class="view-count">532</span></td>
-                            <td style="text-align: right;">
-                                <div class="action-btns" style="justify-content: flex-end;">
-                                    <button class="btn-action"><i class="fa-regular fa-eye"></i></button>
-                                    <button class="btn-action"><i class="fa-solid fa-pen"></i></button>
-                                    <button class="btn-action"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Row 2 -->
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>
-                                <div class="judul-wrapper">
-                                    <div class="judul-title">
-                                        Perubahan Jadwal Ujian Akhir Semester Genap 2024/2025
-                                    </div>
-                                    <div class="judul-desc">Sehubungan dengan perubahan kalender...</div>
-                                </div>
-                            </td>
-                            <td><span class="kat-akademik">Akademik</span></td>
-                            <td>
-                                <div class="date-main">16 Mei 2025</div>
-                                <div class="date-sub">14:30 WIB</div>
-                            </td>
-                            <td><span class="status-badge status-pub">Dipublikasikan</span></td>
-                            <td><span class="view-count">420</span></td>
-                            <td style="text-align: right;">
-                                <div class="action-btns" style="justify-content: flex-end;">
-                                    <button class="btn-action"><i class="fa-regular fa-eye"></i></button>
-                                    <button class="btn-action"><i class="fa-solid fa-pen"></i></button>
-                                    <button class="btn-action"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Row 3 -->
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>
-                                <div class="judul-wrapper">
-                                    <div class="judul-title">
-                                        Batas Akhir Pembayaran UKT Semester Genap 2024/2025
-                                    </div>
-                                    <div class="judul-desc">Diharapkan seluruh mahasiswa melakukan...</div>
-                                </div>
-                            </td>
-                            <td><span class="kat-administrasi">Administrasi</span></td>
-                            <td>
-                                <div class="date-main">15 Mei 2025</div>
-                                <div class="date-sub">09:15 WIB</div>
-                            </td>
-                            <td><span class="status-badge status-pub">Dipublikasikan</span></td>
-                            <td><span class="view-count">812</span></td>
-                            <td style="text-align: right;">
-                                <div class="action-btns" style="justify-content: flex-end;">
-                                    <button class="btn-action"><i class="fa-regular fa-eye"></i></button>
-                                    <button class="btn-action"><i class="fa-solid fa-pen"></i></button>
-                                    <button class="btn-action"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Row 4 -->
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>
-                                <div class="judul-wrapper">
-                                    <div class="judul-title">
-                                        Sosialisasi Program Merdeka Belajar Kampus Merdeka (MBKM)
-                                    </div>
-                                    <div class="judul-desc">Ayo manfaatkan kesempatan untuk mengembangkan...</div>
-                                </div>
-                            </td>
-                            <td><span class="kat-kemahasiswaan">Kemahasiswaan</span></td>
-                            <td>
-                                <div class="date-main">14 Mei 2025</div>
-                                <div class="date-sub">16:00 WIB</div>
-                            </td>
-                            <td><span class="status-badge status-jadwal">Dijadwalkan</span></td>
-                            <td><span class="view-count">-</span></td>
-                            <td style="text-align: right;">
-                                <div class="action-btns" style="justify-content: flex-end;">
-                                    <button class="btn-action"><i class="fa-regular fa-eye"></i></button>
-                                    <button class="btn-action"><i class="fa-solid fa-pen"></i></button>
-                                    <button class="btn-action"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Row 5 -->
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>
-                                <div class="judul-wrapper">
-                                    <div class="judul-title">
-                                        Maintenance Sistem Informasi Akademik (SIA)
-                                    </div>
-                                    <div class="judul-desc">Sistem Informasi Akademik akan dilakukan...</div>
-                                </div>
-                            </td>
-                            <td><span class="kat-informasi">Informasi</span></td>
-                            <td>
-                                <div class="date-main">12 Mei 2025</div>
-                                <div class="date-sub">11:20 WIB</div>
-                            </td>
-                            <td><span class="status-badge status-pub">Dipublikasikan</span></td>
-                            <td><span class="view-count">256</span></td>
-                            <td style="text-align: right;">
-                                <div class="action-btns" style="justify-content: flex-end;">
-                                    <button class="btn-action"><i class="fa-regular fa-eye"></i></button>
-                                    <button class="btn-action"><i class="fa-solid fa-pen"></i></button>
-                                    <button class="btn-action"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Row 6 -->
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>
-                                <div class="judul-wrapper">
-                                    <div class="judul-title">
-                                        Pengumuman Libur Hari Raya Waisak 2025
-                                    </div>
-                                    <div class="judul-desc">Diberitahukan kepada seluruh civitas akademika...</div>
-                                </div>
-                            </td>
-                            <td><span class="kat-informasi">Informasi</span></td>
-                            <td>
-                                <div class="date-main">28 April 2025</div>
-                                <div class="date-sub">08:00 WIB</div>
-                            </td>
-                            <td><span class="status-badge status-arsip-red">Arsip</span></td>
-                            <td><span class="view-count">195</span></td>
-                            <td style="text-align: right;">
-                                <div class="action-btns" style="justify-content: flex-end;">
-                                    <button class="btn-action"><i class="fa-regular fa-eye"></i></button>
-                                    <button class="btn-action"><i class="fa-solid fa-pen"></i></button>
-                                    <button class="btn-action"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Row 7 -->
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>
-                                <div class="judul-wrapper">
-                                    <div class="judul-title">
-                                        Pendaftaran Beasiswa Prestasi Akademik
-                                    </div>
-                                    <div class="judul-desc">Telah dibuka pendaftaran Beasiswa Prestasi Akademik...</div>
-                                </div>
-                            </td>
-                            <td><span class="kat-kemahasiswaan">Kemahasiswaan</span></td>
-                            <td>
-                                <div class="date-main">20 April 2025</div>
-                                <div class="date-sub">13:45 WIB</div>
-                            </td>
-                            <td><span class="status-badge status-arsip-red">Arsip</span></td>
-                            <td><span class="view-count">301</span></td>
-                            <td style="text-align: right;">
-                                <div class="action-btns" style="justify-content: flex-end;">
-                                    <button class="btn-action"><i class="fa-regular fa-eye"></i></button>
-                                    <button class="btn-action"><i class="fa-solid fa-pen"></i></button>
-                                    <button class="btn-action"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                                </div>
-                            </td>
-                        </tr>
+                    <tbody id="announcementsTableBody">
+                        <!-- Dimuat dinamis oleh JS -->
                     </tbody>
                 </table>
 
                 <div class="pagination-row">
-                    <div class="page-info">Menampilkan 1 - 7 dari 24 data</div>
-                    <div class="pagination">
-                        <button class="page-btn"><i class="fa-solid fa-chevron-left" style="margin-right: 6px;"></i> Sebelumnya</button>
-                        <button class="page-btn active">1</button>
-                        <button class="page-btn">2</button>
-                        <button class="page-btn">3</button>
-                        <button class="page-btn">4</button>
-                        <button class="page-btn">Berikutnya <i class="fa-solid fa-chevron-right" style="margin-left: 6px;"></i></button>
-                    </div>
+                    <div class="page-info" id="tableDataInfo">Menampilkan 0 data</div>
                 </div>
             </div>
 
         </main>
     </div>
+
+    <!-- Modal CRUD (Create / Edit) -->
+    <div id="crudModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 class="modal-title" id="modalTitleText">Buat Pengumuman</h3>
+            <form id="announcementForm" onsubmit="saveAnnouncement(event)">
+                <input type="hidden" id="editId">
+                <div class="form-group">
+                    <label for="judulInput">Judul Pengumuman</label>
+                    <input type="text" id="judulInput" required placeholder="Masukkan judul pengumuman...">
+                </div>
+                <div class="form-group">
+                    <label for="kategoriInput">Kategori</label>
+                    <select id="kategoriInput" required>
+                        <option value="Akademik">Akademik</option>
+                        <option value="PMB">PMB</option>
+                        <option value="Administrasi">Administrasi</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="kontenInput">Konten / Isi Pengumuman</label>
+                    <textarea id="kontenInput" required placeholder="Masukkan detail isi pengumuman..."></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal()">Batal</button>
+                    <button type="submit" class="btn-save">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let announcements = [];
+        let currentMode = 'create';
+
+        async function loadAnnouncements() {
+            try {
+                const res = await fetchAPI('/admin/pengumuman');
+                if (res.success && Array.isArray(res.data)) {
+                    announcements = res.data;
+                    updateStats();
+                    renderTable();
+                } else {
+                    alert('Gagal mengambil data pengumuman');
+                }
+            } catch (err) {
+                console.error('Error loadAnnouncements:', err);
+            }
+        }
+
+        function updateStats() {
+            const counts = { total: announcements.length, pmb: 0, akademik: 0, administrasi: 0 };
+            announcements.forEach(item => {
+                const cat = item.kategori.toLowerCase();
+                if (counts[cat] !== undefined) counts[cat]++;
+            });
+
+            document.getElementById('statTotal').textContent = counts.total;
+            document.getElementById('statPmb').textContent = counts.pmb;
+            document.getElementById('statAkademik').textContent = counts.akademik;
+            document.getElementById('statAdministrasi').textContent = counts.administrasi;
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            if (isNaN(date.getTime())) return dateStr;
+
+            const months = [
+                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+            ];
+
+            const day = date.getDate();
+            const month = months[date.getMonth()];
+            const year = date.getFullYear();
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+
+            return {
+                main: `${day} ${month} ${year}`,
+                sub: `${hours}:${minutes} WIB`
+            };
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('announcementsTableBody');
+            tbody.innerHTML = '';
+
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
+            const categoryFilter = document.getElementById('categoryFilter').value;
+
+            const filtered = announcements.filter(item => {
+                const matchSearch = item.judul.toLowerCase().includes(searchQuery) || item.konten.toLowerCase().includes(searchQuery);
+                const matchCategory = categoryFilter === 'Semua' || item.kategori.toLowerCase() === categoryFilter.toLowerCase();
+                return matchSearch && matchCategory;
+            });
+
+            document.getElementById('tableDataInfo').textContent = `Menampilkan ${filtered.length} dari ${announcements.length} data`;
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-secondary); padding: 24px;">Tidak ada data pengumuman.</td></tr>`;
+                return;
+            }
+
+            filtered.forEach(item => {
+                const dateObj = formatDate(item.created_at);
+                const tr = document.createElement('tr');
+
+                let badgeClass = 'kat-akademik';
+                if (item.kategori.toLowerCase() === 'pmb') badgeClass = 'kat-informasi';
+                else if (item.kategori.toLowerCase() === 'administrasi') badgeClass = 'kat-administrasi';
+
+                tr.innerHTML = `
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <div class="judul-wrapper">
+                            <div class="judul-title">${item.judul}</div>
+                            <div class="judul-desc">${item.konten.substring(0, 100)}${item.konten.length > 100 ? '...' : ''}</div>
+                        </div>
+                    </td>
+                    <td><span class="${badgeClass}">${item.kategori}</span></td>
+                    <td>
+                        <div class="date-main">${dateObj.main}</div>
+                        <div class="date-sub">${dateObj.sub}</div>
+                    </td>
+                    <td style="text-align: right;">
+                        <div class="action-btns" style="justify-content: flex-end;">
+                            <button class="btn-action" title="Edit" onclick="openModal('edit', '${item.id}')"><i class="fa-solid fa-pen"></i></button>
+                            <button class="btn-action" title="Hapus" onclick="deleteAnnouncement('${item.id}')" style="color: var(--status-batal-text);"><i class="fa-regular fa-trash-can"></i></button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filterTable() {
+            renderTable();
+        }
+
+        function openModal(mode, id = null) {
+            currentMode = mode;
+            const modal = document.getElementById('crudModal');
+            const titleText = document.getElementById('modalTitleText');
+
+            document.getElementById('announcementForm').reset();
+            document.getElementById('editId').value = '';
+
+            if (mode === 'create') {
+                titleText.textContent = 'Buat Pengumuman Baru';
+            } else {
+                titleText.textContent = 'Edit Pengumuman';
+                const item = announcements.find(a => a.id === id);
+                if (item) {
+                    document.getElementById('editId').value = item.id;
+                    document.getElementById('judulInput').value = item.judul;
+                    document.getElementById('kategoriInput').value = item.kategori;
+                    document.getElementById('kontenInput').value = item.konten;
+                }
+            }
+
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('show'), 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('crudModal');
+            modal.classList.remove('show');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+
+        async function saveAnnouncement(event) {
+            event.preventDefault();
+
+            const id = document.getElementById('editId').value;
+            const judul = document.getElementById('judulInput').value.trim();
+            const kategori = document.getElementById('kategoriInput').value;
+            const konten = document.getElementById('kontenInput').value.trim();
+
+            const payload = { judul, kategori, konten };
+
+            try {
+                let res;
+                if (currentMode === 'create') {
+                    res = await fetchAPI('/admin/pengumuman', {
+                        method: 'POST',
+                        body: JSON.stringify(payload)
+                    });
+                } else {
+                    res = await fetchAPI(`/admin/pengumuman/${id}`, {
+                        method: 'PUT',
+                        body: JSON.stringify(payload)
+                    });
+                }
+
+                if (res.success) {
+                    closeModal();
+                    if (currentMode === 'create') {
+                        alert('Pengumuman berhasil dibuat!');
+                    } else {
+                        alert('Pengumuman berhasil diperbarui!');
+                    }
+                    loadAnnouncements();
+                } else {
+                    alert(res.message || 'Gagal menyimpan pengumuman');
+                }
+            } catch (err) {
+                console.error('Error saveAnnouncement:', err);
+            }
+        }
+
+        async function deleteAnnouncement(id) {
+            if (!confirm('Apakah Anda yakin ingin menghapus pengumuman ini?')) return;
+
+            try {
+                const res = await fetchAPI(`/admin/pengumuman/${id}`, {
+                    method: 'DELETE'
+                });
+                if (res.success) {
+                    loadAnnouncements();
+                } else {
+                    alert(res.message || 'Gagal menghapus pengumuman');
+                }
+            } catch (err) {
+                console.error('Error deleteAnnouncement:', err);
+            }
+        }
+
+        // Handle logout
+        document.querySelector('.sidebar-footer a').addEventListener('click', function (e) {
+            e.preventDefault();
+            localStorage.clear();
+            window.location.href = 'admin-login.html';
+        });
+
+        window.addEventListener('DOMContentLoaded', loadAnnouncements);
+    </script>
 </body>
+
 </html>

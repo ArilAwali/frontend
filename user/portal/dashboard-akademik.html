@@ -406,9 +406,9 @@
                 <i class="far fa-envelope"></i>
             </div>
             <div class="user-profile">
-                <div class="avatar-small">MD</div>
+                <div class="avatar-small" id="topAvatar">-</div>
                 <div class="user-info-top">
-                    <h4>Muhammad Dhafin <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px; color: #94a3b8;"></i></h4>
+                    <h4><span id="topName">-</span> <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px; color: #94a3b8;"></i></h4>
                     <span>Mahasiswa</span>
                 </div>
             </div>
@@ -423,17 +423,17 @@
             <div class="grid-container">
                 <div class="card">
                     <div class="profile-header">
-                        <div class="profile-img-placeholder">
-                            <i class="fas fa-user"></i>
+                        <div class="profile-img-placeholder" id="profileAvatar">
+                            -
                         </div>
                         
                         <div class="profile-title">
                             <div class="profile-title-flex">
                                 <div>
-                                    <h3>Muhammad Dhafin</h3>
-                                    <p>NIM: 2025103492</p>
+                                    <h3 id="studentName">-</h3>
+                                    <p id="studentNim">NIM: -</p>
                                 </div>
-                                <span class="badge-aktif">Aktif</span>
+                                <span class="badge-aktif" id="studentStatus">Aktif</span>
                             </div>
                         </div>
                     </div>
@@ -441,15 +441,15 @@
                     <div class="profile-details">
                         <div class="detail-item">
                             <h5>Program Studi</h5>
-                            <p>S1 Teknik Informatika</p>
+                            <p id="studentProdi">-</p>
                         </div>
                         <div class="detail-item">
                             <h5>Fakultas</h5>
-                            <p>Ilmu Komputer</p>
+                            <p id="studentFakultas">Teknik</p>
                         </div>
                         <div class="detail-item">
                             <h5>Dosen Wali</h5>
-                            <p>Dr. Budi Santoso</p>
+                            <p id="studentDosenWali">Dr. Anita S., M.Kom</p>
                         </div>
                     </div>
                 </div>
@@ -458,7 +458,7 @@
                     <div class="card stat-card">
                         <div class="stat-info">
                             <h5>IPK Kumulatif</h5>
-                            <h2>3.85</h2>
+                            <h2 id="statIpk">0.00</h2>
                         </div>
                         <div class="stat-icon">
                             <i class="fas fa-graduation-cap"></i>
@@ -467,7 +467,7 @@
                     <div class="card stat-card">
                         <div class="stat-info">
                             <h5>SKS Ditempuh</h5>
-                            <h2>84 <span>/ 144</span></h2>
+                            <h2 id="statSks"><span id="statSksLulus">0</span> <span>/ 144</span></h2>
                         </div>
                         <div class="stat-icon">
                             <i class="fas fa-book-open"></i>
@@ -483,7 +483,7 @@
                         <a href="transkrip.html">Lihat Transkrip</a>
                     </div>
                     
-                    <div class="chart-area">
+                    <div class="chart-area" id="chartAreaContainer">
                         <div class="y-axis">
                             <span>4.0</span>
                             <span>3.0</span>
@@ -492,13 +492,13 @@
                             <span>0.0</span>
                         </div>
                         <div class="chart-grid">
-                            <div class="chart-tooltip">3.90</div>
+                            <div class="chart-tooltip" id="chartIpsTooltip">0.00</div>
                         </div>
-                        <div class="x-axis">
-                            <span>Smt 1</span>
+                        <div class="x-axis" id="chartSemesters">
+                            <span class="active">Smt 1</span>
                             <span>Smt 2</span>
                             <span>Smt 3</span>
-                            <span class="active">Smt 4</span>
+                            <span>Smt 4</span>
                             <span>Smt 5</span>
                         </div>
                     </div>
@@ -507,54 +507,132 @@
                 <div class="card">
                     <div class="schedule-header">
                         <h3>Jadwal Hari Ini</h3>
-                        <span class="schedule-badge">Senin</span>
+                        <span class="schedule-badge" id="currentDayName">-</span>
                     </div>
 
-                    <div class="schedule-list">
-                        <div class="schedule-item">
-                            <div class="schedule-time">
-                                08:00
-                                <span>10:30</span>
-                            </div>
-                            <div class="schedule-detail">
-                                <h4>Struktur Data</h4>
-                                <p><i class="fas fa-map-marker-alt"></i> Ruang 302, Gedung B</p>
-                            </div>
-                        </div>
-
-                        <div class="schedule-item">
-                            <div class="schedule-time">
-                                11:00
-                                <span>13:30</span>
-                            </div>
-                            <div class="schedule-detail">
-                                <h4>Aljabar Linier</h4>
-                                <p><i class="fas fa-map-marker-alt"></i> Ruang 205, Gedung A</p>
-                            </div>
-                        </div>
-
-                        <div class="schedule-item">
-                            <div class="schedule-time">
-                                14:00
-                                <span>16:40</span>
-                            </div>
-                            <div class="schedule-detail">
-                                <h4>Bahasa Inggris II</h4>
-                                <p><i class="fas fa-map-marker-alt"></i> Lab Bahasa 1</p>
-                            </div>
-                        </div>
+                    <div class="schedule-list" id="todayScheduleList">
+                        <!-- Dimuat dinamis oleh JS -->
                     </div>
 
-                    <a href="#" class="btn-full-schedule">Lihat Jadwal Lengkap</a>
+                    <a href="jadwal.html" class="btn-full-schedule">Lihat Jadwal Lengkap</a>
                 </div>
             </div>
         </div>
 
         <div class="footer">
-            © 2025 Universitas Crypto. Semua hak dilindungi.
+            © 2026 Universitas Crypto. Semua hak dilindungi.
         </div>
     </main>
 
     <script src="../assets/js/sidebar.js"></script>
+    <script>
+        async function loadDashboard() {
+            try {
+                // 1. Load User Status Info
+                const statusRes = await fetchAPI('/portal/status');
+                if (statusRes.success) {
+                    const user = statusRes.data;
+                    document.getElementById('topName').textContent = user.nama_lengkap;
+                    document.getElementById('studentName').textContent = user.nama_lengkap;
+                    document.getElementById('studentNim').textContent = user.nim ? `NIM: ${user.nim}` : 'NIM: -';
+                    
+                    const initials = user.nama_lengkap.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                    document.getElementById('topAvatar').textContent = initials;
+                    document.getElementById('profileAvatar').textContent = initials;
+
+                    const roleEl = document.querySelector('.user-info-top span');
+                    if (roleEl) {
+                        roleEl.textContent = user.nim ? `MHS - NIM: ${user.nim}` : 'PENDAFTAR';
+                    }
+
+                    // Load Prodi
+                    const biodataRes = await fetchAPI('/biodata').catch(() => null);
+                    let prodiNama = 'Teknik Informatika (S1)';
+                    if (biodataRes && biodataRes.success && biodataRes.data) {
+                        prodiNama = biodataRes.data.pilihan_prodi_1_nama || prodiNama;
+                    }
+                    document.getElementById('studentProdi').textContent = prodiNama;
+                }
+
+                // 2. Load Academic Dashboard Data
+                const dashboardRes = await fetchAPI('/akademik/dashboard');
+                if (dashboardRes.success) {
+                    const dbData = dashboardRes.data;
+                    document.getElementById('statIpk').textContent = dbData.ipk.toFixed(2);
+                    document.getElementById('statSksLulus').textContent = dbData.total_sks;
+                    document.getElementById('chartIpsTooltip').textContent = dbData.ipk.toFixed(2);
+                }
+
+                // 3. Load KRS and filter for Today's Schedule
+                const krsRes = await fetchAPI('/akademik/krs');
+                const todayList = document.getElementById('todayScheduleList');
+                todayList.innerHTML = '';
+
+                // Get current day name in Indonesian (Senin, Selasa, etc.)
+                const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+                const currentDay = days[new Date().getDay()];
+                document.getElementById('currentDayName').textContent = currentDay;
+
+                if (krsRes.success && Array.isArray(krsRes.data) && krsRes.data.length > 0) {
+                    const firstKrs = krsRes.data[0];
+                    const krsStatus = firstKrs.status_persetujuan;
+
+                    if (krsStatus === 'disetujui') {
+                        // Filter classes that are scheduled today
+                        const todayClasses = krsRes.data.filter(c => c.hari.toLowerCase() === currentDay.toLowerCase());
+
+                        if (todayClasses.length === 0) {
+                            todayList.innerHTML = `<div style="text-align: center; color: var(--text-secondary); font-size: 13px; padding: 20px 0;">Tidak ada jadwal kuliah untuk hari ${currentDay}.</div>`;
+                        } else {
+                            todayClasses.forEach(c => {
+                                const timeParts = c.jam.split(' - ');
+                                const startHour = timeParts[0] || '08:00';
+                                const endHour = timeParts[1] || '10:30';
+
+                                const div = document.createElement('div');
+                                div.className = 'schedule-item';
+                                div.innerHTML = `
+                                    <div class="schedule-time">
+                                        ${startHour}
+                                        <span>${endHour}</span>
+                                    </div>
+                                    <div class="schedule-detail">
+                                        <h4>${c.nama_matakuliah}</h4>
+                                        <p><i class="fas fa-map-marker-alt"></i> ${c.ruangan || 'Lantai 1'} • Dosen: ${c.dosen || '-'}</p>
+                                    </div>
+                                `;
+                                todayList.appendChild(div);
+                            });
+                        }
+                    } else if (krsStatus === 'proses') {
+                        todayList.innerHTML = `
+                            <div style="background-color: #FEF3C7; border: 1px solid #FCD34D; color: #92400E; padding: 12px; border-radius: 8px; font-size: 12px; text-align: center;">
+                                <i class="fas fa-hourglass-half" style="margin-right: 6px;"></i> KRS Anda sedang menunggu verifikasi oleh akademik. Jadwal kuliah akan muncul setelah disetujui.
+                            </div>
+                        `;
+                    } else {
+                        todayList.innerHTML = `
+                            <div style="background-color: #FEE2E2; border: 1px solid #FCA5A5; color: #991B1B; padding: 12px; border-radius: 8px; font-size: 12px; text-align: center;">
+                                <i class="fas fa-exclamation-circle" style="margin-right: 6px;"></i> KRS Anda ditolak atau belum diajukan. Silakan lengkapi KRS terlebih dahulu.
+                            </div>
+                        `;
+                    }
+                } else {
+                    todayList.innerHTML = `
+                        <div style="background: #F1F5F9; border: 1px solid #E2E8F0; color: #475569; padding: 16px; border-radius: 8px; font-size: 12px; text-align: center;">
+                            <i class="far fa-calendar-alt" style="font-size: 20px; display: block; margin-bottom: 8px; color: #94A3B8;"></i>
+                            KRS Semester 1 belum diajukan.<br>
+                            <a href="krs.html" style="color: var(--sidebar-active); font-weight: 600; text-decoration: none; display: inline-block; margin-top: 6px;">Pilih Mata Kuliah Sekarang &rarr;</a>
+                        </div>
+                    `;
+                }
+
+            } catch (error) {
+                console.error('Error load dashboard:', error);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', loadDashboard);
+    </script>
 </body>
 </html>

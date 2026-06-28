@@ -514,16 +514,12 @@
                   <label>Fakultas</label>
                   <select id="fakultas_1" class="input-control" required>
                     <option value="" disabled selected>Pilih Fakultas</option>
-                    <option value="Fakultas Ilmu Komputer">Fakultas Ilmu Komputer</option>
-                    <option value="Fakultas Ekonomi & Bisnis">Fakultas Ekonomi & Bisnis</option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label>Program Studi</label>
                   <select id="prodi_1" class="input-control" required>
                     <option value="" disabled selected>Pilih Program Studi</option>
-                    <option value="S1 Teknik Informatika">S1 Teknik Informatika</option>
-                    <option value="S1 Sistem Informasi">S1 Sistem Informasi</option>
                   </select>
                 </div>
               </div>
@@ -534,16 +530,12 @@
                   <label>Fakultas</label>
                   <select id="fakultas_2" class="input-control" required>
                     <option value="" disabled selected>Pilih Fakultas</option>
-                    <option value="Fakultas Ilmu Komputer">Fakultas Ilmu Komputer</option>
-                    <option value="Fakultas Ekonomi & Bisnis">Fakultas Ekonomi & Bisnis</option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label>Program Studi</label>
                   <select id="prodi_2" class="input-control" required>
                     <option value="" disabled selected>Pilih Program Studi</option>
-                    <option value="S1 Teknik Informatika">S1 Teknik Informatika</option>
-                    <option value="S1 Sistem Informasi">S1 Sistem Informasi</option>
                   </select>
                 </div>
               </div>
@@ -673,11 +665,52 @@
   <script>
     let isFormulirSubmitted = false;
 
-    // Pemetaan Program Studi per Fakultas
-    const prodiByFakultas = {
-      "Fakultas Ilmu Komputer": ["S1 Teknik Informatika", "S1 Sistem Informasi"],
-      "Fakultas Ekonomi & Bisnis": ["S1 Manajemen", "S1 Akuntansi"]
-    };
+    // Pemetaan Program Studi per Fakultas (dimuat dari API)
+    let prodiByFakultas = {};
+    let allProdiData = [];
+
+    // Fungsi untuk memuat daftar prodi dari API dan membentuk mapping fakultas
+    async function loadProdiFromAPI() {
+      try {
+        const res = await fetchAPI('/biodata/prodi');
+        if (res.success && Array.isArray(res.data)) {
+          allProdiData = res.data;
+          prodiByFakultas = {};
+          
+          // Bangun mapping fakultas -> prodi
+          allProdiData.forEach(p => {
+            if (!prodiByFakultas[p.fakultas]) {
+              prodiByFakultas[p.fakultas] = [];
+            }
+            prodiByFakultas[p.fakultas].push(`S1 ${p.nama}`);
+          });
+
+          // Isi dropdown fakultas
+          populateFakultasDropdowns();
+        }
+      } catch (err) {
+        console.error('Error saat memuat daftar prodi:', err);
+      }
+    }
+
+    // Isi dropdown fakultas berdasarkan data dari API
+    function populateFakultasDropdowns() {
+      const fakultasList = Object.keys(prodiByFakultas);
+      ['fakultas_1', 'fakultas_2'].forEach(id => {
+        const sel = document.getElementById(id);
+        // Simpan nilai yang sudah terpilih (jika ada)
+        const currentVal = sel.value;
+        sel.innerHTML = '<option value="" disabled selected>Pilih Fakultas</option>';
+        fakultasList.forEach(fak => {
+          const opt = document.createElement('option');
+          opt.value = fak;
+          opt.textContent = fak;
+          sel.appendChild(opt);
+        });
+        // Kembalikan pilihan sebelumnya jika ada
+        if (currentVal) sel.value = currentVal;
+      });
+    }
 
     // Fungsi utility untuk memperbarui dropdown Program Studi berdasarkan Fakultas yang dipilih
     function updateProdiDropdown(num) {
@@ -730,6 +763,9 @@
         // Inisialisasi event change listener pada Fakultas
         document.getElementById('fakultas_1').addEventListener('change', () => updateProdiDropdown(1));
         document.getElementById('fakultas_2').addEventListener('change', () => updateProdiDropdown(2));
+
+        // 0. Muat daftar program studi dari database terlebih dahulu
+        await loadProdiFromAPI();
 
         // 1. Ambil data Biodata terlebih dahulu
         const biodataResponse = await fetchAPI('/biodata/biodata');

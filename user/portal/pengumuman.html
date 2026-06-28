@@ -421,6 +421,81 @@
             margin-top: auto;
             background: white;
         }
+
+        /* Modal Detail Pengumuman */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+        .modal-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content {
+            background: white;
+            width: 600px;
+            max-width: 90%;
+            border-radius: 16px;
+            padding: 32px;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            position: relative;
+        }
+        .modal-overlay.show .modal-content {
+            transform: translateY(0);
+        }
+        .modal-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .modal-close:hover {
+            color: var(--text-dark);
+        }
+        .modal-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+        .modal-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        .modal-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+        }
+        .modal-body {
+            font-size: 14px;
+            color: #334155;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
     </style>
     <link rel="stylesheet" href="../assets/css/sidebar.css">
 </head>
@@ -461,20 +536,20 @@
             <div class="filter-row">
                 <div class="search-box">
                     <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Cari pengumuman...">
+                    <input type="text" id="searchInput" placeholder="Cari pengumuman..." oninput="filterAnnouncements()">
                 </div>
                 <div class="filter-tabs">
-                    <button class="filter-tab active">Semua</button>
-                    <button class="filter-tab">Akademik</button>
-                    <button class="filter-tab">Event</button>
-                    <button class="filter-tab">Administrasi</button>
+                    <button class="filter-tab active" onclick="setCategoryFilter('Semua', this)">Semua</button>
+                    <button class="filter-tab" onclick="setCategoryFilter('Akademik', this)">Akademik</button>
+                    <button class="filter-tab" onclick="setCategoryFilter('PMB', this)">PMB</button>
+                    <button class="filter-tab" onclick="setCategoryFilter('Administrasi', this)">Administrasi</button>
                 </div>
             </div>
 
             <!-- Announcement Grid -->
             <div class="announcement-grid">
                 <!-- Left Column (Articles) -->
-                <div class="left-column">
+                <div class="left-column" id="announcementsList">
                     <!-- Featured Card -->
                     <div class="card-featured">
                         <div class="card-header-top">
@@ -578,11 +653,204 @@
 
         <!-- Footer -->
         <footer class="footer">
-            © 2025 Universitas Crypto. Semua hak dilindungi.
+            © 2026 Universitas Crypto. Semua hak dilindungi.
         </footer>
     </div>
 
     <!-- Reusable Sidebar JS Component -->
     <script src="../assets/js/sidebar.js"></script>
+    <script>
+        let allAnnouncements = [];
+        let activeCategory = 'Semua';
+
+        async function initPage() {
+            try {
+                // 1. Load User Profile
+                const statusRes = await fetchAPI('/portal/status');
+                if (statusRes.success) {
+                    const user = statusRes.data;
+                    
+                    const nameEl = document.querySelector('.user-profile .user-name');
+                    if (nameEl) {
+                        nameEl.innerHTML = `${user.nama_lengkap} <i class="fas fa-chevron-down" style="font-size: 10px; color: var(--text-muted);"></i>`;
+                    }
+
+                    const avatarEl = document.querySelector('.user-profile .user-avatar');
+                    if (avatarEl) {
+                        const initials = user.nama_lengkap.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                        avatarEl.textContent = initials;
+                    }
+
+                    const roleEl = document.querySelector('.user-profile .user-role');
+                    if (roleEl) {
+                        roleEl.textContent = user.nim ? `MHS - NIM: ${user.nim}` : 'PENDAFTAR';
+                    }
+                }
+
+                // 2. Fetch Announcements
+                const announcementsRes = await fetchAPI('/portal/pengumuman');
+                if (announcementsRes.success && Array.isArray(announcementsRes.data)) {
+                    allAnnouncements = announcementsRes.data;
+                    renderAnnouncements();
+                    renderCategoryCounts();
+                } else {
+                    const listContainer = document.getElementById('announcementsList');
+                    listContainer.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px; background: white; border-radius: 16px; border: 1px solid var(--border-color);">Gagal memuat pengumuman.</div>`;
+                }
+
+            } catch (err) {
+                console.error('Error init pengumuman page:', err);
+            }
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            if (isNaN(date.getTime())) return dateStr;
+
+            const months = [
+                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+            ];
+
+            const day = date.getDate();
+            const month = months[date.getMonth()];
+            const year = date.getFullYear();
+            
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+
+            return `${day} ${month} ${year}, ${hours}:${minutes} WIB`;
+        }
+
+        function renderAnnouncements() {
+            const listContainer = document.getElementById('announcementsList');
+            listContainer.innerHTML = '';
+
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
+
+            // Filter by active tab & search query
+            const filtered = allAnnouncements.filter(item => {
+                const matchCategory = activeCategory === 'Semua' || item.kategori.toLowerCase() === activeCategory.toLowerCase();
+                const matchSearch = item.judul.toLowerCase().includes(searchQuery) || item.konten.toLowerCase().includes(searchQuery);
+                return matchCategory && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                listContainer.innerHTML = `
+                    <div style="text-align: center; color: var(--text-muted); padding: 40px; background: white; border-radius: 16px; border: 1px solid var(--border-color);">
+                        <i class="fas fa-search" style="font-size: 32px; margin-bottom: 12px; color: #cbd5e1;"></i>
+                        <p>Tidak ada pengumuman yang sesuai dengan kriteria pencarian.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Render
+            filtered.forEach((item, index) => {
+                const dateText = formatDate(item.created_at);
+                const snippet = item.konten.length > 150 ? item.konten.substring(0, 150) + '...' : item.konten;
+                
+                // If it is the first item and we are in 'Semua' tab without search, render as Featured Card
+                if (index === 0 && activeCategory === 'Semua' && searchQuery === '') {
+                    const card = document.createElement('div');
+                    card.className = 'card-featured';
+                    card.innerHTML = `
+                        <div class="card-header-top">
+                            <div class="icon-circle-featured">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <span class="badge-red">TERBARU</span>
+                            <span class="time-muted">${dateText}</span>
+                        </div>
+                        <h2>${item.judul}</h2>
+                        <p>${snippet}</p>
+                        <a href="pengumuman-detail.html?id=${item.id}" class="btn-read-more">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    `;
+                    listContainer.appendChild(card);
+                } else {
+                    // Render standard card
+                    const card = document.createElement('div');
+                    card.className = 'card-standard';
+                    
+                    let badgeClass = 'badge-green-text';
+                    let iconClass = 'fa-calendar-alt';
+                    let bgIcon = '#e6f4ed';
+                    let colorIcon = '#0d4a36';
+
+                    if (item.kategori.toLowerCase() === 'pmb') {
+                        badgeClass = 'badge-blue-text';
+                        iconClass = 'fa-university';
+                        bgIcon = '#dbeafe';
+                        colorIcon = '#1e40af';
+                    } else if (item.kategori.toLowerCase() === 'administrasi') {
+                        badgeClass = 'badge-blue-text';
+                        iconClass = 'fa-wallet';
+                        bgIcon = '#fee2e2';
+                        colorIcon = '#b91c1c';
+                    }
+
+                    card.innerHTML = `
+                        <div class="card-header-top">
+                            <div class="icon-circle-standard" style="background: ${bgIcon}; color: ${colorIcon};">
+                                <i class="fas ${iconClass}"></i>
+                            </div>
+                            <span class="${badgeClass}">${item.kategori.toUpperCase()}</span>
+                            <span class="time-gray">${dateText}</span>
+                        </div>
+                        <h3>${item.judul}</h3>
+                        <p>${snippet}</p>
+                        <a href="pengumuman-detail.html?id=${item.id}" class="btn-read-more-dark">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    `;
+                    listContainer.appendChild(card);
+                }
+            });
+        }
+
+        function renderCategoryCounts() {
+            // Count categories dynamically
+            const counts = { pmb: 0, akademik: 0, administrasi: 0, event: 0 };
+            allAnnouncements.forEach(item => {
+                const cat = item.kategori.toLowerCase();
+                if (counts[cat] !== undefined) {
+                    counts[cat]++;
+                } else {
+                    counts[cat] = 1;
+                }
+            });
+
+            // Update counts in sidebar widget
+            const catItems = document.querySelectorAll('.cat-list .cat-item');
+            catItems.forEach(el => {
+                const text = el.textContent.toLowerCase();
+                let countSpan = el.querySelector('.cat-count');
+                if (countSpan) {
+                    if (text.includes('akademik')) {
+                        countSpan.textContent = counts.akademik || 0;
+                    } else if (text.includes('pmb') || text.includes('kegiatan') || text.includes('event')) {
+                        countSpan.textContent = counts.pmb || 0;
+                    } else if (text.includes('administrasi')) {
+                        countSpan.textContent = counts.administrasi || 0;
+                    }
+                }
+            });
+        }
+
+        function setCategoryFilter(category, buttonEl) {
+            activeCategory = category;
+
+            // Update tab active class
+            const tabs = document.querySelectorAll('.filter-tabs .filter-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            buttonEl.classList.add('active');
+
+            renderAnnouncements();
+        }
+
+        function filterAnnouncements() {
+            renderAnnouncements();
+        }
+
+        window.addEventListener('DOMContentLoaded', initPage);
+    </script>
 </body>
 </html>

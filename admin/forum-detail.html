@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <script src="../config/admin-guard.js"></script>
+    <script src="../config/api.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Diskusi - Universitas Crypto</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        .post-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+            margin-top: 15px;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge {
+            background-color: #e6f4ed;
+            color: #0d4a36;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .post-time {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .post-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .post-body {
+            font-size: 14px;
+            color: var(--text-primary);
+            line-height: 1.7;
+            margin-bottom: 20px;
+            white-space: pre-line;
+        }
+
+        /* Replies Section */
+        .replies-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 10px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+
+        .reply-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            border: 1px solid var(--border-color);
+        }
+
+        .reply-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .reply-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .reply-time {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .reply-body {
+            font-size: 13px;
+            color: var(--text-primary);
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+
+        /* Comment Form */
+        .comment-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            margin-top: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            height: 100px;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+            resize: vertical;
+            font-family: inherit;
+            color: var(--text-primary);
+        }
+
+        .btn-submit {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--dark-green);
+        }
+
+        .btn-back {
+            background: none;
+            border: none;
+            color: var(--primary-green);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="top-header" style="justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <a href="forum.html" class="btn-back" style="margin-bottom: 0; padding-left: 24px;"><i
+                    class="fa-solid fa-arrow-left"></i> Kembali ke Forum</a>
+        </div>
+        <div class="top-right-icons">
+            <button class="icon-btn">
+                <i class="fa-regular fa-bell"></i>
+                <div class="badge-count">6</div>
+            </button>
+            <button class="icon-btn">
+                <i class="fa-regular fa-envelope"></i>
+                <div class="badge-count">2</div>
+            </button>
+            <div class="user-profile">
+                <div class="user-avatar" id="headerAvatar">A</div>
+                <div class="user-name" id="headerName">Admin PMB <i class="fa-solid fa-chevron-down"
+                        style="font-size: 10px; margin-left: 6px; color: var(--text-secondary);"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="layout-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">UP</span>
+                    <span class="brand-subtitle">Portal PMB</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <i class="fa-solid fa-border-all"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="dokumen.html" class="nav-item">
+                    <i class="fa-regular fa-file-lines"></i>
+                    <span>Dokumen</span>
+                </a>
+                <a href="registrasi_ulang.html" class="nav-item">
+                    <i class="fa-solid fa-address-card"></i>
+                    <span>Registrasi Ulang</span>
+                </a>
+                <a href="prodi.html" class="nav-item">
+                    <i class="fa-solid fa-users-gear"></i>
+                    <span>Manajemen Prodi</span>
+                </a>
+                <a href="pendaftaran.html" class="nav-item">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>Pendaftaran</span>
+                </a>
+                <a href="laporan.html" class="nav-item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Laporan</span>
+                </a>
+                <a href="pengumuman.html" class="nav-item">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span>Pengumuman</span>
+                </a>
+                <a href="ajuan.html" class="nav-item">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Ajuan Mata Kuliah</span>
+                </a>
+                <a href="forum.html" class="nav-item active">
+                    <i class="fa-regular fa-comments"></i>
+                    <span>Diskusi</span>
+                </a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Keluar</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content" style="max-width: 900px; margin: 0 auto; width: 100%;">
+
+            <!-- Detail Thread Card -->
+            <div class="post-card" id="threadDetailCard">
+                <!-- Dimuat dinamis -->
+            </div>
+
+            <!-- Replies Section -->
+            <div>
+                <h3 class="section-title" id="repliesCountText">Komentar Balasan (0)</h3>
+                <div class="replies-section" id="repliesContainer">
+                    <!-- Dimuat dinamis -->
+                </div>
+            </div>
+
+            <!-- Comment Form -->
+            <div class="comment-card">
+                <form id="commentForm" onsubmit="submitComment(event)">
+                    <div class="form-group">
+                        <label for="replyInput">Tulis Balasan / Komentar</label>
+                        <textarea id="replyInput" required
+                            placeholder="Masukkan komentar Anda untuk membantu berdiskusi..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Kirim Balasan</button>
+                </form>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        let threadId = '';
+
+        async function initPage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            threadId = urlParams.get('id');
+
+            if (!threadId) {
+                alert('ID Diskusi tidak valid!');
+                window.location.href = 'forum.html';
+                return;
+            }
+
+            try {
+                // 1. Load User Profile
+                const userStr = localStorage.getItem('user');
+                let name = 'Staf Administrasi';
+                if (userStr) {
+                    const user = JSON.parse(userStr);
+                    if (user.nama_lengkap) {
+                        name = user.nama_lengkap;
+                    } else if (user.email) {
+                        const parts = user.email.split('@')[0].split(/[._-]/);
+                        name = parts.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
+                    }
+                }
+                document.getElementById('headerName').innerHTML = `${name} <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 6px; color: var(--text-secondary);"></i>`;
+
+                const avatarEl = document.getElementById('headerAvatar');
+                if (avatarEl) {
+                    const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                    avatarEl.textContent = initials;
+                }
+
+                // 2. Load Thread Detail and Replies
+                await loadThreadDetail();
+
+            } catch (err) {
+                console.error('Error init page:', err);
+            }
+        }
+
+        async function loadThreadDetail() {
+            try {
+                const res = await fetchAPI(`/akademik/forum/threads/${threadId}`);
+                if (res.success && res.data) {
+                    renderThreadDetail(res.data);
+                    renderReplies(res.data.balasan);
+                } else {
+                    alert('Gagal memuat detail diskusi.');
+                    window.location.href = 'forum.html';
+                }
+            } catch (err) {
+                console.error('Error loadThreadDetail:', err);
+            }
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            if (isNaN(date.getTime())) return dateStr;
+
+            const months = [
+                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+            ];
+
+            const day = date.getDate();
+            const month = months[date.getMonth()];
+            const year = date.getFullYear();
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+
+            return `${day} ${month} ${year}, ${hours}:${minutes} WIB`;
+        }
+
+        function renderThreadDetail(data) {
+            const detailCard = document.getElementById('threadDetailCard');
+            const initials = data.pembuat.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+
+            let categoryBadgeColor = '#e6f4ea';
+            let categoryTextColor = '#0d4a36';
+
+            if (data.kategori.toLowerCase() === 'akademik') {
+                categoryBadgeColor = '#dbeafe';
+                categoryTextColor = '#1e40af';
+            } else if (data.kategori.toLowerCase() === 'pmb') {
+                categoryBadgeColor = '#fee2e2';
+                categoryTextColor = '#b91c1c';
+            } else if (data.kategori.toLowerCase() === 'umum') {
+                categoryBadgeColor = '#fef3c7';
+                categoryTextColor = '#d97706';
+            }
+
+            detailCard.innerHTML = `
+                <div class="post-header">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: #0d4a36; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px;">${initials}</div>
+                    <div class="post-meta">
+                        <span class="badge" style="background-color: ${categoryBadgeColor}; color: ${categoryTextColor};">${data.kategori.toUpperCase()}</span>
+                        <span class="post-time">• ${formatDate(data.created_at)}</span>
+                    </div>
+                </div>
+                
+                <h2 class="post-title" style="margin-top: 5px;">${data.judul}</h2>
+                <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 15px;">Diposting oleh: <strong>${data.pembuat}</strong> (${data.pembuat_role.toUpperCase()})</p>
+                <div class="post-body">${data.konten}</div>
+            `;
+        }
+
+        function renderReplies(replies) {
+            const countText = document.getElementById('repliesCountText');
+            countText.textContent = `Komentar Balasan (${replies.length})`;
+
+            const container = document.getElementById('repliesContainer');
+            container.innerHTML = '';
+
+            if (replies.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; color: var(--text-secondary); padding: 24px; background: white; border-radius: 12px; border: 1px solid var(--border-color);">
+                        Belum ada tanggapan. Jadilah yang pertama memberikan tanggapan!
+                    </div>
+                `;
+                return;
+            }
+
+            replies.forEach(item => {
+                const initials = item.pembuat.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                const replyCard = document.createElement('div');
+                replyCard.className = 'reply-card';
+
+                replyCard.innerHTML = `
+                    <div class="reply-header">
+                        <div class="reply-author">
+                            <div style="width: 30px; height: 30px; border-radius: 50%; background: #64748b; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11px;">${initials}</div>
+                            <div>
+                                <span>${item.pembuat}</span>
+                                <span style="font-size: 10px; color: var(--text-secondary); margin-left: 5px; font-weight: 500; text-transform: uppercase;">(${item.pembuat_role})</span>
+                            </div>
+                        </div>
+                        <span class="reply-time">${formatDate(item.created_at)}</span>
+                    </div>
+                    <div class="reply-body">${item.konten}</div>
+                `;
+                container.appendChild(replyCard);
+            });
+        }
+
+        async function submitComment(event) {
+            event.preventDefault();
+
+            const replyInput = document.getElementById('replyInput');
+            const konten = replyInput.value.trim();
+
+            if (!konten) return;
+
+            try {
+                const res = await fetchAPI(`/akademik/forum/threads/${threadId}/replies`, {
+                    method: 'POST',
+                    body: JSON.stringify({ konten })
+                });
+
+                if (res.success) {
+                    alert('Balasan komentar berhasil dikirim!');
+                    replyInput.value = '';
+                    await loadThreadDetail();
+                } else {
+                    alert(res.message || 'Gagal mengirim balasan.');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Terjadi kesalahan saat mengirim balasan.');
+            }
+        }
+
+        // Handle logout
+        document.querySelector('.sidebar-footer a').addEventListener('click', function (e) {
+            e.preventDefault();
+            localStorage.clear();
+            window.location.href = 'admin-login.html';
+        });
+
+        window.addEventListener('DOMContentLoaded', initPage);
+    </script>
+</body>
+
+</html>
