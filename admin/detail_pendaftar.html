@@ -464,7 +464,10 @@
                 <span class="tab-link active" onclick="switchTab('biodata')">Biodata Lengkap</span>
                 <span class="tab-link" onclick="switchTab('akademik')">Data Akademik & Rapor</span>
                 <span class="tab-link" onclick="switchTab('prodi')">Pilihan Program Studi</span>
+                <span class="tab-link" id="switch-to-dokumen">Verifikas
+                    Dokumen</span>
                 <span class="tab-link" onclick="switchTab('status')">Status Kelulusan</span>
+
             </div>
 
             <!-- Tab: Biodata Lengkap -->
@@ -714,6 +717,10 @@
             else if (tabId === 'prodi') tabLinks[2].classList.add('active');
             else if (tabId === 'status') tabLinks[3].classList.add('active');
         }
+
+        document.getElementById('switch-to-dokumen').addEventListener('click', () => {
+            window.location.href = `detail_dokumen.html?id=${currentUserId}`;
+        });
 
         function formatTanggal(isoString) {
             if (!isoString) return '-';
